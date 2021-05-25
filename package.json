@@ -25,7 +25,6 @@
   "homepage": "https://github.com/N0chteil/Apple-Music-RPC#readme",
   "dependencies": {
     "discord-rpc": "^3.2.0",
-    "electron-builder": "^22.10.5",
     "itunes-bridge": "^0.6.6"
   }
 }

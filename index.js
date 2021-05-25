@@ -14,12 +14,6 @@ var presenceData = {
 iTunesEmitter.on('playing', async function(type, currentTrack) {
     presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
     presenceData.state = currentTrack.artist || "Unknown artist";
-    presenceData.buttons = [
-        {
-            label: "View Track",
-            url: "https://music.apple.com"
-        }
-    ]
 
     if(currentTrack) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
 });
