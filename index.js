@@ -12,8 +12,8 @@ var presenceData = {
     };
 
 iTunesEmitter.on('playing', async function(type, currentTrack) {
-    presenceData.details = `${currentTrack.name} - ${currentTrack.album}` || "Unknown track"
-    presenceData.state = currentTrack.artist || "Unknown artist"
+    presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
+    presenceData.state = currentTrack.artist || "Unknown artist";
     presenceData.buttons = [
         {
             label: "View Track",
@@ -26,7 +26,6 @@ iTunesEmitter.on('playing', async function(type, currentTrack) {
 
 iTunesEmitter.on('paused', async function(type, currentTrack) {
     delete presenceData.endTimestamp;
-
     presenceData.state = "Paused";
 });
 
