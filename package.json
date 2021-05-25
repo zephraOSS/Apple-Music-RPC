@@ -1,0 +1,31 @@
+{
+  "name": "apple-music-rpc",
+  "version": "1.0.0",
+  "description": "Discord RPC for iTunes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N0chteil/Apple-Music-RPC.git"
+  },
+  "keywords": [
+    "discord",
+    "rpc",
+    "iTunes",
+    "Apple",
+    "Music"
+  ],
+  "author": "N0chteil ^^",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/N0chteil/Apple-Music-RPC/issues"
+  },
+  "homepage": "https://github.com/N0chteil/Apple-Music-RPC#readme",
+  "dependencies": {
+    "discord-rpc": "^3.2.0",
+    "electron-builder": "^22.10.5",
+    "itunes-bridge": "^0.6.6"
+  }
+}

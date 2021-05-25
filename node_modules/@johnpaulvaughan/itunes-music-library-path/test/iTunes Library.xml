@@ -1,0 +1,1092 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Major Version</key><integer>1</integer>
+	<key>Minor Version</key><integer>1</integer>
+	<key>Application Version</key><string>12.3.2.35</string>
+	<key>Date</key><date>2016-03-18T08:30:56Z</date>
+	<key>Features</key><integer>5</integer>
+	<key>Show Content Ratings</key><true/>
+	<key>Library Persistent ID</key><string>E63FD46A4C1D36A0</string>
+	<key>Tracks</key>
+	<dict>
+		<key>85</key>
+		<dict>
+			<key>Track ID</key><integer>85</integer>
+			<key>Size</key><integer>544313160</integer>
+			<key>Total Time</key><integer>2520720</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>3</integer>
+			<key>Track Count</key><integer>7</integer>
+			<key>Year</key><integer>2011</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T05:43:32Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3446314512</integer>
+			<key>Play Date UTC</key><date>2013-03-16T10:35:12Z</date>
+			<key>Release Date</key><date>2011-06-07T07:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>1</integer>
+			<key>Episode Order</key><integer>3</integer>
+			<key>Persistent ID</key><string>99FF920D13E93918</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>103</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 1</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>103</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 1</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|M|500|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>103</string>
+		</dict>
+		<key>87</key>
+		<dict>
+			<key>Track ID</key><integer>87</integer>
+			<key>Size</key><integer>498537425</integer>
+			<key>Total Time</key><integer>2428760</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>1</integer>
+			<key>Track Count</key><integer>7</integer>
+			<key>Year</key><integer>2011</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T05:43:32Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3445694704</integer>
+			<key>Play Date UTC</key><date>2013-03-09T06:25:04Z</date>
+			<key>Release Date</key><date>2011-05-24T07:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>1</integer>
+			<key>Episode Order</key><integer>1</integer>
+			<key>Persistent ID</key><string>19A5B5D389BBCC7D</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>101</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 1</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>101</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 1</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|M|500|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>101</string>
+		</dict>
+		<key>89</key>
+		<dict>
+			<key>Track ID</key><integer>89</integer>
+			<key>Size</key><integer>521823746</integer>
+			<key>Total Time</key><integer>2584160</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>4</integer>
+			<key>Track Count</key><integer>7</integer>
+			<key>Year</key><integer>2011</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T05:43:32Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3446315376</integer>
+			<key>Play Date UTC</key><date>2013-03-16T10:49:36Z</date>
+			<key>Release Date</key><date>2011-06-14T07:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>1</integer>
+			<key>Episode Order</key><integer>4</integer>
+			<key>Persistent ID</key><string>D8EFB313B520175D</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>104</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 1</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>104</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 1</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|M|500|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>104</string>
+		</dict>
+		<key>91</key>
+		<dict>
+			<key>Track ID</key><integer>91</integer>
+			<key>Size</key><integer>53904380</integer>
+			<key>Total Time</key><integer>252200</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>101</integer>
+			<key>Year</key><integer>2011</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T05:43:32Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Release Date</key><date>2011-05-24T07:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>1</integer>
+			<key>Episode Order</key><integer>101</integer>
+			<key>Persistent ID</key><string>DA598230BED6461B</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>iTunes Exclusive: Meet the Geordie Shore Cast!</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 1</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>iTunes Exclusive: Meet the Geordie Shore Cast!</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 1</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|M|500|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>001</string>
+		</dict>
+		<key>93</key>
+		<dict>
+			<key>Track ID</key><integer>93</integer>
+			<key>Size</key><integer>1325445705</integer>
+			<key>Total Time</key><integer>2510760</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>1</integer>
+			<key>Track Count</key><integer>17</integer>
+			<key>Year</key><integer>2013</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T03:27:57Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3445686608</integer>
+			<key>Play Date UTC</key><date>2013-03-09T04:10:08Z</date>
+			<key>Release Date</key><date>2013-02-19T08:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>5</integer>
+			<key>Episode Order</key><integer>1</integer>
+			<key>Persistent ID</key><string>FBC0568F3A539180</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>501</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 5</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>501</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 5</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|MA15+|550|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>501</string>
+		</dict>
+		<key>95</key>
+		<dict>
+			<key>Track ID</key><integer>95</integer>
+			<key>Size</key><integer>534669848</integer>
+			<key>Total Time</key><integer>2587640</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>5</integer>
+			<key>Track Count</key><integer>7</integer>
+			<key>Year</key><integer>2011</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T05:43:32Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3446318000</integer>
+			<key>Play Date UTC</key><date>2013-03-16T11:33:20Z</date>
+			<key>Release Date</key><date>2011-06-21T07:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>1</integer>
+			<key>Episode Order</key><integer>5</integer>
+			<key>Persistent ID</key><string>A7438CE74CD63427</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>105</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 1</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>105</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 1</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|M|500|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>105</string>
+		</dict>
+		<key>97</key>
+		<dict>
+			<key>Track ID</key><integer>97</integer>
+			<key>Size</key><integer>841225881</integer>
+			<key>Total Time</key><integer>3297632</integer>
+			<key>Year</key><integer>2009</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2011-12-23T09:34:19Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Release Date</key><date>2009-09-29T07:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Persistent ID</key><string>999D3BF9FE0A15CD</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>Movie</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>A Muppet Christmas: Letters to Santa - Free Offer</string>
+			<key>Artist</key><string>Kirk R. Thatcher</string>
+			<key>Genre</key><string>Kids &#38; Family</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>Muppet Christmas: Letters to Santa - Free Offer</string>
+			<key>Sort Artist</key><string>Kirk R. Thatcher</string>
+			<key>Content Rating</key><string>au-movie|G|100|</string>
+		</dict>
+		<key>99</key>
+		<dict>
+			<key>Track ID</key><integer>99</integer>
+			<key>Size</key><integer>530046652</integer>
+			<key>Total Time</key><integer>2553680</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>6</integer>
+			<key>Track Count</key><integer>7</integer>
+			<key>Year</key><integer>2011</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T05:43:32Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Release Date</key><date>2011-06-28T07:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>1</integer>
+			<key>Episode Order</key><integer>6</integer>
+			<key>Persistent ID</key><string>DCE5C64F4D0A36EF</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>106</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 1</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>106</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 1</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|M|500|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>106</string>
+		</dict>
+		<key>101</key>
+		<dict>
+			<key>Track ID</key><integer>101</integer>
+			<key>Size</key><integer>507537045</integer>
+			<key>Total Time</key><integer>2488360</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>2</integer>
+			<key>Track Count</key><integer>7</integer>
+			<key>Year</key><integer>2011</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T05:43:32Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3445697168</integer>
+			<key>Play Date UTC</key><date>2013-03-09T07:06:08Z</date>
+			<key>Release Date</key><date>2011-05-31T07:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>1</integer>
+			<key>Episode Order</key><integer>2</integer>
+			<key>Persistent ID</key><string>73C30A7C2CFADA2F</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>102</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 1</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>102</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 1</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|M|500|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>102</string>
+		</dict>
+		<key>103</key>
+		<dict>
+			<key>Track ID</key><integer>103</integer>
+			<key>Size</key><integer>1433947376</integer>
+			<key>Total Time</key><integer>2628840</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>1</integer>
+			<key>Track Count</key><integer>8</integer>
+			<key>Year</key><integer>2012</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-16T09:46:51Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3446314384</integer>
+			<key>Play Date UTC</key><date>2013-03-16T10:33:04Z</date>
+			<key>Release Date</key><date>2012-01-21T08:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>2</integer>
+			<key>Episode Order</key><integer>1</integer>
+			<key>Persistent ID</key><string>0F2AF6B56C487C77</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>Desert Island</string>
+			<key>Artist</key><string>An Idiot Abroad</string>
+			<key>Album</key><string>An Idiot Abroad, Season 2</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>Desert Island</string>
+			<key>Sort Album</key><string>Idiot Abroad, Season 2</string>
+			<key>Sort Artist</key><string>An Idiot Abroad</string>
+			<key>Sort Series</key><string>Idiot Abroad</string>
+			<key>Content Rating</key><string>au-tv|MA15+|550|</string>
+			<key>Series</key><string>An Idiot Abroad</string>
+			<key>Episode</key><string>1</string>
+		</dict>
+		<key>105</key>
+		<dict>
+			<key>Track ID</key><integer>105</integer>
+			<key>Size</key><integer>1349111829</integer>
+			<key>Total Time</key><integer>2541680</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>2</integer>
+			<key>Track Count</key><integer>17</integer>
+			<key>Year</key><integer>2013</integer>
+			<key>Date Modified</key><date>2015-11-13T09:05:23Z</date>
+			<key>Date Added</key><date>2013-03-09T04:11:58Z</date>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3445689392</integer>
+			<key>Play Date UTC</key><date>2013-03-09T04:56:32Z</date>
+			<key>Release Date</key><date>2013-02-26T08:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Season</key><integer>5</integer>
+			<key>Episode Order</key><integer>2</integer>
+			<key>Persistent ID</key><string>92CA2DE362714A61</string>
+			<key>Track Type</key><string>Remote</string>
+			<key>Purchased</key><true/>
+			<key>TV Show</key><true/>
+			<key>Has Video</key><true/>
+			<key>Name</key><string>502</string>
+			<key>Artist</key><string>Geordie Shore</string>
+			<key>Album</key><string>Geordie Shore, Season 5</string>
+			<key>Genre</key><string>Reality TV</string>
+			<key>Kind</key><string>Purchased MPEG-4 video file</string>
+			<key>Sort Name</key><string>502</string>
+			<key>Sort Album</key><string>Geordie Shore, Season 5</string>
+			<key>Sort Artist</key><string>Geordie Shore</string>
+			<key>Content Rating</key><string>au-tv|MA15+|550|</string>
+			<key>Series</key><string>Geordie Shore</string>
+			<key>Episode</key><string>502</string>
+		</dict>
+		<key>111</key>
+		<dict>
+			<key>Track ID</key><integer>111</integer>
+			<key>Size</key><integer>3197710</integer>
+			<key>Total Time</key><integer>207986</integer>
+			<key>Track Number</key><integer>4</integer>
+			<key>Year</key><integer>2002</integer>
+			<key>BPM</key><integer>101</integer>
+			<key>Date Modified</key><date>2014-10-11T00:18:25Z</date>
+			<key>Date Added</key><date>2016-03-05T22:04:54Z</date>
+			<key>Bit Rate</key><integer>121</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Compilation</key><true/>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Persistent ID</key><string>8683ECDB149202D2</string>
+			<key>Track Type</key><string>File</string>
+			<key>File Folder Count</key><integer>-1</integer>
+			<key>Library Folder Count</key><integer>-1</integer>
+			<key>Name</key><string>Beast Of Burden</string>
+			<key>Artist</key><string>The Rolling Stones</string>
+			<key>Composer</key><string>electric guitar solo, an emotional male lead vocal performance, heartbreaking lyrics</string>
+			<key>Album</key><string>Forty Licks (Disc 2)</string>
+			<key>Grouping</key><string>1288274</string>
+			<key>Genre</key><string>Rock</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Comments</key><string>classic rock, rock, the rolling stones, 70s, british, 60s, blues rock, blues, rolling stones, british invasion, beast of burden, 1978, Rock and Roll, sexy, pop, classic, oldies, rhythm and blues, chill, favorite songs, hard rock, favorites, Stones, Rock  </string>
+			<key>Sort Artist</key><string>Rolling Stones</string>
+			<key>Sort Album Artist</key><string>Rolling Stones, The</string>
+			<key>Location</key><string>file://localhost/G:/Music/Music/Compilations/Forty%20Licks%20(Disc%202)/04%20Beast%20Of%20Burden.mp3</string>
+		</dict>
+		<key>304</key>
+		<dict>
+			<key>Track ID</key><integer>304</integer>
+			<key>Size</key><integer>3858432</integer>
+			<key>Total Time</key><integer>239856</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>7</integer>
+			<key>Year</key><integer>2002</integer>
+			<key>BPM</key><integer>96</integer>
+			<key>Date Modified</key><date>2014-10-11T00:48:08Z</date>
+			<key>Date Added</key><date>2016-03-18T08:30:49Z</date>
+			<key>Bit Rate</key><integer>128</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Compilation</key><true/>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Persistent ID</key><string>871A6ED72F4AFD67</string>
+			<key>Track Type</key><string>File</string>
+			<key>File Folder Count</key><integer>-1</integer>
+			<key>Library Folder Count</key><integer>-1</integer>
+			<key>Name</key><string>19th Nervous Breakdown</string>
+			<key>Artist</key><string>The Rolling Stones</string>
+			<key>Album</key><string>Forty Licks (Disc 1)</string>
+			<key>Grouping</key><string>805146</string>
+			<key>Genre</key><string>Classic Rock</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Comments</key><string>rock, classic rock, 60s, the rolling stones, british invasion, british, Rock and Roll, oldies, 1966, rolling stones, blues-rock, blues, psychedelic, hard rock, rock n roll, JTMlate60s, top 2000, sufu5a, male vocalists, classic, blues rock, 1960s, 70s, the</string>
+			<key>Sort Artist</key><string>Rolling Stones</string>
+			<key>Sort Album Artist</key><string>Rolling Stones, The</string>
+			<key>Location</key><string>file://localhost/G:/Music/Music/Compilations/Forty%20Licks%20(Disc%201)/07%2019th%20Nervous%20Breakdown.mp3</string>
+		</dict>
+		<key>309</key>
+		<dict>
+			<key>Track ID</key><integer>309</integer>
+			<key>Size</key><integer>3827765</integer>
+			<key>Total Time</key><integer>238915</integer>
+			<key>Track Number</key><integer>1</integer>
+			<key>Year</key><integer>1966</integer>
+			<key>BPM</key><integer>96</integer>
+			<key>Date Modified</key><date>2014-10-11T00:30:57Z</date>
+			<key>Date Added</key><date>2016-03-18T08:30:49Z</date>
+			<key>Bit Rate</key><integer>128</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Persistent ID</key><string>BB2CBF8FA33C1295</string>
+			<key>Track Type</key><string>File</string>
+			<key>File Folder Count</key><integer>-1</integer>
+			<key>Library Folder Count</key><integer>-1</integer>
+			<key>Name</key><string>19th Nervous Breakdown</string>
+			<key>Artist</key><string>The Rolling Stones</string>
+			<key>Album</key><string>Aftermath (UK) Single's</string>
+			<key>Grouping</key><string>805146</string>
+			<key>Genre</key><string>Classic Rock</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Comments</key><string>rock, classic rock, 60s, the rolling stones, british invasion, british, Rock and Roll, oldies, 1966, rolling stones, blues-rock, blues, psychedelic, hard rock, rock n roll, JTMlate60s, top 2000, sufu5a, male vocalists, classic, blues rock, 1960s, 70s, the</string>
+			<key>Sort Artist</key><string>Rolling Stones</string>
+			<key>Location</key><string>file://localhost/G:/Music/Music/The%20Rolling%20Stones/Aftermath%20(UK)%20Single's/01%2019th%20Nervous%20Breakdown.mp3</string>
+		</dict>
+	</dict>
+	<key>Playlists</key>
+	<array>
+		<dict>
+			<key>Master</key><true/>
+			<key>Playlist ID</key><integer>127</integer>
+			<key>Playlist Persistent ID</key><string>BA6C97EBC1E7B24B</string>
+			<key>All Items</key><true/>
+			<key>Visible</key><false/>
+			<key>Name</key><string>####!####</string>
+			<key>Playlist Items</key>
+			<array>
+				<dict>
+					<key>Track ID</key><integer>85</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>87</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>89</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>91</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>93</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>95</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>97</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>99</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>101</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>103</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>105</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>111</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>304</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>309</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>145</integer>
+			<key>Playlist Persistent ID</key><string>663919584BF4A9EA</string>
+			<key>Distinguished Kind</key><integer>4</integer>
+			<key>Music</key><true/>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Music</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAQIbEAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAQIbEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIIAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIIAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+			<key>Playlist Items</key>
+			<array>
+				<dict>
+					<key>Track ID</key><integer>111</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>309</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>304</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>152</integer>
+			<key>Playlist Persistent ID</key><string>8CA5C43D3BB513BB</string>
+			<key>Distinguished Kind</key><integer>47</integer>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Music Videos</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIYAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIYAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>155</integer>
+			<key>Playlist Persistent ID</key><string>4326C12E8613BD95</string>
+			<key>Distinguished Kind</key><integer>7</integer>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Rentals</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAAEIAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAIAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAIAA
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>158</integer>
+			<key>Playlist Persistent ID</key><string>429C46EF6FA177EB</string>
+			<key>Distinguished Kind</key><integer>2</integer>
+			<key>Movies</key><true/>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Movies</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIKAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIKAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+			<key>Playlist Items</key>
+			<array>
+				<dict>
+					<key>Track ID</key><integer>97</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>162</integer>
+			<key>Playlist Persistent ID</key><string>CBFAA622BCF7D4A5</string>
+			<key>Distinguished Kind</key><integer>48</integer>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Home Videos</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAABAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIYAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIYAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>165</integer>
+			<key>Playlist Persistent ID</key><string>19D30303F33499B9</string>
+			<key>Distinguished Kind</key><integer>3</integer>
+			<key>TV Shows</key><true/>
+			<key>All Items</key><true/>
+			<key>Name</key><string>TV Shows</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIKAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIKAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+			<key>Playlist Items</key>
+			<array>
+				<dict>
+					<key>Track ID</key><integer>103</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>87</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>101</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>85</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>89</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>95</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>99</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>91</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>93</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>105</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>178</integer>
+			<key>Playlist Persistent ID</key><string>D15A15B962716848</string>
+			<key>Distinguished Kind</key><integer>10</integer>
+			<key>Podcasts</key><true/>
+			<key>All Items</key><true/>
+			<key>Visible</key><false/>
+			<key>Name</key><string>Podcasts</string>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>185</integer>
+			<key>Playlist Persistent ID</key><string>176F69A90F6005F6</string>
+			<key>Distinguished Kind</key><integer>31</integer>
+			<key>iTunesU</key><true/>
+			<key>All Items</key><true/>
+			<key>Visible</key><false/>
+			<key>Name</key><string>iTunes U</string>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>188</integer>
+			<key>Playlist Persistent ID</key><string>A911C134C52FA6D4</string>
+			<key>Distinguished Kind</key><integer>5</integer>
+			<key>Audiobooks</key><true/>
+			<key>Books</key><true/>
+			<key>All Items</key><true/>
+			<key>Visible</key><false/>
+			<key>Name</key><string>Books</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAADAAAgAAAAAAAAAAAAAAAAAAAAB
+			AAAAAADAAAgAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIKAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIKAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>191</integer>
+			<key>Playlist Persistent ID</key><string>256787B6C9039C3C</string>
+			<key>Distinguished Kind</key><integer>57</integer>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Books</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAB
+			AAAAAABAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIKAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIKAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>194</integer>
+			<key>Playlist Persistent ID</key><string>D74BF528676B7A14</string>
+			<key>Distinguished Kind</key><integer>59</integer>
+			<key>All Items</key><true/>
+			<key>Name</key><string>PDFs</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAB
+			AAAAAACAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIKAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIKAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>197</integer>
+			<key>Playlist Persistent ID</key><string>0C692D1CDB9E6C95</string>
+			<key>Distinguished Kind</key><integer>58</integer>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Audiobooks</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AgAEAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAIKAE
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAIKAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>203</integer>
+			<key>Playlist Persistent ID</key><string>F2E4C4D8C6116B86</string>
+			<key>Distinguished Kind</key><integer>26</integer>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Genius</string>
+			<key>Smart Info</key>
+			<data>
+			AAABAwAAAAIAAAAZAAABAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>206</integer>
+			<key>Playlist Persistent ID</key><string>86052830E592B330</string>
+			<key>All Items</key><true/>
+			<key>Name</key><string>90’s Music</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAEAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAB8YAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAB88AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgFNMc3QAAQAB
+			AAAAAgAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAB
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAABAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAAAAAAAAIAAAAAAAAAAA
+			AAAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>211</integer>
+			<key>Playlist Persistent ID</key><string>47DBCB10820645AF</string>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Classical Music</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAU0xzdAABAAEAAAACAAAAAQAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAADwAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAABEAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAg
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABVxTTHN0AAEAAQAAABEAAAAB
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAACAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAABIAQwBsAGEAcwBzAGkAYwBhAGwAAAAIAQAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEABLAGwAYQBzAHMAaQBlAGsAAAAI
+			AQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgBD
+			AGwAYQBzAHMAaQBxAHUAZQAAAAgBAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAOAEsAbABhAHMAcwBpAGsAAAAIAQAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEABDAGwAYQBzAHMAaQBjAGEAAAAI
+			AQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjCv
+			MOkwtzDDMK8AAAAIAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAADgBDAGwA4QBzAGkAYwBhAAAACAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAASwBsAGEAcwBzAGkAcwBrAAAACAEAAAEAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAQwBsAOEAcwBz
+			AGkAYwBhAAAACAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAABIASwBsAGEAcwBzAGkAcwBrAHQAAAAIAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAQaBDsEMARBBEEEOARHBDUEQQQ6BDAETwAA
+			AAgBAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS
+			AEsAbABhAHMAeQBjAHoAbgBhAAAACAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAABIASwBsAGEAcwBzAGkAbgBlAG4AAAAIAQAAAQAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADABLAGwAYQBzAGkAawAA
+			AAgBAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU
+			AEsAbABhAHMAcwB6AGkAawB1AHMAAAAIAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAFgBWAOEBfgBuAOEAIABoAHUAZABiAGEAAAAIAQAAAQAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgZDBkQGJwYz
+			BkoGQwZK
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>214</integer>
+			<key>Playlist Persistent ID</key><string>88A3549FBAF1674C</string>
+			<key>All Items</key><true/>
+			<key>Name</key><string>My Top Rated</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABkAAAAQAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAADwAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>217</integer>
+			<key>Playlist Persistent ID</key><string>8B902D77CF0D7A0E</string>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Recently Added</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABELa4tri2uLa7//////////gAAAAAACTqA
+			La4tri2uLa4AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5AgAAAQAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAB
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+			<key>Playlist Items</key>
+			<array>
+				<dict>
+					<key>Track ID</key><integer>111</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>309</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>304</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>222</integer>
+			<key>Playlist Persistent ID</key><string>7379C4473B4C8432</string>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Recently Played</string>
+			<key>Smart Info</key>
+			<data>
+			AQEAAwAAAAIAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABcAAAIAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABELa4tri2uLa7//////////gAAAAAACTqA
+			La4tri2uLa4AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5AgAAAQAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAB
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+		</dict>
+		<dict>
+			<key>Playlist ID</key><integer>225</integer>
+			<key>Playlist Persistent ID</key><string>859600146F8B6172</string>
+			<key>All Items</key><true/>
+			<key>Name</key><string>Top 25 Most Played</string>
+			<key>Smart Info</key>
+			<data>
+			AQEBAwAAABkAAAAZAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAA==
+			</data>
+			<key>Smart Criteria</key>
+			<data>
+			U0xzdAABAAEAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADkCAAABAAAAAAAAAAAAAAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAB
+			AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAAAEAAA
+			AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAA
+			AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA
+			AAAAAAAA
+			</data>
+			<key>Playlist Items</key>
+			<array>
+				<dict>
+					<key>Track ID</key><integer>103</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>87</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>101</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>85</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>89</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>95</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>99</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>91</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>93</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>105</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>97</integer>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>Music Folder</key><string>file://localhost/C:/Users/JohnPaul/Music/iTunes-test/iTunes%20Media/</string>
+</dict>
+</plist>

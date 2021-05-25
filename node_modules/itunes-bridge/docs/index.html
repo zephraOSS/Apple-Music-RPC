@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Events</li><li class="nav-heading"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="iTunes-bridge.html#event:paused">paused</a></span></li><li class="nav-heading"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="iTunes-bridge.html#event:playing">playing</a></span></li><li class="nav-heading"><span class="nav-item-type type-event">E</span><span class="nav-item-name"><a href="iTunes-bridge.html#event:stopped">stopped</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html"></a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCurrentTrack">getCurrentTrack</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPlayerState">getPlayerState</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPlaylistCount">getPlaylistCount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getTrack">getTrack</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getTrackCount">getTrackCount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isRunning">isRunning</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#pause">pause</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#play">play</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#soundVolume">soundVolume</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#stop">stop</a></span></li>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>iTunes-bridge</h1><p>A macOS and Windows NodeJS package to control and get informations from iTunes through AppleScript</p>
+<h5>If you need OS X Mavericks and earlier support, use the 0.3.0-alpha, but you will have no Windows support and events in this version.</h5><h3>This package is a WIP, a lot of functions will be added in the future and some that are already existing could change</h3><h1>Documentation</h1><p>You can found it at <a href="https://itunes-bridge.js.org">itunes-bridge.js.org</a></p>
+<h1>Example</h1><pre class="prettyprint source lang-js"><code>var iTunes = require('./itunes-bridge');
+var currentTrack = iTunes.getCurrentTrack();
+// We load the iTunes-bridge emitter to receive events
+var iTunesEmitter = iTunes.emitter;
+
+switch(currentTrack.playerState){
+    case &quot;playing&quot;: {
+        var exampleMsg = &quot;iTunes is currently playing &quot; + currentTrack.name + &quot; by &quot; + currentTrack.artist + ' from the album &quot;' + currentTrack.album + '&quot;. This song is ' + currentTrack.duration + 's long and will finish in ' + currentTrack.remainingTime+'s';
+        var exampleMsg2 = &quot;You have &quot; + iTunes.getPlaylistCount('/Users/steve/Music/iTunes/iTunes Library.xml') + &quot; playlists in your library and &quot; + iTunes.getTrackCount('/Users/steve/Music/iTunes/iTunes Library.xml') + &quot; tracks!&quot;;
+        console.log(exampleMsg);
+        console.log(exampleMsg2);
+        break;
+    }
+    case &quot;paused&quot;: {
+        var exampleMsg = 'iTunes is currently paused';
+        console.log(exampleMsg);
+        break;
+    }
+    case &quot;stopped&quot;: {
+        var exampleMsg = &quot;iTunes is not playing at the moment.&quot;;
+        console.log(exampleMsg);
+        break;
+    }
+};
+
+// Do something when iTunes is playing
+iTunesEmitter.on('playing', function(type, currentTrack){
+    // If it is a paused track that restarts playing
+    if(type === &quot;player_state_change&quot;) {
+        console.log(currentTrack.name + &quot; has been resumed! &quot;);
+        // Or if it is a new track
+    }else if(type === 'new_track'){
+        console.log(currentTrack.name+&quot; is now playing!&quot;)
+    }
+});
+
+// Do something when iTunes is paused
+iTunesEmitter.on('paused', function(type, currentTrack){
+    console.log(currentTrack.name+&quot; is now paused!&quot;);
+});
+// Do something when iTunes is stopped
+iTunesEmitter.on('stopped', function(){
+    console.log(&quot;iTunes is not longer playing!&quot;);
+});
+
+</code></pre><h1>Using with Electron</h1><p>If you want to use iTunes-bridge with Electron and the ASAR compression system, you need to use electron-builder and add the following to your package.json:</p>
+<pre class="prettyprint source lang-json"><code>    &quot;asarUnpack&quot;: [
+      &quot;node_modules/itunes-bridge/wscript&quot;,
+      &quot;node_modules/itunes-bridge/jxa&quot;
+    ]</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jul 27 2019 01:48:17 GMT+0200 (GMT+02:00) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
