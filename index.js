@@ -8,23 +8,55 @@ const rpc = new DiscordRPC.Client({ transport: 'ipc' }),
 
 var presenceData = {
         largeImageKey: 'applemusic-logo',
-        largeImageText: 'AMRPC - V.1.0.0',
-    };
+        largeImageText: `AMRPC - V.${process.env.npm_package_version}`
+    },
+    debugging = false;
 
 iTunesEmitter.on('playing', async function(type, currentTrack) {
     presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
     presenceData.state = currentTrack.artist || "Unknown artist";
 
     if(currentTrack) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
+
+    if(debugging) {
+        console.log("\naction", "playing");
+        console.log("type", type);
+        console.log("currentTrack.name", currentTrack.name);
+        console.log("currentTrack.album", currentTrack.album);
+        console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack?.elapsedTime + currentTrack?.duration);
+    }
 });
 
 iTunesEmitter.on('paused', async function(type, currentTrack) {
     delete presenceData.endTimestamp;
     presenceData.state = "Paused";
+
+    if(debugging) {
+        console.log("\naction", "paused");
+        console.log("type", type);
+        console.log("currentTrack.name", currentTrack.name);
+        console.log("currentTrack.album", currentTrack.album);
+    }
 });
 
 iTunesEmitter.on('stopped', async function() {
+    if(debugging) {
+        console.log("\naction", "stopped");
+    }
 });
+
+if(process.argv.find(element => element === "supporting")) {
+    presenceData.buttons = [
+        {
+            label: "Download AMRPC",
+            url: "https://github.com/N0chteil/Apple-Music-RPC"
+        }
+    ]
+}
+
+if(process.argv.find(element => element === "debugging")) {
+    debugging = true;
+}
   
 rpc.on('ready', () => {
     presenceData.details = `${currentTrack.name} - ${currentTrack.album}` || "Unknown track";

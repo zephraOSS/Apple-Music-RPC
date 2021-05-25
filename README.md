@@ -13,3 +13,7 @@
 
 ## Information
 This RPC is only for the Windows program. If you use Apple Music in your browser, check out [Apple Music RPC for PreMiD](https://premid.app/store/presences/Apple%20Music)!
+
+## Coming soon
+* Autostart
+* EXE installer
