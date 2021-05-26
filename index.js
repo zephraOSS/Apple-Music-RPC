@@ -1,6 +1,7 @@
 const clientId = '842112189618978897',
-    DiscordRPC = require('discord-rpc'),
-    iTunes = require('itunes-bridge');
+    DiscordRPC = require("discord-rpc"),
+    iTunes = require("itunes-bridge"),
+    AutoLaunch = require("auto-launch");
 
 const rpc = new DiscordRPC.Client({ transport: 'ipc' }),
     currentTrack = iTunes.getCurrentTrack(),
@@ -12,8 +13,13 @@ var presenceData = {
     },
     debugging = false;
 
+let autoLaunch = new AutoLaunch({
+    name: "",
+    path: __dirname+"AMRPC.bat"
+});
+
 iTunesEmitter.on('playing', async function(type, currentTrack) {
-    presenceData.details = (currentTrack) ? `${currentTrack?.name} - ${currentTrack?.album}` : "Unknown track";
+    presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
     presenceData.state = currentTrack.artist || "Unknown artist";
 
     if(currentTrack) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
@@ -23,7 +29,14 @@ iTunesEmitter.on('playing', async function(type, currentTrack) {
         console.log("type", type);
         console.log("currentTrack.name", currentTrack.name);
         console.log("currentTrack.album", currentTrack.album);
-        console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack?.elapsedTime + currentTrack?.duration);
+        console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
+
+        presenceData.buttons = [
+            {
+                label: "Play on Apple Music",
+                url: "https://music.apple.com"
+            }
+        ]
     }
 });
 
@@ -57,17 +70,23 @@ if(process.argv.find(element => element === "supporting")) {
 if(process.argv.find(element => element === "debugging")) {
     debugging = true;
 }
+
+if(process.argv.find(element => element === "setup")) {
+    setTimeout(() => {
+        process.exit();
+    }, 5000);
+    autoLaunch.enable();
+}
   
 rpc.on('ready', () => {
-    presenceData.details = `${currentTrack.name} - ${currentTrack.album}` || "Unknown track";
+    presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
     presenceData.state = currentTrack.artist || "Unknown artist";
 
     setInterval(() => {
-        if(iTunes.isRunning()) {
-            if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
-            if(presenceData.state.length > 128) presenceData.state = presenceData.state.substring(0,128);
-            rpc.setActivity(presenceData);
-        }
+        if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
+        if(presenceData.state.length > 128) presenceData.state = presenceData.state.substring(0,128);
+
+        if(currentTrack) rpc.setActivity(presenceData);
     }, 5);
 });
   

@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/N0chteil/Apple-Music-RPC#readme",
   "dependencies": {
+    "auto-launch": "^5.0.5",
     "discord-rpc": "^3.2.0",
     "itunes-bridge": "^0.6.6"
   }
