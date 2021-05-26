@@ -20,7 +20,7 @@ let autoLaunch = new AutoLaunch({
 
 iTunesEmitter.on('playing', async function(type, currentTrack) {
     presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
-    presenceData.state = currentTrack.artist || "Unknown artist";
+    presenceData.state = (currentTrack) ? currentTrack.artist : "Unknown artist";
 
     if(currentTrack) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
 
@@ -30,13 +30,6 @@ iTunesEmitter.on('playing', async function(type, currentTrack) {
         console.log("currentTrack.name", currentTrack.name);
         console.log("currentTrack.album", currentTrack.album);
         console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
-
-        presenceData.buttons = [
-            {
-                label: "Play on Apple Music",
-                url: "https://music.apple.com"
-            }
-        ]
     }
 });
 
