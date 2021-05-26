@@ -3,7 +3,7 @@
 ## Installation
 * Download the [latest release](https://github.com/N0chteil/Apple-Music-RPC/releases)
 * Extract the zip file
-* Open terminal and **cd \path\to\extracted\zip**
+* Open the terminal and **cd \path\to\extracted\zip**
 * Type **npm start**
 
 ## Requirements

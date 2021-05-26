@@ -13,7 +13,7 @@ var presenceData = {
     debugging = false;
 
 iTunesEmitter.on('playing', async function(type, currentTrack) {
-    presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
+    presenceData.details = (currentTrack) ? `${currentTrack?.name} - ${currentTrack?.album}` : "Unknown track";
     presenceData.state = currentTrack.artist || "Unknown artist";
 
     if(currentTrack) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
@@ -63,7 +63,11 @@ rpc.on('ready', () => {
     presenceData.state = currentTrack.artist || "Unknown artist";
 
     setInterval(() => {
-        if(iTunes.isRunning()) rpc.setActivity(presenceData);
+        if(iTunes.isRunning()) {
+            if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
+            if(presenceData.state.length > 128) presenceData.state = presenceData.state.substring(0,128);
+            rpc.setActivity(presenceData);
+        }
     }, 5);
 });
   
