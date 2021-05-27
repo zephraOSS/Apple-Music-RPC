@@ -4,7 +4,11 @@
   "description": "Discord RPC for iTunes",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . AMRPC --overwrite --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=N0chteil --version-string.FileDescription=Discord RPC for Apple Music --version-string.ProductName=\"AMRPC\"",
+    "package-linux": "electron-packager . AMRPC --overwrite --platform=linux --arch=x64 --icon=assets/logo.png --prune=true --out=release-builds"
   },
   "repository": {
     "type": "git",
@@ -29,5 +33,9 @@
     "fetch": "^1.1.0",
     "get-apple-music-link": "^1.0.0",
     "itunes-bridge": "^0.6.6"
+  },
+  "devDependencies": {
+    "electron": "^13.0.1",
+    "electron-packager": "^15.2.0"
   }
 }

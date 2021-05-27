@@ -3,22 +3,23 @@ const clientId = '842112189618978897',
     iTunes = require("itunes-bridge"),
     getAppleMusicLink = require("get-apple-music-link"),
     AutoLaunch = require("auto-launch"),
-    request = require("request");
+    request = require("request"),
+    electron = require("electron"),
+    url = require("url"),
+    path = require("path"),
+    fs = require('fs');
 
 const rpc = new DiscordRPC.Client({ transport: 'ipc' }),
     currentTrack = iTunes.getCurrentTrack(),
-    iTunesEmitter = iTunes.emitter;
+    iTunesEmitter = iTunes.emitter,
+    {app, Menu, Notification, Tray} = electron,
+    config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
 let presenceData = {
         largeImageKey: 'applemusic-logo',
-        largeImageText: `AMRPC - V.${process.env.npm_package_version}`
+        largeImageText: `AMRPC - V.${config.version}`
     },
     debugging = false;
-
-let autoLaunch = new AutoLaunch({
-    name: "",
-    path: __dirname+"AMRPC.bat"
-});
 
 iTunesEmitter.on('playing', async function(type, currentTrack) {
     presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
@@ -31,7 +32,7 @@ iTunesEmitter.on('playing', async function(type, currentTrack) {
                 if(debugging) console.log(res);
                 presenceData.buttons = [
                     {
-                        label: "Play on Apple Musicᴮᴱᵀᴬ",
+                        label: "Play on Apple Music",
                         url: res
                     }
                 ]
@@ -61,9 +62,7 @@ iTunesEmitter.on('paused', async function(type, currentTrack) {
 });
 
 iTunesEmitter.on('stopped', async function() {
-    if(debugging) {
-        console.log("\naction", "stopped");
-    }
+    if(debugging) console.log("\naction", "stopped");
 });
 
 if(process.argv.find(element => element === "supporting")) {
@@ -99,6 +98,31 @@ rpc.on('ready', () => {
     }, 5);
 });
 
+app.on("ready", function() {
+    let tray = new Tray(`${__dirname}\\assets\\logo.png`),
+        isQuiting;
+
+    let autoLaunch = new AutoLaunch({
+        name: "AMRPC",
+        path: app.getPath('exe')
+    });
+
+    app.on("quit", () => tray.destroy());
+    app.on('before-quit', function () {
+        isQuiting = true;
+    });
+
+    tray.setToolTip("AMRPC");
+    tray.setContextMenu(Menu.buildFromTemplate([
+        { label: `AMRPC V${config.version}`, icon: `${__dirname}\\assets\\tray\\logo@18.png`, enabled: false },
+        { type: "separator" },
+        { label: "Show Presence", type: "checkbox", checked: (config.show) ? true : false, click() { updateShowRPC(this.checked) } },
+        { label: "Quit", click() { isQuiting = true, app.quit() } }
+      ]));
+    tray.on("right-click", () => tray.update());
+    autoLaunch.enable();
+});
+
 function updateChecker() {
     const fetchUrl = require("fetch").fetchUrl;
 
@@ -106,44 +130,23 @@ function updateChecker() {
         body = JSON.parse(body.toString());
         let version = {
                 git: body[0].name.replace(".", "").replace("v", ""),
-                package: process.env.npm_package_version.replace(".", "")
+                package: config.version.replace(".", "")
             }
 
         if(version.git > version.package) {
             console.log("\x1b[31m%s\x1b[0m", `VersionCheck: Your version is outdated. Newest release is ${body[0].name}`);
-            console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Downloading newest release...");
-            setTimeout(() => {
-                updateVersion(body[0].name);
-            }, 2000);
+            console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Please download the newest release from GitHub (Updater is currently in work)");
+            showNotification("VersionCheck", `Your version is outdated. Newest release is ${body[0].name}`);
+            showNotification("VersionCheck", "Please download the newest release from GitHub (Updater is currently in work)");
         } else {
             console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Up to date");
+            showNotification("VersionCheck", "Up to date");
         }
     });
 }
 
-function updateVersion(version) {
-    const download = require("download-git-repo"),
-        fs = require('fs');
-    
-    download(`direct:https://github.com/N0chteil/Apple-Music-RPC/releases/download/${version}/amrpc-win.zip`, 'github_newest', function (err) {
-        err = (err === undefined || err === false) ? false : true;
-        if(!err) {
-            console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Successfully downloaded!");
-            fs.writeFile("updater.bat", 'del "index.js"\ndel "package.json"\nmove /y github_newest\\*.* .\n@RD /S /Q "github_newest"\nnpm install\ndel "updater.bat"', function(err) {
-                if(err) return console.log(err);
-                else {
-                    console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Created updater file. Exiting process in 10 seconds.");
-                    console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Please open the updater file after the process is finished.");
-                }
-            }); 
-            setTimeout(() => {
-                require('child_process').exec('updater.bat');
-                process.exit();
-            }, 10000);
-        } else {
-            console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Error downloading the latest version from GitHub");
-        }
-    })
+function showNotification (title, body) {
+    new Notification({title: title,body: body}).show()
 }
   
 rpc.login({ clientId }).catch(console.error);
