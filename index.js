@@ -117,6 +117,7 @@ app.on("ready", function() {
     tray.setContextMenu(cmenu);
     tray.on("right-click", () => tray.update());
     if(config.autolaunch) autoLaunch.enable();
+    else autoLaunch.disable();
 });
 
 function updateChecker() {
