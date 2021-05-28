@@ -81,10 +81,10 @@ rpc.on('ready', () => {
     presenceData.state = currentTrack.artist || "Unknown artist";
 
     setInterval(() => {
-        if(!rpc || !presenceData.details || config.show === "false") return rpc.clearActivity();
-        if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
-        if(presenceData.state.length > 128) presenceData.state = presenceData.state.substring(0,128);
-        else if(presenceData.state.length === 0) delete presenceData.state;
+        if(!rpc || !presenceData?.details || config.show === "false") return rpc.clearActivity();
+        if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
+        if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
+        else if(presenceData.state?.length === 0) delete presenceData.state;
 
         if(currentTrack) rpc.setActivity(presenceData);
     }, 5);
