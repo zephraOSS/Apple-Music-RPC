@@ -74,13 +74,6 @@ if(process.argv.find(element => element === "supporting")) {
 if(process.argv.find(element => element === "debugging")) {
     debugging = true;
 }
-
-if(process.argv.find(element => element === "setup")) {
-    setTimeout(() => {
-        process.exit();
-    }, 5000);
-    autoLaunch.enable();
-}
   
 rpc.on('ready', () => {
     updateChecker();
@@ -88,8 +81,10 @@ rpc.on('ready', () => {
     presenceData.state = currentTrack.artist || "Unknown artist";
 
     setInterval(() => {
+        if(!rpc || !presenceData.details || config.show === "false") return rpc.clearActivity();
         if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
         if(presenceData.state.length > 128) presenceData.state = presenceData.state.substring(0,128);
+        else if(presenceData.state.length === 0) delete presenceData.state;
 
         if(currentTrack) rpc.setActivity(presenceData);
     }, 5);
@@ -97,12 +92,21 @@ rpc.on('ready', () => {
 
 app.on("ready", function() {
     let tray = new Tray(`${__dirname}\\assets\\logo.png`),
-        isQuiting;
-
-    let autoLaunch = new AutoLaunch({
-        name: "AMRPC",
-        path: app.getPath('exe')
-    });
+        isQuiting,
+        autoLaunch = new AutoLaunch({
+            name: "AMRPC",
+            path: app.getPath('exe')
+        }),
+        cmenu = Menu.buildFromTemplate([
+            { label: `AMRPC V${config.version}`, icon: `${__dirname}\\assets\\tray\\logo@18.png`, enabled: false },
+            { type: "separator" },
+            { label: "Reload AMRPC", click() { reloadAMRPC() } },
+            { type: "separator" },
+            { label: "Show Presence", type: "checkbox", checked: (config.show) ? true : false, click() { updateShowRPC(cmenu.items[4].checked) } },
+            { label: "Run on startup", type: "checkbox", checked: (config.autolaunch) ? true : false, click() { updateConfig("autolaunch", cmenu.items[5].checked.toString()) } },
+            { type: "separator" },
+            { label: "Quit", click() { isQuiting = true, app.quit() } }
+          ]);
 
     app.on("quit", () => tray.destroy());
     app.on('before-quit', function () {
@@ -110,14 +114,9 @@ app.on("ready", function() {
     });
 
     tray.setToolTip("AMRPC");
-    tray.setContextMenu(Menu.buildFromTemplate([
-        { label: `AMRPC V${config.version}`, icon: `${__dirname}\\assets\\tray\\logo@18.png`, enabled: false },
-        { type: "separator" },
-        { label: "Show Presence", type: "checkbox", checked: (config.show) ? true : false, click() { updateShowRPC(this.checked) } },
-        { label: "Quit", click() { isQuiting = true, app.quit() } }
-      ]));
+    tray.setContextMenu(cmenu);
     tray.on("right-click", () => tray.update());
-    autoLaunch.enable();
+    if(config.autolaunch) autoLaunch.enable();
 });
 
 function updateChecker() {
@@ -146,4 +145,76 @@ function showNotification (title, body) {
     new Notification({title: title,body: body}).show()
 }
   
+function updateShowRPC(status) {
+    if(status) {
+        let ct = iTunes.getCurrentTrack();
+        if(ct) {
+            presenceData.details = (ct) ? `${ct.name} - ${ct.album}` : "Unknown track";
+            presenceData.state = (ct) ? ct.artist : "Unknown artist";
+            presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+            getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
+                if(!err){
+                    if(debugging) console.log(res);
+                    presenceData.buttons = [
+                        {
+                            label: "Play on Apple Music",
+                            url: res
+                        }
+                    ]
+                }
+            });
+
+            if(debugging) {
+                console.log("\naction", "update_cfg_show");
+                console.log("currentTrack.name", ct.name);
+                console.log("currentTrack.album", ct.album);
+                console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
+            }
+        }
+    } else {
+        rpc.clearActivity();
+        delete presenceData.details;
+        delete presenceData.state;
+        delete presenceData.endTimestamp;
+    }
+    
+    updateConfig("show", status.toString());
+}
+
+function updateConfig(c, v) {
+    config[c] = v;
+    fs.writeFile(`${__dirname}\\config.json`, JSON.stringify(config), function (err) {if (err) console.log(err)});
+}
+
+async function reloadAMRPC() {
+    await rpc.connect();
+
+    if(config.show === "true") {
+        let ct = iTunes.getCurrentTrack();
+        if(ct) {
+            presenceData.details = (ct) ? `${ct.name} - ${ct.album}` : "Unknown track";
+            presenceData.state = (ct) ? ct.artist : "Unknown artist";
+            presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+            getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
+                if(!err){
+                    if(debugging) console.log(res);
+                    presenceData.buttons = [
+                        {
+                            label: "Play on Apple Music",
+                            url: res
+                        }
+                    ]
+                }
+            });
+
+            if(debugging) {
+                console.log("\naction", "reload_amrpc");
+                console.log("currentTrack.name", ct.name);
+                console.log("currentTrack.album", ct.album);
+                console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
+            }
+        }
+    }
+}
+
 rpc.login({ clientId }).catch(console.error);
