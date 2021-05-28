@@ -149,8 +149,8 @@ function updateShowRPC(status) {
     if(status) {
         let ct = iTunes.getCurrentTrack();
         if(ct) {
-            presenceData.details = (ct) ? `${ct.name} - ${ct.album}` : "Unknown track";
-            presenceData.state = (ct) ? ct.artist : "Unknown artist";
+            presenceData.details = `${ct.name} - ${ct.album}`;
+            presenceData.state = ct.artist;
             presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
             getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
                 if(!err){
@@ -192,8 +192,8 @@ async function reloadAMRPC() {
     if(config.show === "true") {
         let ct = iTunes.getCurrentTrack();
         if(ct) {
-            presenceData.details = (ct) ? `${ct.name} - ${ct.album}` : "Unknown track";
-            presenceData.state = (ct) ? ct.artist : "Unknown artist";
+            presenceData.details = `${ct.name} - ${ct.album}`;
+            presenceData.state = ct.artist;
             presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
             getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
                 if(!err){
