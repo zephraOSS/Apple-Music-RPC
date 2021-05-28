@@ -3,17 +3,14 @@ const clientId = '842112189618978897',
     iTunes = require("itunes-bridge"),
     getAppleMusicLink = require("get-apple-music-link"),
     AutoLaunch = require("auto-launch"),
-    request = require("request"),
     electron = require("electron"),
-    url = require("url"),
-    path = require("path"),
     fs = require('fs');
 
 const rpc = new DiscordRPC.Client({ transport: 'ipc' }),
     currentTrack = iTunes.getCurrentTrack(),
     iTunesEmitter = iTunes.emitter,
     {app, Menu, Notification, Tray} = electron,
-    config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+    config = JSON.parse(fs.readFileSync(`${__dirname}\\config.json`, 'utf8'));
 
 let presenceData = {
         largeImageKey: 'applemusic-logo',
