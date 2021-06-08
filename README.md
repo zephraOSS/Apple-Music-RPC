@@ -13,5 +13,11 @@
 ## Information
 This RPC is only for the Windows program. If you use Apple Music in your browser (macOS, Windows, Linux), check out [Apple Music RPC for PreMiD](https://premid.app/store/presences/Apple%20Music)!
 
-## Coming soon
+## Coming in V2.1.0
 * EXE installer
+* (LIVE) Radio support
+* Hide presence completely
+* Hide presence on pause
+* Autostart
+* Auto reconnect
+* Bug fixes
