@@ -1,0 +1,28 @@
+{
+    "appId": "com.electron.amrpc",
+    "productName": "AMRPC",
+    "artifactName": "AMRPC.${ext}",
+    "copyright": "Copyright © 2021 N0chteil",
+    "asar": "true",
+    "asarUnpack": [
+        "node_modules/itunes-bridge/wscript",
+        "node_modules/itunes-bridge/jxa"
+    ],
+    "extraResources": [
+        "assets/logo.png",
+        "assets/tray/"
+    ],
+    "directories": {
+        "buildResources": "assets",
+        "output": "app"
+    },
+    "nsis": {
+        "createDesktopShortcut": "always"
+    },
+    "win": {
+        "target": "nsis",
+        "icon": "assets/icons/win/icon.ico",
+        "artifactName": "AMRPC-installer.exe",
+        "publish": ["github"]
+    }
+}

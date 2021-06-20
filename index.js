@@ -1,29 +1,54 @@
-const clientId = '842112189618978897',
+const clientId = "842112189618978897",
     DiscordRPC = require("discord-rpc"),
     iTunes = require("itunes-bridge"),
     getAppleMusicLink = require("get-apple-music-link"),
     AutoLaunch = require("auto-launch"),
-    electron = require("electron"),
-    fs = require('fs');
+    {app, Menu, Notification, Tray, dialog} = require("electron"),
+    Store = require("electron-store"),
+    { autoUpdater } = require("electron-updater"),
+    path = require("path");
 
-const rpc = new DiscordRPC.Client({ transport: 'ipc' }),
-    currentTrack = iTunes.getCurrentTrack(),
-    iTunesEmitter = iTunes.emitter,
-    {app, Menu, Notification, Tray} = electron,
-    config = JSON.parse(fs.readFileSync(`${__dirname}\\config.json`, 'utf8'));
+const iTunesEmitter = iTunes.emitter,
+    config = new Store({defaults: {
+		autolaunch: true,
+		show: true,
+        hideOnPause: true
+	}});
 
-let presenceData = {
-        largeImageKey: 'applemusic-logo',
-        largeImageText: `AMRPC - V.${config.version}`
+let rpc = new DiscordRPC.Client({ transport: "ipc" }),
+    presenceData = {
+        largeImageKey: "applemusic-logo",
+        largeImageText: `AMRPC - V.${app.getVersion()}`
     },
     debugging = false;
 
-iTunesEmitter.on('playing', async function(type, currentTrack) {
-    presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
+require('child_process').exec('NET SESSION', function(err,so,se) {
+    let isAdmin = se.length === 0 ? true : false;
+    if(isAdmin) {
+        isQuiting = true;
+        console.log("Please do not run AMRPC with administrator privileges!");
+        dialog.showErrorBox("Oh no!", "Please do not run AMRPC with administrator privileges!");
+        app.quit();
+    }
+});
+
+iTunesEmitter.on("playing", async function(type, currentTrack) {
+    if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0)
+        presenceData.details = `${currentTrack.name}`;
+    else
+        presenceData.details = `${currentTrack.name} - ${currentTrack.album}`;
+
     presenceData.state = (currentTrack) ? currentTrack.artist : "Unknown artist";
 
-    if(currentTrack) {
+    if(currentTrack.duration > 0)
         presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
+    else {
+        if(presenceData.endTimestamp) delete presenceData.endTimestamp;
+        presenceData.details = currentTrack.name;
+        presenceData.state = "LIVE";
+    }
+
+    if(currentTrack) {
         getAppleMusicLink.track(currentTrack.name, currentTrack.artist, function(res, err){
             if(!err){
                 if(debugging) console.log(res);
@@ -41,25 +66,38 @@ iTunesEmitter.on('playing', async function(type, currentTrack) {
         console.log("\naction", "playing");
         console.log("type", type);
         console.log("currentTrack.name", currentTrack.name);
+        console.log("currentTrack.artist", currentTrack.artist);
         console.log("currentTrack.album", currentTrack.album);
         console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
     }
 });
 
-iTunesEmitter.on('paused', async function(type, currentTrack) {
-    delete presenceData.endTimestamp;
-    presenceData.state = "Paused";
+iTunesEmitter.on("paused", async function(type, currentTrack) {
+    if(config.get("hideOnPause")) {
+        if(presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) rpc.clearActivity();
+        delete presenceData.details;
+        delete presenceData.state;
+        delete presenceData.endTimestamp;
+    } else {
+        delete presenceData.endTimestamp;
+        presenceData.state = "Paused";
+    }
 
     if(debugging) {
         console.log("\naction", "paused");
         console.log("type", type);
         console.log("currentTrack.name", currentTrack.name);
+        console.log("currentTrack.artist", currentTrack.artist);
         console.log("currentTrack.album", currentTrack.album);
     }
 });
 
-iTunesEmitter.on('stopped', async function() {
+iTunesEmitter.on("stopped", async () => {
     if(debugging) console.log("\naction", "stopped");
+    if(presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) rpc.clearActivity();
+    delete presenceData.details;
+    delete presenceData.state;
+    delete presenceData.endTimestamp;
 });
 
 if(process.argv.find(element => element === "supporting")) {
@@ -71,88 +109,101 @@ if(process.argv.find(element => element === "supporting")) {
     ]
 }
 
-if(process.argv.find(element => element === "debugging")) {
-    debugging = true;
-}
+if(process.argv.find(element => element === "debugging")) debugging = true;
   
-rpc.on('ready', () => {
+rpc.on("ready", () => {
+    const currentTrack = iTunes.getCurrentTrack();
+
     updateChecker();
-    presenceData.details = (currentTrack) ? `${currentTrack.name} - ${currentTrack.album}` : "Unknown track";
-    presenceData.state = currentTrack.artist || "Unknown artist";
+    if(currentTrack) {
+        if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0)
+            presenceData.details = `${currentTrack.name}`;
+        else
+            presenceData.details = `${currentTrack.name} - ${currentTrack.album}`;
+
+        presenceData.state = currentTrack.artist || "Unknown artist";
+
+        if(currentTrack.duration === 0) {
+            presenceData.details = currentTrack.name;
+            presenceData.state = "LIVE";
+        }
+    }
 
     setInterval(() => {
-        if(!rpc || !presenceData?.details || config.show === "false") return rpc.clearActivity();
+        const ct = iTunes.getCurrentTrack();
+
+        if(!presenceData?.details || !config.get("show")) return rpc.clearActivity();
         if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
         if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
         else if(presenceData.state?.length === 0) delete presenceData.state;
 
-        if(currentTrack) rpc.setActivity(presenceData);
+        if(ct?.playerState !== "stopped") rpc.setActivity(presenceData);
     }, 5);
+
+    setInterval(() => {
+        updateChecker();
+    }, 600e3);
 });
 
-app.on("ready", function() {
-    let tray = new Tray(`${__dirname}\\assets\\logo.png`),
+rpc.on("disconnected", () => {
+    rpc = new DiscordRPC.Client({ transport: "ipc" });
+    rpc.login({ clientId: clientId }).catch(() => rpc.destroy());
+});
+
+app.on("ready", () => {
+    let tray = new Tray(app.isPackaged ? path.join(process.resourcesPath, "/assets/logo.png") : path.join(__dirname, `/assets/logo.png`)),
         isQuiting,
         autoLaunch = new AutoLaunch({
             name: "AMRPC",
-            path: app.getPath('exe')
+            path: app.getPath("exe")
         }),
         cmenu = Menu.buildFromTemplate([
-            { label: `AMRPC V${config.version}`, icon: `${__dirname}\\assets\\tray\\logo@18.png`, enabled: false },
+            { label: `AMRPC V${app.getVersion()}`, icon: app.isPackaged ? path.join(process.resourcesPath, "/assets/tray/logo@18.png") : path.join(__dirname, `/assets/tray/logo@18.png`), enabled: false },
             { type: "separator" },
             { label: "Reload AMRPC", click() { reloadAMRPC() } },
             { type: "separator" },
-            { label: "Show Presence", type: "checkbox", checked: (config.show) ? true : false, click() { updateShowRPC(cmenu.items[4].checked) } },
-            { label: "Run on startup", type: "checkbox", checked: (config.autolaunch) ? true : false, click() { updateConfig("autolaunch", cmenu.items[5].checked.toString()) } },
+            { label: "Show Presence", type: "checkbox", checked: config.get("show"), click() { updateShowRPC(cmenu.items[4].checked) } },
+            { label: "Run on startup", type: "checkbox", checked: config.get("autolaunch"), click() { config.set("autolaunch", cmenu.items[5].checked) } },
+            { label: "Hide on pause", type: "checkbox", checked: config.get("hideOnPause"), click() { config.set("hideOnPause", cmenu.items[6].checked) } },
             { type: "separator" },
             { label: "Quit", click() { isQuiting = true, app.quit() } }
           ]);
 
     app.on("quit", () => tray.destroy());
-    app.on('before-quit', function () {
+    app.on("before-quit", function () {
         isQuiting = true;
     });
 
     tray.setToolTip("AMRPC");
     tray.setContextMenu(cmenu);
     tray.on("right-click", () => tray.update());
-    if(config.autolaunch) autoLaunch.enable();
+
+    if(config.get("autolaunch")) autoLaunch.enable();
     else autoLaunch.disable();
 });
 
 function updateChecker() {
-    const fetchUrl = require("fetch").fetchUrl;
+    console.log("Checking for updates...");
 
-    fetchUrl("https://api.github.com/repos/N0chteil/Apple-Music-RPC/tags", function(error, meta, body) {
-        body = JSON.parse(body.toString());
-        let version = {
-                git: body[0].name.replace(".", "").replace("v", ""),
-                package: config.version.replace(".", "")
-            }
-
-        if(version.git > version.package) {
-            console.log("\x1b[31m%s\x1b[0m", `VersionCheck: Your version is outdated. Newest release is ${body[0].name}`);
-            console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Please download the newest release from GitHub (Updater is currently in work)");
-            showNotification("VersionCheck", `Your version is outdated. Newest release is ${body[0].name}`);
-            showNotification("VersionCheck", "Please download the newest release from GitHub (Updater is currently in work)");
-        } else {
-            console.log("\x1b[36m%s\x1b[0m", "VersionCheck: Up to date");
-            showNotification("VersionCheck", "Up to date");
-        }
+    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.on("update-downloaded", () => {
+        autoUpdater.quitAndInstall();
     });
 }
 
-function showNotification (title, body) {
-    new Notification({title: title,body: body}).show()
+function showNotification(title, body) {
+    new Notification({title: title, body: body}).show();
 }
   
 function updateShowRPC(status) {
     if(status) {
         let ct = iTunes.getCurrentTrack();
         if(ct) {
-            presenceData.details = `${ct.name} - ${ct.album}`;
+            if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = `${ct.name}`;
+            else presenceData.details = `${ct.name} - ${ct.album}`;
+
             presenceData.state = ct.artist;
-            presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+            if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
             getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
                 if(!err){
                     if(debugging) console.log(res);
@@ -168,6 +219,7 @@ function updateShowRPC(status) {
             if(debugging) {
                 console.log("\naction", "update_cfg_show");
                 console.log("currentTrack.name", ct.name);
+                console.log("currentTrack.artist", ct.artist);
                 console.log("currentTrack.album", ct.album);
                 console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
             }
@@ -179,23 +231,20 @@ function updateShowRPC(status) {
         delete presenceData.endTimestamp;
     }
     
-    updateConfig("show", status.toString());
-}
-
-function updateConfig(c, v) {
-    config[c] = v;
-    fs.writeFile(`${__dirname}\\config.json`, JSON.stringify(config), function (err) {if (err) console.log(err)});
+    config.set("show", status);
 }
 
 async function reloadAMRPC() {
-    await rpc.connect();
-
-    if(config.show === "true") {
+    rpc.destroy();
+    
+    if(config.get("show")) {
         let ct = iTunes.getCurrentTrack();
         if(ct) {
-            presenceData.details = `${ct.name} - ${ct.album}`;
+            if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = `${ct.name}`;
+            else presenceData.details = `${ct.name} - ${ct.album}`;
+                
             presenceData.state = ct.artist;
-            presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+            if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
             getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
                 if(!err){
                     if(debugging) console.log(res);
@@ -211,6 +260,7 @@ async function reloadAMRPC() {
             if(debugging) {
                 console.log("\naction", "reload_amrpc");
                 console.log("currentTrack.name", ct.name);
+                console.log("currentTrack.artist", ct.artist);
                 console.log("currentTrack.album", ct.album);
                 console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
             }
@@ -218,4 +268,4 @@ async function reloadAMRPC() {
     }
 }
 
-rpc.login({ clientId }).catch(console.error);
+rpc.login({ clientId: clientId }).catch(() => rpc.destroy());
