@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: 'BUG | '
+title: BUG | short description of your bug
 labels: bug
 assignees: N0chteil
 
@@ -12,8 +12,10 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
-1. Open your terminal/console
-2. Copy error
+1. Press **WIN** + **R**
+2. Insert **%appdata%**
+3. Select the **apple-music-rpc** folder and then the **logs** folder
+4. Open **main.log**
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
