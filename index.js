@@ -6,7 +6,8 @@ const clientId = "842112189618978897",
     {app, Menu, Notification, Tray, dialog} = require("electron"),
     Store = require("electron-store"),
     { autoUpdater } = require("electron-updater"),
-    path = require("path");
+    path = require("path"),
+    log = require('electron-log');
 
 const iTunesEmitter = iTunes.emitter,
     config = new Store({defaults: {
@@ -20,7 +21,9 @@ let rpc = new DiscordRPC.Client({ transport: "ipc" }),
         largeImageKey: "applemusic-logo",
         largeImageText: `AMRPC - V.${app.getVersion()}`
     },
-    debugging = false;
+    debugging = true;
+
+console.log = log.log;
 
 require('child_process').exec('NET SESSION', function(err,so,se) {
     let isAdmin = se.length === 0 ? true : false;
@@ -63,7 +66,7 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
     }
 
     if(debugging) {
-        console.log("\naction", "playing");
+        console.log("action", "playing");
         console.log("type", type);
         console.log("currentTrack.name", currentTrack.name);
         console.log("currentTrack.artist", currentTrack.artist);
@@ -84,7 +87,7 @@ iTunesEmitter.on("paused", async function(type, currentTrack) {
     }
 
     if(debugging) {
-        console.log("\naction", "paused");
+        console.log("action", "paused");
         console.log("type", type);
         console.log("currentTrack.name", currentTrack.name);
         console.log("currentTrack.artist", currentTrack.artist);
@@ -93,7 +96,7 @@ iTunesEmitter.on("paused", async function(type, currentTrack) {
 });
 
 iTunesEmitter.on("stopped", async () => {
-    if(debugging) console.log("\naction", "stopped");
+    if(debugging) console.log("action", "stopped");
     if(presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) rpc.clearActivity();
     delete presenceData.details;
     delete presenceData.state;
@@ -217,7 +220,7 @@ function updateShowRPC(status) {
             });
 
             if(debugging) {
-                console.log("\naction", "update_cfg_show");
+                console.log("action", "update_cfg_show");
                 console.log("currentTrack.name", ct.name);
                 console.log("currentTrack.artist", ct.artist);
                 console.log("currentTrack.album", ct.album);
@@ -258,7 +261,7 @@ async function reloadAMRPC() {
             });
 
             if(debugging) {
-                console.log("\naction", "reload_amrpc");
+                console.log("action", "reload_amrpc");
                 console.log("currentTrack.name", ct.name);
                 console.log("currentTrack.artist", ct.artist);
                 console.log("currentTrack.album", ct.album);
