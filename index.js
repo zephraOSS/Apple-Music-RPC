@@ -133,14 +133,12 @@ rpc.on("ready", () => {
     }
 
     setInterval(() => {
-        const ct = iTunes.getCurrentTrack();
-
         if(!presenceData?.details || !config.get("show")) return rpc.clearActivity();
         if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
         if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
         else if(presenceData.state?.length === 0) delete presenceData.state;
 
-        if(ct?.playerState !== "stopped") rpc.setActivity(presenceData);
+        rpc.setActivity(presenceData);
     }, 5);
 
     setInterval(() => {
@@ -154,14 +152,14 @@ rpc.on("disconnected", () => {
 });
 
 app.on("ready", () => {
-    let tray = new Tray(app.isPackaged ? path.join(process.resourcesPath, "/assets/logo.png") : path.join(__dirname, `/assets/logo.png`)),
+    let tray = new Tray(path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/logo.png")),
         isQuiting,
         autoLaunch = new AutoLaunch({
             name: "AMRPC",
             path: app.getPath("exe")
         }),
         cmenu = Menu.buildFromTemplate([
-            { label: `AMRPC V${app.getVersion()}`, icon: app.isPackaged ? path.join(process.resourcesPath, "/assets/tray/logo@18.png") : path.join(__dirname, `/assets/tray/logo@18.png`), enabled: false },
+            { label: `AMRPC V${app.getVersion()}`, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/tray/logo@18.png"), enabled: false },
             { type: "separator" },
             { label: "Reload AMRPC", click() { reloadAMRPC() } },
             { type: "separator" },
@@ -189,9 +187,7 @@ function updateChecker() {
     console.log("Checking for updates...");
 
     autoUpdater.checkForUpdatesAndNotify();
-    autoUpdater.on("update-downloaded", () => {
-        autoUpdater.quitAndInstall();
-    });
+    autoUpdater.on("update-downloaded", () => autoUpdater.quitAndInstall());
 }
 
 function showNotification(title, body) {
