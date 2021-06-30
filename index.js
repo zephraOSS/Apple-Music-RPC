@@ -3,11 +3,12 @@ const clientId = "842112189618978897",
     iTunes = require("itunes-bridge"),
     getAppleMusicLink = require("get-apple-music-link"),
     AutoLaunch = require("auto-launch"),
-    {app, Menu, Notification, Tray, dialog} = require("electron"),
+    {app, Menu, Notification, Tray, BrowserWindow, dialog} = require("electron"),
     Store = require("electron-store"),
     { autoUpdater } = require("electron-updater"),
     path = require("path"),
-    log = require('electron-log');
+    log = require('electron-log'),
+    url = require('url');
 
 const iTunesEmitter = iTunes.emitter,
     config = new Store({defaults: {
@@ -151,6 +152,8 @@ rpc.on("disconnected", () => {
     rpc.login({ clientId: clientId }).catch(() => rpc.destroy());
 });
 
+let mainWindow;
+
 app.on("ready", () => {
     let tray = new Tray(path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/logo.png")),
         isQuiting,
@@ -163,9 +166,7 @@ app.on("ready", () => {
             { type: "separator" },
             { label: "Reload AMRPC", click() { reloadAMRPC() } },
             { type: "separator" },
-            { label: "Show Presence", type: "checkbox", checked: config.get("show"), click() { updateShowRPC(cmenu.items[4].checked) } },
-            { label: "Run on startup", type: "checkbox", checked: config.get("autolaunch"), click() { config.set("autolaunch", cmenu.items[5].checked) } },
-            { label: "Hide on pause", type: "checkbox", checked: config.get("hideOnPause"), click() { config.set("hideOnPause", cmenu.items[6].checked) } },
+            { label: "Open Settings", click() { mainWindow.show() } },
             { type: "separator" },
             { label: "Quit", click() { isQuiting = true, app.quit() } }
           ]);
@@ -178,9 +179,39 @@ app.on("ready", () => {
     tray.setToolTip("AMRPC");
     tray.setContextMenu(cmenu);
     tray.on("right-click", () => tray.update());
+    tray.on("click", () => mainWindow.show());
 
     if(config.get("autolaunch")) autoLaunch.enable();
     else autoLaunch.disable();
+
+    mainWindow = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true
+        },
+        icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/logo.png"),
+        frame: false,
+        resizable: false
+    });
+
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname),
+        protocol: "file:",
+        slashes: true
+    })+"/index.html");
+
+    require('@electron/remote/main').initialize();
+
+    mainWindow.on('close', function(event) {
+        if(!isQuiting) {
+            event.preventDefault();
+            mainWindow.hide();
+            return false;
+        }
+    });
+
+    mainWindow.close();
 });
 
 function updateChecker() {

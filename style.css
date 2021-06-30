@@ -1,0 +1,146 @@
+body {
+    border: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.control {
+    display: block;
+    position: relative;
+    background-color: #F6F6F6;
+    width: 100%;
+    height: 30px;
+    padding: 20px 0;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-app-region: drag;
+}
+
+div.control::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+div.control .center {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+}
+
+div.control .songinfo {
+    float: left;
+    margin-left: 80px;
+    margin-top: 5px;
+}
+
+div.control #songname, div.control #songartist {
+    display: block;
+    -webkit-app-region: no-drag;
+}
+
+div.control #songartist {
+    color: #808080;
+    font-size: 13px;
+}
+
+div.control #songlogo {
+    float: left;
+    width: 40px;
+    user-select: none;
+    pointer-events: none;
+    -webkit-app-region: no-drag;
+}
+
+div.windowcontrols {
+    float: left;
+    margin-left: 5px;
+    margin-top: -10px;
+    user-select: none;
+    -webkit-app-region: no-drag;
+}
+
+div.windowcontrols::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+div.windowcontrols .dot {
+    height: 15px;
+    width: 15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-left: 5px;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+div.control:hover div.windowcontrols .dot.close {
+    background-color: #D52735;
+}
+
+div.control:hover div.windowcontrols .dot.maximize {
+    background-color: #13C11E;
+}
+
+div.control:hover div.windowcontrols .dot.minimize {
+    background-color: #FAC536;
+}
+
+div.control:hover div.windowcontrols .dot.notavailable {
+    cursor: not-allowed;
+}
+
+div.windowcontrols .dot.close:hover {
+    background-color: #F25056;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #D52735;
+}
+
+div.windowcontrols .dot.maximize:hover {
+    background-color: #39EA49;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #13C11E;
+}
+
+div.windowcontrols .dot.minimize:hover {
+    background-color: #DA9E10;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #DA9E10;
+}
+
+div.content {
+    padding: 15px;
+}
+
+div.content form .setting {
+    margin-bottom: 20px;
+}
+
+div.extra {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+div.extra span {
+    color: grey;
+    cursor: pointer;
+    vertical-align: top;
+    margin-left: 10px;
+}
+
+div.extra span svg {
+    vertical-align: inherit;
+}
