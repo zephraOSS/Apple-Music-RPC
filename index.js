@@ -37,12 +37,21 @@ require('child_process').exec('NET SESSION', function(err,so,se) {
 });
 
 iTunesEmitter.on("playing", async function(type, currentTrack) {
-    if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0)
-        presenceData.details = `${currentTrack.name}`;
-    else
-        presenceData.details = `${currentTrack.name} - ${currentTrack.album}`;
+    if(debugging) {
+        console.log("action", "playing");
+        console.log("type", type);
+        console.log("currentTrack.name", currentTrack.name);
+        console.log("currentTrack.artist", currentTrack.artist);
+        console.log("currentTrack.album", currentTrack.album);
+        console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
+    }
+    
+    if(!currentTrack) return console.log("No track detected");
 
-    presenceData.state = (currentTrack) ? currentTrack.artist : "Unknown artist";
+    if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0) presenceData.details = `${currentTrack.name}`;
+    else presenceData.details = `${currentTrack.name} - ${currentTrack.album}`;
+
+    presenceData.state = currentTrack.artist;
 
     if(currentTrack.duration > 0)
         presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
@@ -52,28 +61,17 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
         presenceData.state = "LIVE";
     }
 
-    if(currentTrack) {
-        getAppleMusicLink.track(currentTrack.name, currentTrack.artist, function(res, err){
-            if(!err){
-                if(debugging) console.log(res);
-                presenceData.buttons = [
-                    {
-                        label: "Play on Apple Music",
-                        url: res
-                    }
-                ]
-            }
-        });
-    }
-
-    if(debugging) {
-        console.log("action", "playing");
-        console.log("type", type);
-        console.log("currentTrack.name", currentTrack.name);
-        console.log("currentTrack.artist", currentTrack.artist);
-        console.log("currentTrack.album", currentTrack.album);
-        console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
-    }
+    getAppleMusicLink.track(currentTrack.name, currentTrack.artist, function(res, err){
+        if(!err){
+            if(debugging) console.log(res);
+            presenceData.buttons = [
+                {
+                    label: "Play on Apple Music",
+                    url: res
+                }
+            ]
+        }
+    });
 });
 
 iTunesEmitter.on("paused", async function(type, currentTrack) {
