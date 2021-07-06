@@ -8,7 +8,10 @@ const clientId = "842112189618978897",
     { autoUpdater } = require("electron-updater"),
     path = require("path"),
     log = require('electron-log'),
-    url = require('url');
+    url = require('url'),
+    fetch = require("fetch").fetchUrl,
+    fs = require("fs"),
+    covers = require("./covers.json");
 
 const iTunesEmitter = iTunes.emitter,
     config = new Store({defaults: {
@@ -37,6 +40,8 @@ require('child_process').exec('NET SESSION', function(err,so,se) {
 });
 
 iTunesEmitter.on("playing", async function(type, currentTrack) {
+    console.log(currentTrack);
+
     if(debugging) {
         console.log("action", "playing");
         console.log("type", type);
@@ -61,6 +66,8 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
         presenceData.state = "LIVE";
     }
 
+    checkCover(currentTrack);
+
     getAppleMusicLink.track(currentTrack.name, currentTrack.artist, function(res, err){
         if(!err){
             if(debugging) console.log(res);
@@ -80,8 +87,10 @@ iTunesEmitter.on("paused", async function(type, currentTrack) {
         delete presenceData.details;
         delete presenceData.state;
         delete presenceData.endTimestamp;
+        presenceData.largeImageKey = "applemusic-logo";
     } else {
         delete presenceData.endTimestamp;
+        presenceData.largeImageKey = "applemusic-logo";
         presenceData.state = "Paused";
     }
 
@@ -100,6 +109,7 @@ iTunesEmitter.on("stopped", async () => {
     delete presenceData.details;
     delete presenceData.state;
     delete presenceData.endTimestamp;
+    presenceData.largeImageKey = "applemusic-logo";
 });
 
 if(process.argv.find(element => element === "supporting")) {
@@ -117,7 +127,8 @@ rpc.on("ready", () => {
     const currentTrack = iTunes.getCurrentTrack();
 
     updateChecker();
-    if(currentTrack) {
+    if(currentTrack && currentTrack.playerState === "playing") {
+
         if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0)
             presenceData.details = `${currentTrack.name}`;
         else
@@ -129,6 +140,8 @@ rpc.on("ready", () => {
             presenceData.details = currentTrack.name;
             presenceData.state = "LIVE";
         }
+
+        checkCover(currentTrack);
     }
 
     setInterval(() => {
@@ -217,6 +230,21 @@ function updateChecker() {
 
     autoUpdater.checkForUpdatesAndNotify();
     autoUpdater.on("update-downloaded", () => autoUpdater.quitAndInstall());
+
+    if(!app.isPackaged) return;
+
+    fetch("https://raw.githubusercontent.com/N0chteil-Productions/Apple-Music-RPC/main/covers.json", function(error, meta, body) {
+        body = JSON.parse(body.toString());
+
+        console.log("Checking for new covers...");
+        
+        if(!isEqual(covers, body)) {
+            fs.writeFile(`${__dirname}\\covers.json`, JSON.stringify(body, null, 4), function (err) {if (err) console.log(err)});
+            console.log("Updated covers");
+        } else {
+            console.log("No new covers available");
+        }
+    });
 }
 
 function showNotification(title, body) {
@@ -232,6 +260,7 @@ function updateShowRPC(status) {
 
             presenceData.state = ct.artist;
             if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+            checkCover(currentTrack);
             getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
                 if(!err){
                     if(debugging) console.log(res);
@@ -262,6 +291,37 @@ function updateShowRPC(status) {
     config.set("show", status);
 }
 
+function isEqual(obj1, obj2) {
+    const obj1Keys = Object.keys(obj1);
+    const obj2Keys = Object.keys(obj2);
+
+    if(obj1Keys.length !== obj2Keys.length) {
+        return false;
+    }
+
+    for (let objKey of obj1Keys) {
+        if (obj1[objKey] !== obj2[objKey]) {
+            if(typeof obj1[objKey] == "object" && typeof obj2[objKey] == "object") {
+                if(!isEqual(obj1[objKey], obj2[objKey])) {
+                    return false;
+                }
+            } 
+            else {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+function checkCover(ct) {
+    if(covers.album[ct.album.toLowerCase()]) presenceData.largeImageKey = covers.album[ct.album.toLowerCase()];
+    else if(covers.song[ct.name.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.name.toLowerCase()];
+    else if(covers.song[ct.album.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.album.toLowerCase()];
+    else if(presenceData.largeImageKey !== "applemusic-logo") presenceData.largeImageKey = "applemusic-logo";
+}
+
 async function reloadAMRPC() {
     rpc.destroy();
     
@@ -273,6 +333,7 @@ async function reloadAMRPC() {
                 
             presenceData.state = ct.artist;
             if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+            checkCover(currentTrack);
             getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
                 if(!err){
                     if(debugging) console.log(res);

@@ -2,7 +2,14 @@
     "album": {
         "luca (original motion picture soundtrack)": "cover_luca_soundtrack",
         "dnce": "cover_dnce",
-        "hidden figures: the album": "cover_hidden_figures"
+        "hidden figures: the album": "cover_hidden_figures",
+        "nippon egao hyakkei": "cover_nippon_egao_hyakkei",
+        "gemini": "cover_macklemore_gemini",
+        "beggin": "cover_madcon_beggin",
+        "welcome to the madhouse": "cover_welcome_to_the_madhouse",
+        "welcome to the madhouse (deluxe)": "cover_welcome_to_the_madhouse",
+        "r.o.o.t.s.": "cover_florida_roots",
+        "pumpin blood - ep": "cover_pumpin_blood_ep"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
@@ -18,5 +25,9 @@
         "classical in spatial audio": "cover_classical_in_spatial_audio",
         "jazz in spatial audio": "cover_jazz_in_spatial_audio"
     },
-    "song": {}
+    "song": {
+        "#brooklynbloodpop! - single": "cover_song_brooklynbloodpop",
+        "fallin' apart (feat. denzel curry & pell) - single": "cover_song_fallin_apart_yf",
+        "polarizer - single": "cover_song_polarizer"
+    }
 }

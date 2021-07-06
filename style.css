@@ -134,13 +134,24 @@ div.extra {
     right: 15px;
 }
 
-div.extra span {
+div.extra-left {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+}
+
+div.extra span, div.extra-left span {
     color: grey;
     cursor: pointer;
     vertical-align: top;
     margin-left: 10px;
 }
 
-div.extra span svg {
+div.extra-left span {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+div.extra span svg, div.extra-left span svg {
     vertical-align: inherit;
 }
