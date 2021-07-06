@@ -9,7 +9,43 @@
         "welcome to the madhouse": "cover_welcome_to_the_madhouse",
         "welcome to the madhouse (deluxe)": "cover_welcome_to_the_madhouse",
         "r.o.o.t.s.": "cover_florida_roots",
-        "pumpin blood - ep": "cover_pumpin_blood_ep"
+        "pumpin blood - ep": "cover_pumpin_blood_ep",
+        "#brooklynbloodpop! - single": "cover_song_brooklynbloodpop",
+        "fallin' apart (feat. denzel curry & pell) - single": "cover_song_fallin_apart_yf",
+        "polarizer - single": "cover_song_polarizer",
+        "coco (original motion picture soundtrack / deluxe edition)": "cover_coco_soundtrack",
+        "coco (original motion picture soundtrack) [deluxe edition]": "cover_coco_soundtrack",
+        "coco (bande originale du film)": "cover_coco_soundtrack",
+        "coco (banda sonora original en español)": "cover_coco_soundtrack",
+        "coco (original motion picture soundtrack)": "cover_coco_soundtrack",
+        "soul (original motion picture soundtrack)": "cover_soul_soundtrack",
+        "toy story (motion picture soundtrack) [walt disney records: the legacy collection]": "cover_toystory_soundtrack",
+        "toy story (motion picture soundtrack)": "cover_toystory_soundtrack",
+        "cars (original motion picture soundtrack)": "cover_cars_soundtrack",
+        "cars 3: evolution (original film-soundtrack)": "cover_cars_soundtrack",
+        "ratatouille (music from the motion picture)": "cover_ratatouille_soundtrack",
+        "ratatouille (score from the motion picture)": "cover_ratatouille_soundtrack",
+        "toy story 2 (an original walt disney records soundtrack)": "cover_toystory2_soundtrack",
+        "a bug's life (original soundtrack)": "cover_abugslife_soundtrack",
+        "a bug's life (an original walt disney records soundtrack)": "cover_abugslife_soundtrack",
+        "me and my gang (bonus track version)": "cover_meandmygang_soundtrack",
+        "me and my gang": "cover_meandmygang_soundtrack",
+        "finding nemo (an original soundtrack)": "cover_findingnemo_soundtrack",
+        "disney summer songs - 4th of july": "cover_disneysummersongs",
+        "the incredibles (music from the motion picture)": "cover_theincredibles_soundtrack",
+        "monsters, inc. (original soundtrack) [english version]": "cover_monstersinc_soundtrack",
+        "monsters, inc. (original soundtrack)": "cover_monstersinc_soundtrack",
+        "monsters, inc. (original motion picture soundtrack)": "cover_monstersinc_soundtrack",
+        "monsters university (original score)": "cover_monstersinc_soundtrack",
+        "wall-e and eve (music inspired by disney/pixar's wall-e)": "cover_walleandeve_soundtrack",
+        "partysaurus overflow (from \"partysaurus rex\") - single": "cover_partysaurus_soundtrack",
+        "the good dinosaur (original motion picture soundtrack)": "cover_thegooddinosaur_soundtrack",
+        "disneyland [walt disney records: the legacy collection]": "cover_disneyland_soundtrack",
+        "piper (from \"piper\") - single": "cover_piper_soundtrack",
+        "lou (original score) - single": "cover_lou_soundtrack",
+        "wyclef jean presents the carnival featuring refugee allstars": "cover_thecarnival",
+        "long way down (deluxe)": "cover_longwaydown",
+        "long way down": "cover_longwaydown"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
@@ -25,9 +61,5 @@
         "classical in spatial audio": "cover_classical_in_spatial_audio",
         "jazz in spatial audio": "cover_jazz_in_spatial_audio"
     },
-    "song": {
-        "#brooklynbloodpop! - single": "cover_song_brooklynbloodpop",
-        "fallin' apart (feat. denzel curry & pell) - single": "cover_song_fallin_apart_yf",
-        "polarizer - single": "cover_song_polarizer"
-    }
+    "song": {}
 }
