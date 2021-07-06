@@ -239,8 +239,9 @@ function updateChecker() {
         console.log("Checking for new covers...");
         
         if(!isEqual(covers, body)) {
-            fs.writeFile(`${__dirname}\\covers.json`, JSON.stringify(body, null, 4), function (err) {if (err) console.log(err)});
+            fs.writeFile(path.join(app.isPackaged ? process.resourcesPath + "/app.asar.unpacked" : __dirname, "/covers.json"), JSON.stringify(body, null, 4), function (err) {if (err) console.log(err)});
             console.log("Updated covers");
+            showNotification("AMRPC", "The cover list has been successfully updated. Restart the app to make the changes effective.")
         } else {
             console.log("No new covers available");
         }
