@@ -1,0 +1,22 @@
+{
+    "album": {
+        "luca (original motion picture soundtrack)": "cover_luca_soundtrack",
+        "dnce": "cover_dnce",
+        "hidden figures: the album": "cover_hidden_figures"
+    },
+    "playlist": {
+        "heard in apple ads": "cover_heard-in-apple-ads",
+        "today at apple": "cover_today_at_apple",
+        "apple music 1": "cover_apple_music_one",
+        "apple music hits": "cover_apple_music_hits",
+        "made for spatial audio": "cover_made_for_spatial_audio",
+        "hits in spatial audio": "cover_hits_in_spatial_audio",
+        "pop in spatial audio": "cover_pop_in_spatial_audio",
+        "hip-pop in spatial audio": "cover_hippop_in_spatial_audio",
+        "country in spatial audio": "cover_country_in_spatial_audio",
+        "rock in spatial audio": "cover_rock_in_spatial_audio",
+        "classical in spatial audio": "cover_classical_in_spatial_audio",
+        "jazz in spatial audio": "cover_jazz_in_spatial_audio"
+    },
+    "song": {}
+}
