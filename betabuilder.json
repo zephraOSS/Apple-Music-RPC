@@ -1,6 +1,6 @@
 {
     "appId": "com.amrpc.beta",
-    "productName": "AMRPC-Beta",
+    "productName": "AMRPC-BETA",
     "artifactName": "AMRPC-BETA.${ext}",
     "copyright": "Copyright © 2021 N0chteil Productions",
     "asar": "true",

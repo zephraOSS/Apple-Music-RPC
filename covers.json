@@ -32,6 +32,7 @@
         "me and my gang": "cover_meandmygang_soundtrack",
         "finding nemo (an original soundtrack)": "cover_findingnemo_soundtrack",
         "disney summer songs - 4th of july": "cover_disneysummersongs",
+        "disney summer songs": "cover_disneysummersongs",
         "the incredibles (music from the motion picture)": "cover_theincredibles_soundtrack",
         "monsters, inc. (original soundtrack) [english version]": "cover_monstersinc_soundtrack",
         "monsters, inc. (original soundtrack)": "cover_monstersinc_soundtrack",
@@ -47,7 +48,8 @@
         "long way down (deluxe)": "cover_longwaydown",
         "long way down": "cover_longwaydown",
         "abba gold: greatest hits (40th anniversary edition)": "cover_abba_greatesthits",
-        "abba gold: greatest hits": "cover_abba_greatesthits"
+        "abba gold: greatest hits": "cover_abba_greatesthits",
+        "vaiana (original motion picture soundtrack)": "cover_vaiana_soundtrack"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
