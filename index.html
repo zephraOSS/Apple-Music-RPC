@@ -79,8 +79,10 @@
                 info: document.querySelector("div.songinfo")
             };
 
+        app.beta = app.name === "apple-music-rpc" ? false : true;
+
         document.querySelector("img#songlogo").src = path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/logo.png");
-        document.querySelector("span#extra_version").textContent = `V.${app.getVersion()}`;
+        document.querySelector("span#extra_version").textContent = `${app.beta ? "Beta" : ""} V.${app.getVersion()}`;
 
         iTunesEmitter.on("playing", async function(type, currentTrack) {
             song.name.textContent = currentTrack.name;

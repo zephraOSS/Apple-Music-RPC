@@ -1,7 +1,7 @@
 {
-    "appId": "com.amrpc",
-    "productName": "AMRPC",
-    "artifactName": "AMRPC.${ext}",
+    "appId": "com.amrpc.beta",
+    "productName": "AMRPC-Beta",
+    "artifactName": "AMRPC-BETA.${ext}",
     "copyright": "Copyright © 2021 N0chteil Productions",
     "asar": "true",
     "asarUnpack": [
@@ -15,7 +15,11 @@
     ],
     "directories": {
         "buildResources": "assets",
-        "output": "app/stable"
+        "output": "app/beta"
+    },
+    "publish": {
+        "provider": "s3",
+        "bucket": "com-amrpc-beta"
     },
     "nsis": {
         "createDesktopShortcut": "always"
@@ -23,7 +27,11 @@
     "win": {
         "target": "nsis",
         "icon": "assets/icons/win/icon.ico",
-        "artifactName": "AMRPC-installer.exe",
+        "artifactName": "AMRPC-BETA-installer.exe",
         "publish": ["github"]
+    },
+    "mac": {
+        "category": "public.app-category.utilities",
+        "icon": "assets/icons/mac/icon.icns"
     }
 }

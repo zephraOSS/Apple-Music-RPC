@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir --config builder.json",
+    "dist-beta": "electron-builder --config betabuilder.json -c.extraMetadata.name=apple-music-rpc-beta",
     "dist": "electron-builder --config builder.json"
   },
   "repository": {

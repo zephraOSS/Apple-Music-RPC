@@ -20,14 +20,15 @@ const iTunesEmitter = iTunes.emitter,
         hideOnPause: true
 	}});
 
+console.log = log.log;
+app.beta = app.name === "apple-music-rpc" ? false : true;
+
 let rpc = new DiscordRPC.Client({ transport: "ipc" }),
     presenceData = {
         largeImageKey: "applemusic-logo",
-        largeImageText: `AMRPC - V.${app.getVersion()}`
+        largeImageText: `${app.beta ? "AMRPC - BETA" : "AMRPC"} - V.${app.getVersion()}`
     },
     debugging = true;
-
-console.log = log.log;
 
 require('child_process').exec('NET SESSION', function(err,so,se) {
     let isAdmin = se.length === 0 ? true : false;
@@ -169,11 +170,11 @@ app.on("ready", () => {
     let tray = new Tray(path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/logo.png")),
         isQuiting,
         autoLaunch = new AutoLaunch({
-            name: "AMRPC",
+            name: app.beta ? "AMRPC - BETA" : "AMRPC",
             path: app.getPath("exe")
         }),
         cmenu = Menu.buildFromTemplate([
-            { label: `AMRPC V${app.getVersion()}`, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/tray/logo@18.png"), enabled: false },
+            { label: `${app.beta ? "AMRPC - BETA" : "AMRPC"} V${app.getVersion()}`, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/tray/logo@18.png"), enabled: false },
             { type: "separator" },
             { label: "Reload AMRPC", click() { reloadAMRPC() } },
             { type: "separator" },
@@ -187,7 +188,7 @@ app.on("ready", () => {
         isQuiting = true;
     });
 
-    tray.setToolTip("AMRPC");
+    tray.setToolTip(app.beta ? "AMRPC - BETA" : "AMRPC");
     tray.setContextMenu(cmenu);
     tray.on("right-click", () => tray.update());
     tray.on("click", () => mainWindow.show());
@@ -228,6 +229,11 @@ app.on("ready", () => {
 function updateChecker() {
     console.log("Checking for updates...");
 
+    autoUpdater.setFeedURL({
+        provider: 'github',
+        channel: app.beta ? "beta" : "latest",
+        releaseType: app.beta ? "prerelease" : "release"
+    });
     autoUpdater.checkForUpdatesAndNotify();
     autoUpdater.on("update-downloaded", () => autoUpdater.quitAndInstall());
 
@@ -238,7 +244,7 @@ function updateChecker() {
 
         console.log("Checking for new covers...");
         
-        if(!isEqual(covers, body)) {
+        if(!isEqual(require("./covers.json"), body)) {
             fs.writeFile(path.join(app.isPackaged ? process.resourcesPath + "/app.asar.unpacked" : __dirname, "/covers.json"), JSON.stringify(body, null, 4), function (err) {if (err) console.log(err)});
             console.log("Updated covers");
             showNotification("AMRPC", "The cover list has been successfully updated. Restart the app to make the changes effective.")
