@@ -45,7 +45,9 @@
         "lou (original score) - single": "cover_lou_soundtrack",
         "wyclef jean presents the carnival featuring refugee allstars": "cover_thecarnival",
         "long way down (deluxe)": "cover_longwaydown",
-        "long way down": "cover_longwaydown"
+        "long way down": "cover_longwaydown",
+        "abba gold: greatest hits (40th anniversary edition)": "cover_abba_greatesthits",
+        "abba gold: greatest hits": "cover_abba_greatesthits"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
