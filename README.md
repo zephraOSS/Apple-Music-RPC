@@ -14,3 +14,9 @@ No, AMRPC is not a virus. View the test results on [VirusTotal](https://www.viru
 
 ## Information
 This RPC is only for the Windows program. If you use Apple Music in your browser (macOS, Windows, Linux), check out [Apple Music RPC for PreMiD](https://premid.app/store/presences/Apple%20Music)!
+
+## To Do
+* Support for macOS
+
+## Support
+<a href="https://www.patreon.com/bePatron?u=31820782">![image](https://user-images.githubusercontent.com/53608074/125461244-94dbe2d6-c43c-47f3-b732-ab9edc6b4a23.png)</a>
