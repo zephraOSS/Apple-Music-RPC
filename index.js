@@ -235,6 +235,7 @@ function updateChecker() {
         releaseType: app.beta ? "prerelease" : "release"
     });
     autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.on("update-available", () => autoUpdater.downloadUpdate());
     autoUpdater.on("update-downloaded", () => autoUpdater.quitAndInstall());
 
     if(!app.isPackaged) return;
