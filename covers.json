@@ -49,7 +49,11 @@
         "long way down": "cover_longwaydown",
         "abba gold: greatest hits (40th anniversary edition)": "cover_abba_greatesthits",
         "abba gold: greatest hits": "cover_abba_greatesthits",
-        "vaiana (original motion picture soundtrack)": "cover_vaiana_soundtrack"
+        "vaiana (original motion picture soundtrack)": "cover_vaiana_soundtrack",
+        "the heist (deluxe edition)": "cover_theheist",
+        "a little bit of mambo": "cover_littlebiteofmambo",
+        "bright: the album": "cover_brightalbum",
+        "hot shot": "cover_hotshot"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
