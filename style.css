@@ -4,6 +4,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body[data-theme="dark"] {
+    background-color: #1f1f1f;
+    color: #ffffff8c;
+}
+
+input:focus, select:focus {
+    outline: none;
+}
+
 div.control {
     display: block;
     position: relative;
@@ -14,6 +23,10 @@ div.control {
     -webkit-user-select: none;
     user-select: none;
     -webkit-app-region: drag;
+}
+
+body[data-theme="dark"] div.control {
+    background-color: #2d2d2de0;
 }
 
 div.control::after {
@@ -40,6 +53,10 @@ div.control .songinfo {
 div.control #songname, div.control #songartist {
     display: block;
     -webkit-app-region: no-drag;
+}
+
+body[data-theme="dark"] div.control #songname {
+    color: #e5e5e5;
 }
 
 div.control #songartist {

@@ -10,24 +10,25 @@ const clientId = "842112189618978897",
     log = require('electron-log'),
     url = require('url'),
     fetch = require("fetch").fetchUrl,
-    fs = require("fs"),
-    covers = require("./covers.json");
+    fs = require("fs");
 
 const iTunesEmitter = iTunes.emitter,
     config = new Store({defaults: {
 		autolaunch: true,
 		show: true,
-        hideOnPause: true
+        hideOnPause: true,
+        colorTheme: "white"
 	}});
 
 console.log = log.log;
-app.beta = app.name === "apple-music-rpc" ? false : true;
+app.beta = (app.name === "apple-music-rpc" && app.isPackaged) ? false : true;
 
 let rpc = new DiscordRPC.Client({ transport: "ipc" }),
     presenceData = {
         largeImageKey: "applemusic-logo",
         largeImageText: `${app.beta ? "AMRPC - BETA" : "AMRPC"} - V.${app.getVersion()}`
     },
+    covers = require("./covers.json"),
     debugging = true;
 
 require('child_process').exec('NET SESSION', function(err,so,se) {
@@ -177,8 +178,9 @@ app.on("ready", () => {
             { label: `${app.beta ? "AMRPC - BETA" : "AMRPC"} V${app.getVersion()}`, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/tray/logo@18.png"), enabled: false },
             { type: "separator" },
             { label: "Reload AMRPC", click() { reloadAMRPC() } },
+            { label: "Check for updates", click() { updateChecker() } },
             { type: "separator" },
-            { label: "Open Settings", click() { mainWindow.show() } },
+            { label: "Open settings", click() { mainWindow.show() } },
             { type: "separator" },
             { label: "Quit", click() { isQuiting = true, app.quit() } }
           ]);
@@ -248,7 +250,8 @@ function updateChecker() {
         if(!isEqual(require("./covers.json"), body)) {
             fs.writeFile(path.join(app.isPackaged ? process.resourcesPath + "/app.asar.unpacked" : __dirname, "/covers.json"), JSON.stringify(body, null, 4), function (err) {if (err) console.log(err)});
             console.log("Updated covers");
-            showNotification("AMRPC", "The cover list has been successfully updated. Restart the app to make the changes effective.")
+            showNotification("AMRPC", "The cover list has been successfully updated.");
+            covers = require("./covers.json");
         } else {
             console.log("No new covers available");
         }
