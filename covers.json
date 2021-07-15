@@ -53,7 +53,9 @@
         "the heist (deluxe edition)": "cover_theheist",
         "a little bit of mambo": "cover_littlebiteofmambo",
         "bright: the album": "cover_brightalbum",
-        "hot shot": "cover_hotshot"
+        "hot shot": "cover_hotshot",
+        "fiesta macarena": "cover_fiestamacarena",
+        "fast & furious 9: the fast saga (original motion picture soundtrack)": "cover_fastandfurious_soundtrack"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
