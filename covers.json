@@ -57,7 +57,13 @@
         "fiesta macarena": "cover_fiestamacarena",
         "fast & furious 9: the fast saga (original motion picture soundtrack)": "cover_fastandfurious_soundtrack",
         "the greatest showman (original motion picture soundtrack)": "cover_greatestshowman_soundtrack",
-        "the greatest showman: reimagined": "cover_greatestshowman_reimagined"
+        "the greatest showman: reimagined": "cover_greatestshowman_reimagined",
+        "3.0": "cover_ma30",
+        "cola song (feat. j balvin) - single": "cover_colasongjbalvin",
+        "sour": "cover_sour_rodrigo",
+        "future nostalgia (bonus edition)": "cover_future_nostalgia",
+        "future nostalgia (deluxe)": "cover_future_nostalgia",
+        "el dorado": "cover_eldorado"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
