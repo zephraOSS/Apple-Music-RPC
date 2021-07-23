@@ -63,7 +63,10 @@
         "sour": "cover_sour_rodrigo",
         "future nostalgia (bonus edition)": "cover_future_nostalgia",
         "future nostalgia (deluxe)": "cover_future_nostalgia",
-        "el dorado": "cover_eldorado"
+        "el dorado": "cover_eldorado",
+        "high school musical: the musical: the series (music from the disney+ original series)": "cover_hsmtmts_soundtrack",
+        "31 minutes to takeoff (bonus track version)": "cover_31minutestakeoff",
+        "31 minutes to takeoff": "cover_31minutestakeoff"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
