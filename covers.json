@@ -66,7 +66,13 @@
         "el dorado": "cover_eldorado",
         "high school musical: the musical: the series (music from the disney+ original series)": "cover_hsmtmts_soundtrack",
         "31 minutes to takeoff (bonus track version)": "cover_31minutestakeoff",
-        "31 minutes to takeoff": "cover_31minutestakeoff"
+        "31 minutes to takeoff": "cover_31minutestakeoff",
+        "light chasers": "cover_lightchasers",
+        "thriller": "cover_thrillermj",
+        "michael jackson's this is it (the music that inspired the movie)": "cover_thisisitmj",
+        "off the wall": "cover_offthewallmj",
+        "bad": "cover_badmj",
+        "xscape (deluxe)": "cover_xscapemj"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
