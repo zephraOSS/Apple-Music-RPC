@@ -23,7 +23,7 @@
     "win": {
         "target": "nsis",
         "icon": "assets/icons/win/icon.ico",
-        "artifactName": "AMRPC-installer.exe",
+        "artifactName": "AMRPC-Installer.exe",
         "publish": ["github"]
     }
 }

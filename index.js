@@ -17,6 +17,7 @@ const iTunesEmitter = iTunes.emitter,
 		autolaunch: true,
 		show: true,
         hideOnPause: true,
+        showAlbumCover: true,
         colorTheme: "white"
 	}});
 
@@ -42,8 +43,6 @@ require('child_process').exec('NET SESSION', function(err,so,se) {
 });
 
 iTunesEmitter.on("playing", async function(type, currentTrack) {
-    console.log(currentTrack);
-
     if(debugging) {
         console.log("action", "playing");
         console.log("type", type);
@@ -128,7 +127,6 @@ if(process.argv.find(element => element === "debugging")) debugging = true;
 rpc.on("ready", () => {
     const currentTrack = iTunes.getCurrentTrack();
 
-    updateChecker();
     if(currentTrack && currentTrack.playerState === "playing") {
 
         if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0)
@@ -154,10 +152,6 @@ rpc.on("ready", () => {
 
         rpc.setActivity(presenceData);
     }, 5);
-
-    setInterval(() => {
-        updateChecker();
-    }, 600e3);
 });
 
 rpc.on("disconnected", () => {
@@ -178,9 +172,9 @@ app.on("ready", () => {
             { label: `${app.beta ? "AMRPC - BETA" : "AMRPC"} V${app.getVersion()}`, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/tray/logo@18.png"), enabled: false },
             { type: "separator" },
             { label: "Reload AMRPC", click() { reloadAMRPC() } },
-            { label: "Check for updates", click() { updateChecker() } },
+            { label: "Check for Updates", click() { updateChecker() } },
             { type: "separator" },
-            { label: "Open settings", click() { mainWindow.show() } },
+            { label: "Open Settings", click() { mainWindow.show() } },
             { type: "separator" },
             { label: "Quit", click() { isQuiting = true, app.quit() } }
           ]);
@@ -226,6 +220,12 @@ app.on("ready", () => {
     });
 
     mainWindow.close();
+
+    updateChecker();
+
+    setInterval(() => {
+        updateChecker();
+    }, 600e3);
 });
 
 function updateChecker() {
@@ -242,7 +242,7 @@ function updateChecker() {
 
     if(!app.isPackaged) return;
 
-    fetch("https://raw.githubusercontent.com/N0chteil-Productions/Apple-Music-RPC/main/covers.json", function(error, meta, body) {
+    fetch("https://raw.githubusercontent.com/N0chteil-Productions/Apple-Music-RPC/main/covers.json", {cache: "no-store"}, function(error, meta, body) {
         body = JSON.parse(body.toString());
 
         console.log("Checking for new covers...");
@@ -327,6 +327,8 @@ function isEqual(obj1, obj2) {
 }
 
 function checkCover(ct) {
+    if(!config.get("showAlbumCover")) return presenceData.largeImageKey = "applemusic-logo";
+
     if(covers.album[ct.album.toLowerCase()]) presenceData.largeImageKey = covers.album[ct.album.toLowerCase()];
     else if(covers.song[ct.name.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.name.toLowerCase()];
     else if(covers.song[ct.album.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.album.toLowerCase()];

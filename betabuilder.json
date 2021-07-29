@@ -27,7 +27,7 @@
     "win": {
         "target": "nsis",
         "icon": "assets/icons/win/icon.ico",
-        "artifactName": "AMRPC-BETA-installer.exe",
+        "artifactName": "AMRPC-BETA-Installer.exe",
         "publish": ["github"]
     },
     "mac": {
