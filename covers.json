@@ -72,7 +72,11 @@
         "michael jackson's this is it (the music that inspired the movie)": "cover_thisisitmj",
         "off the wall": "cover_offthewallmj",
         "bad": "cover_badmj",
-        "xscape (deluxe)": "cover_xscapemj"
+        "xscape (deluxe)": "cover_xscapemj",
+        "so schön anders (deluxe version)": "cover_soschoenanders",
+        "abba": "cover_abba",
+        "nicht von dieser welt": "cover_xnvondieserwelt",
+        "danke fürs zuhören (best of)": "cover_xnfuerszuhoeren"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
