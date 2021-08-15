@@ -7,17 +7,18 @@ const clientId = "842112189618978897",
     Store = require("electron-store"),
     { autoUpdater } = require("electron-updater"),
     path = require("path"),
-    log = require('electron-log'),
-    url = require('url'),
+    log = require("electron-log"),
+    url = require("url"),
     fetch = require("fetch").fetchUrl,
     fs = require("fs");
 
 const iTunesEmitter = iTunes.emitter,
     config = new Store({defaults: {
 		autolaunch: true,
-		show: true,
+        show: true,
         hideOnPause: true,
         showAlbumCover: true,
+        performanceMode: false,
         colorTheme: "white"
 	}});
 
@@ -29,12 +30,10 @@ let rpc = new DiscordRPC.Client({ transport: "ipc" }),
         largeImageKey: "applemusic-logo",
         largeImageText: `${app.beta ? "AMRPC - BETA" : "AMRPC"} - V.${app.getVersion()}`
     },
-    covers = require("./covers.json"),
-    debugging = true;
+    covers = require("./covers.json");
 
-require('child_process').exec('NET SESSION', function(err,so,se) {
-    let isAdmin = se.length === 0 ? true : false;
-    if(isAdmin) {
+require("child_process").exec("NET SESSION", function(err,so,se) {
+    if(se.length === 0) {
         isQuiting = true;
         console.log("Please do not run AMRPC with administrator privileges!");
         dialog.showErrorBox("Oh no!", "Please do not run AMRPC with administrator privileges!");
@@ -43,18 +42,9 @@ require('child_process').exec('NET SESSION', function(err,so,se) {
 });
 
 iTunesEmitter.on("playing", async function(type, currentTrack) {
-    if(debugging) {
-        console.log("action", "playing");
-        console.log("type", type);
-        console.log("currentTrack.name", currentTrack.name);
-        console.log("currentTrack.artist", currentTrack.artist);
-        console.log("currentTrack.album", currentTrack.album);
-        console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
-    }
-    
     if(!currentTrack) return console.log("No track detected");
 
-    if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0) presenceData.details = `${currentTrack.name}`;
+    if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0) presenceData.details = currentTrack.name;
     else presenceData.details = `${currentTrack.name} - ${currentTrack.album}`;
 
     presenceData.state = currentTrack.artist;
@@ -69,9 +59,16 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
 
     checkCover(currentTrack);
 
+    console.log("action", "playing");
+    console.log("type", type);
+    console.log("currentTrack.name", currentTrack.name);
+    console.log("currentTrack.artist", currentTrack.artist);
+    console.log("currentTrack.album", currentTrack.album);
+    console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
+
     getAppleMusicLink.track(currentTrack.name, currentTrack.artist, function(res, err){
-        if(!err){
-            if(debugging) console.log(res);
+        if(!err) {
+            console.log("currentTrack url", res);
             presenceData.buttons = [
                 {
                     label: "Play on Apple Music",
@@ -80,6 +77,7 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
             ]
         }
     });
+
 });
 
 iTunesEmitter.on("paused", async function(type, currentTrack) {
@@ -95,44 +93,29 @@ iTunesEmitter.on("paused", async function(type, currentTrack) {
         presenceData.state = "Paused";
     }
 
-    if(debugging) {
-        console.log("action", "paused");
-        console.log("type", type);
-        console.log("currentTrack.name", currentTrack.name);
-        console.log("currentTrack.artist", currentTrack.artist);
-        console.log("currentTrack.album", currentTrack.album);
-    }
+    console.log("action", "paused");
+    console.log("type", type);
+    console.log("currentTrack.name", currentTrack.name);
+    console.log("currentTrack.artist", currentTrack.artist);
+    console.log("currentTrack.album", currentTrack.album);
 });
 
 iTunesEmitter.on("stopped", async () => {
-    if(debugging) console.log("action", "stopped");
+    console.log("action", "stopped");
     if(presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) rpc.clearActivity();
     delete presenceData.details;
     delete presenceData.state;
     delete presenceData.endTimestamp;
     presenceData.largeImageKey = "applemusic-logo";
 });
-
-if(process.argv.find(element => element === "supporting")) {
-    presenceData.buttons = [
-        {
-            label: "Download AMRPC",
-            url: "https://github.com/N0chteil/Apple-Music-RPC"
-        }
-    ]
-}
-
-if(process.argv.find(element => element === "debugging")) debugging = true;
   
 rpc.on("ready", () => {
     const currentTrack = iTunes.getCurrentTrack();
 
     if(currentTrack && currentTrack.playerState === "playing") {
 
-        if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0)
-            presenceData.details = `${currentTrack.name}`;
-        else
-            presenceData.details = `${currentTrack.name} - ${currentTrack.album}`;
+        if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0) presenceData.details = currentTrack.name;
+        else presenceData.details = `${currentTrack.name} - ${currentTrack.album}`;
 
         presenceData.state = currentTrack.artist || "Unknown artist";
 
@@ -144,14 +127,25 @@ rpc.on("ready", () => {
         checkCover(currentTrack);
     }
 
-    setInterval(() => {
-        if(!presenceData?.details || !config.get("show")) return rpc.clearActivity();
-        if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
-        if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
-        else if(presenceData.state?.length === 0) delete presenceData.state;
-
-        rpc.setActivity(presenceData);
-    }, 5);
+    if(config.get("performanceMode")) {
+        setInterval(() => {
+            if(!presenceData?.details) return rpc.clearActivity();
+            if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
+            if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
+            else if(presenceData.state?.length === 0) delete presenceData.state;
+    
+            rpc.setActivity(presenceData);
+        }, 5);
+    } else {
+        setInterval(() => {
+            if(!presenceData?.details || !config.get("show")) return rpc.clearActivity();
+            if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
+            if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
+            else if(presenceData.state?.length === 0) delete presenceData.state;
+    
+            rpc.setActivity(presenceData);
+        }, 5);
+    }
 });
 
 rpc.on("disconnected", () => {
@@ -209,9 +203,9 @@ app.on("ready", () => {
         slashes: true
     })+"/index.html");
 
-    require('@electron/remote/main').initialize();
+    require("@electron/remote/main").initialize();
 
-    mainWindow.on('close', function(event) {
+    mainWindow.on("close", function(event) {
         if(!isQuiting) {
             event.preventDefault();
             mainWindow.hide();
@@ -232,7 +226,7 @@ function updateChecker() {
     console.log("Checking for updates...");
 
     autoUpdater.setFeedURL({
-        provider: 'github',
+        provider: "github",
         channel: app.beta ? "beta" : "latest",
         releaseType: app.beta ? "prerelease" : "release"
     });
@@ -251,7 +245,7 @@ function updateChecker() {
             fs.writeFile(path.join(app.isPackaged ? process.resourcesPath + "/app.asar.unpacked" : __dirname, "/covers.json"), JSON.stringify(body, null, 4), function (err) {if (err) console.log(err)});
             console.log("Updated covers");
             showNotification("AMRPC", "The cover list has been successfully updated.");
-            covers = require("./covers.json");
+            covers = JSON.stringify(body, null, 4);
         } else {
             console.log("No new covers available");
         }
@@ -266,15 +260,23 @@ function updateShowRPC(status) {
     if(status) {
         let ct = iTunes.getCurrentTrack();
         if(ct) {
-            if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = `${ct.name}`;
+            if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
             else presenceData.details = `${ct.name} - ${ct.album}`;
 
             presenceData.state = ct.artist;
             if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+
             checkCover(currentTrack);
+
+            console.log("action", "update_cfg_show");
+            console.log("currentTrack.name", ct.name);
+            console.log("currentTrack.artist", ct.artist);
+            console.log("currentTrack.album", ct.album);
+            console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
+
             getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
-                if(!err){
-                    if(debugging) console.log(res);
+                if(!err) {
+                    console.log("currentTrack url", res);
                     presenceData.buttons = [
                         {
                             label: "Play on Apple Music",
@@ -283,14 +285,6 @@ function updateShowRPC(status) {
                     ]
                 }
             });
-
-            if(debugging) {
-                console.log("action", "update_cfg_show");
-                console.log("currentTrack.name", ct.name);
-                console.log("currentTrack.artist", ct.artist);
-                console.log("currentTrack.album", ct.album);
-                console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
-            }
         }
     } else {
         rpc.clearActivity();
@@ -341,15 +335,23 @@ async function reloadAMRPC() {
     if(config.get("show")) {
         let ct = iTunes.getCurrentTrack();
         if(ct) {
-            if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = `${ct.name}`;
+            if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
             else presenceData.details = `${ct.name} - ${ct.album}`;
-                
+
             presenceData.state = ct.artist;
             if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+
             checkCover(currentTrack);
+
+            console.log("action", "reload_amrpc");
+            console.log("currentTrack.name", ct.name);
+            console.log("currentTrack.artist", ct.artist);
+            console.log("currentTrack.album", ct.album);
+            console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
+
             getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
-                if(!err){
-                    if(debugging) console.log(res);
+                if(!err) {
+                    console.log("currentTrack url", res);
                     presenceData.buttons = [
                         {
                             label: "Play on Apple Music",
@@ -358,14 +360,6 @@ async function reloadAMRPC() {
                     ]
                 }
             });
-
-            if(debugging) {
-                console.log("action", "reload_amrpc");
-                console.log("currentTrack.name", ct.name);
-                console.log("currentTrack.artist", ct.artist);
-                console.log("currentTrack.album", ct.album);
-                console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
-            }
         }
     }
 }
