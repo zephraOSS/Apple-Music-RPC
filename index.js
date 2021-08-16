@@ -142,6 +142,7 @@ rpc.on("ready", () => {
             if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
             if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
             else if(presenceData.state?.length === 0) delete presenceData.state;
+            if(presenceData.endTimestamp < Math.floor(Date.now() / 1000)) reGetCT("song_repeat");
     
             rpc.setActivity(presenceData);
         }, 5);
@@ -255,38 +256,41 @@ function updateChecker() {
 function showNotification(title, body) {
     new Notification({title: title, body: body}).show();
 }
+
+function reGetCT(type) {
+    let ct = iTunes.getCurrentTrack();
+    if(ct) {
+        if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
+        else presenceData.details = `${ct.name} - ${ct.album}`;
+
+        presenceData.state = ct.artist;
+        if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+
+        checkCover(ct);
+
+        console.log("action", type);
+        console.log("currentTrack.name", ct.name);
+        console.log("currentTrack.artist", ct.artist);
+        console.log("currentTrack.album", ct.album);
+        console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
+
+        getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
+            if(!err) {
+                console.log("currentTrack url", res);
+                presenceData.buttons = [
+                    {
+                        label: "Play on Apple Music",
+                        url: res
+                    }
+                ]
+            }
+        });
+    }
+}
   
 function updateShowRPC(status) {
-    if(status) {
-        let ct = iTunes.getCurrentTrack();
-        if(ct) {
-            if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
-            else presenceData.details = `${ct.name} - ${ct.album}`;
-
-            presenceData.state = ct.artist;
-            if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
-
-            checkCover(currentTrack);
-
-            console.log("action", "update_cfg_show");
-            console.log("currentTrack.name", ct.name);
-            console.log("currentTrack.artist", ct.artist);
-            console.log("currentTrack.album", ct.album);
-            console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
-
-            getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
-                if(!err) {
-                    console.log("currentTrack url", res);
-                    presenceData.buttons = [
-                        {
-                            label: "Play on Apple Music",
-                            url: res
-                        }
-                    ]
-                }
-            });
-        }
-    } else {
+    if(status) reGetCT("update_cfg_show");
+    else {
         rpc.clearActivity();
         delete presenceData.details;
         delete presenceData.state;
@@ -332,36 +336,7 @@ function checkCover(ct) {
 async function reloadAMRPC() {
     rpc.destroy();
     
-    if(config.get("show")) {
-        let ct = iTunes.getCurrentTrack();
-        if(ct) {
-            if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
-            else presenceData.details = `${ct.name} - ${ct.album}`;
-
-            presenceData.state = ct.artist;
-            if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
-
-            checkCover(currentTrack);
-
-            console.log("action", "reload_amrpc");
-            console.log("currentTrack.name", ct.name);
-            console.log("currentTrack.artist", ct.artist);
-            console.log("currentTrack.album", ct.album);
-            console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
-
-            getAppleMusicLink.track(ct.name, ct.artist, function(res, err) {
-                if(!err) {
-                    console.log("currentTrack url", res);
-                    presenceData.buttons = [
-                        {
-                            label: "Play on Apple Music",
-                            url: res
-                        }
-                    ]
-                }
-            });
-        }
-    }
+    if(config.get("show")) reGetCT("reload_amrpc");
 }
 
 rpc.login({ clientId: clientId }).catch(() => rpc.destroy());
