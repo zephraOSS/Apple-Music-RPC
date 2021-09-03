@@ -18,6 +18,16 @@
         "buildResources": "assets",
         "output": "app/stable/win"
     },
+    "files": [
+        "node_modules/",
+        "language/",
+        "assets/",
+        "*.js",
+        "*.html",
+        "*.css",
+        "covers.json",
+        "!node_modules/.cache/"
+    ],
     "nsis": {
         "createDesktopShortcut": "always"
     },
