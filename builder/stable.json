@@ -1,13 +1,14 @@
 {
-    "appId": "com.amrpc.beta",
-    "productName": "AMRPC-BETA",
-    "artifactName": "AMRPC-BETA.${ext}",
+    "appId": "com.amrpc",
+    "productName": "AMRPC",
+    "artifactName": "AMRPC.${ext}",
     "copyright": "Copyright © 2021 N0chteil Productions",
     "asar": "true",
     "asarUnpack": [
         "node_modules/itunes-bridge/wscript",
         "node_modules/itunes-bridge/jxa",
-        "covers.json"
+        "covers.json",
+        "language/"
     ],
     "extraResources": [
         "assets/logo.png",
@@ -15,11 +16,7 @@
     ],
     "directories": {
         "buildResources": "assets",
-        "output": "app/beta"
-    },
-    "publish": {
-        "provider": "s3",
-        "bucket": "com-amrpc-beta"
+        "output": "app/stable/win"
     },
     "nsis": {
         "createDesktopShortcut": "always"
@@ -27,11 +24,7 @@
     "win": {
         "target": "nsis",
         "icon": "assets/icons/win/icon.ico",
-        "artifactName": "AMRPC-BETA-Installer.exe",
+        "artifactName": "AMRPC-Installer.exe",
         "publish": ["github"]
-    },
-    "mac": {
-        "category": "public.app-category.utilities",
-        "icon": "assets/icons/mac/icon.icns"
     }
 }

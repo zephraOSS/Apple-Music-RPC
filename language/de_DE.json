@@ -1,0 +1,44 @@
+{
+    "error": {
+        "admin": "Bitte starte AMRPC nicht mit Administrator-Rechten!",
+        "noTrack": "No track detected"
+    },
+    "tray": {
+        "reload": "AMRPC neu laden",
+        "checkForUpdates": "Nach Updates suchen",
+        "openSettings": "Einstellungen öffnen",
+        "quit": "Beenden"
+    },
+    "notification": {
+        "coverlistUpdated": "Die Cover-Liste wurde erfolgreich aktualisiert."
+    },
+    "settings": {
+        "config": {
+            "autolaunch": "Autostart",
+            "show": "Presence anzeigen",
+            "hideOnPause": "Presence während Pause ausblenden",
+            "showAlbumCover": "Albumcover anzeigen, wenn verfügbar",
+            "performanceMode": "Performance Mode",
+            "colorTheme": "Bevorzugtes Farbschema",
+            "language": "App-Sprache",
+            "rpcDetails": "Presence Details",
+            "rpcState": "Presence State"
+        },
+        "extra": {
+            "github": "Auf GitHub ansehen",
+            "reloadPage": "Neu laden",
+            "restartApp": "Neustart erforderlich"
+        },
+        "modal": {
+            "usercount": {
+                "title": "User-Zählung",
+                "description": "Dürfen wir unseren User-Counter durch Deine Installierung der App für unsere Statistiken aktualisieren? Wir senden beziehungsweise speichern keine persönlichen Informationen über Dich.",
+                "buttons": {
+                    "no": "Nein",
+                    "later": "Nicht jetzt",
+                    "yes": "Ja"
+                }
+            }
+        }
+    }
+}
