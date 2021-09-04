@@ -9,6 +9,10 @@
 * Windows 10
 * [iTunes for Windows 10](https://www.microsoft.com/p/itunes/9pb2mz1zmb1s?rtc=1&activetab=pivot:overviewtab)
 
+## You need help?
+* Take a look into [the Wiki](https://github.com/N0chteil-Productions/Apple-Music-RPC/wiki)
+* Join [our Discord](https://discord.gg/APDghNfJhQ)
+
 ## Virus?
 No, AMRPC is not a virus. View the test results on [VirusTotal](https://www.virustotal.com/gui/file/92bc47c327ee2be03b2ae21d64c0370e4dfa52bd57b7aa42ddcbef549aa153b3/detection)
 
