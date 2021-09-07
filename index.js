@@ -83,7 +83,6 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
             ]
         }
     });
-
 });
 
 iTunesEmitter.on("paused", async function(type, currentTrack) {
@@ -137,7 +136,7 @@ rpc.on("ready", () => {
 
     if(config.get("performanceMode")) {
         setInterval(() => {
-            if(!presenceData?.details) return rpc.clearActivity();
+            if(!presenceData.details) return rpc.clearActivity();
             if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
             if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
             else if(presenceData.state?.length === 0) delete presenceData.state;
@@ -146,7 +145,7 @@ rpc.on("ready", () => {
         }, 5);
     } else {
         setInterval(() => {
-            if(!presenceData?.details || !config.get("show")) return rpc.clearActivity();
+            if(!presenceData.details || !config.get("show")) return rpc.clearActivity();
             if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
             if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
             else if(presenceData.state?.length === 0) delete presenceData.state;

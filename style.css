@@ -5,7 +5,7 @@ body {
 }
 
 body[data-theme="dark"] {
-    background-color: #1f1f1f;
+    background-color: #1F1F1F;
     color: #ffffff8c;
 }
 
@@ -16,17 +16,18 @@ input:focus, select:focus {
 div.control {
     display: block;
     position: relative;
-    background-color: #F6F6F6;
+    background-color: #F9F9F9;
     width: 100%;
     height: 30px;
-    padding: 20px 0;
+    padding: 25px 0;
     -webkit-user-select: none;
     user-select: none;
     -webkit-app-region: drag;
+    border-bottom: 1px solid #ffffff1a;
 }
 
 body[data-theme="dark"] div.control {
-    background-color: #2d2d2de0;
+    background-color: #252526;
 }
 
 div.control::after {
@@ -74,7 +75,7 @@ div.control #songlogo {
 
 div.windowcontrols {
     float: left;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-top: -10px;
     user-select: none;
     -webkit-app-region: no-drag;
@@ -87,8 +88,8 @@ div.windowcontrols::after {
 }
 
 div.windowcontrols .dot {
-    height: 15px;
-    width: 15px;
+    height: 12px;
+    width: 12px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
@@ -100,41 +101,24 @@ div.windowcontrols .dot {
     -webkit-app-region: no-drag;
 }
 
-div.control:hover div.windowcontrols .dot.close {
-    background-color: #D52735;
+div.control div.windowcontrols .dot.close {
+    background-color: rgb(255, 92, 92);
 }
 
-div.control:hover div.windowcontrols .dot.maximize {
-    background-color: #13C11E;
+div.control div.windowcontrols .dot.maximize {
+    background-color: rgb(0, 202, 86);
 }
 
-div.control:hover div.windowcontrols .dot.minimize {
-    background-color: #FAC536;
+div.control div.windowcontrols .dot.minimize {
+    background-color: rgb(255, 189, 76);
 }
 
 div.control:hover div.windowcontrols .dot.notavailable {
     cursor: not-allowed;
 }
 
-div.windowcontrols .dot.close:hover {
-    background-color: #F25056;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #D52735;
-}
-
-div.windowcontrols .dot.maximize:hover {
-    background-color: #39EA49;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #13C11E;
-}
-
-div.windowcontrols .dot.minimize:hover {
-    background-color: #DA9E10;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #DA9E10;
+div.windowcontrols .dot:hover:not(.notavailable) {
+    filter: brightness(40%)
 }
 
 div.content {
@@ -204,8 +188,9 @@ div.modal {
     border-radius: 18px;
     border-width: 1.5px;
     border-style: solid;
+    overflow-y: auto;
     padding: 20px;
-    max-width: 80%;
+    max-width: 85%;
     max-height: 60%;
 }
 
@@ -226,6 +211,29 @@ div.modal .title {
 
 div.modal .description {
     display: block;
+    text-align: left;
+    white-space: pre-line;
+}
+
+div.modal .description ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+div.modal .description p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+div.modal .description a {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: black;
+    cursor: pointer;
+}
+
+body[data-theme="dark"] div.modal .description a {
+    color: #ffffff8c;
 }
 
 div.modal .btn {
@@ -261,6 +269,15 @@ div.modal .btn.btn-grey {
     background-color: #404040;
 }
 
+div.modal .btn.btn-rainbow {
+    background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+}
+
+div.modal .btn.btn-rainbow:hover {
+    background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+    animation: slidebg 5s linear infinite;
+}
+
 div.setting input[type="text"], div.setting select {
     background-color: #ffffff8c;
     border-color: #E5E5E5;
@@ -275,6 +292,13 @@ div.setting input[type="text"], div.setting select {
 
 body[data-theme="dark"] div.setting input[type="text"], body[data-theme="dark"] div.setting select {
     background-color: #2d2d2d;
-    border-color: #111111;
+    border-color: #ffffff1a;
     color: white;
+}
+
+/* KEYFRAMES */
+@keyframes slidebg {
+    to {
+        background-position:20vw;
+    }
 }

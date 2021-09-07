@@ -32,12 +32,20 @@
         "modal": {
             "usercount": {
                 "title": "User-Zählung",
-                "description": "Dürfen wir unseren User-Counter durch Deine Installierung der App für unsere Statistiken aktualisieren? Wir senden beziehungsweise speichern keine persönlichen Informationen über Dich.",
+                "description": "Dürfen wir unseren User-Counter durch Deine Installierung der App für unsere Statistiken aktualisieren? Wir senden beziehungsweise speichern keine persönlichen Informationen über Dich."
+            },
+            "appleEvent": {
+                "title": "Nicht vergessen!",
+                "description": "Heute um %d Uhr (10.00 Uhr PDT) ist das Apple Event! Schaue es hier live: %s",
                 "buttons": {
-                    "no": "Nein",
-                    "later": "Nicht jetzt",
-                    "yes": "Ja"
+                    "okcool": "Okay, cool!"
                 }
+            },
+            "buttons": {
+                "no": "Nein",
+                "later": "Nicht jetzt",
+                "yes": "Ja",
+                "okay": "Okay"
             }
         }
     }

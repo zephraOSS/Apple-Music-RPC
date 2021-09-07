@@ -33,11 +33,18 @@
             "usercount": {
                 "title": "User-Counting",
                 "description": "May we update our user counter by your installation of the app for our statistics? We do not send respectively store any personal information about you.",
+            "appleEvent": {
+                "title": "Do not forget!",
+                "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
                 "buttons": {
-                    "no": "No",
-                    "later": "Not now",
-                    "yes": "Yes"
+                    "okcool": "Okay, cool!"
                 }
+            },
+            "buttons": {
+                "no": "No",
+                "later": "Not now",
+                "yes": "Yes",
+                "okay": "Okay"
             }
         }
     }
