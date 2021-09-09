@@ -22,6 +22,12 @@ const iTunesEmitter = iTunes.emitter,
         language: "en_US",
         rpcDetails: "%title% - %album%",
         rpcState: "%artist%"
+    }}),
+    appData = new Store({name: "data", defaults: {
+        userCountUsageAsked: false,
+        nineelevenAsked: false,
+        appleEventAsked: false,
+        nineelevenCovers: false
     }});
 
 console.log = log.log;
@@ -338,12 +344,14 @@ function isEqual(obj1, obj2) {
 }
 
 function checkCover(ct) {
+    if(!ct) return;
     if(!config.get("showAlbumCover")) return presenceData.largeImageKey = "applemusic-logo";
+    if(appData.get("nineelevenCovers") && (new Date().getMonth() + 1 === 9 && new Date().getDate() === 11)) return presenceData.largeImageKey = "cover_911";
 
     if(covers.album[ct.album.toLowerCase()]) presenceData.largeImageKey = covers.album[ct.album.toLowerCase()];
-    else if(covers.song[ct.name.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.name.toLowerCase()];
-    else if(covers.song[ct.album.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.album.toLowerCase()];
-    else if(presenceData.largeImageKey !== "applemusic-logo") presenceData.largeImageKey = "applemusic-logo";
+    else if(covers.song[ct.artist.toLowerCase()]) {
+        if(covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()];
+    } else if(presenceData.largeImageKey !== "applemusic-logo") presenceData.largeImageKey = "applemusic-logo";
 }
 
 function replaceRPCVars(ct, cfg) {

@@ -9,6 +9,10 @@ body[data-theme="dark"] {
     color: #ffffff8c;
 }
 
+a.underline {
+    text-decoration: underline;
+}
+
 input:focus, select:focus {
     outline: none;
 }
@@ -194,6 +198,10 @@ div.modal {
     max-height: 60%;
 }
 
+div.modal::-webkit-scrollbar {
+    width: 0;
+}
+
 body.modalIsOpen div.content {
     filter: blur(5px) grayscale(90%);
     user-select: none;
@@ -273,9 +281,14 @@ div.modal .btn.btn-rainbow {
     background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
 }
 
-div.modal .btn.btn-rainbow:hover {
-    background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
-    animation: slidebg 5s linear infinite;
+div.modal .btn.btn-usaflag {
+    background-image: url("assets/app/usaflag.png");
+    background-size: cover;
+    transition: .4s background-image;
+}
+
+div.modal .btn.btn-usaflag:hover {
+    background-image: url("assets/app/usaflag.gif");
 }
 
 div.setting input[type="text"], div.setting select {

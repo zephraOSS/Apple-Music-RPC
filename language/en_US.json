@@ -32,7 +32,15 @@
         "modal": {
             "usercount": {
                 "title": "User-Counting",
-                "description": "May we update our user counter by your installation of the app for our statistics? We do not send respectively store any personal information about you.",
+                "description": "May we update our user counter by your installation of the app for our statistics? We do not send respectively store any personal information about you."
+            },
+            "911": {
+                "title": "In memory of the victims of September 11",
+                "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+                "buttons": {
+                    "okcover": "Okay, change the covers!"
+                }
+            },
             "appleEvent": {
                 "title": "Do not forget!",
                 "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",

@@ -98,5 +98,18 @@
         "classical in spatial audio": "cover_classical_in_spatial_audio",
         "jazz in spatial audio": "cover_jazz_in_spatial_audio"
     },
-    "song": {}
+    "song": {
+        "alan jackson": {
+            "where were you": "cover_911",
+            "where were you (when the world stopped turning)": "cover_911"
+        },
+        "beyoncé": {
+            "i was here": "cover_911"
+        },
+        "toby keith": {
+            "courtesy of the red, white and blue (the angry american)": "cover_911",
+            "courtesy of the red, white and blue": "cover_911",
+            "american soldier": "cover_911"
+        }
+    }
 }

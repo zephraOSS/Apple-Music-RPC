@@ -130,7 +130,9 @@
             }}),
             appData = new Store({name: "data", defaults: {
                 userCountUsageAsked: false,
-                appleEventAsked: false
+                nineelevenAsked: false,
+                appleEventAsked: false,
+                nineelevenCovers: false
             }}),
             song = {
                 name: document.querySelector("#songname"),
@@ -179,6 +181,31 @@
                     ]
                 }
             ]);
+        }
+
+        if(!appData.get("nineelevenAsked") && (new Date().getMonth() + 1 === 9 && new Date().getDate() === 11)) {
+            newModal(langString.settings.modal["911"].title, langString.settings.modal["911"].description.replace("%s", marked(`\n* <a class="underline" onclick="openUrl('itmss://music.apple.com/de/album/drive/255369588')">Where Were You - Alan Jackson</a>\n* <a class="underline" onclick="openUrl('itmss://music.apple.com/us/album/4-expanded-edition/626204707')">I Was Here - Beyoncé</a>\n* <a class="underline" onclick="openUrl('itmss://music.apple.com/us/album/35-biggest-hits/1452801021')">Courtesy Of The Red, White And Blue - Toby Keith</a>\n* <a class="underline" onclick="openUrl('itmss://music.apple.com/us/album/35-biggest-hits/1452801021')">American Soldier - Toby Keith</a>`)), [
+                {
+                    text: langString.settings.modal.buttons.okay,
+                    style: "btn-usaflag",
+                    events: [
+                        {
+                            name: "onclick",
+                            value: "appData.set('nineelevenCovers', false), appData.set('nineelevenAsked', true), closeModal(this.parentElement.id)"
+                        }
+                    ]
+                },
+                {
+                    text: langString.settings.modal["911"].buttons.okcover,
+                    style: "btn-usaflag",
+                    events: [
+                        {
+                            name: "onclick",
+                            value: "appData.set('nineelevenCovers', true), appData.set('nineelevenAsked', true), closeModal(this.parentElement.id)"
+                        }
+                    ]
+                }
+            ], []);
         }
 
         if(!appData.get("appleEventAsked") && (+new Date('9/14/2021 12:00:00 AM UTC') <= Date.now() && Date.now() < +new Date('9/14/2021 6:30:00 PM UTC'))) {
@@ -323,7 +350,7 @@
             e.title.classList.add("title");
             e.description.classList.add("description");
 
-            e.title.textContent = title;
+            e.title.innerHTML = title;
             e.description.innerHTML = description;
 
             e.modal.id = generateEleId();
@@ -334,7 +361,7 @@
                         ele = document.createElement("li");
 
                     ele.style["text-align"] = "left";
-                    ele.textContent = ext;
+                    ele.innerHTML = ext;
 
                     e.modal.appendChild(ele);
                 }
@@ -348,7 +375,7 @@
                 ele.classList.add("btn");
                 ele.classList.add(btn.style);
                 if(i === 2) ele.classList.add("btn-last");
-                ele.textContent = btn.text;
+                ele.innerHTML = btn.text;
 
                 if(btn.events) {
                     for (let i2 = 0; i2 < buttons[i].events.length; i2++) {
@@ -402,8 +429,6 @@
             for (var i = 0; i < characters.length; i++) {
                 result += characters.charAt(Math.floor(Math.random() * characters.length));
             }
-
-            console.log(result)
 
             return result;
         }

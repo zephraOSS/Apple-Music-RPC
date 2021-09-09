@@ -34,6 +34,13 @@
                 "title": "User-Zählung",
                 "description": "Dürfen wir unseren User-Counter durch Deine Installierung der App für unsere Statistiken aktualisieren? Wir senden beziehungsweise speichern keine persönlichen Informationen über Dich."
             },
+            "911": {
+                "title": "Zum Gedenken an die Opfer des 11. September",
+                "description": "Zu Ehren der Opfer des 11. Septembers haben wir für diese Songs individuelle Albumcover erstellt: %s\nUnd wenn du möchtest, kannst du alle deine Covers ändern (nur für heute).",
+                "buttons": {
+                    "okcover": "Okay, ändere die Covers!"
+                }
+            },
             "appleEvent": {
                 "title": "Nicht vergessen!",
                 "description": "Heute um %d Uhr (10.00 Uhr PDT) ist das Apple Event! Schaue es hier live: %s",
