@@ -2,7 +2,7 @@ const clientId = "842112189618978897",
     DiscordRPC = require("discord-rpc"),
     iTunes = require("itunes-bridge"),
     AutoLaunch = require("auto-launch"),
-    {app, Menu, Notification, Tray, BrowserWindow, dialog} = require("electron"),
+    {ipcMain, app, Menu, Notification, Tray, BrowserWindow, dialog} = require("electron"),
     Store = require("electron-store"),
     { autoUpdater } = require("electron-updater"),
     path = require("path"),
@@ -121,7 +121,7 @@ iTunesEmitter.on("stopped", async () => {
     presenceData.largeImageKey = "applemusic-logo";
     ctG = undefined;
 });
-  
+
 rpc.on("ready", () => {
     ctG = iTunes.getCurrentTrack();
 
@@ -148,7 +148,7 @@ rpc.on("ready", () => {
             else if(presenceData.state?.length === 0) delete presenceData.state;
     
             rpc.setActivity(presenceData);
-        }, 5);
+        }, 15);
     } else {
         setInterval(() => {
             if(!presenceData.details || !config.get("show")) return rpc.clearActivity();
@@ -158,7 +158,7 @@ rpc.on("ready", () => {
             if(presenceData.endTimestamp < Math.floor(Date.now() / 1000)) reGetCT("song_repeat");
 
             rpc.setActivity(presenceData);
-        }, 5);
+        }, 15);
     }
 });
 
@@ -227,6 +227,42 @@ app.on("ready", () => {
         }
     });
 
+    autoUpdater.on('update-available', (info) => {
+        console.log('Update available.');
+        sendMsgToMainWindow({
+            "type": "new-update-available",
+            "data": {
+                "version": info.version
+            }
+        });
+        autoUpdater.downloadUpdate();
+    });
+
+    autoUpdater.on('update-not-available', (info) => {
+        console.log('No updates available');
+    });
+
+    autoUpdater.on('error', (err) => {
+        console.log('Error in auto-updater. ' + err);
+    });
+
+    autoUpdater.on('download-progress', (progressObj) => {
+        sendMsgToMainWindow({
+            "type": "download-progress-update",
+            "data": {
+                "percent": progressObj.percent,
+                "transferred": progressObj.transferred,
+                "total": progressObj.total,
+                "speed": progressObj.bytesPerSecond
+            }
+        });
+    });
+    
+    autoUpdater.on('update-downloaded', (info) => {
+        sendMsgToMainWindow('Update downloaded');
+        autoUpdater.quitAndInstall();
+    });
+
     mainWindow.close();
 
     updateChecker();
@@ -237,17 +273,18 @@ app.on("ready", () => {
     }, 600e3);
 });
 
+ipcMain.on('asynchronous-message', (event, args) => {
+    console.log(args);
+});
+
+function sendMsgToMainWindow(v) {
+    mainWindow.webContents.send('asynchronous-message', v)
+}
+
 function updateChecker() {
     console.log("Checking for updates...");
 
-    autoUpdater.setFeedURL({
-        provider: "github",
-        channel: "latest",
-        releaseType: "release"
-    });
     autoUpdater.checkForUpdatesAndNotify();
-    autoUpdater.on("update-available", () => autoUpdater.downloadUpdate());
-    autoUpdater.on("update-downloaded", () => autoUpdater.quitAndInstall());
 
     if(!app.isPackaged) return;
 
@@ -273,7 +310,7 @@ function languageChecker() {
 }
 
 function showNotification(title, body) {
-    new Notification({title: title, body: body}).show();
+    new Notification({title: title, body: body, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/logo.png")}).show();
 }
 
 function reGetCT(type) {
@@ -320,23 +357,17 @@ function updateShowRPC(status) {
 }
 
 function isEqual(obj1, obj2) {
-    const obj1Keys = Object.keys(obj1);
-    const obj2Keys = Object.keys(obj2);
+    const obj1Keys = Object.keys(obj1),
+        obj2Keys = Object.keys(obj2);
 
-    if(obj1Keys.length !== obj2Keys.length) {
-        return false;
-    }
+    if(obj1Keys.length !== obj2Keys.length) return false;
 
     for (let objKey of obj1Keys) {
         if (obj1[objKey] !== obj2[objKey]) {
             if(typeof obj1[objKey] == "object" && typeof obj2[objKey] == "object") {
-                if(!isEqual(obj1[objKey], obj2[objKey])) {
-                    return false;
-                }
-            } 
-            else {
-                return false;
+                if(!isEqual(obj1[objKey], obj2[objKey])) return false;
             }
+            else return false;
         }
     }
 
@@ -351,6 +382,7 @@ function checkCover(ct) {
     if(covers.album[ct.album.toLowerCase()]) presenceData.largeImageKey = covers.album[ct.album.toLowerCase()];
     else if(covers.song[ct.artist.toLowerCase()]) {
         if(covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()];
+        else presenceData.largeImageKey = "applemusic-logo";
     } else if(presenceData.largeImageKey !== "applemusic-logo") presenceData.largeImageKey = "applemusic-logo";
 }
 

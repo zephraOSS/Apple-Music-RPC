@@ -48,6 +48,21 @@
                     "okcool": "Okay, cool!"
                 }
             },
+            "newUpdate" : {
+                "title": "Software Update",
+                "description": "Version %version% is available for your PC.",
+                "installed": {
+                    "description": "Version %version% is available for your PC and is ready to install.",
+                    "buttons": {
+                        "install": "Install now",
+                        "later": "Later"
+                    }
+                },
+                "buttons": {
+                    "downandinst": "Download & install",
+                    "download": "Download & install later"
+                }
+            },
             "buttons": {
                 "no": "No",
                 "later": "Not now",

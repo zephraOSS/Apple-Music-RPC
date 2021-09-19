@@ -1,6 +1,6 @@
 {
   "name": "apple-music-rpc",
-  "version": "2.2.6",
+  "version": "2.2.8",
   "description": "Discord RPC for iTunes",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/N0chteil/Apple-Music-RPC.git"
+    "url": "git+https://github.com/N0chteil-Productions/Apple-Music-RPC.git"
   },
   "keywords": [
     "discord",
@@ -22,15 +22,15 @@
   "author": "N0chteil ^^",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/N0chteil/Apple-Music-RPC/issues"
+    "url": "https://github.com/N0chteil-Productions/Apple-Music-RPC/issues"
   },
-  "homepage": "https://github.com/N0chteil/Apple-Music-RPC#readme",
+  "homepage": "https://github.com/N0chteil-Productions/Apple-Music-RPC#readme",
   "dependencies": {
-    "@electron/remote": "^1.2.0",
+    "@electron/remote": "^1.2.2",
     "auto-launch": "^5.0.5",
     "discord-rpc": "^4.0.1",
-    "electron-log": "^4.3.5",
-    "electron-store": "^8.0.0",
+    "electron-log": "^4.4.1",
+    "electron-store": "^8.0.1",
     "electron-updater": "^4.3.9",
     "fetch": "^1.1.0",
     "fs": "0.0.1-security",
@@ -39,7 +39,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "electron": "^13.1.4",
+    "electron": "^13.4.0",
     "electron-builder": "^22.11.7"
   }
 }
