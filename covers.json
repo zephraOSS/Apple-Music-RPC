@@ -10,9 +10,6 @@
         "welcome to the madhouse (deluxe)": "cover_welcome_to_the_madhouse",
         "r.o.o.t.s.": "cover_florida_roots",
         "pumpin blood - ep": "cover_pumpin_blood_ep",
-        "#brooklynbloodpop! - single": "cover_song_brooklynbloodpop",
-        "fallin' apart (feat. denzel curry & pell) - single": "cover_song_fallin_apart_yf",
-        "polarizer - single": "cover_song_polarizer",
         "coco (original motion picture soundtrack / deluxe edition)": "cover_coco_soundtrack",
         "coco (original motion picture soundtrack) [deluxe edition]": "cover_coco_soundtrack",
         "coco (bande originale du film)": "cover_coco_soundtrack",
@@ -39,11 +36,8 @@
         "monsters, inc. (original motion picture soundtrack)": "cover_monstersinc_soundtrack",
         "monsters university (original score)": "cover_monstersinc_soundtrack",
         "wall-e and eve (music inspired by disney/pixar's wall-e)": "cover_walleandeve_soundtrack",
-        "partysaurus overflow (from \"partysaurus rex\") - single": "cover_partysaurus_soundtrack",
         "the good dinosaur (original motion picture soundtrack)": "cover_thegooddinosaur_soundtrack",
         "disneyland [walt disney records: the legacy collection]": "cover_disneyland_soundtrack",
-        "piper (from \"piper\") - single": "cover_piper_soundtrack",
-        "lou (original score) - single": "cover_lou_soundtrack",
         "wyclef jean presents the carnival featuring refugee allstars": "cover_thecarnival",
         "long way down (deluxe)": "cover_longwaydown",
         "long way down": "cover_longwaydown",
@@ -59,7 +53,6 @@
         "the greatest showman (original motion picture soundtrack)": "cover_greatestshowman_soundtrack",
         "the greatest showman: reimagined": "cover_greatestshowman_reimagined",
         "3.0": "cover_ma30",
-        "cola song (feat. j balvin) - single": "cover_colasongjbalvin",
         "sour": "cover_sour_rodrigo",
         "future nostalgia (bonus edition)": "cover_future_nostalgia",
         "future nostalgia (deluxe)": "cover_future_nostalgia",
@@ -78,7 +71,6 @@
         "nicht von dieser welt": "cover_xnvondieserwelt",
         "danke fürs zuhören (best of)": "cover_xnfuerszuhoeren",
         "gangsta's paradise": "cover_gangstasparadise",
-        "stay - single": "cover_stayjb",
         "canto del pilón (remixes) [feat. maría marquez]": "cover_cantodelpilon",
         "mar de colores (versión extendida)": "cover_mardecolores",
         "eterno agosto": "cover_eternoagosto",
@@ -110,6 +102,27 @@
             "courtesy of the red, white and blue (the angry american)": "cover_911",
             "courtesy of the red, white and blue": "cover_911",
             "american soldier": "cover_911"
+        },
+        "bbno$": {
+            "edamame (feat. rich brian)": "cover_edamame"
+        },
+        "the kid laroi & justin bieber": {
+            "stay": "cover_stayjb"
+        },
+        "syko": {
+            "#brooklynbloodpop!": "cover_song_brooklynbloodpop"
+        },
+        "young franco": {
+            "fallin' apart (feat. denzel curry & pell)": "cover_song_fallin_apart_yf"
+        },
+        "cid rim": {
+            "polarizer": "cover_song_polarizer"
+        },
+        "inna": {
+            "cola song (feat. j balvin)": "cover_colasongjbalvin"
+        },
+        "bt & au5": {
+            "partysaurus overflow (from \"partysaurus rex\")": "cover_partysaurus_soundtrack"
         }
     }
 }
