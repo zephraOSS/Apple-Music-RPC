@@ -58,6 +58,7 @@
                     <select name="config_colorTheme">
                         <option value="dark">Darkmode</option>
                         <option value="white">Whitemode</option>
+                        <option value="sunsetrise">Whitemode until Sunrise</option>
                         <option value="os">System theme</option>
                     </select>
                     <label for="config_colorTheme">Preferred color theme</label>
@@ -136,7 +137,10 @@
                 userCountUsageAsked: false,
                 nineelevenAsked: false,
                 appleEventAsked: false,
-                nineelevenCovers: false
+                nineelevenCovers: false,
+                changelog: {
+                    "2.2.9": false
+                }
             }}),
             song = {
                 name: document.querySelector("#songname"),
@@ -162,7 +166,7 @@
                         events: [
                             {
                                 name: "onclick",
-                                value: "BrowserWindow.getFocusedWindow().webContents.send('asynchronous-message', {'type': 'download-and-install-update'}), closeModal(this.parentElement.id)"
+                                value: "ipcRenderer.send('asynchronous-message', {'type': 'download-and-install-update'}), closeModal(this.parentElement.id)"
                             }
                         ]
                     },
@@ -172,7 +176,7 @@
                         events: [
                             {
                                 name: "onclick",
-                                value: "BrowserWindow.getFocusedWindow().webContents.send('asynchronous-message', {'type': 'download-update'}), closeModal(this.parentElement.id)"
+                                value: "ipcRenderer.send('asynchronous-message', {'type': 'download-update'}), closeModal(this.parentElement.id)"
                             }
                         ]
                     }
@@ -185,7 +189,7 @@
                         events: [
                             {
                                 name: "onclick",
-                                value: "BrowserWindow.getFocusedWindow().webContents.send('asynchronous-message', {'type': 'install-update'}), closeModal(this.parentElement.id)"
+                                value: "ipcRenderer.send('asynchronous-message', {'type': 'install-update'}), closeModal(this.parentElement.id)"
                             }
                         ]
                     },
@@ -284,6 +288,30 @@
             ]);
         }
 
+        if(!appData.get("changelog")[app.getVersion()]) {
+            fetch("https://api.github.com/repos/N0chteil-Productions/Apple-Music-RPC/releases/latest", function(error, meta, body) {
+                if(!body || error) return console.log(`Error ${error}. Can't get latest release.`);
+                body = JSON.parse(body.toString());
+
+                if(body["tag_name"].replace(/\D/g, "") === app.getVersion().replace(/\D/g, "")) {
+                    newModal(`Changelog ${body.name}`, marked(body.body.replace("# Changelog:\r\n", "")), [
+                        {
+                            text: langString.settings.modal.buttons.okay,
+                            style: "btn-grey",
+                            events: [
+                                {
+                                    name: "onclick",
+                                    value: "updateDataChangelog(app.getVersion(), true), closeModal(this.parentElement.id)"
+                                }
+                            ]
+                        }
+                    ]);
+                } else
+                    updateDataChangelog(app.getVersion(), true);
+            });
+            
+        }
+
         iTunesEmitter.on("playing", async function(type, currentTrack) {
             song.name.textContent = currentTrack.name;
             song.artist.textContent = currentTrack.artist;
@@ -339,7 +367,7 @@
         document.querySelectorAll("div.setting select").forEach((select) => {
             select.addEventListener('change', (e) => {
                 config.set(select.name.replace("config_", ""), select.value);
-                console.log(select.name.replace("config_", ""))
+                console.log(select.name.replace("config_", ""), select.value)
                 if(select.name === "config_colorTheme") updateTheme();
                 else if(select.name === "config_language") updateLanguage();
             });
@@ -377,9 +405,11 @@
         }
 
         function updateLanguage() {
-            const language = config.get("language")
+            const language = config.get("language");
 
             langString = require(`./language/${language}.json`);
+
+            ipcRenderer.send('language-change', {"lang": language});
 
             document.querySelectorAll("div.setting label").forEach((ele) => {
                 const ls = langString.settings.config[ele.getAttribute("for").replace("config_", "")]
@@ -462,7 +492,8 @@
         }
 
         function sendUserCount() {
-            var xhr = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest();
+
             xhr.open("POST", "https://amrpc.n0chteil.xyz/userCount.php", true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send();
@@ -472,11 +503,17 @@
             let result = '',
                 characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-            for (var i = 0; i < characters.length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
+            for (let i = 0; i < characters.length; i++) result += characters.charAt(Math.floor(Math.random() * characters.length));
 
             return result;
+        }
+
+        function updateDataChangelog(k, v) {
+            let changelog = appData.get("changelog");
+
+            changelog[k] = v;
+
+            appData.set("changelog", changelog);
         }
 
         function restartApp() {

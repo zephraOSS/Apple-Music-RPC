@@ -4,7 +4,7 @@
         "noTrack": "No track detected"
     },
     "tray": {
-        "reload": "Reload AMRPC",
+        "restart": "Restart AMRPC",
         "checkForUpdates": "Check for Updates",
         "openSettings": "Open Settings",
         "quit": "Quit"

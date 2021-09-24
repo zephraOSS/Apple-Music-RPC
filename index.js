@@ -2,7 +2,7 @@ const clientId = "842112189618978897",
     DiscordRPC = require("discord-rpc"),
     iTunes = require("itunes-bridge"),
     AutoLaunch = require("auto-launch"),
-    {ipcMain, app, Menu, Notification, Tray, BrowserWindow, dialog} = require("electron"),
+    { ipcMain, app, Menu, Notification, Tray, BrowserWindow, dialog } = require("electron"),
     Store = require("electron-store"),
     { autoUpdater } = require("electron-updater"),
     path = require("path"),
@@ -41,7 +41,8 @@ let rpc = new DiscordRPC.Client({ transport: "ipc" }),
     covers = require("./covers.json"),
     userLang = config.get("language"),
     langString = require(`./language/${userLang}.json`),
-    ctG;
+    ctG,
+    disconnected = false;
 
 require("child_process").exec("NET SESSION", function(err,so,se) {
     if(se.length === 0) {
@@ -54,9 +55,10 @@ require("child_process").exec("NET SESSION", function(err,so,se) {
 
 iTunesEmitter.on("playing", async function(type, currentTrack) {
     if(!currentTrack) return console.log("No track detected");
+    if(currentTrack.mediaKind !== 2 && currentTrack.mediaKind !== 3 && currentTrack.mediaKind !== 7) return;
     ctG = currentTrack;
 
-    if((currentTrack.mediaKind === 3 || currentTrack.mediaKind === 7) && currentTrack.album.length === 0) presenceData.details = currentTrack.name;
+    if(currentTrack.mediaKind === 7 && currentTrack.album.length === 0) presenceData.details = currentTrack.name;
     else replaceRPCVars(currentTrack, "rpcDetails");
 
     replaceRPCVars(currentTrack, "rpcState");
@@ -92,7 +94,10 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
 });
 
 iTunesEmitter.on("paused", async function(type, currentTrack) {
+    if(!currentTrack) return console.log("No track detected");
+    if(currentTrack.mediaKind !== 2 && currentTrack.mediaKind !== 3 && currentTrack.mediaKind !== 7) return;
     ctG = currentTrack;
+
     if(config.get("hideOnPause")) {
         if(presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) rpc.clearActivity();
         delete presenceData.details;
@@ -123,11 +128,11 @@ iTunesEmitter.on("stopped", async () => {
 });
 
 rpc.on("ready", () => {
+    disconnected = false;
     ctG = iTunes.getCurrentTrack();
 
-    if(ctG && ctG.playerState === "playing") {
-
-        if((ctG.mediaKind === 3 || ctG.mediaKind === 7) && ctG.album.length === 0) presenceData.details = ctG.name;
+    if(ctG && ctG.playerState === "playing" && (ctG.mediaKind === 2 || ctG.mediaKind === 3 || ctG.mediaKind === 7)) {
+        if(ctG.album.length === 0) presenceData.details = ctG.name;
         else replaceRPCVars(ctG, "rpcDetails");
 
         replaceRPCVars(ctG, "rpcState");
@@ -140,8 +145,47 @@ rpc.on("ready", () => {
         checkCover(ctG);
     }
 
+    startCheckInterval();
+});
+
+rpc.on("disconnected", () => {
+    disconnected = true;
+    
+    const interval = setInterval(() => {
+        if(!disconnected) return clearInterval(interval);
+        rpc?.destroy();
+
+        rpc = new DiscordRPC.Client({ transport: "ipc" });
+        rpc.login({ clientId: clientId }).catch(() => rpc.destroy());
+
+        rpc.once("ready", () => {
+            disconnected = false;
+            ctG = iTunes.getCurrentTrack();
+
+            if(ctG && ctG.playerState === "playing" && (ctG.mediaKind === 2 || ctG.mediaKind === 3 || ctG.mediaKind === 7)) {
+                if(ctG.album.length === 0) presenceData.details = ctG.name;
+                else replaceRPCVars(ctG, "rpcDetails");
+        
+                replaceRPCVars(ctG, "rpcState");
+        
+                if(ctG.duration === 0) {
+                    presenceData.details = ctG.name;
+                    presenceData.state = "LIVE";
+                }
+        
+                checkCover(ctG);
+            }
+        
+            startCheckInterval();
+        });
+    }, 1000);
+});
+
+function startCheckInterval() {
+    disconnected = false;
     if(config.get("performanceMode")) {
-        setInterval(() => {
+        const interval = setInterval(() => {
+            if(disconnected) return clearInterval(interval);
             if(!presenceData.details) return rpc.clearActivity();
             if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
             if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
@@ -150,7 +194,8 @@ rpc.on("ready", () => {
             rpc.setActivity(presenceData);
         }, 15);
     } else {
-        setInterval(() => {
+        const interval = setInterval(() => {
+            if(disconnected) return clearInterval(interval);
             if(!presenceData.details || !config.get("show")) return rpc.clearActivity();
             if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
             if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
@@ -160,12 +205,7 @@ rpc.on("ready", () => {
             rpc.setActivity(presenceData);
         }, 15);
     }
-});
-
-rpc.on("disconnected", () => {
-    rpc = new DiscordRPC.Client({ transport: "ipc" });
-    rpc.login({ clientId: clientId }).catch(() => rpc.destroy());
-});
+}
 
 let mainWindow;
 
@@ -179,7 +219,7 @@ app.on("ready", () => {
         cmenu = Menu.buildFromTemplate([
             { label: `${app.dev ? "AMRPC - DEV" : "AMRPC"} V${app.getVersion()}`, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/tray/logo@18.png"), enabled: false },
             { type: "separator" },
-            { label: langString.tray.reload, click() { reloadAMRPC() } },
+            { label: langString.tray.restart, click() { restartAMRPC() } },
             { label: langString.tray.checkForUpdates, click() { updateChecker() } },
             { type: "separator" },
             { label: langString.tray.openSettings, click() { mainWindow.show() } },
@@ -229,7 +269,7 @@ app.on("ready", () => {
 
     autoUpdater.on('update-available', (info) => {
         console.log('Update available.');
-        sendMsgToMainWindow({
+        sendMsgToMainWindow("asynchronous-message", {
             "type": "new-update-available",
             "data": {
                 "version": info.version
@@ -247,7 +287,7 @@ app.on("ready", () => {
     });
 
     autoUpdater.on('download-progress', (progressObj) => {
-        sendMsgToMainWindow({
+        sendMsgToMainWindow("asynchronous-message", {
             "type": "download-progress-update",
             "data": {
                 "percent": progressObj.percent,
@@ -259,7 +299,7 @@ app.on("ready", () => {
     });
     
     autoUpdater.on('update-downloaded', (info) => {
-        sendMsgToMainWindow('Update downloaded');
+        sendMsgToMainWindow("asynchronous-message", 'Update downloaded');
         autoUpdater.quitAndInstall();
     });
 
@@ -273,12 +313,14 @@ app.on("ready", () => {
     }, 600e3);
 });
 
-ipcMain.on('asynchronous-message', (event, args) => {
-    console.log(args);
+ipcMain.on("language-change", (e, d) => {
+    console.log(`Changed backend language to ${d.lang}`);
+    userLang = d.lang;
+    langString = require(`./language/${userLang}.json`);
 });
 
-function sendMsgToMainWindow(v) {
-    mainWindow.webContents.send('asynchronous-message', v)
+function sendMsgToMainWindow(t, v) {
+    mainWindow.webContents.send(t, v)
 }
 
 function updateChecker() {
@@ -298,7 +340,10 @@ function updateChecker() {
             fs.writeFile(path.join(app.isPackaged ? process.resourcesPath + "/app.asar.unpacked" : __dirname, "/covers.json"), JSON.stringify(body, null, 4), function (err) {if (err) console.log(err)});
             console.log("Updated covers");
             showNotification("AMRPC", langString.notification.coverlistUpdated);
-            covers = JSON.stringify(body, null, 4);
+            setTimeout(() => {
+                app.relaunch();
+                app.exit();
+            }, 1000);
         } else console.log("No new covers available");
     });
 }
@@ -315,6 +360,9 @@ function showNotification(title, body) {
 
 function reGetCT(type) {
     let ct = iTunes.getCurrentTrack();
+    if(!ct) return console.log("No track detected");
+    if(ct.mediaKind !== 2 && ct.mediaKind !== 3 && ct.mediaKind !== 7) return;
+
     if(ct) {
         if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
         else replaceRPCVars(ct, "rpcDetails");
@@ -404,10 +452,9 @@ function getAppleMusicLink(title, artist, callback) {
     });
 };
 
-async function reloadAMRPC() {
-    rpc.destroy();
-    
-    if(config.get("show")) reGetCT("reload_amrpc");
+function restartAMRPC() {
+    app.relaunch();
+    app.exit();
 }
 
 rpc.login({ clientId: clientId }).catch(() => rpc.destroy());

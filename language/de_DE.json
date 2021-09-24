@@ -4,7 +4,7 @@
         "noTrack": "No track detected"
     },
     "tray": {
-        "reload": "AMRPC neu laden",
+        "restart": "AMRPC neu starten",
         "checkForUpdates": "Nach Updates suchen",
         "openSettings": "Einstellungen öffnen",
         "quit": "Beenden"
