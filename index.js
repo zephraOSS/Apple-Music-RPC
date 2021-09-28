@@ -55,7 +55,6 @@ require("child_process").exec("NET SESSION", function(err,so,se) {
 
 iTunesEmitter.on("playing", async function(type, currentTrack) {
     if(!currentTrack) return console.log("No track detected");
-    if(currentTrack.mediaKind !== 2 && currentTrack.mediaKind !== 3 && currentTrack.mediaKind !== 7) return;
     ctG = currentTrack;
 
     if(currentTrack.mediaKind === 7 && currentTrack.album.length === 0) presenceData.details = currentTrack.name;
@@ -89,13 +88,12 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
                     url: res
                 }
             ]
-        }
+        } else if(presenceData.buttons) delete presenceData.buttons;
     });
 });
 
 iTunesEmitter.on("paused", async function(type, currentTrack) {
     if(!currentTrack) return console.log("No track detected");
-    if(currentTrack.mediaKind !== 2 && currentTrack.mediaKind !== 3 && currentTrack.mediaKind !== 7) return;
     ctG = currentTrack;
 
     if(config.get("hideOnPause")) {
@@ -131,7 +129,7 @@ rpc.on("ready", () => {
     disconnected = false;
     ctG = iTunes.getCurrentTrack();
 
-    if(ctG && ctG.playerState === "playing" && (ctG.mediaKind === 2 || ctG.mediaKind === 3 || ctG.mediaKind === 7)) {
+    if(ctG && ctG.playerState === "playing") {
         if(ctG.album.length === 0) presenceData.details = ctG.name;
         else replaceRPCVars(ctG, "rpcDetails");
 
@@ -162,7 +160,7 @@ rpc.on("disconnected", () => {
             disconnected = false;
             ctG = iTunes.getCurrentTrack();
 
-            if(ctG && ctG.playerState === "playing" && (ctG.mediaKind === 2 || ctG.mediaKind === 3 || ctG.mediaKind === 7)) {
+            if(ctG && ctG.playerState === "playing") {
                 if(ctG.album.length === 0) presenceData.details = ctG.name;
                 else replaceRPCVars(ctG, "rpcDetails");
         
@@ -187,7 +185,7 @@ function startCheckInterval() {
         const interval = setInterval(() => {
             if(disconnected) return clearInterval(interval);
             if(!presenceData.details) return rpc.clearActivity();
-            if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
+            if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
             if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
             else if(presenceData.state?.length === 0) delete presenceData.state;
     
@@ -219,7 +217,7 @@ app.on("ready", () => {
         cmenu = Menu.buildFromTemplate([
             { label: `${app.dev ? "AMRPC - DEV" : "AMRPC"} V${app.getVersion()}`, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/tray/logo@18.png"), enabled: false },
             { type: "separator" },
-            { label: langString.tray.restart, click() { restartAMRPC() } },
+            { label: langString.tray.restart, click() { app.restart() } },
             { label: langString.tray.checkForUpdates, click() { updateChecker() } },
             { type: "separator" },
             { label: langString.tray.openSettings, click() { mainWindow.show() } },
@@ -363,33 +361,31 @@ function reGetCT(type) {
     if(!ct) return console.log("No track detected");
     if(ct.mediaKind !== 2 && ct.mediaKind !== 3 && ct.mediaKind !== 7) return;
 
-    if(ct) {
-        if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
-        else replaceRPCVars(ct, "rpcDetails");
+    if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
+    else replaceRPCVars(ct, "rpcDetails");
 
-        replaceRPCVars(ct, "rpcState");
-        if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+    replaceRPCVars(ct, "rpcState");
+    if(ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
 
-        checkCover(ct);
+    checkCover(ct);
 
-        console.log("action", type);
-        console.log("currentTrack.name", ct.name);
-        console.log("currentTrack.artist", ct.artist);
-        console.log("currentTrack.album", ct.album);
-        console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
+    console.log("action", type);
+    console.log("currentTrack.name", ct.name);
+    console.log("currentTrack.artist", ct.artist);
+    console.log("currentTrack.album", ct.album);
+    console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
 
-        getAppleMusicLink(ct.name, ct.artist, function(res, err) {
-            if(!err) {
-                console.log("currentTrack url", res);
-                presenceData.buttons = [
-                    {
-                        label: "Play on Apple Music",
-                        url: res
-                    }
-                ]
-            }
-        });
-    }
+    getAppleMusicLink(ct.name, ct.artist, function(res, err) {
+        if(!err) {
+            console.log("currentTrack url", res);
+            presenceData.buttons = [
+                {
+                    label: "Play on Apple Music",
+                    url: res
+                }
+            ]
+        } else if(presenceData.buttons) delete presenceData.buttons;
+    });
 }
   
 function updateShowRPC(status) {
@@ -446,13 +442,13 @@ function getAppleMusicLink(title, artist, callback) {
 
     fetch(`https://itunes.apple.com/search?term=${reqParam}&entity=musicTrack`, {cache: "no-store"}, function(error, meta, body) {
         if(!body) return callback(null, true);
-        const res = JSON.parse(body?.toString()).results[0];
+        const res = JSON.parse(body.toString()).results[0];
         if(res) callback(res.trackViewUrl);
         else callback(null, true);
     });
 };
 
-function restartAMRPC() {
+app.restart = () => {
     app.relaunch();
     app.exit();
 }
