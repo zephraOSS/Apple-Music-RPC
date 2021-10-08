@@ -57,7 +57,7 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
     if(!currentTrack) return console.log("No track detected");
     ctG = currentTrack;
 
-    if(currentTrack.mediaKind === 7 && currentTrack.album.length === 0) presenceData.details = currentTrack.name;
+    if(currentTrack.album === 0) presenceData.details = currentTrack.name;
     else replaceRPCVars(currentTrack, "rpcDetails");
 
     replaceRPCVars(currentTrack, "rpcState");
@@ -79,13 +79,13 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
     console.log("currentTrack.album", currentTrack.album);
     console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
 
-    getAppleMusicLink(currentTrack.name, currentTrack.artist, function(res, err) {
-        if(!err) {
-            console.log("currentTrack url", res);
+    getAppleMusicData(currentTrack.name, currentTrack.artist, function(res, err) {
+        if (!err) {
+            console.log("currentTrack url", res.url);
             presenceData.buttons = [
                 {
                     label: "Play on Apple Music",
-                    url: res
+                    url: res.url
                 }
             ]
         } else if(presenceData.buttons) delete presenceData.buttons;
@@ -178,32 +178,6 @@ rpc.on("disconnected", () => {
         });
     }, 1000);
 });
-
-function startCheckInterval() {
-    disconnected = false;
-    if(config.get("performanceMode")) {
-        const interval = setInterval(() => {
-            if(disconnected) return clearInterval(interval);
-            if(!presenceData.details) return rpc.clearActivity();
-            if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
-            if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
-            else if(presenceData.state?.length === 0) delete presenceData.state;
-    
-            rpc.setActivity(presenceData);
-        }, 15);
-    } else {
-        const interval = setInterval(() => {
-            if(disconnected) return clearInterval(interval);
-            if(!presenceData.details || !config.get("show")) return rpc.clearActivity();
-            if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
-            if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
-            else if(presenceData.state?.length === 0) delete presenceData.state;
-            if(presenceData.endTimestamp < Math.floor(Date.now() / 1000)) reGetCT("song_repeat");
-
-            rpc.setActivity(presenceData);
-        }, 15);
-    }
-}
 
 let mainWindow;
 
@@ -359,9 +333,8 @@ function showNotification(title, body) {
 function reGetCT(type) {
     let ct = iTunes.getCurrentTrack();
     if(!ct) return console.log("No track detected");
-    if(ct.mediaKind !== 2 && ct.mediaKind !== 3 && ct.mediaKind !== 7) return;
 
-    if((ct.mediaKind === 3 || ct.mediaKind === 7) && ct.album.length === 0) presenceData.details = ct.name;
+    if(ct.album.length === 0) presenceData.details = ct.name;
     else replaceRPCVars(ct, "rpcDetails");
 
     replaceRPCVars(ct, "rpcState");
@@ -375,13 +348,13 @@ function reGetCT(type) {
     console.log("currentTrack.album", ct.album);
     console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
 
-    getAppleMusicLink(ct.name, ct.artist, function(res, err) {
-        if(!err) {
-            console.log("currentTrack url", res);
+    getAppleMusicData(currentTrack.name, currentTrack.artist, function(res, err) {
+        if (!err) {
+            console.log("currentTrack url", res.url);
             presenceData.buttons = [
                 {
                     label: "Play on Apple Music",
-                    url: res
+                    url: res.url
                 }
             ]
         } else if(presenceData.buttons) delete presenceData.buttons;
@@ -437,16 +410,47 @@ function replaceRPCVars(ct, cfg) {
     else if(cfg === "rpcState") presenceData.state = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
 }
 
-function getAppleMusicLink(title, artist, callback) {
+function getAppleMusicData(title, artist, callback) {
     const reqParam = encodeURIComponent(`${title} ${artist}`).replace(/'/g,"%27").replace(/"/g,"%22");
 
     fetch(`https://itunes.apple.com/search?term=${reqParam}&entity=musicTrack`, {cache: "no-store"}, function(error, meta, body) {
         if(!body) return callback(null, true);
         const res = JSON.parse(body.toString()).results[0];
-        if(res) callback(res.trackViewUrl);
+        if(res) callback({
+            url: res.trackViewUrl,
+            collectionId: res.collectionId,
+            trackId: res.trackId,
+            explicit: !res.notExplicit
+        });
         else callback(null, true);
     });
-};
+}
+
+function startCheckInterval() {
+    disconnected = false;
+    if(config.get("performanceMode")) {
+        const interval = setInterval(() => {
+            if(disconnected) return clearInterval(interval);
+            if(!presenceData.details) return rpc.clearActivity();
+            if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
+            if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
+            else if(presenceData.state?.length === 0) delete presenceData.state;
+    
+            rpc.setActivity(presenceData);
+        }, 15);
+    } else {
+        const interval = setInterval(() => {
+            if(disconnected) return clearInterval(interval);
+            if(!presenceData.details || !config.get("show")) return rpc.clearActivity();
+            if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
+            if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
+            else if(presenceData.state?.length === 0) delete presenceData.state;
+            if(presenceData.endTimestamp < Math.floor(Date.now() / 1000)) reGetCT("song_repeat");
+
+            rpc.setActivity(presenceData);
+        }, 15);
+    }
+}
 
 app.restart = () => {
     app.relaunch();
