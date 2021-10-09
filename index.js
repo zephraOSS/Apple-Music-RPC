@@ -348,7 +348,7 @@ function reGetCT(type) {
     console.log("currentTrack.album", ct.album);
     console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
 
-    getAppleMusicData(currentTrack.name, currentTrack.artist, function(res, err) {
+    getAppleMusicData(ct.name, ct.artist, function(res, err) {
         if (!err) {
             console.log("currentTrack url", res.url);
             presenceData.buttons = [
