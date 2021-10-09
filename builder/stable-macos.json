@@ -1,0 +1,46 @@
+{
+    "appId": "com.amrpc",
+    "productName": "AMRPC",
+    "artifactName": "AMRPC.${ext}",
+    "copyright": "Copyright © 2021 N0chteil Productions",
+    "asar": "true",
+    "asarUnpack": [
+        "node_modules/itunes-bridge/wscript",
+        "node_modules/itunes-bridge/jxa",
+        "covers.json"
+    ],
+    "extraResources": [
+        "assets/logo.png",
+        "assets/tray/"
+    ],
+    "directories": {
+        "buildResources": "assets",
+        "output": "app/stable/macos"
+    },
+    "dmg": {
+		"window": {
+			"width": 660,
+			"height": 400
+		},
+		"contents": [
+			{
+				"x": 180,
+				"y": 170
+			},
+			{
+				"x": 480,
+				"y": 170,
+				"type": "link",
+				"path": "/Applications"
+			}
+		],
+		"title": "Discord RPC for Apple Music",
+		"writeUpdateInfo": false
+	},
+	"mac": {
+		"icon": "assets/icons/mac/icon.icns",
+		"target": { "target": "default", "arch": ["x64", "arm64"] },
+		"artifactName": "AMRPC-Installer-macOS-${arch}.${ext}",
+		"publish": { "provider": "github", "releaseType": "draft" }
+	}
+}
