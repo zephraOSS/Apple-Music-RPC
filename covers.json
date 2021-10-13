@@ -76,7 +76,10 @@
         "eterno agosto": "cover_eternoagosto",
         "magia": "cover_magiaas",
         "nothing but the best (remastered)": "cover_nothingbutthebest",
-        "a jolly christmas from frank sinatra (50th anniversary edition)": "cover_jollychristmas"
+        "a jolly christmas from frank sinatra (50th anniversary edition)": "cover_jollychristmas",
+        "raise!":" cover_ewf_raise",
+        "voyage": "cover_abba_voyage",
+        "the best of m people": "cover_thebestofmpeople"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
@@ -131,6 +134,12 @@
         },
         "farruko": {
             "pepas": "cover_farruko_pepas"
+        },
+        "billie eilish": {
+            "no time to die": "cover_jamesbond_nttd"
+        },
+        "coi leray": {
+            "twinnem": "cover_learay_twinnem"
         }
     }
 }
