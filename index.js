@@ -147,7 +147,7 @@ if (!config.get("performanceMode")) {
             let ctg = Math.floor(Date.now() / 1000) - ctG.elapsedTime + ctG.duration;
             const difference = (ct > ctg) ? ct - ctg : ctg - ct;
 
-            if (difference > 1.5) {
+            if (difference > 200) {
                 replaceRPCVars(currentTrack, "rpcState");
                 presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ctG.elapsedTime + (ctG.duration + 2);
                 presenceData.isLive = false;
@@ -463,7 +463,8 @@ function checkCover(ct) {
     else if (covers.song[ct.artist.toLowerCase()]) {
         if (covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()];
         else presenceData.largeImageKey = config.get("cover");
-    } else if (presenceData.largeImageKey !== config.get("cover")) presenceData.largeImageKey = config.get("cover");
+    } else if (presenceData.isLive && covers.playlist[ct.name.toLowerCase()]) presenceData.largeImageKey = covers.playlist[ct.name.toLowerCase()];
+    else if (presenceData.largeImageKey !== config.get("cover")) presenceData.largeImageKey = config.get("cover");
 
     rpc.setActivity(presenceData);
 }
@@ -471,8 +472,13 @@ function checkCover(ct) {
 function replaceRPCVars(ct, cfg) {
     if (!ct || !cfg || ct.playerState === "stopped") return;
 
-    if (cfg === "rpcDetails") presenceData.details = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
-    else if (cfg === "rpcState") presenceData.state = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
+    if (cfg === "rpcDetails") {
+        if (!ct.name || !ct.album || !ct.artist) return;
+        presenceData.details = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
+    } else if (cfg === "rpcState") {
+        if (!ct.name || !ct.album || !ct.artist) return;
+        presenceData.state = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
+    }
 }
 
 function getAppleMusicData(title, artist, callback) {
