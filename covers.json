@@ -79,7 +79,8 @@
         "a jolly christmas from frank sinatra (50th anniversary edition)": "cover_jollychristmas",
         "raise!": "cover_ewf_raise",
         "voyage": "cover_abba_voyage",
-        "the best of m people": "cover_thebestofmpeople"
+        "the best of m people": "cover_thebestofmpeople",
+        "ron's gone wrong (original motion picture soundtrack)": "cover_ronsgonewrong_soundtrack"
     },
     "playlist": {
         "heard in apple ads": "cover_heard-in-apple-ads",
@@ -140,6 +141,9 @@
         },
         "coi leray": {
             "twinnem": "cover_learay_twinnem"
+        },
+        "liam payne": {
+            "sunshine (from the motion picture “ron’s gone wrong”)": "cover_ronsgonewrong_sunshine"
         }
     }
 }
