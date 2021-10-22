@@ -41,7 +41,8 @@ app.dev = (app.isPackaged) ? false : true;
 let rpc = new DiscordRPC.Client({ transport: "ipc" }),
     presenceData = {
         largeImageKey: config.get("cover"),
-        largeImageText: `${app.dev ? "AMRPC - DEV" : "AMRPC"} - V.${app.getVersion()}`
+        largeImageText: `${app.dev ? "AMRPC - DEV" : "AMRPC"} - V.${app.getVersion()}`,
+        isLive: false
     },
     covers = require("./covers.json"),
     userLang = config.get("language"),
@@ -61,6 +62,7 @@ require("child_process").exec("NET SESSION", function (err, so, se) {
 iTunesEmitter.on("playing", async function (type, currentTrack) {
     if (!currentTrack) return console.log("No track detected");
     ctG = currentTrack;
+    presenceData.isLive = false;
 
     if (currentTrack.album === 0) presenceData.details = currentTrack.name;
     else replaceRPCVars(currentTrack, "rpcDetails");
@@ -73,6 +75,7 @@ iTunesEmitter.on("playing", async function (type, currentTrack) {
         if (presenceData.endTimestamp) delete presenceData.endTimestamp;
         presenceData.details = currentTrack.name;
         presenceData.state = "LIVE";
+        presenceData.isLive = true;
     }
 
     checkCover(currentTrack);
@@ -137,14 +140,29 @@ iTunesEmitter.on("stopped", async () => {
 
 if (!config.get("performanceMode")) {
     iTunesEmitter.on("timeChange", async (type, currentTrack) => {
-        if (!presenceData.endTimestamp) return;
+        if (!presenceData.details || presenceData.details.length > 128) return;
         let ct = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
+
+        if (presenceData.isLive) {
+            let ctg = Math.floor(Date.now() / 1000) - ctG.elapsedTime + ctG.duration;
+            const difference = (ct > ctg) ? ct - ctg : ctg - ct;
+
+            if (difference > 1.5) {
+                replaceRPCVars(currentTrack, "rpcState");
+                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ctG.elapsedTime + (ctG.duration + 2);
+                presenceData.isLive = false;
+                rpc.setActivity(presenceData);
+            }
+            return;
+        }
+
+        if (!presenceData.endTimestamp) return;
 
         if (ct !== presenceData.endTimestamp) {
             const difference = (ct > presenceData.endTimestamp) ? ct - presenceData.endTimestamp : presenceData.endTimestamp - ct;
 
             if (difference > 1.5) {
-                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
+                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + 2);
                 rpc.setActivity(presenceData);
             }
         }
@@ -154,6 +172,7 @@ if (!config.get("performanceMode")) {
 rpc.on("ready", () => {
     disconnected = false;
     ctG = iTunes.getCurrentTrack();
+    presenceData.isLive = false;
 
     if (ctG && ctG.playerState === "playing") {
         if (ctG.album.length === 0) presenceData.details = ctG.name;
@@ -164,6 +183,7 @@ rpc.on("ready", () => {
         if (ctG.duration === 0) {
             presenceData.details = ctG.name;
             presenceData.state = "LIVE";
+            presenceData.isLive = true;
         }
 
         rpc.setActivity(presenceData);
@@ -187,6 +207,7 @@ rpc.on("disconnected", () => {
         rpc.once("ready", () => {
             disconnected = false;
             ctG = iTunes.getCurrentTrack();
+            presenceData.isLive = false;
 
             if (ctG && ctG.playerState === "playing") {
                 if (ctG.album.length === 0) presenceData.details = ctG.name;
@@ -197,6 +218,7 @@ rpc.on("disconnected", () => {
                 if (ctG.duration === 0) {
                     presenceData.details = ctG.name;
                     presenceData.state = "LIVE";
+                    presenceData.isLive = true;
                 }
 
                 rpc.setActivity(presenceData);
@@ -368,7 +390,15 @@ function reGetCT(type) {
     else replaceRPCVars(ct, "rpcDetails");
 
     replaceRPCVars(ct, "rpcState");
-    if (ct.duration > 0) presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+
+    if (ct.duration > 0)
+        presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration;
+    else {
+        if (presenceData.endTimestamp) delete presenceData.endTimestamp;
+        presenceData.details = ct.name;
+        presenceData.state = "LIVE";
+        presenceData.isLive = true;
+    }
 
     checkCover(ct);
 
