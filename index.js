@@ -435,7 +435,7 @@ function checkCover(ct) {
 }
 
 function replaceRPCVars(ct, cfg) {
-    if(!ct || !cfg || ct?.playerState === "stopped") return;
+    if(!ct || !cfg || ct.playerState === "stopped") return;
 
     if(cfg === "rpcDetails") presenceData.details = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
     else if(cfg === "rpcState") presenceData.state = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);

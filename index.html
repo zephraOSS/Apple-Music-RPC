@@ -158,22 +158,6 @@
         updateTheme();
         updateLanguage();
 
-        if(!appData.get("acceptedPrivacyPolicy")) {
-            showNotification(langString.notification["privacyPolicy"]);
-            newModal(langString.settings.modal["privacyPolicy"].title, langString.settings.modal["privacyPolicy"].description.replace(/{.*}+/g, `<a onclick="openUrl('https://amrpc.n0chteil.xyz/privacypolicy')">${langString.settings.modal["privacyPolicy"].description.match(/{(.*)}+/g).toString().replace(/{|}+/g, "")}</a>`), [
-                {
-                    text: langString.settings.modal["privacyPolicy"].buttons.accept,
-                    style: "btn-grey",
-                    events: [
-                        {
-                            name: "onclick",
-                            value: "appData.set('acceptedPrivacyPolicy', true), ipcRenderer.send('privacyPolicy', {'accepted': true}), closeModal(this.parentElement.id)"
-                        }
-                    ]
-                }
-            ]);
-        }
-
         ipcRenderer.on('asynchronous-message', function (evt, o) {
             if(o.type === "new-update-available") {
                 newModal(langString.settings.modal["newUpdate"].title, langString.settings.modal["newUpdate"].description.replace("%version%", o.data.version), [
