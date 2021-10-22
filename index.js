@@ -20,6 +20,7 @@ const iTunesEmitter = iTunes.emitter,
         performanceMode: false,
         colorTheme: "white",
         language: "en_US",
+        cover: "applemusic-logo",
         rpcDetails: "%title% - %album%",
         rpcState: "%artist%"
     }}),
@@ -35,7 +36,7 @@ app.dev = (app.isPackaged) ? false : true;
 
 let rpc = new DiscordRPC.Client({ transport: "ipc" }),
     presenceData = {
-        largeImageKey: "applemusic-logo",
+        largeImageKey: config.get("cover"),
         largeImageText: `${app.dev ? "AMRPC - DEV" : "AMRPC"} - V.${app.getVersion()}`
     },
     covers = require("./covers.json"),
@@ -88,8 +89,11 @@ iTunesEmitter.on("playing", async function(type, currentTrack) {
                     url: res.url
                 }
             ]
+            rpc.setActivity(presenceData);
         } else if(presenceData.buttons) delete presenceData.buttons;
     });
+
+    rpc.setActivity(presenceData);
 });
 
 iTunesEmitter.on("paused", async function(type, currentTrack) {
@@ -106,6 +110,8 @@ iTunesEmitter.on("paused", async function(type, currentTrack) {
         delete presenceData.endTimestamp;
         presenceData.largeImageKey = "applemusic-logo";
         presenceData.state = "Paused";
+
+        rpc.setActivity(presenceData);
     }
 
     console.log("action", "paused");
@@ -125,6 +131,22 @@ iTunesEmitter.on("stopped", async () => {
     ctG = undefined;
 });
 
+if(!config.get("performanceMode")) {
+    iTunesEmitter.on("timeChange", async (type, currentTrack) => {
+        if (!presenceData.endTimestamp) return;
+        let ct = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
+
+        if (ct !== presenceData.endTimestamp) {
+            const difference = (ct > presenceData.endTimestamp) ? ct - presenceData.endTimestamp : presenceData.endTimestamp - ct;
+
+            if (difference > 1.5) {
+                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
+                rpc.setActivity(presenceData);
+            }
+        }
+    });
+}
+
 rpc.on("ready", () => {
     disconnected = false;
     ctG = iTunes.getCurrentTrack();
@@ -139,6 +161,8 @@ rpc.on("ready", () => {
             presenceData.details = ctG.name;
             presenceData.state = "LIVE";
         }
+
+        rpc.setActivity(presenceData);
 
         checkCover(ctG);
     }
@@ -170,6 +194,8 @@ rpc.on("disconnected", () => {
                     presenceData.details = ctG.name;
                     presenceData.state = "LIVE";
                 }
+
+                rpc.setActivity(presenceData);
         
                 checkCover(ctG);
             }
@@ -332,7 +358,7 @@ function showNotification(title, body) {
 
 function reGetCT(type) {
     let ct = iTunes.getCurrentTrack();
-    if(!ct) return console.log("No track detected");
+    if(!ct || ct.playerState === "stopped") return console.log("No track detected");
 
     if(ct.album.length === 0) presenceData.details = ct.name;
     else replaceRPCVars(ct, "rpcDetails");
@@ -357,8 +383,11 @@ function reGetCT(type) {
                     url: res.url
                 }
             ]
+            rpc.setActivity(presenceData);
         } else if(presenceData.buttons) delete presenceData.buttons;
     });
+
+    rpc.setActivity(presenceData);
 }
   
 function updateShowRPC(status) {
@@ -392,19 +421,21 @@ function isEqual(obj1, obj2) {
 }
 
 function checkCover(ct) {
-    if(!ct) return;
-    if(!config.get("showAlbumCover")) return presenceData.largeImageKey = "applemusic-logo";
+    if(!ct || ct.playerState === "stopped") return;
+    if(!config.get("showAlbumCover")) return presenceData.largeImageKey = config.get("cover");
     if(appData.get("nineelevenCovers") && (new Date().getMonth() + 1 === 9 && new Date().getDate() === 11)) return presenceData.largeImageKey = "cover_911";
 
     if(covers.album[ct.album.toLowerCase()]) presenceData.largeImageKey = covers.album[ct.album.toLowerCase()];
     else if(covers.song[ct.artist.toLowerCase()]) {
         if(covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()]) presenceData.largeImageKey = covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()];
-        else presenceData.largeImageKey = "applemusic-logo";
-    } else if(presenceData.largeImageKey !== "applemusic-logo") presenceData.largeImageKey = "applemusic-logo";
+        else presenceData.largeImageKey = config.get("cover");
+    } else if(presenceData.largeImageKey !== config.get("cover")) presenceData.largeImageKey = config.get("cover");
+
+    rpc.setActivity(presenceData);
 }
 
 function replaceRPCVars(ct, cfg) {
-    if(!ct || !cfg) return;
+    if(!ct || !cfg || ct?.playerState === "stopped") return;
 
     if(cfg === "rpcDetails") presenceData.details = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
     else if(cfg === "rpcState") presenceData.state = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
@@ -435,8 +466,6 @@ function startCheckInterval() {
             if(presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0,128);
             if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
             else if(presenceData.state?.length === 0) delete presenceData.state;
-    
-            rpc.setActivity(presenceData);
         }, 15);
     } else {
         const interval = setInterval(() => {
@@ -445,9 +474,6 @@ function startCheckInterval() {
             if(presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0,128);
             if(presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0,128);
             else if(presenceData.state?.length === 0) delete presenceData.state;
-            if(presenceData.endTimestamp < Math.floor(Date.now() / 1000)) reGetCT("song_repeat");
-
-            rpc.setActivity(presenceData);
         }, 15);
     }
 }

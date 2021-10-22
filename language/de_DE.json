@@ -21,6 +21,7 @@
             "performanceMode": "Performance Mode",
             "colorTheme": "Bevorzugtes Farbschema",
             "language": "App-Sprache",
+            "cover": "RPC Logo",
             "rpcDetails": "Presence Details",
             "rpcState": "Presence State"
         },

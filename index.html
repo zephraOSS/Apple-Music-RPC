@@ -28,7 +28,7 @@
         <form id="config">
             <div class="settingsRight">
                 <div class="setting">
-                    <input type="checkbox" name="config_autolaunch">
+                    <input type="checkbox" name="config_autolaunch" rR="true">
                     <label for="config_autolaunch">Autolaunch</label>
                 </div>
     
@@ -48,7 +48,7 @@
                 </div>
     
                 <div class="setting">
-                    <input type="checkbox" name="config_performanceMode">
+                    <input type="checkbox" name="config_performanceMode" rR="true">
                     <label for="config_performanceMode">Performance Mode</label>
                 </div>
             </div>
@@ -70,6 +70,14 @@
                         <option value="de_DE">Deutsch (DE)</option>
                     </select>
                     <label for="config_language">App language</label>
+                </div>
+
+                <div class="setting">
+                    <select name="config_cover">
+                        <option value="applemusic-logo">Default</option>
+                        <option value="applemusic-logo-rainbow">Rainbow</option>
+                    </select>
+                    <label for="config_cover">RPC logo</label>
                 </div>
     
                 <div class="setting">
@@ -118,21 +126,11 @@
         const iTunes = require("itunes-bridge"),
             iTunesEmitter = iTunes.emitter,
             { ipcRenderer } = require('electron'),
-            { BrowserWindow, nativeTheme, app } = require('@electron/remote'),
+            { BrowserWindow, nativeTheme, Notification, app } = require('@electron/remote'),
             Store = require("electron-store"),
             path = require("path"),
             fetch = require("fetch").fetchUrl,
-            config = new Store({defaults: {
-                autolaunch: true,
-                show: true,
-                hideOnPause: true,
-                showAlbumCover: true,
-                performanceMode: false,
-                colorTheme: "white",
-                language: "en_US",
-                rpcDetails: "%title% - %album%",
-                rpcState: "%artist%"
-            }}),
+            config = new Store({}),
             appData = new Store({name: "data", defaults: {
                 userCountUsageAsked: false,
                 nineelevenAsked: false,
@@ -140,7 +138,9 @@
                 nineelevenCovers: false,
                 changelog: {
                     "2.2.9": false,
-                    "2.2.10": false
+                    "2.2.10": false,
+                    "2.2.11": false,
+                    "2.3.0": false
                 }
             }}),
             song = {
@@ -157,6 +157,22 @@
         document.querySelector("span#extra_version").textContent = `${app.dev ? "Developer" : ""} V.${app.getVersion()}`;
         updateTheme();
         updateLanguage();
+
+        if(!appData.get("acceptedPrivacyPolicy")) {
+            showNotification(langString.notification["privacyPolicy"]);
+            newModal(langString.settings.modal["privacyPolicy"].title, langString.settings.modal["privacyPolicy"].description.replace(/{.*}+/g, `<a onclick="openUrl('https://amrpc.n0chteil.xyz/privacypolicy')">${langString.settings.modal["privacyPolicy"].description.match(/{(.*)}+/g).toString().replace(/{|}+/g, "")}</a>`), [
+                {
+                    text: langString.settings.modal["privacyPolicy"].buttons.accept,
+                    style: "btn-grey",
+                    events: [
+                        {
+                            name: "onclick",
+                            value: "appData.set('acceptedPrivacyPolicy', true), ipcRenderer.send('privacyPolicy', {'accepted': true}), closeModal(this.parentElement.id)"
+                        }
+                    ]
+                }
+            ]);
+        }
 
         ipcRenderer.on('asynchronous-message', function (evt, o) {
             if(o.type === "new-update-available") {
@@ -314,8 +330,8 @@
         }
 
         iTunesEmitter.on("playing", async function(type, currentTrack) {
-            song.name.textContent = currentTrack.name;
-            song.artist.textContent = currentTrack.artist;
+            song.name.textContent = (currentTrack.name.length > 40) ? currentTrack.name.substring(0, 40) + "..." : currentTrack.name;
+            song.artist.textContent = (currentTrack.artist.length > 40) ? currentTrack.artist.substring(0, 40) + "..." : currentTrack.artist;
             song.info.style.display = "block";
         });
 
@@ -342,7 +358,7 @@
                 input.addEventListener('click', (e) => {
                     config.set(input.name.replace("config_", ""), input.checked);
 
-                    if(input.name === "config_performanceMode") {
+                    if(input.getAttribute("rR") === "true") {
                         updateSCPM();
                         document.querySelector("span#restartApp").style["display"] = "inline";
                         document.querySelector("span#reloadPage").style["display"] = "none";
@@ -520,6 +536,10 @@
         app.restart = () => {
             app.relaunch();
             app.exit();
+        }
+
+        function showNotification(title, body) {
+            new Notification({title: title, body: body, icon: path.join(app.isPackaged ? process.resourcesPath : __dirname, "/assets/logo.png")}).show();
         }
     </script>
 </body>
