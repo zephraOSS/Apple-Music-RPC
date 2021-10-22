@@ -6,8 +6,10 @@
 * Done
 
 ## Requirements
-* Windows 10
-* [iTunes for Windows 10](https://www.microsoft.com/p/itunes/9pb2mz1zmb1s?rtc=1&activetab=pivot:overviewtab)
+* Windows 7 or later
+* [iTunes for Windows](https://www.microsoft.com/p/itunes/9pb2mz1zmb1s?rtc=1&activetab=pivot:overviewtab)
+
+[More](https://github.com/N0chteil-Productions/Apple-Music-RPC/wiki/Installation)
 
 ## You need help?
 * Take a look into [the Wiki](https://github.com/N0chteil-Productions/Apple-Music-RPC/wiki)
