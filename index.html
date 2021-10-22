@@ -487,6 +487,13 @@
                 e.modal.appendChild(ele);
             }
 
+            document.querySelector(".modal a").addEventListener("click", function (e) {
+                e.preventDefault();
+                openUrl(this.href);
+
+                return false;
+            });
+
             if (e.body.classList.contains("modalIsOpen")) e.modal.style.display = "none", e.modal.classList.add("awaiting");
             else e.body.classList.add("modalIsOpen");
         }
