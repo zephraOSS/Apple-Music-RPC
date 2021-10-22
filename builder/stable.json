@@ -36,6 +36,8 @@
         "icon": "assets/icons/win/icon.ico",
         "artifactName": "AMRPC-Installer.exe",
         "publisherName": "N0chteil Productions",
-        "publish": ["github"]
+        "publish": [
+            "github"
+        ]
     }
 }

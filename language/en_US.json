@@ -49,7 +49,7 @@
                     "okcool": "Okay, cool!"
                 }
             },
-            "newUpdate" : {
+            "newUpdate": {
                 "title": "Software Update",
                 "description": "Version %version% is available for your PC.",
                 "installed": {
