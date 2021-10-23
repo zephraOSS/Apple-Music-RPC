@@ -150,6 +150,7 @@ if (!config.get("performanceMode")) {
             if (presenceData.endTimestamp) delete presenceData.endTimestamp;
 
             if (difference > 99 && currentTrack.duration > 0) {
+                replaceRPCVars(currentTrack, "rpcDetails");
                 replaceRPCVars(currentTrack, "rpcState");
                 presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.25 : 1));
                 presenceData.isLive = false;
