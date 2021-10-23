@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/N0chteil-Productions/Apple-Music-RPC.git"
+    "url": "git+https://github.com/ZephraCloud/Apple-Music-RPC.git"
   },
   "keywords": [
     "discord",
@@ -22,9 +22,9 @@
   "author": "N0chteil ^^",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/N0chteil-Productions/Apple-Music-RPC/issues"
+    "url": "https://github.com/ZephraCloud/Apple-Music-RPC/issues"
   },
-  "homepage": "https://github.com/N0chteil-Productions/Apple-Music-RPC#readme",
+  "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
   "dependencies": {
     "@electron/remote": "^1.2.2",
     "auto-launch": "^5.0.5",

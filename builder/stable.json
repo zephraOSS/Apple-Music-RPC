@@ -2,7 +2,7 @@
     "appId": "com.amrpc",
     "productName": "AMRPC",
     "artifactName": "AMRPC.${ext}",
-    "copyright": "Copyright © 2021 N0chteil Productions",
+    "copyright": "Copyright © 2021 Zephra",
     "asar": "true",
     "asarUnpack": [
         "node_modules/itunes-bridge/wscript",
@@ -36,7 +36,7 @@
         "target": "nsis",
         "icon": "assets/icons/win/icon.ico",
         "artifactName": "AMRPC-Installer.exe",
-        "publisherName": "N0chteil Productions",
+        "publisherName": "Zephra",
         "publish": [
             "github"
         ]
