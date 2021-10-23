@@ -72,6 +72,7 @@ div.control #songartist {
 div.control #songlogo {
     float: left;
     width: 40px;
+    border-radius: 8px;
     user-select: none;
     pointer-events: none;
     -webkit-app-region: no-drag;
