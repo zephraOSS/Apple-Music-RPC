@@ -282,7 +282,7 @@ app.on("ready", () => {
         pathname: path.join(__dirname),
         protocol: "file:",
         slashes: true
-    }) + "/index.html");
+    }) + "/browser/index.html");
 
     require("@electron/remote/main").initialize();
 
