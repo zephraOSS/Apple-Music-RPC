@@ -30,7 +30,7 @@
         <form id="config">
             <div class="settingsRight">
                 <div class="setting">
-                    <input type="checkbox" name="config_autolaunch" rR="true">
+                    <input type="checkbox" name="config_autolaunch">
                     <label for="config_autolaunch">Autolaunch</label>
                 </div>
 
@@ -172,7 +172,8 @@
                 info: document.querySelector("div.songinfo")
             };
 
-        let langString = require(`./language/${config.get("language")}.json`);
+        let langString = require(`./language/${config.get("language")}.json`),
+            ctG;
 
         app.dev = (app.isPackaged) ? false : true;
 
@@ -231,6 +232,15 @@
             } else if (o.type === "download-progress-update") {
                 document.querySelector("span#download-progress").style.display = (o.data.percent === 100) ? "none" : "inline-block";
                 document.querySelector("span#download-progress progress").value = o.data.percent;
+            } else if (o.type === "sendCover") {
+                if (ctG.playerState !== "stopped" && o.data.element) {
+                    fetch("https://discord.com/api/oauth2/applications/842112189618978897/assets", function (error, meta, body) {
+                        if (!body || error) return console.log(`Error ${error}. Can't access Discord API`);
+                        body = JSON.parse(body.toString());
+
+                        document.getElementById("songlogo").src = `https://cdn.discordapp.com/app-assets/842112189618978897/${body.find(ele => ele.name === o.data.element).id}.png`;
+                    });
+                }
             }
         });
 
@@ -333,19 +343,31 @@
                 } else
                     updateDataChangelog(app.getVersion(), true);
             });
-
         }
 
         iTunesEmitter.on("playing", async function (type, currentTrack) {
+            ctG = currentTrack;
             song.name.textContent = (currentTrack.name.length > 40) ? currentTrack.name.substring(0, 40) + "..." : currentTrack.name;
             song.artist.textContent = (currentTrack.artist.length > 40) ? currentTrack.artist.substring(0, 40) + "..." : currentTrack.artist;
             song.info.style.display = "block";
+
+            ipcRenderer.send('getCover', {});
         });
 
-        iTunesEmitter.on("stopped", async function (type, currentTrack) {
+        iTunesEmitter.on("paused", async function (type, currentTrack) {
+            ctG = currentTrack;
             song.name.textContent = "";
             song.artist.textContent = "";
             song.info.style.display = "none";
+            document.getElementById("songlogo").src = "assets/logo.png";
+        });
+
+        iTunesEmitter.on("stopped", async function (type, currentTrack) {
+            ctG = currentTrack;
+            song.name.textContent = "";
+            song.artist.textContent = "";
+            song.info.style.display = "none";
+            document.getElementById("songlogo").src = "assets/logo.png";
         });
 
         document.querySelector("span.dot.minimize")?.addEventListener("click", function (e) {
@@ -370,6 +392,7 @@
                         document.querySelector("span#restartApp").style["display"] = "inline";
                         document.querySelector("span#reloadPage").style["display"] = "none";
                     }
+                    if (input.name === "config_autolaunch") ipcRenderer.send("autolaunch-change", {});
                 });
             } else if (input.type === "text") {
                 let timeout;
