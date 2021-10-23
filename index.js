@@ -138,39 +138,37 @@ iTunesEmitter.on("stopped", async () => {
     ctG = undefined;
 });
 
-if (!config.get("performanceMode")) {
-    iTunesEmitter.on("timeChange", async (type, currentTrack) => {
-        if (!presenceData.details || presenceData.details.length > 128) return;
-        let ct = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
+iTunesEmitter.on("timeChange", async (type, currentTrack) => {
+    if (!presenceData.details || presenceData.details.length > 128) return;
+    let ct = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration;
 
-        if (presenceData.isLive) {
-            let ctg = Math.floor(Date.now() / 1000) - ctG.elapsedTime + ctG.duration;
-            const difference = (ct > ctg) ? ct - ctg : ctg - ct;
+    if (presenceData.isLive) {
+        let ctg = Math.floor(Date.now() / 1000) - ctG.elapsedTime + ctG.duration;
+        const difference = (ct > ctg) ? ct - ctg : ctg - ct;
 
-            if (presenceData.endTimestamp) delete presenceData.endTimestamp;
+        if (presenceData.endTimestamp) delete presenceData.endTimestamp;
 
-            if (difference > 99 && currentTrack.duration > 0) {
-                replaceRPCVars(currentTrack, "rpcDetails");
-                replaceRPCVars(currentTrack, "rpcState");
-                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.25 : 1));
-                presenceData.isLive = false;
-                rpc.setActivity(presenceData);
-            }
-            return;
+        if (difference > 99 && currentTrack.duration > 0) {
+            replaceRPCVars(currentTrack, "rpcDetails");
+            replaceRPCVars(currentTrack, "rpcState");
+            presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.75 : 1));
+            presenceData.isLive = false;
+            rpc.setActivity(presenceData);
         }
+        return;
+    }
 
-        if (!presenceData.endTimestamp) return;
+    if (!presenceData.endTimestamp) return;
 
-        if (ct !== presenceData.endTimestamp) {
-            const difference = (ct > presenceData.endTimestamp) ? ct - presenceData.endTimestamp : presenceData.endTimestamp - ct;
+    if (ct !== presenceData.endTimestamp) {
+        const difference = (ct > presenceData.endTimestamp) ? ct - presenceData.endTimestamp : presenceData.endTimestamp - ct;
 
-            if (difference > 1.5) {
-                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.25 : 1));
-                rpc.setActivity(presenceData);
-            }
+        if (difference > 1.5) {
+            presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.75 : 1));
+            rpc.setActivity(presenceData);
         }
-    });
-}
+    }
+});
 
 rpc.on("ready", () => {
     disconnected = false;
