@@ -147,9 +147,11 @@ if (!config.get("performanceMode")) {
             let ctg = Math.floor(Date.now() / 1000) - ctG.elapsedTime + ctG.duration;
             const difference = (ct > ctg) ? ct - ctg : ctg - ct;
 
-            if (difference > 200) {
+            if (presenceData.endTimestamp) delete presenceData.endTimestamp;
+
+            if (difference > 99 && currentTrack.duration > 0) {
                 replaceRPCVars(currentTrack, "rpcState");
-                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - ctG.elapsedTime + (ctG.duration + 2);
+                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.25 : 1));
                 presenceData.isLive = false;
                 rpc.setActivity(presenceData);
             }
@@ -162,7 +164,7 @@ if (!config.get("performanceMode")) {
             const difference = (ct > presenceData.endTimestamp) ? ct - presenceData.endTimestamp : presenceData.endTimestamp - ct;
 
             if (difference > 1.5) {
-                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + 2);
+                presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.25 : 1));
                 rpc.setActivity(presenceData);
             }
         }
@@ -327,13 +329,19 @@ app.on("ready", () => {
         autoUpdater.quitAndInstall();
     });
 
+    ipcMain.on("autolaunch-change", (e, d) => {
+        if (config.get("autolaunch")) autoLaunch.enable();
+        else autoLaunch.disable();
+
+        console.log(`Autolaunch is now ${(config.get("autolaunch")) ? "enabled" : "disabled"}`);
+    });
+
     mainWindow.close();
 
     updateChecker();
 
     setInterval(() => {
         updateChecker();
-        languageChecker();
     }, 600e3);
 });
 
@@ -341,6 +349,17 @@ ipcMain.on("language-change", (e, d) => {
     console.log(`Changed backend language to ${d.lang}`);
     userLang = d.lang;
     langString = require(`./language/${userLang}.json`);
+});
+
+ipcMain.on("getCover", (e, d) => {
+    if (!ctG) return;
+
+    sendMsgToMainWindow("asynchronous-message", {
+        "type": "sendCover",
+        "data": {
+            "element": presenceData.largeImageKey
+        }
+    });
 });
 
 function sendMsgToMainWindow(t, v) {
@@ -370,12 +389,6 @@ function updateChecker() {
             }, 1000);
         } else console.log("No new covers available");
     });
-}
-
-function languageChecker() {
-    console.log("Checking for language changes...");
-
-    if (config.get("language") !== userLang) userLang = config.get("language");
 }
 
 function showNotification(title, body) {
