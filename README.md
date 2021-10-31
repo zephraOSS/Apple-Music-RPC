@@ -25,4 +25,9 @@ This RPC is only for the Windows program. If you use Apple Music in your browser
 * Support for macOS
 
 ## Support
-<a href="https://www.patreon.com/bePatron?u=31820782">![image](https://user-images.githubusercontent.com/53608074/125461244-94dbe2d6-c43c-47f3-b732-ab9edc6b4a23.png)</a>
+<a href="https://www.patreon.com/bePatron?u=31820782">![image](https://user-images.githubusercontent.com/53608074/125461244-94dbe2d6-c43c-47f3-b732-ab9edc6b4a23.png)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FZephraCloud%2FApple-Music-RPC.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FZephraCloud%2FApple-Music-RPC?ref=badge_shield)
+</a>
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FZephraCloud%2FApple-Music-RPC.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FZephraCloud%2FApple-Music-RPC?ref=badge_large)
