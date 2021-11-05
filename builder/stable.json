@@ -23,6 +23,7 @@
         "language/",
         "assets/",
         "browser/",
+        "managers/",
         "*.js",
         "*.html",
         "*.css",
