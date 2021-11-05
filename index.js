@@ -9,7 +9,8 @@ const clientId = "842112189618978897",
     log = require("electron-log"),
     url = require("url"),
     fetch = require("fetch").fetchUrl,
-    fs = require("fs");
+    fs = require("fs"),
+    { logInfo, logSuccess, logError } = require("./managers/log");
 
 const iTunesEmitter = iTunes.emitter,
     config = new Store({
@@ -42,7 +43,8 @@ let rpc = new DiscordRPC.Client({ transport: "ipc" }),
     presenceData = {
         largeImageKey: config.get("cover"),
         largeImageText: `${app.dev ? "AMRPC - DEV" : "AMRPC"} - V.${app.getVersion()}`,
-        isLive: false
+        isLive: false,
+        isReady: false
     },
     covers = require("./covers.json"),
     userLang = config.get("language"),
@@ -64,7 +66,7 @@ iTunesEmitter.on("playing", async function (type, currentTrack) {
     ctG = currentTrack;
     presenceData.isLive = false;
 
-    if (currentTrack.album === 0) presenceData.details = currentTrack.name;
+    if (currentTrack.album.length === 0) presenceData.details = currentTrack.name;
     else replaceRPCVars(currentTrack, "rpcDetails");
 
     replaceRPCVars(currentTrack, "rpcState");
@@ -80,27 +82,29 @@ iTunesEmitter.on("playing", async function (type, currentTrack) {
 
     checkCover(currentTrack);
 
-    console.log("action", "playing");
-    console.log("type", type);
-    console.log("currentTrack.name", currentTrack.name);
-    console.log("currentTrack.artist", currentTrack.artist);
-    console.log("currentTrack.album", currentTrack.album);
-    console.log("timestamp", Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration);
-
     getAppleMusicData(currentTrack.name, currentTrack.artist, function (res, err) {
         if (!err) {
-            console.log("currentTrack url", res.url);
             presenceData.buttons = [
                 {
                     label: "Play on Apple Music",
                     url: res.url
                 }
             ]
-            rpc.setActivity(presenceData);
+            if (presenceData.isReady) rpc.setActivity(presenceData);
         } else if (presenceData.buttons) delete presenceData.buttons;
+
+        console.log("currentTrack", {
+            action: "playing",
+            type: type,
+            name: currentTrack.name,
+            artist: currentTrack.artist,
+            album: currentTrack.album,
+            timestamp: Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + currentTrack.duration,
+            url: (!err) ? res.url : "not found"
+        });
     });
 
-    rpc.setActivity(presenceData);
+    if (presenceData.isReady) rpc.setActivity(presenceData);
 });
 
 iTunesEmitter.on("paused", async function (type, currentTrack) {
@@ -118,14 +122,16 @@ iTunesEmitter.on("paused", async function (type, currentTrack) {
         presenceData.largeImageKey = "applemusic-logo";
         presenceData.state = "Paused";
 
-        rpc.setActivity(presenceData);
+        if (presenceData.isReady) rpc.setActivity(presenceData);
     }
 
-    console.log("action", "paused");
-    console.log("type", type);
-    console.log("currentTrack.name", currentTrack.name);
-    console.log("currentTrack.artist", currentTrack.artist);
-    console.log("currentTrack.album", currentTrack.album);
+    console.log("currentTrack", {
+        action: "paused",
+        type: type,
+        name: currentTrack.name,
+        artist: currentTrack.artist,
+        album: currentTrack.album
+    });
 });
 
 iTunesEmitter.on("stopped", async () => {
@@ -153,7 +159,7 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
             replaceRPCVars(currentTrack, "rpcState");
             presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.75 : 1));
             presenceData.isLive = false;
-            rpc.setActivity(presenceData);
+            if (presenceData.isReady) rpc.setActivity(presenceData);
         }
         return;
     }
@@ -165,15 +171,17 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
 
         if (difference > 1.5) {
             presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.75 : 1));
-            rpc.setActivity(presenceData);
+            if (presenceData.isReady) rpc.setActivity(presenceData);
         }
     }
 });
 
 rpc.on("ready", () => {
     disconnected = false;
-    ctG = iTunes.getCurrentTrack();
+    presenceData.isReady = true;
     presenceData.isLive = false;
+    ctG = iTunes.getCurrentTrack();
+
 
     if (ctG && ctG.playerState === "playing") {
         if (ctG.album.length === 0) presenceData.details = ctG.name;
@@ -187,7 +195,7 @@ rpc.on("ready", () => {
             presenceData.isLive = true;
         }
 
-        rpc.setActivity(presenceData);
+        if (presenceData.isReady) rpc.setActivity(presenceData);
 
         checkCover(ctG);
     }
@@ -222,7 +230,7 @@ rpc.on("disconnected", () => {
                     presenceData.isLive = true;
                 }
 
-                rpc.setActivity(presenceData);
+                if (presenceData.isReady) rpc.setActivity(presenceData);
 
                 checkCover(ctG);
             }
@@ -335,7 +343,7 @@ app.on("ready", () => {
         console.log(`Autolaunch is now ${(config.get("autolaunch")) ? "enabled" : "disabled"}`);
     });
 
-    mainWindow.close();
+    mainWindow.hide();
 
     updateChecker();
 
@@ -414,12 +422,6 @@ function reGetCT(type) {
 
     checkCover(ct);
 
-    console.log("action", type);
-    console.log("currentTrack.name", ct.name);
-    console.log("currentTrack.artist", ct.artist);
-    console.log("currentTrack.album", ct.album);
-    console.log("timestamp", Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration);
-
     getAppleMusicData(ct.name, ct.artist, function (res, err) {
         if (!err) {
             console.log("currentTrack url", res.url);
@@ -429,11 +431,20 @@ function reGetCT(type) {
                     url: res.url
                 }
             ]
-            rpc.setActivity(presenceData);
+            if (presenceData.isReady) rpc.setActivity(presenceData);
         } else if (presenceData.buttons) delete presenceData.buttons;
+
+        console.log("currentTrack", {
+            type: type,
+            name: ct.name,
+            artist: ct.artist,
+            album: ct.album,
+            timestamp: Math.floor(Date.now() / 1000) - ct.elapsedTime + ct.duration,
+            url: (!err) ? res.url : "not found"
+        });
     });
 
-    rpc.setActivity(presenceData);
+    if (presenceData.isReady) rpc.setActivity(presenceData);
 }
 
 function updateShowRPC(status) {
@@ -478,19 +489,14 @@ function checkCover(ct) {
     } else if (presenceData.isLive && covers.playlist[ct.name.toLowerCase()]) presenceData.largeImageKey = covers.playlist[ct.name.toLowerCase()];
     else if (presenceData.largeImageKey !== config.get("cover")) presenceData.largeImageKey = config.get("cover");
 
-    rpc.setActivity(presenceData);
+    if (presenceData.isReady) rpc.setActivity(presenceData);
 }
 
 function replaceRPCVars(ct, cfg) {
-    if (!ct || !cfg || ct.playerState === "stopped") return;
+    if (!ct || !cfg || ct.playerState === "stopped" || (cfg !== "rpcDetails" && cfg !== "rpcState")) return;
+    if ((!ct.name && config.get(cfg).includes("%title%")) || (!ct.album && config.get(cfg).includes("%album%")) || (!ct.artist && config.get(cfg).includes("%artist%"))) return;
 
-    if (cfg === "rpcDetails") {
-        if (!ct.name || !ct.album || !ct.artist) return;
-        presenceData.details = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
-    } else if (cfg === "rpcState") {
-        if (!ct.name || !ct.album || !ct.artist) return;
-        presenceData.state = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
-    }
+    presenceData[(cfg === "rpcDetails") ? "details" : "state"] = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
 }
 
 function getAppleMusicData(title, artist, callback) {
