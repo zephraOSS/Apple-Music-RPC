@@ -19,7 +19,7 @@
     "Apple",
     "Music"
   ],
-  "author": "N0chteil ^^",
+  "author": "zephra",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ZephraCloud/Apple-Music-RPC/issues"
@@ -35,7 +35,7 @@
     "fetch": "^1.1.0",
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
-    "itunes-bridge": "^0.6.7",
+    "itunes-bridge": "git+https://github.com/ZephraCloud/iTunes-bridge.git",
     "url": "^0.11.0"
   },
   "devDependencies": {

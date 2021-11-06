@@ -37,7 +37,7 @@
         "target": "nsis",
         "icon": "assets/icons/win/icon.ico",
         "artifactName": "AMRPC-Installer.exe",
-        "publisherName": "Zephra",
+        "publisherName": "zephra",
         "publish": [
             "github"
         ]
