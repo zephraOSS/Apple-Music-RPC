@@ -27,14 +27,7 @@ const iTunesEmitter = iTunes.emitter,
             rpcState: "%artist%"
         }
     }),
-    appData = new Store({
-        name: "data", defaults: {
-            userCountUsageAsked: false,
-            nineelevenAsked: false,
-            appleEventAsked: false,
-            nineelevenCovers: false
-        }
-    });
+    appData = new Store({name: "data"});
 
 console.log = log.log;
 app.dev = (app.isPackaged) ? false : true;
@@ -90,7 +83,7 @@ iTunesEmitter.on("playing", async function (type, currentTrack) {
                     url: res.url
                 }
             ]
-            if (presenceData.isReady) rpc.setActivity(presenceData);
+            if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
         } else if (presenceData.buttons) delete presenceData.buttons;
 
         console.log("currentTrack", {
@@ -104,7 +97,7 @@ iTunesEmitter.on("playing", async function (type, currentTrack) {
         });
     });
 
-    if (presenceData.isReady) rpc.setActivity(presenceData);
+    if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
 });
 
 iTunesEmitter.on("paused", async function (type, currentTrack) {
@@ -112,7 +105,7 @@ iTunesEmitter.on("paused", async function (type, currentTrack) {
     ctG = currentTrack;
 
     if (config.get("hideOnPause")) {
-        if (presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) rpc.clearActivity();
+        if ((presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) && !disconnected) rpc.clearActivity();
         delete presenceData.details;
         delete presenceData.state;
         delete presenceData.endTimestamp;
@@ -122,7 +115,7 @@ iTunesEmitter.on("paused", async function (type, currentTrack) {
         presenceData.largeImageKey = "applemusic-logo";
         presenceData.state = "Paused";
 
-        if (presenceData.isReady) rpc.setActivity(presenceData);
+        if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
     }
 
     console.log("currentTrack", {
@@ -136,7 +129,7 @@ iTunesEmitter.on("paused", async function (type, currentTrack) {
 
 iTunesEmitter.on("stopped", async () => {
     console.log("action", "stopped");
-    if (presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) rpc.clearActivity();
+    if ((presenceData.details || presenceData.state || presenceData.endTimestamp || presenceData.buttons) && !disconnected) rpc.clearActivity();
     delete presenceData.details;
     delete presenceData.state;
     delete presenceData.endTimestamp;
@@ -159,7 +152,7 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
             replaceRPCVars(currentTrack, "rpcState");
             presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.75 : 1));
             presenceData.isLive = false;
-            if (presenceData.isReady) rpc.setActivity(presenceData);
+            if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
         }
         return;
     }
@@ -171,7 +164,7 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
 
         if (difference > 1.5) {
             presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.75 : 1));
-            if (presenceData.isReady) rpc.setActivity(presenceData);
+            if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
         }
     }
 });
@@ -182,6 +175,7 @@ rpc.on("ready", () => {
     presenceData.isLive = false;
     ctG = iTunes.getCurrentTrack();
 
+    console.log("Connected user:", rpc.user.username);
 
     if (ctG && ctG.playerState === "playing") {
         if (ctG.album.length === 0) presenceData.details = ctG.name;
@@ -195,7 +189,7 @@ rpc.on("ready", () => {
             presenceData.isLive = true;
         }
 
-        if (presenceData.isReady) rpc.setActivity(presenceData);
+        if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
 
         checkCover(ctG);
     }
@@ -203,42 +197,42 @@ rpc.on("ready", () => {
     startCheckInterval();
 });
 
-rpc.on("disconnected", () => {
+rpc.on("disconnected", handleDisconnect);
+
+function handleDisconnect() {
     disconnected = true;
 
-    const interval = setInterval(() => {
-        if (!disconnected) return clearInterval(interval);
-        rpc?.destroy();
+    rpc = new DiscordRPC.Client({ transport: "ipc" });
+    rpc.login({ clientId: clientId }).catch(handleDisconnect);
 
-        rpc = new DiscordRPC.Client({ transport: "ipc" });
-        rpc.login({ clientId: clientId }).catch(() => rpc.destroy());
+    rpc.once("ready", () => {
+        disconnected = false;
+        presenceData.isReady = true;
+        presenceData.isLive = false;
+        ctG = iTunes.getCurrentTrack();
 
-        rpc.once("ready", () => {
-            disconnected = false;
-            ctG = iTunes.getCurrentTrack();
-            presenceData.isLive = false;
+        console.log("Connected user:", rpc.user.username);
 
-            if (ctG && ctG.playerState === "playing") {
-                if (ctG.album.length === 0) presenceData.details = ctG.name;
-                else replaceRPCVars(ctG, "rpcDetails");
+        if (ctG && ctG.playerState === "playing") {
+            if (ctG.album.length === 0) presenceData.details = ctG.name;
+            else replaceRPCVars(ctG, "rpcDetails");
 
-                replaceRPCVars(ctG, "rpcState");
+            replaceRPCVars(ctG, "rpcState");
 
-                if (ctG.duration === 0) {
-                    presenceData.details = ctG.name;
-                    presenceData.state = "LIVE";
-                    presenceData.isLive = true;
-                }
-
-                if (presenceData.isReady) rpc.setActivity(presenceData);
-
-                checkCover(ctG);
+            if (ctG.duration === 0) {
+                presenceData.details = ctG.name;
+                presenceData.state = "LIVE";
+                presenceData.isLive = true;
             }
 
-            startCheckInterval();
-        });
-    }, 1000);
-});
+            if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
+
+            checkCover(ctG);
+        }
+
+        startCheckInterval();
+    })
+}
 
 let mainWindow;
 
@@ -431,7 +425,7 @@ function reGetCT(type) {
                     url: res.url
                 }
             ]
-            if (presenceData.isReady) rpc.setActivity(presenceData);
+            if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
         } else if (presenceData.buttons) delete presenceData.buttons;
 
         console.log("currentTrack", {
@@ -444,13 +438,13 @@ function reGetCT(type) {
         });
     });
 
-    if (presenceData.isReady) rpc.setActivity(presenceData);
+    if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
 }
 
 function updateShowRPC(status) {
     if (status) reGetCT("update_cfg_show");
     else {
-        rpc.clearActivity();
+        if (!disconnected) rpc.clearActivity();
         delete presenceData.details;
         delete presenceData.state;
         delete presenceData.endTimestamp;
@@ -489,7 +483,7 @@ function checkCover(ct) {
     } else if (presenceData.isLive && covers.playlist[ct.name.toLowerCase()]) presenceData.largeImageKey = covers.playlist[ct.name.toLowerCase()];
     else if (presenceData.largeImageKey !== config.get("cover")) presenceData.largeImageKey = config.get("cover");
 
-    if (presenceData.isReady) rpc.setActivity(presenceData);
+    if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
 }
 
 function replaceRPCVars(ct, cfg) {
@@ -520,18 +514,18 @@ function startCheckInterval() {
     if (config.get("performanceMode")) {
         const interval = setInterval(() => {
             if (disconnected) return clearInterval(interval);
-            if (!presenceData.details) return rpc.clearActivity();
-            if (presenceData.details.length > 128) presenceData.details = presenceData.details.substring(0, 128);
-            if (presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0, 128);
-            else if (presenceData.state?.length === 0) delete presenceData.state;
+            if (!presenceData?.details) return rpc?.clearActivity();
+            if (presenceData?.details.length > 128) presenceData.details = presenceData.details.substring(0, 128);
+            if (presenceData?.state?.length > 128) presenceData.state = presenceData.state.substring(0, 128);
+            else if (presenceData?.state?.length === 0) delete presenceData.state;
         }, 15);
     } else {
         const interval = setInterval(() => {
             if (disconnected) return clearInterval(interval);
-            if (!presenceData.details || !config.get("show")) return rpc.clearActivity();
-            if (presenceData.details?.length > 128) presenceData.details = presenceData.details.substring(0, 128);
-            if (presenceData.state?.length > 128) presenceData.state = presenceData.state.substring(0, 128);
-            else if (presenceData.state?.length === 0) delete presenceData.state;
+            if (!presenceData?.details || !config.get("show")) return rpc?.clearActivity();
+            if (presenceData?.details?.length > 128) presenceData.details = presenceData.details.substring(0, 128);
+            if (presenceData?.state?.length > 128) presenceData.state = presenceData.state.substring(0, 128);
+            else if (presenceData?.state?.length === 0) delete presenceData.state;
         }, 15);
     }
 }
