@@ -6,26 +6,13 @@ const iTunes = require("itunes-bridge"),
     path = require("path"),
     fetch = require("fetch").fetchUrl,
     config = new Store({}),
-    appData = new Store({
-        name: "data", defaults: {
-            userCountUsageAsked: false,
-            nineelevenAsked: false,
-            appleEventAsked: false,
-            nineelevenCovers: false,
-            changelog: {
-                "2.2.9": false,
-                "2.2.10": false,
-                "2.2.11": false,
-                "2.3.0": false,
-                "2.3.1": false
-            }
-        }
-    }),
+    appData = new Store({name: "data"}),
     song = {
         name: document.querySelector("#songname"),
         artist: document.querySelector("#songartist"),
         info: document.querySelector("div.songinfo")
-    };
+    },
+    { logInfo, logSuccess, logError } = require("../managers/log");
 
 let langString = require(`../language/${config.get("language")}.json`),
     ctG;
@@ -89,12 +76,21 @@ ipcRenderer.on('asynchronous-message', function (evt, o) {
         document.querySelector("span#download-progress progress").value = o.data.percent;
     } else if (o.type === "sendCover") {
         if (ctG.playerState !== "stopped" && o.data.element) {
-            fetch("https://discord.com/api/oauth2/applications/842112189618978897/assets", function (error, meta, body) {
-                if (!body || error) return console.log(`Error ${error}. Can't access Discord API`);
-                body = JSON.parse(body.toString());
+            const appDataEle = appData.get("discordImg").find(ele => ele.name === o.data.element);
 
-                document.getElementById("songlogo").src = `https://cdn.discordapp.com/app-assets/842112189618978897/${body.find(ele => ele.name === o.data.element).id}.png`;
-            });
+            if (appDataEle)
+                document.getElementById("songlogo").src = `https://cdn.discordapp.com/app-assets/842112189618978897/${appDataEle.id}.png`;
+            else {
+                fetch("https://discord.com/api/oauth2/applications/842112189618978897/assets", function (error, meta, body) {
+                    if (!body || error) return console.log(`Error ${error}. Can't access Discord API`);
+                    body = JSON.parse(body.toString());
+                    let aD = appData.get("discordImg");
+
+                    document.getElementById("songlogo").src = `https://cdn.discordapp.com/app-assets/842112189618978897/${body.find(ele => ele.name === o.data.element).id}.png`;
+                    aD = body;
+                    appData.set("discordImg", aD);
+                });
+            }
         }
     }
 });
@@ -183,7 +179,7 @@ if (!appData.get("changelog")[app.getVersion()]) {
         body = JSON.parse(body.toString());
 
         if (body["tag_name"].replace(/\D/g, "") === app.getVersion().replace(/\D/g, "")) {
-            newModal(`Changelog ${body.name}`, marked(body.body.replace("# Changelog:\r\n", "")), [
+            newModal(`Changelog ${body.name}`, marked.parse(body.body.replace("# Changelog:\r\n", "")), [
                 {
                     text: langString.settings.modal.buttons.okay,
                     style: "btn-grey",
@@ -196,7 +192,7 @@ if (!appData.get("changelog")[app.getVersion()]) {
                 }
             ]);
         } else
-            updateDataChangelog(app.getVersion(), true);
+            updateDataChangelog(app.getVersion(), false);
     });
 }
 
@@ -366,11 +362,13 @@ function newModal(title, description, buttons) {
         e.modal.appendChild(ele);
     }
 
-    document.querySelector(".modal a").addEventListener("click", function (e) {
-        e.preventDefault();
-        openUrl(this.href);
-
-        return false;
+    document.querySelectorAll(".modal a").forEach(element => {
+        element.addEventListener("click", function (e) {
+            e.preventDefault();
+            openUrl(element.href);
+    
+            return false;
+        });
     });
 
     if (e.body.classList.contains("modalIsOpen")) e.modal.style.display = "none", e.modal.classList.add("awaiting");

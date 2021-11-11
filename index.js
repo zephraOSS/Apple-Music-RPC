@@ -27,7 +27,16 @@ const iTunesEmitter = iTunes.emitter,
             rpcState: "%artist%"
         }
     }),
-    appData = new Store({name: "data"});
+    appData = new Store({
+        name: "data", defaults: {
+            userCountUsageAsked: false,
+            nineelevenAsked: false,
+            appleEventAsked: false,
+            nineelevenCovers: false,
+            changelog: {},
+            discordImg: []
+        }
+    });
 
 console.log = log.log;
 app.dev = (app.isPackaged) ? false : true;
@@ -162,7 +171,7 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
     if (ct !== presenceData.endTimestamp) {
         const difference = (ct > presenceData.endTimestamp) ? ct - presenceData.endTimestamp : presenceData.endTimestamp - ct;
 
-        if (difference > 1.5) {
+        if (difference > 1.25) {
             presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.75 : 1));
             if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
         }
@@ -294,6 +303,8 @@ app.on("ready", () => {
         }
     });
 
+    mainWindow.hide();
+
     autoUpdater.on('update-available', (info) => {
         console.log('Update available.');
         sendMsgToMainWindow("asynchronous-message", {
@@ -337,7 +348,8 @@ app.on("ready", () => {
         console.log(`Autolaunch is now ${(config.get("autolaunch")) ? "enabled" : "disabled"}`);
     });
 
-    mainWindow.hide();
+    // Check if the application is running for the first time
+    if (!config.get("language")) app.restart();
 
     updateChecker();
 
