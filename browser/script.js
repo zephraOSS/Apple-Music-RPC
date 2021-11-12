@@ -19,7 +19,7 @@ let langString = require(`../language/${config.get("language")}.json`),
 
 app.dev = (app.isPackaged) ? false : true;
 
-document.querySelector("img#songlogo").src = path.join(app.isPackaged ? process.resourcesPath : __dirname, "../assets/logo.png");
+document.querySelector("img#songlogo").src = path.join(app.isPackaged ? process.resourcesPath : `${__dirname}/..`, "/assets/logo.png");
 document.querySelector("span#extra_version").textContent = `${app.dev ? "Developer" : ""} V.${app.getVersion()}`;
 updateTheme();
 updateLanguage();
@@ -210,7 +210,8 @@ iTunesEmitter.on("paused", async function (type, currentTrack) {
     song.name.textContent = "";
     song.artist.textContent = "";
     song.info.style.display = "none";
-    document.getElementById("songlogo").src = "../assets/logo.png";
+
+    document.querySelector("img#songlogo").src = path.join(app.isPackaged ? process.resourcesPath : `${__dirname}/..`, "/assets/logo.png");
 });
 
 iTunesEmitter.on("stopped", async function (type, currentTrack) {
@@ -218,7 +219,8 @@ iTunesEmitter.on("stopped", async function (type, currentTrack) {
     song.name.textContent = "";
     song.artist.textContent = "";
     song.info.style.display = "none";
-    document.getElementById("songlogo").src = "../assets/logo.png";
+
+    document.querySelector("img#songlogo").src = path.join(app.isPackaged ? process.resourcesPath : `${__dirname}/..`, "/assets/logo.png");
 });
 
 document.querySelector("span.dot.minimize")?.addEventListener("click", function (e) {
@@ -401,7 +403,7 @@ function deleteModal(id) {
 function sendUserCount() {
     const xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "https://amrpc.n0chteil.xyz/userCount.php", true);
+    xhr.open("POST", "https://amrpc.zephra.cloud/userCount", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send();
 }

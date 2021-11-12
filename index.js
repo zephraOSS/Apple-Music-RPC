@@ -83,6 +83,7 @@ iTunesEmitter.on("playing", async function (type, currentTrack) {
     }
 
     checkCover(currentTrack);
+    checkRPCData();
 
     getAppleMusicData(currentTrack.name, currentTrack.artist, function (res, err) {
         if (!err) {
@@ -159,8 +160,12 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
         if (difference > 99 && currentTrack.duration > 0) {
             replaceRPCVars(currentTrack, "rpcDetails");
             replaceRPCVars(currentTrack, "rpcState");
+
+            checkRPCData();
+
             presenceData.endTimestamp = Math.floor(Date.now() / 1000) - currentTrack.elapsedTime + (currentTrack.duration + (config.get("performanceMode") ? 1.75 : 1));
             presenceData.isLive = false;
+
             if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
         }
         return;
@@ -198,12 +203,11 @@ rpc.on("ready", () => {
             presenceData.isLive = true;
         }
 
-        if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
-
         checkCover(ctG);
-    }
+        checkRPCData();
 
-    startCheckInterval();
+        if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
+    }
 });
 
 rpc.on("disconnected", handleDisconnect);
@@ -234,12 +238,11 @@ function handleDisconnect() {
                 presenceData.isLive = true;
             }
 
-            if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
-
             checkCover(ctG);
-        }
+            checkRPCData();
 
-        startCheckInterval();
+            if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
+        }
     })
 }
 
@@ -364,6 +367,10 @@ ipcMain.on("language-change", (e, d) => {
     langString = require(`./language/${userLang}.json`);
 });
 
+ipcMain.on("showrpc-change", (e, d) => {
+    if (config.get("show")) rpc?.clearActivity();
+});
+
 ipcMain.on("getCover", (e, d) => {
     if (!ctG) return;
 
@@ -386,7 +393,7 @@ function updateChecker() {
 
     if (!app.isPackaged) return;
 
-    fetch("https://raw.githubusercontent.com/N0chteil-Productions/Apple-Music-RPC/main/covers.json", { cache: "no-store" }, function (error, meta, body) {
+    fetch("https://raw.githubusercontent.com/ZephraCloud/Apple-Music-RPC/main/covers.json", { cache: "no-store" }, function (error, meta, body) {
         if (!body) return console.log(`Error ${error}. Cover check was canceled.`);
         body = JSON.parse(body.toString());
 
@@ -427,6 +434,7 @@ function reGetCT(type) {
     }
 
     checkCover(ct);
+    checkRPCData();
 
     getAppleMusicData(ct.name, ct.artist, function (res, err) {
         if (!err) {
@@ -505,6 +513,15 @@ function replaceRPCVars(ct, cfg) {
     presenceData[(cfg === "rpcDetails") ? "details" : "state"] = config.get(cfg).replace("%title%", ct.name).replace("%album%", ct.album).replace("%artist%", ct.artist);
 }
 
+function checkRPCData() {
+    if (!presenceData?.details) return rpc?.clearActivity();
+
+    if (presenceData?.details?.length > 128) presenceData.details = presenceData.details.substring(0, 128);
+
+    if (presenceData?.state?.length > 128) presenceData.state = presenceData.state.substring(0, 128);
+    else if (presenceData?.state?.length === 0) delete presenceData.state;
+}
+
 function getAppleMusicData(title, artist, callback) {
     const reqParam = encodeURIComponent(`${title} ${artist}`).replace(/'/g, "%27").replace(/"/g, "%22");
 
@@ -519,27 +536,6 @@ function getAppleMusicData(title, artist, callback) {
         });
         else callback(null, true);
     });
-}
-
-function startCheckInterval() {
-    disconnected = false;
-    if (config.get("performanceMode")) {
-        const interval = setInterval(() => {
-            if (disconnected) return clearInterval(interval);
-            if (!presenceData?.details) return rpc?.clearActivity();
-            if (presenceData?.details.length > 128) presenceData.details = presenceData.details.substring(0, 128);
-            if (presenceData?.state?.length > 128) presenceData.state = presenceData.state.substring(0, 128);
-            else if (presenceData?.state?.length === 0) delete presenceData.state;
-        }, 15);
-    } else {
-        const interval = setInterval(() => {
-            if (disconnected) return clearInterval(interval);
-            if (!presenceData?.details || !config.get("show")) return rpc?.clearActivity();
-            if (presenceData?.details?.length > 128) presenceData.details = presenceData.details.substring(0, 128);
-            if (presenceData?.state?.length > 128) presenceData.state = presenceData.state.substring(0, 128);
-            else if (presenceData?.state?.length === 0) delete presenceData.state;
-        }, 15);
-    }
 }
 
 app.restart = () => {
