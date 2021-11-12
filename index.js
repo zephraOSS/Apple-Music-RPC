@@ -368,7 +368,13 @@ ipcMain.on("language-change", (e, d) => {
 });
 
 ipcMain.on("showrpc-change", (e, d) => {
-    if (config.get("show")) rpc?.clearActivity();
+    if (config.get("show")) reGetCT("update_cfg_show");
+    else {
+        if (!disconnected) rpc.clearActivity();
+        delete presenceData.details;
+        delete presenceData.state;
+        delete presenceData.endTimestamp;
+    }
 });
 
 ipcMain.on("getCover", (e, d) => {

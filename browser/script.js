@@ -246,6 +246,7 @@ document.querySelectorAll("div.setting input").forEach((input) => {
                 document.querySelector("span#reloadPage").style["display"] = "none";
             }
             if (input.name === "config_autolaunch") ipcRenderer.send("autolaunch-change", {});
+            if (input.name === "config_show") ipcRenderer.send("showrpc-change", {});
         });
     } else if (input.type === "text") {
         let timeout;
