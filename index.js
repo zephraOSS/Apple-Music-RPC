@@ -208,9 +208,9 @@ rpc.on("ready", () => {
 
         if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
     }
-});
 
-rpc.on("disconnected", handleDisconnect);
+    rpc.on("disconnected", handleDisconnect);
+});
 
 function handleDisconnect() {
     disconnected = true;
@@ -243,7 +243,9 @@ function handleDisconnect() {
 
             if (presenceData.isReady && !disconnected) rpc.setActivity(presenceData);
         }
-    })
+
+        rpc.on("disconnected", handleDisconnect);
+    });
 }
 
 let mainWindow;
@@ -549,4 +551,4 @@ app.restart = () => {
     app.exit();
 }
 
-rpc.login({ clientId: clientId }).catch(() => rpc.destroy());
+rpc.login({ clientId: clientId }).catch(handleDisconnect);
