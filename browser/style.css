@@ -2,28 +2,64 @@ body {
     border: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #fff;
 }
 
 body[data-theme="dark"] {
-    background-color: #1F1F1F;
+    background-color: #1f1f1f;
     color: #ffffff8c;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    border-style: none;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: 0.25s background-color;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="dark"] ::-webkit-scrollbar-track {
+    background-color: #1f1f1f;
+}
+
+body[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 a.underline {
     text-decoration: underline;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     outline: none;
 }
 
 div.control {
     display: block;
-    position: relative;
-    background-color: #F9F9F9;
+    position: fixed;
+    background-color: #f9f9f9;
+    top: 0;
     width: 100%;
     height: 30px;
     padding: 25px 0;
+    z-index: 9999;
     -webkit-user-select: none;
     user-select: none;
     -webkit-app-region: drag;
@@ -55,7 +91,8 @@ div.control .songinfo {
     margin-top: 5px;
 }
 
-div.control #songname, div.control #songartist {
+div.control #songname,
+div.control #songartist {
     display: block;
     -webkit-app-region: no-drag;
 }
@@ -123,15 +160,40 @@ div.control:hover div.windowcontrols .dot.notavailable {
 }
 
 div.windowcontrols .dot:hover:not(.notavailable) {
-    filter: brightness(40%)
+    filter: brightness(40%);
 }
 
 div.content {
+    height: 425px;
+    overflow-y: auto;
+    margin-top: 85px;
     padding: 15px;
 }
 
 div.content form .setting {
+    position: relative;
+    display: flow-root;
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+div.content form .setting > * {
+    position: relative;
+    display: inline-block;
+}
+
+div.content .settings {
+    position: relative;
+    display: block;
+    width: 65%;
+    margin: 0 auto;
     margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 div.content form .settingsLeft {
@@ -159,7 +221,8 @@ div.extra-left {
     left: 15px;
 }
 
-div.extra span, div.extra-left span {
+div.extra span,
+div.extra-left span {
     color: grey;
     cursor: pointer;
     vertical-align: top;
@@ -175,7 +238,8 @@ div.extra-left span {
     margin-right: 10px;
 }
 
-div.extra span svg, div.extra-left span svg {
+div.extra span svg,
+div.extra-left span svg {
     vertical-align: inherit;
 }
 
@@ -213,7 +277,7 @@ div.modal {
     text-align: center;
     z-index: 1000;
     background-color: #ffffff8c;
-    border-color: #E5E5E5;
+    border-color: #e5e5e5;
     border-radius: 18px;
     border-width: 1.5px;
     border-style: solid;
@@ -279,7 +343,7 @@ div.modal .btn {
     max-width: 180px;
     margin-right: 15px;
     cursor: pointer;
-    transition: .2s filter;
+    transition: 0.2s filter;
 }
 
 div.modal .btn:hover {
@@ -291,11 +355,11 @@ div.modal .btn.btn-last {
 }
 
 div.modal .btn.btn-red {
-    background-color: #FF3D3D;
+    background-color: #ff3d3d;
 }
 
 div.modal .btn.btn-green {
-    background-color: #57AF31;
+    background-color: #57af31;
 }
 
 div.modal .btn.btn-grey {
@@ -303,40 +367,97 @@ div.modal .btn.btn-grey {
 }
 
 div.modal .btn.btn-rainbow {
-    background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+    background-image: linear-gradient(
+        90deg,
+        #00c0ff 0%,
+        #ffcf00 49%,
+        #fc4f4f 80%,
+        #00c0ff 100%
+    );
 }
 
 div.modal .btn.btn-usaflag {
     background-image: url("assets/app/usaflag.png");
     background-size: cover;
-    transition: .4s background-image;
+    transition: 0.4s background-image;
 }
 
 div.modal .btn.btn-usaflag:hover {
     background-image: url("assets/app/usaflag.gif");
 }
 
-div.setting input[type="text"], div.setting select {
-    background-color: #ffffff8c;
-    border-color: #E5E5E5;
+div.setting input[type="text"],
+div.setting select {
+    display: block !important;
+    background-color: transparent;
+    border-color: #e5e5e5;
     border-radius: 8px;
     border-width: 1.5px;
     border-style: solid;
     padding: 5px;
-    width: 50%;
-    max-width: 50%;
+    width: 40%;
+    float: right;
+    max-width: 60%;
     max-height: 60%;
 }
 
-body[data-theme="dark"] div.setting input[type="text"], body[data-theme="dark"] div.setting select {
-    background-color: #2d2d2d;
-    border-color: #ffffff1a;
+body[data-theme="dark"] div.setting input[type="text"],
+body[data-theme="dark"] div.setting select {
+    background-color: #1d1d1d;
+    border-color: #2d2d2d;
     color: white;
+}
+
+div.setting label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 35px;
+    height: 21px;
+    appearance: none;
+    float: right;
+    outline: none;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid #d9dadc;
+    border-radius: 50px;
+    box-shadow: inset -14px 0 0 0 #ffffff;
+    transition-duration: 200ms;
+}
+
+input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+input[type="checkbox"]:after {
+    position: absolute;
+    width: 18.2px;
+    height: 18.2px;
+    content: "";
+    top: 1px;
+    left: 1px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+input[type="checkbox"]:checked {
+    border-color: #4ed164;
+    box-shadow: inset 14px 0 0 0 #4ed164;
+}
+
+input[type="checkbox"]:checked:after {
+    left: 14px;
+    box-shadow: -2px 4px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* KEYFRAMES */
 @keyframes slidebg {
     to {
-        background-position:20vw;
+        background-position: 20vw;
     }
 }

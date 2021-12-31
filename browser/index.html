@@ -28,7 +28,7 @@
 
     <div class="content">
         <form id="config">
-            <div class="settingsRight">
+            <div class="settings">
                 <div class="setting">
                     <input type="checkbox" name="config_autolaunch">
                     <label for="config_autolaunch">Autolaunch</label>
@@ -45,51 +45,56 @@
                 </div>
 
                 <div class="setting">
-                    <input type="checkbox" name="config_showAlbumCover">
-                    <label for="config_showAlbumCover">Show album art when available</label>
+                    <input type="checkbox" name="config_showAlbumArtwork">
+                    <label for="config_showAlbumArtwork">Show artwork of the album</label>
                 </div>
 
                 <div class="setting">
                     <input type="checkbox" name="config_performanceMode" rR="true">
                     <label for="config_performanceMode">Performance Mode</label>
                 </div>
-            </div>
 
-            <div class="settingsLeft">
                 <div class="setting">
+                    <label for="config_colorTheme">Preferred color theme</label>
                     <select name="config_colorTheme">
-                        <option value="dark">Darkmode</option>
-                        <option value="white">Whitemode</option>
-                        <option value="sunsetrise">Whitemode until Sunrise</option>
+                        <option value="dark">Dark</option>
+                        <option value="white">White</option>
                         <option value="os">System theme</option>
                     </select>
-                    <label for="config_colorTheme">Preferred color theme</label>
                 </div>
 
                 <div class="setting">
+                    <label for="config_language">App language</label>
                     <select name="config_language">
                         <option value="en_US">English (US)</option>
                         <option value="de_DE">Deutsch (DE)</option>
                     </select>
-                    <label for="config_language">App language</label>
                 </div>
 
                 <div class="setting">
+                    <label for="config_cover">RPC logo</label>
                     <select name="config_cover">
                         <option value="applemusic-logo">Default</option>
                         <option value="applemusic-logo-rainbow">Rainbow</option>
                     </select>
-                    <label for="config_cover">RPC logo</label>
                 </div>
 
                 <div class="setting">
-                    <input type="text" name="config_rpcDetails">
+                    <label for="config_service">Choose your service</label>
+                    <select name="config_service" rR="true">
+                        <option value="ame">Apple Music Electron</option>
+                        <option value="itunes">iTunes</option>
+                    </select>
+                </div>
+
+                <div class="setting">
                     <label for="config_rpcDetails">Presence details</label>
+                    <input type="text" name="config_rpcDetails">
                 </div>
 
                 <div class="setting">
-                    <input type="text" name="config_rpcState">
                     <label for="config_rpcState">Presence state</label>
+                    <input type="text" name="config_rpcState">
                 </div>
             </div>
         </form>
@@ -123,7 +128,7 @@
             </svg>
             <span>Patreon</span>
         </span>
-        <span onclick="BrowserWindow.getFocusedWindow().reload()" id="reloadPage">
+        <span onclick="window.electron.reload()" id="reloadPage">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" width="1em"
                 viewBox="0 0 489.533 489.533">
                 <path
@@ -131,7 +136,7 @@
             </svg>
             <span>Reload</span>
         </span>
-        <span onclick="app.restart()" style="display: none; color: #EF4A4A" id="restartApp">
+        <span onclick="window.electron.restart()" style="display: none; color: #EF4A4A" id="restartApp">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" width="1em"
                 viewBox="0 0 489.533 489.533">
                 <path
@@ -142,8 +147,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="script.js"></script>
-    <script src="zephra.js"></script>
+    <script src="renderer.js"></script>
+</body>
 </body>
 
 </html>

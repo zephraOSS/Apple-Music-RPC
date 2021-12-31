@@ -10,20 +10,22 @@
         "quit": "Beenden"
     },
     "notification": {
-        "coverlistUpdated": "Die Cover-Liste wurde erfolgreich aktualisiert."
+        "coverlistUpdated": "Die Cover-Liste wurde erfolgreich aktualisiert.",
+        "modallistUpdated": "Die Modal-Liste wurde erfolgreich aktualisiert.",
+        "alphaNotAllowed": "Du bist nicht berechtigt, die Alpha Version zu nutzen!"
     },
     "settings": {
         "config": {
             "autolaunch": "Autostart",
             "show": "Presence anzeigen",
             "hideOnPause": "Presence während Pause ausblenden",
-            "showAlbumCover": "Albumcover anzeigen, wenn verfügbar",
+            "showAlbumArtwork": "Artwork des Albums anzeigen",
             "performanceMode": "Performance Mode",
             "colorTheme": "Bevorzugtes Farbschema",
             "language": "App-Sprache",
-            "cover": "RPC Logo",
             "rpcDetails": "Presence Details",
-            "rpcState": "Presence State"
+            "rpcState": "Presence State",
+            "appleMusicElectron": "Wähle deinen Dienst"
         },
         "extra": {
             "github": "Auf GitHub ansehen",

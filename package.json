@@ -1,7 +1,7 @@
 {
   "name": "apple-music-rpc",
-  "version": "2.3.7",
-  "description": "Discord RPC for iTunes",
+  "version": "3.0.0",
+  "description": "Discord RPC for Apple Music",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
@@ -26,20 +26,19 @@
   },
   "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
   "dependencies": {
-    "@electron/remote": "^1.2.2",
     "auto-launch": "^5.0.5",
     "discord-rpc": "^4.0.1",
-    "electron-log": "^4.4.1",
+    "electron-log": "^4.4.4",
     "electron-store": "^8.0.1",
-    "electron-updater": "^4.3.9",
+    "electron-updater": "^4.6.1",
     "fetch": "^1.1.0",
     "fs": "0.0.1-security",
-    "http": "0.0.1-security",
+    "http": "^0.0.1-security",
     "itunes-bridge": "git+https://github.com/ZephraCloud/iTunes-bridge.git",
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "electron": "^13.4.0",
-    "electron-builder": "^22.11.7"
+    "electron": "^16.0.5",
+    "electron-builder": "^22.14.5"
   }
 }

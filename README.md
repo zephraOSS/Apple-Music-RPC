@@ -7,7 +7,7 @@
 
 ## Requirements
 * Windows 7 or later
-* [iTunes for Windows](https://www.microsoft.com/p/itunes/9pb2mz1zmb1s?rtc=1&activetab=pivot:overviewtab)
+* [iTunes for Windows](https://www.microsoft.com/p/itunes/9pb2mz1zmb1s?rtc=1&activetab=pivot:overviewtab) or [Apple Music Electron](https://github.com/Apple-Music-Electron/Apple-Music-Electron/releases/latest)
 
 [More](https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Installation)
 

@@ -10,20 +10,22 @@
         "quit": "Quit"
     },
     "notification": {
-        "coverlistUpdated": "The cover list has been successfully updated."
+        "coverlistUpdated": "The cover list has been successfully updated.",
+        "modallistUpdated": "The modal list has been successfully updated.",
+        "alphaNotAllowed": "You are not allowed to use the alpha version!"
     },
     "settings": {
         "config": {
             "autolaunch": "Autolaunch",
             "show": "Show Presence",
             "hideOnPause": "Hide Presence on pause",
-            "showAlbumCover": "Show album art when available",
+            "showAlbumArtwork": "Show artwork of the album",
             "performanceMode": "Performance Mode",
             "colorTheme": "Preferred color theme",
             "language": "App language",
-            "cover": "RPC logo",
             "rpcDetails": "Presence details",
-            "rpcState": "Presence state"
+            "rpcState": "Presence state",
+            "appleMusicElectron": "Choose your service"
         },
         "extra": {
             "github": "View on GitHub",
@@ -62,6 +64,13 @@
                 "buttons": {
                     "downandinst": "Download & install",
                     "download": "Download & install later"
+                }
+            },
+            "alphaVersion": {
+                "title": "Alpha version",
+                "description": "Hello user! We are happy to announce that we have just released our alpha version of AMRPC. For now, we only have a few spots for the alpha version. So be quick if you want to test!",
+                "buttons": {
+                    "register": "Register"
                 }
             },
             "buttons": {
