@@ -125,6 +125,9 @@ module.exports = {
                         },
                     ];
 
+                    if (res.artwork && config.get("showAlbumArtwork"))
+                        app.discord.presenceData.largeImageKey = res.artwork;
+
                     if (app.discord.presenceData.isReady)
                         app.discord.client.setActivity(
                             app.discord.presenceData
@@ -249,6 +252,10 @@ module.exports = {
                         collectionId: res.collectionId,
                         trackId: res.trackId,
                         explicit: !res.notExplicit,
+                        artwork: res.artworkUrl100.replace(
+                            "100x100bb",
+                            "500x500bb"
+                        ),
                     });
                 else callback(null, true);
             }
