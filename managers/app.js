@@ -5,7 +5,6 @@ const {
         Notification,
         Tray,
         BrowserWindow,
-        dialog,
         nativeTheme,
     } = require("electron"),
     Store = require("electron-store"),
@@ -42,9 +41,10 @@ app.on("ready", () => {
                 enabled: false,
             },
             {
-                label: config.get("service") === "ame"
-                    ? "Apple Music Electron"
-                    : "iTunes",
+                label:
+                    config.get("service") === "ame"
+                        ? "Apple Music Electron"
+                        : "iTunes",
                 enabled: false,
             },
             { type: "separator" },
@@ -223,9 +223,11 @@ app.on("ready", () => {
 });
 
 app.checkForUpdates = () => {
-    console.log("Checking for updates...");
+    console.log("[UPDATER] Checking for updates...");
     autoUpdater.checkForUpdatesAndNotify();
+
     if (!app.isPackaged) return;
+
     fetch(
         "https://raw.githubusercontent.com/ZephraCloud/Apple-Music-RPC/main/covers.json",
         { cache: "no-store" },
@@ -233,7 +235,9 @@ app.checkForUpdates = () => {
             if (!body)
                 return console.log(`Error ${error}. Cover check was canceled.`);
             body = JSON.parse(body.toString());
-            console.log("Checking for new covers...");
+
+            console.log("[UPDATER] Checking for new covers...");
+
             if (!isEqual(require("../covers.json"), body)) {
                 fs.writeFile(
                     path.join(
@@ -247,13 +251,16 @@ app.checkForUpdates = () => {
                         if (err) console.log(err);
                     }
                 );
-                console.log("Updated covers");
+
+                console.log("[UPDATER] Updated covers");
+
                 app.showNotification(
                     "AMRPC",
                     langString.notification.coverlistUpdated
                 );
+
                 setTimeout(app.restart, 1000);
-            } else console.log("No new covers available");
+            } else console.log("[UPDATER] No new covers available");
         }
     );
 };
