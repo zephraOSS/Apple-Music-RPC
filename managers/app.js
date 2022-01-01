@@ -42,7 +42,7 @@ app.on("ready", () => {
                 enabled: false,
             },
             {
-                label: config.get("appleMusicElectron")
+                label: config.get("service") === "ame"
                     ? "Apple Music Electron"
                     : "iTunes",
                 enabled: false,
