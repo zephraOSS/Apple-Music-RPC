@@ -291,6 +291,11 @@ div.modal::-webkit-scrollbar {
     width: 0;
 }
 
+div.modal img {
+    width: 100%;
+    border-radius: 6px;
+}
+
 body.modalIsOpen div.content {
     filter: blur(5px) grayscale(90%);
     user-select: none;
