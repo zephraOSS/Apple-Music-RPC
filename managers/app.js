@@ -36,7 +36,7 @@ app.on("ready", () => {
             {
                 label: `${
                     app.dev ? "AMRPC - DEV" : "AMRPC"
-                } V${app.getVersion()}`,
+                } V.${app.getVersion()}`,
                 icon: path.join(app.getAppPath(), "assets/tray/logo@18.png"),
                 enabled: false,
             },
