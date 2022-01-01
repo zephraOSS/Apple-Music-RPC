@@ -6,8 +6,7 @@
     "asar": "true",
     "asarUnpack": [
         "node_modules/itunes-bridge/wscript",
-        "node_modules/itunes-bridge/jxa",
-        "covers.json"
+        "node_modules/itunes-bridge/jxa"
     ],
     "extraResources": [
         "assets/logo.png",

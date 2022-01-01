@@ -7,7 +7,6 @@
     "asarUnpack": [
         "node_modules/itunes-bridge/wscript",
         "node_modules/itunes-bridge/jxa",
-        "covers.json",
         "modals.js",
         "language/"
     ],
@@ -24,7 +23,6 @@
         "*.js",
         "*.html",
         "*.css",
-        "covers.json",
         "!node_modules/.cache/"
     ],
     "nsis": {
