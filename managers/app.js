@@ -223,46 +223,8 @@ app.on("ready", () => {
 });
 
 app.checkForUpdates = () => {
-    console.log("[UPDATER] Checking for updates...");
+    console.log("[UPDATER] Checking for Updates...");
     autoUpdater.checkForUpdatesAndNotify();
-
-    if (!app.isPackaged) return;
-
-    fetch(
-        "https://raw.githubusercontent.com/ZephraCloud/Apple-Music-RPC/main/covers.json",
-        { cache: "no-store" },
-        function (error, meta, body) {
-            if (!body)
-                return console.log(`Error ${error}. Cover check was canceled.`);
-            body = JSON.parse(body.toString());
-
-            console.log("[UPDATER] Checking for new covers...");
-
-            if (!isEqual(require("../covers.json"), body)) {
-                fs.writeFile(
-                    path.join(
-                        app.isPackaged
-                            ? process.resourcesPath + "/app.asar.unpacked"
-                            : __dirname + "/..",
-                        "/covers.json"
-                    ),
-                    JSON.stringify(body, null, 4),
-                    function (err) {
-                        if (err) console.log(err);
-                    }
-                );
-
-                console.log("[UPDATER] Updated covers");
-
-                app.showNotification(
-                    "AMRPC",
-                    langString.notification.coverlistUpdated
-                );
-
-                setTimeout(app.restart, 1000);
-            } else console.log("[UPDATER] No new covers available");
-        }
-    );
 };
 
 app.sendToMainWindow = (t, v) => {

@@ -41,8 +41,8 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
     if (app.discord.presenceData.isLive) {
         let ctg =
             Math.floor(Date.now() / 1000) -
-            app.discord.rpc.ctG.elapsedTime +
-            app.discord.rpc.ctG.duration;
+            app.discord.rpc.currentTrack.elapsedTime +
+            app.discord.rpc.currentTrack.duration;
         const difference = ct > ctg ? ct - ctg : ctg - ct;
 
         if (app.discord.presenceData.endTimestamp)

@@ -3,7 +3,6 @@ const DiscordRPC = require("discord-rpc"),
     config = new Store({}),
     { app } = require("electron"),
     appData = new Store({ name: "data" }),
-    covers = require("../covers.json"),
     fetch = require("fetch").fetchUrl;
 
 app.discord = {
@@ -92,24 +91,7 @@ module.exports = {
             app.discord.presenceData.isLive = true;
         }
 
-        if (currentTrack.artwork && config.get("showAlbumArtwork")) {
-            if (!app.discord.prevCover) {
-                app.discord.presenceData.largeImageKey = currentTrack.artwork;
-                app.discord.prevCover = [+Date.now(), currentTrack.artwork];
-            } else if (app.discord.prevCover[1] !== currentTrack.artwork) {
-                app.discord.presenceData.largeImageKey = currentTrack.artwork;
-                app.discord.prevCover = [+Date.now(), currentTrack.artwork];
-                // There is currently no information about rate limits from Discord's side
-                // if (app.discord.prevCover[1] !== currentTrack.artwork && Date.now() - app.discord.prevCover[0] > 2500) {
-                //     app.discord.presenceData.largeImageKey = currentTrack.artwork;
-                //     app.discord.prevCover = [+Date.now(), currentTrack.artwork]
-                // } else {
-                //     console.log("[DiscordRPC] Artwork rate limit");
-
-                //     app.discord.presenceData.largeImageKey = "applemusic-logo";
-                // }
-            }
-        } else module.exports.checkCover();
+        if (currentTrack.artwork) module.exports.checkCover(currentTrack);
 
         module.exports.getAppleMusicData(
             currentTrack.name,
@@ -125,8 +107,11 @@ module.exports = {
                         },
                     ];
 
-                    if (res.artwork && config.get("showAlbumArtwork"))
-                        app.discord.presenceData.largeImageKey = res.artwork;
+                    if (!currentTrack.artwork) {
+                        currentTrack.artwork = res.artwork;
+
+                        module.exports.checkCover(currentTrack);
+                    }
 
                     if (app.discord.presenceData.isReady)
                         app.discord.client.setActivity(
@@ -176,33 +161,33 @@ module.exports = {
             app.discord.client.clearActivity();
     },
 
-    replaceRPCVars: (ct, cfg) => {
+    replaceRPCVars: (currentTrack, cfg) => {
         if (
-            !ct ||
+            !currentTrack ||
             !cfg ||
-            ct.playerState === "stopped" ||
+            currentTrack.playerState === "stopped" ||
             (cfg !== "rpcDetails" && cfg !== "rpcState")
         )
             return;
         if (
-            (!ct.name && config.get(cfg).includes("%title%")) ||
-            (!ct.album && config.get(cfg).includes("%album%")) ||
-            (!ct.artist && config.get(cfg).includes("%artist%"))
+            (!currentTrack.name && config.get(cfg).includes("%title%")) ||
+            (!currentTrack.album && config.get(cfg).includes("%album%")) ||
+            (!currentTrack.artist && config.get(cfg).includes("%artist%"))
         )
             return;
 
         app.discord.presenceData[cfg === "rpcDetails" ? "details" : "state"] =
             config
                 .get(cfg)
-                .replace("%title%", ct.name)
-                .replace("%album%", ct.album)
-                .replace("%artist%", ct.artist)
+                .replace("%title%", currentTrack.name)
+                .replace("%album%", currentTrack.album)
+                .replace("%artist%", currentTrack.artist)
                 .substring(0, 128);
     },
 
-    checkCover: (ct) => {
-        if (!ct || ct.playerState === "stopped") return;
-        if (!config.get("showAlbumArtwork"))
+    checkCover: (currentTrack) => {
+        if (!currentTrack || currentTrack.playerState === "stopped") return;
+        if (!config.get("showAlbumArtwork") || !currentTrack.artwork)
             return (app.discord.presenceData.largeImageKey =
                 config.get("cover"));
         if (
@@ -212,25 +197,22 @@ module.exports = {
         )
             return (app.discord.presenceData.largeImageKey = "cover_911");
 
-        if (covers.album[ct.album.toLowerCase()])
-            app.discord.presenceData.largeImageKey =
-                covers.album[ct.album.toLowerCase()];
-        else if (covers.song[ct.artist.toLowerCase()]) {
-            if (covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()])
-                app.discord.presenceData.largeImageKey =
-                    covers.song[ct.artist.toLowerCase()][ct.name.toLowerCase()];
-            else app.discord.presenceData.largeImageKey = config.get("cover");
-        } else if (
-            app.discord.presenceData.isLive &&
-            covers.playlist[ct.name.toLowerCase()]
-        )
-            app.discord.presenceData.largeImageKey =
-                covers.playlist[ct.name.toLowerCase()];
-        else if (app.discord.presenceData.largeImageKey !== config.get("cover"))
-            app.discord.presenceData.largeImageKey = config.get("cover");
+        if (!app.discord.prevCover) {
+            app.discord.presenceData.largeImageKey = currentTrack.artwork;
+            app.discord.prevCover = [+Date.now(), currentTrack.artwork];
+        } else if (app.discord.prevCover[1] !== currentTrack.artwork) {
+            app.discord.presenceData.largeImageKey = currentTrack.artwork;
+            app.discord.prevCover = [+Date.now(), currentTrack.artwork];
+            // There is currently no information about rate limits from Discord's side
+            // if (app.discord.prevCover[1] !== currentTrack.artwork && Date.now() - app.discord.prevCover[0] > 2500) {
+            //     app.discord.presenceData.largeImageKey = currentTrack.artwork;
+            //     app.discord.prevCover = [+Date.now(), currentTrack.artwork]
+            // } else {
+            //     console.log("[DiscordRPC] Artwork rate limit");
 
-        if (app.discord.presenceData.isReady && !app.discord.disconnected)
-            app.discord.client.setActivity(app.discord.presenceData);
+            //     app.discord.presenceData.largeImageKey = "applemusic-logo";
+            // }
+        }
     },
 
     getAppleMusicData: (title, artist, callback) => {
