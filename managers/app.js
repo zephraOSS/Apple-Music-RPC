@@ -98,6 +98,7 @@ app.on("ready", () => {
         icon: path.join(app.getAppPath(), "assets/logo.png"),
         frame: false,
         resizable: false,
+        devTools: app.dev,
     });
 
     app.mainWindow.loadFile(path.join(app.getAppPath(), "browser/index.html"));
@@ -113,13 +114,12 @@ app.on("ready", () => {
 
     autoUpdater.on("update-available", (info) => {
         console.log(`[UPDATER] Update available (${info.version})`);
-        app.sendToMainWindow("asynchronous-message", {
-            type: "new-update-available",
-            data: {
-                version: info.version,
-            },
+
+        app.mainWindow.show();
+
+        app.sendToMainWindow("new-update-available", {
+            version: info.version,
         });
-        autoUpdater.downloadUpdate();
     });
 
     autoUpdater.on("update-not-available", (info) => {
@@ -141,25 +141,36 @@ app.on("ready", () => {
                 `[UPDATER] Downloading update... (${progressObj.percent}%)`
             );
 
-        app.sendToMainWindow("asynchronous-message", {
-            type: "download-progress-update",
-            data: {
-                percent: progressObj.percent,
-                transferred: progressObj.transferred,
-                total: progressObj.total,
-                speed: progressObj.bytesPerSecond,
-            },
+        app.sendToMainWindow("update-download-progress-update", {
+            percent: progressObj.percent,
+            transferred: progressObj.transferred,
+            total: progressObj.total,
+            speed: progressObj.bytesPerSecond,
         });
     });
 
     autoUpdater.on("update-downloaded", (info) => {
         console.log(`[UPDATER] Update downloaded (${info.version})`);
 
-        app.sendToMainWindow("asynchronous-message", "Update downloaded");
+        app.mainWindow.show();
+        app.sendToMainWindow("update-downloaded", {});
+    
+        if (appData.get("installUpdate")) autoUpdater.quitAndInstall();
+    });
+
+    ipcMain.handle("update-download", (e, install) => {
+        if (install) appData.set("installUpdate", true);
+
+        autoUpdater.downloadUpdate();
+    });
+
+    ipcMain.handle("update-install", (e) => {
+        appData.delete("installUpdate");
+
         autoUpdater.quitAndInstall();
     });
 
-    ipcMain.on("autolaunch-change", (e, d) => {
+    ipcMain.handle("autolaunch-change", (e, d) => {
         if (config.get("autolaunch")) autoLaunch.enable();
         else autoLaunch.disable();
 
@@ -178,7 +189,7 @@ app.on("ready", () => {
         return app.dev;
     });
 
-    ipcMain.handle("getSystemTheme", (e, k) => {
+    ipcMain.handle("getSystemTheme", () => {
         return nativeTheme.shouldUseDarkColors ? "dark" : "light";
     });
 

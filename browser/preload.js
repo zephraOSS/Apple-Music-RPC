@@ -65,11 +65,20 @@ contextBridge.exposeInMainWorld("electron", {
 });
 
 contextBridge.exposeInMainWorld("api", {
-    receive: (channel, func) => {
-        const validChannels = ["update-system-theme"];
+    send: (channel, data) => {
+        const validChannels = ["update-download", "update-install"];
 
-        if (validChannels.includes(channel)) {
+        if (validChannels.includes(channel)) ipcRenderer.send(channel, data);
+    },
+    receive: (channel, func) => {
+        const validChannels = [
+            "update-system-theme",
+            "new-update-available",
+            "update-download-progress-update",
+            "update-downloaded",
+        ];
+
+        if (validChannels.includes(channel))
             ipcRenderer.on(channel, (event, ...args) => func(...args));
-        }
     },
 });
