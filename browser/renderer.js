@@ -163,13 +163,20 @@ document.querySelectorAll("div.setting select").forEach(async (select) => {
     );
 });
 
+window.api.receive("update-system-theme", (e, theme) => {
+    console.log(`[BROWSER RENDERER] Changed theme to ${theme}`);
+
+    updateTheme(theme);
+});
+
 function openUrl(url) {
     if (!url) return;
+
     window.electron.openURL(url);
 }
 
-async function updateTheme() {
-    let theme = await window.electron.config.get("colorTheme");
+async function updateTheme(theme) {
+    if (!theme) theme = await window.electron.config.get("colorTheme");
 
     if (theme === "os") theme = await window.electron.getSystemTheme();
 
@@ -212,6 +219,18 @@ async function updateLanguage() {
             langString.settings.config[
                 ele.getAttribute("for").replace("config_", "")
             ];
+
+        if (ls) {
+            if (typeof ls === "object") ele.textContent = ls["label"];
+            else ele.textContent = ls;
+        }
+    });
+
+    document.querySelectorAll("div.setting select option").forEach((ele) => {
+        const ls =
+            langString.settings.config[
+                ele.parentElement.getAttribute("name").replace("config_", "")
+            ]?.[ele.getAttribute("value")];
 
         if (ls) ele.textContent = ls;
     });

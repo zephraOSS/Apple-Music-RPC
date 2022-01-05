@@ -24,6 +24,8 @@ app.dev = app.isPackaged ? false : true;
 app.addLog = log.log;
 console.log = app.addLog;
 
+if (!config.get("hardwareAcceleration")) app.disableHardwareAcceleration();
+
 app.on("ready", () => {
     console.log("[APP] Starting...");
 
@@ -209,6 +211,20 @@ app.on("ready", () => {
 
     ipcMain.handle("appControl", (e, action) => {
         if (action === "restart") app?.restart();
+    });
+
+    nativeTheme.on("updated", () => {
+        console.log(
+            `[Backend] Theme changed to ${
+                nativeTheme.shouldUseDarkColors ? "dark" : "light"
+            }`
+        );
+
+        if (config.get("colorTheme") === "os") {
+            app.mainWindow.webContents.send("update-system-theme", {
+                theme: nativeTheme.shouldUseDarkColors ? "dark" : "light",
+            });
+        }
     });
 
     app.mainWindow.hide();

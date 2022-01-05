@@ -63,3 +63,13 @@ contextBridge.exposeInMainWorld("electron", {
     reload: () => ipcRenderer.invoke("windowControl", "reload"),
     restart: () => ipcRenderer.invoke("appControl", "restart"),
 });
+
+contextBridge.exposeInMainWorld("api", {
+    receive: (channel, func) => {
+        const validChannels = ["update-system-theme"];
+
+        if (validChannels.includes(channel)) {
+            ipcRenderer.on(channel, (event, ...args) => func(...args));
+        }
+    },
+});
