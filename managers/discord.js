@@ -5,21 +5,20 @@ const DiscordRPC = require("discord-rpc"),
     appData = new Store({ name: "data" }),
     fetch = require("fetch").fetchUrl;
 
-app.discord = {
-    client: undefined,
-    presenceData: {},
-    currentTrack: {},
-    disconnected: false,
-    prevCover: null,
-};
-
 module.exports = {
     connect: () => {
         console.log("[DiscordRPC] Connecting...");
 
-        if (app.discord) app.discord = {};
+        app.discord = {
+            client: undefined,
+            presenceData: {},
+            currentTrack: {},
+            disconnected: false,
+            prevCover: null,
+        };
 
         const client = new DiscordRPC.Client({ transport: "ipc" });
+
         client
             .login({ clientId: "842112189618978897" })
             .catch(module.exports.connect);
@@ -51,6 +50,16 @@ module.exports = {
 
                 app.discord.disconnected = true;
             });
+        });
+
+        client.on("disconnected", () => {
+            console.log("[DiscordRPC] Disconnected");
+
+            app.discord.disconnected = true;
+
+            setTimeout(() => {
+                module.exports.connect();
+            }, 5000);
         });
     },
 
@@ -113,7 +122,10 @@ module.exports = {
                         module.exports.checkCover(currentTrack);
                     }
 
-                    if (app.discord.presenceData.isReady)
+                    if (
+                        !app.discord.disconnected &&
+                        app.discord.presenceData.isReady
+                    )
                         app.discord.client.setActivity(
                             app.discord.presenceData
                         );
