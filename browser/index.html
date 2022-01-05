@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body data-theme="white">
+<body data-theme="light">
     <div class="control">
         <div class="windowcontrols">
             <span class="dot close"></span>
@@ -41,12 +41,12 @@
 
                 <div class="setting">
                     <input type="checkbox" name="config_hideOnPause">
-                    <label for="config_hideOnPause">Hide Presence on pause</label>
+                    <label for="config_hideOnPause">Hide Presence on Pause</label>
                 </div>
 
                 <div class="setting">
                     <input type="checkbox" name="config_showAlbumArtwork">
-                    <label for="config_showAlbumArtwork">Show artwork of the album</label>
+                    <label for="config_showAlbumArtwork">Show Artwork of the Album</label>
                 </div>
 
                 <div class="setting">
@@ -55,24 +55,30 @@
                 </div>
 
                 <div class="setting">
-                    <label for="config_colorTheme">Preferred color theme</label>
+                    <input type="checkbox" name="config_hardwareAcceleration" rR="true">
+                    <label for="config_hardwareAcceleration">Hardware Acceleration</label>
+                </div>
+
+                <div class="setting">
+                    <label for="config_colorTheme">Preferred Color Theme</label>
                     <select name="config_colorTheme">
                         <option value="dark">Dark</option>
-                        <option value="white">White</option>
+                        <option value="light">Light</option>
                         <option value="os">System theme</option>
                     </select>
                 </div>
 
                 <div class="setting">
-                    <label for="config_language">App language</label>
+                    <label for="config_language">App Language</label>
                     <select name="config_language">
                         <option value="en_US">English (US)</option>
+                        <option value="en_GB">English (GB)</option>
                         <option value="de_DE">Deutsch (DE)</option>
                     </select>
                 </div>
 
                 <div class="setting">
-                    <label for="config_cover">RPC logo</label>
+                    <label for="config_cover">Default artwork</label>
                     <select name="config_cover">
                         <option value="applemusic-logo">Default</option>
                         <option value="applemusic-logo-rainbow">Rainbow</option>
@@ -80,7 +86,7 @@
                 </div>
 
                 <div class="setting">
-                    <label for="config_service">Choose your service</label>
+                    <label for="config_service">Service</label>
                     <select name="config_service" rR="true">
                         <option value="ame">Apple Music Electron</option>
                         <option value="itunes">iTunes</option>
@@ -88,12 +94,12 @@
                 </div>
 
                 <div class="setting">
-                    <label for="config_rpcDetails">Presence details</label>
+                    <label for="config_rpcDetails">Presence Details</label>
                     <input type="text" name="config_rpcDetails">
                 </div>
 
                 <div class="setting">
-                    <label for="config_rpcState">Presence state</label>
+                    <label for="config_rpcState">Presence State</label>
                     <input type="text" name="config_rpcState">
                 </div>
             </div>
