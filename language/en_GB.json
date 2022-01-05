@@ -5,8 +5,8 @@
     },
     "tray": {
         "restart": "Restart AMRPC",
-        "checkForUpdates": "Check for Updates",
-        "openSettings": "Open Settings",
+        "checkForUpdates": "Check for updates",
+        "openSettings": "Open settings",
         "quit": "Quit"
     },
     "notification": {
@@ -18,14 +18,14 @@
             "autolaunch": "Autolaunch",
             "show": "Show Presence",
             "hideOnPause": "Hide Presence on Pause",
-            "showAlbumArtwork": "Show Artwork of the Album",
-            "performanceMode": "Performance Mode",
-            "hardwareAcceleration": "Hardware Acceleration",
+            "showAlbumArtwork": "Show Artwork of the album",
+            "performanceMode": "Performance mode",
+            "hardwareAcceleration": "Hardware acceleration",
             "colorTheme": {
-                "label": "Preferred Color Theme",
+                "label": "Preferred colour theme",
                 "light": "Light",
                 "dark": "Dark",
-                "os": "System Default"
+                "os": "System default"
             },
             "language": {
                 "label": "Preferred Language",
@@ -34,7 +34,7 @@
                 "de_DE": "Deutsch (DE) - German (DE)"
             },
             "cover": {
-                "label": "Default Artwork",
+                "label": "Default artwork",
                 "applemusic-logo": "Default",
                 "applemusic-logo-rainbow": "Rainbow"
             },
@@ -50,7 +50,7 @@
         "modal": {
             "911": {
                 "title": "In memory of the victims of September 11",
-                "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+                "description": "To honour those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
                 "buttons": {
                     "okcover": "Okay, change the covers!"
                 }
@@ -63,7 +63,7 @@
                 }
             },
             "newUpdate": {
-                "title": "Software Update",
+                "title": "Software update",
                 "description": "Version %version% is available for your PC.",
                 "installed": {
                     "description": "Version %version% is available for your PC and is ready to install.",
@@ -73,7 +73,6 @@
                     }
                 },
                 "buttons": {
-                    "downandinst": "Download & install",
                     "download": "Download & install later"
                 }
             },

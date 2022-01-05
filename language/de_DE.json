@@ -10,7 +10,6 @@
         "quit": "Beenden"
     },
     "notification": {
-        "coverlistUpdated": "Die Cover-Liste wurde erfolgreich aktualisiert.",
         "modallistUpdated": "Die Modal-Liste wurde erfolgreich aktualisiert.",
         "alphaNotAllowed": "Du bist nicht berechtigt, die Alpha Version zu nutzen!"
     },
@@ -21,11 +20,27 @@
             "hideOnPause": "Presence während Pause ausblenden",
             "showAlbumArtwork": "Artwork des Albums anzeigen",
             "performanceMode": "Performance Mode",
-            "colorTheme": "Bevorzugtes Farbschema",
-            "language": "App-Sprache",
+            "hardwareAcceleration": "Hardware-Beschleunigung",
+            "colorTheme": {
+                "label": "Bevorzugtes Farbschema",
+                "light": "Hell",
+                "dark": "Dunkel",
+                "os": "System Farbschema"
+            },
+            "language": {
+                "label": "Bevorzugte Sprache",
+                "en_US": "Englisch (US) - English (US)",
+                "en_GB": "Englisch (GB) - English (UK)",
+                "de_DE": "Deutsch (DE) - German (DE)"
+            },
+            "cover": {
+                "label": "Standard Artwork",
+                "applemusic-logo": "Standard",
+                "applemusic-logo-rainbow": "Regenbogen"
+            },
+            "service": "Service",
             "rpcDetails": "Presence Details",
-            "rpcState": "Presence State",
-            "appleMusicElectron": "Wähle deinen Dienst"
+            "rpcState": "Presence State"
         },
         "extra": {
             "github": "Auf GitHub ansehen",
@@ -33,10 +48,6 @@
             "restartApp": "Neustart erforderlich"
         },
         "modal": {
-            "usercount": {
-                "title": "User-Zählung",
-                "description": "Dürfen wir unseren User-Counter durch Deine Installierung der App für unsere Statistiken aktualisieren? Wir senden beziehungsweise speichern keine persönlichen Informationen über Dich."
-            },
             "911": {
                 "title": "Zum Gedenken an die Opfer des 11. September",
                 "description": "Zu Ehren der Opfer des 11. Septembers haben wir für diese Songs individuelle Albumcover erstellt: %s\nUnd wenn du möchtest, kannst du alle deine Covers ändern (nur für heute).",
