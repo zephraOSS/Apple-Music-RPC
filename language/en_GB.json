@@ -28,7 +28,7 @@
                 "os": "System default"
             },
             "language": {
-                "label": "Preferred Language",
+                "label": "Preferred language",
                 "en_US": "English (US)",
                 "en_GB": "English (GB)",
                 "de_DE": "Deutsch (DE) - German (DE)"
