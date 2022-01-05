@@ -6,7 +6,7 @@ const config = new Store({
             autolaunch: true,
             show: true,
             hideOnPause: true,
-            showAlbumCover: true,
+            showAlbumArtwork: true,
             performanceMode: false,
             listenAlong: false,
             hardwareAcceleration: true,
