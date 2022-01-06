@@ -84,6 +84,11 @@
                     "register": "Register"
                 }
             },
+            "amePlugin": {
+                "title": "Apple Music Electron Plugin",
+                "description": "The plugin was installed successfully.",
+                "descriptionError": "The plugin could not be installed."
+            },
             "buttons": {
                 "no": "No",
                 "later": "Not now",

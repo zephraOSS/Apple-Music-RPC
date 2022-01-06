@@ -77,6 +77,11 @@
                     "download": "Laden & später installieren"
                 }
             },
+            "amePlugin": {
+                "title": "Apple Music Electron Plugin",
+                "description": "Das Plugin wurde erfolgreich installiert.",
+                "descriptionError": "Das Plugin konnte nicht installiert werden."
+            },
             "buttons": {
                 "no": "Nein",
                 "later": "Nicht jetzt",
