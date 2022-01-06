@@ -26,7 +26,7 @@ This RPC is only for the Windows program. If you use Apple Music in your browser
 
 ## Support
 <div align="center">
-  <a href="https://www.patreon.com/bePatron?u=31820782"><img src="https://user-images.githubusercontent.com/53608074/125461244-94dbe2d6-c43c-47f3-b732-ab9edc6b4a23.png"/></a>
+  <a href="https://ko-fi.com/V7V57SSRM"><img src="https://ko-fi.com/img/githubbutton_sm.svg"/></a>
 </div>
 
 ## License
