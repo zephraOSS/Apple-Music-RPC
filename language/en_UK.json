@@ -92,7 +92,8 @@
                 "no": "No",
                 "later": "Not now",
                 "yes": "Yes",
-                "okay": "Okay"
+                "okay": "Okay",
+                "learnMore": "Learn more"
             }
         }
     }
