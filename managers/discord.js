@@ -72,6 +72,7 @@ module.exports = {
         )
             return;
 
+        if (!currentTrack.artwork) app.discord.presenceData.largeImageKey = config.get("cover");
         app.discord.presenceData.isLive = false;
         app.discord.currentTrack = currentTrack;
 
