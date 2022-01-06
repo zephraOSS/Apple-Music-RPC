@@ -32,6 +32,9 @@ contextBridge.exposeInMainWorld("electron", {
             return ipcRenderer.invoke("getConfig", k);
         },
     },
+    installAMEPlugin: async () => {
+        return await ipcRenderer.invoke("installAMEPlugin");
+    },
     fetchChangelog: () => {
         return new Promise((resolve, reject) => {
             fetch(

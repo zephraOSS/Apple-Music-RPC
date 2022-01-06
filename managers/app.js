@@ -16,7 +16,8 @@ const {
     fetch = require("fetch").fetchUrl,
     fs = require("fs"),
     log = require("electron-log"),
-    { connect } = require("../managers/discord.js");
+    { connect } = require("../managers/discord.js"),
+    { installAMEPlugin } = require("../utils/plugin.js");
 
 let langString = require(`../language/${config.get("language")}.json`);
 
@@ -199,6 +200,10 @@ app.on("ready", () => {
 
     ipcMain.handle("getAppData", (e, k) => {
         return appData.get(k);
+    });
+
+    ipcMain.handle("installAMEPlugin", () => {
+        return installAMEPlugin();
     });
 
     ipcMain.handle("updateLanguage", (e, language) => {

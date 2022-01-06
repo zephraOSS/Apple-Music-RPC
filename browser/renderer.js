@@ -152,10 +152,36 @@ document.querySelectorAll("div.setting select").forEach(async (select) => {
 
         if (select.name === "config_colorTheme") updateTheme();
         else if (select.name === "config_language") updateLanguage();
-        else if (select.name === "config_service" && select.value === "ame")
-            window.electron.openURL(
-                "https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Apple-Music-Electron#how-to-use-amrpc-for-ame"
+        else if (select.name === "config_service" && select.value === "ame") {
+            const pluginInstall = await window.electron.installAMEPlugin();
+
+            newModal(
+                langString.settings.modal.amePlugin.title,
+                langString.settings.modal.amePlugin[pluginInstall ? "description" : "descriptionError"],
+                [
+                    {
+                        text: langString.settings.modal.buttons.okay,
+                        style: "btn-grey",
+                        events: [
+                            {
+                                name: "onclick",
+                                value: "closeModal(this.parentElement.id)",
+                            },
+                        ],
+                    },
+                    {
+                        text: langString.settings.modal.buttons.learnMore,
+                        style: "btn-grey",
+                        events: [
+                            {
+                                name: "onclick",
+                                value: "window.electron.openURL(\"https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Apple-Music-Electron#how-to-use-amrpc-for-ame\")",
+                            },
+                        ],
+                    },
+                ]
             );
+        }
     });
 
     select.value = await window.electron.config.get(

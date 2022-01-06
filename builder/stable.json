@@ -20,6 +20,7 @@
         "assets/",
         "browser/",
         "managers/",
+        "utils/",
         "*.js",
         "*.html",
         "*.css",
