@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir --config builder/stable.json",
-    "dist": "electron-builder --config builder/stable.json"
+    "pack-macos": "electron-builder --dir --config builder/stable-macos.json",
+    "dist": "electron-builder --config builder/stable.json",
+    "dist-macos": "electron-builder --config builder/stable-macos.json"
   },
   "repository": {
     "type": "git",

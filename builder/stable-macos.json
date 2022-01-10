@@ -1,22 +1,32 @@
 {
-    "appId": "com.amrpc",
-    "productName": "AMRPC",
-    "artifactName": "AMRPC.${ext}",
-    "copyright": "Copyright © 2021 zephra",
-    "asar": "true",
-    "asarUnpack": [
-        "node_modules/itunes-bridge/wscript",
-        "node_modules/itunes-bridge/jxa"
-    ],
-    "extraResources": [
-        "assets/logo.png",
-        "assets/tray/"
-    ],
-    "directories": {
-        "buildResources": "assets",
-        "output": "app/stable/macos"
-    },
-    "dmg": {
+	"appId": "com.amrpc",
+	"productName": "AMRPC",
+	"artifactName": "AMRPC.${ext}",
+	"copyright": "Copyright © 2022 zephra",
+	"asar": "true",
+	"asarUnpack": [
+		"node_modules/itunes-bridge/wscript",
+		"node_modules/itunes-bridge/jxa",
+		"modals.js",
+		"language/"
+	],
+	"directories": {
+		"buildResources": "assets",
+		"output": "app/stable/macos"
+	},
+	"files": [
+		"node_modules/",
+		"language/",
+		"assets/",
+		"browser/",
+		"managers/",
+		"utils/",
+		"*.js",
+		"*.html",
+		"*.css",
+		"!node_modules/.cache/"
+	],
+	"dmg": {
 		"window": {
 			"width": 660,
 			"height": 400
@@ -38,8 +48,17 @@
 	},
 	"mac": {
 		"icon": "assets/icons/mac/icon.icns",
-		"target": { "target": "default", "arch": ["x64", "arm64"] },
+		"target": {
+			"target": "default",
+			"arch": [
+				"x64",
+				"arm64"
+			]
+		},
 		"artifactName": "AMRPC-Installer-macOS-${arch}.${ext}",
-		"publish": { "provider": "github", "releaseType": "draft" }
+		"publish": {
+			"provider": "github",
+			"releaseType": "draft"
+		}
 	}
 }

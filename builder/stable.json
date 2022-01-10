@@ -2,7 +2,7 @@
     "appId": "com.amrpc",
     "productName": "AMRPC",
     "artifactName": "AMRPC.${ext}",
-    "copyright": "Copyright © 2021 zephra",
+    "copyright": "Copyright © 2022 zephra",
     "asar": "true",
     "asarUnpack": [
         "node_modules/itunes-bridge/wscript",
