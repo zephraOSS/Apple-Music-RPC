@@ -195,12 +195,12 @@ window.api.receive("update-system-theme", (e, theme) => {
     updateTheme(theme);
 });
 
-window.api.receive("new-update-available", (e, version) => {
+window.api.receive("new-update-available", (e, data) => {
     newModal(
         langString.settings.modal["newUpdate"].title,
         langString.settings.modal["newUpdate"].description.replace(
             "%version%",
-            version
+            data.version
         ),
         [
             {
@@ -236,12 +236,12 @@ window.api.receive("update-download-progress-update", (e, data) => {
         data.percent;
 });
 
-window.api.receive("update-downloaded", (e, version) => {
+window.api.receive("update-downloaded", (e, data) => {
     newModal(
         langString.settings.modal["newUpdate"].title,
         langString.settings.modal["newUpdate"].installed.description.replace(
             "%version%",
-            version
+            data.version
         ),
         [
             {
