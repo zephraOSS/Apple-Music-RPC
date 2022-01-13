@@ -1,8 +1,5 @@
 const DiscordRPC = require("discord-rpc"),
-    Store = require("electron-store"),
-    config = new Store({}),
     { app } = require("electron"),
-    appData = new Store({ name: "data" }),
     fetch = require("fetch").fetchUrl;
 
 module.exports = {
@@ -28,7 +25,7 @@ module.exports = {
         DiscordRPC.register("842112189618978897");
 
         app.discord.presenceData = {
-            largeImageKey: config.get("cover"),
+            largeImageKey: app.config.get("cover"),
             largeImageText: `${
                 app.dev ? "AMRPC - DEV" : "AMRPC"
             } - V.${app.getVersion()}`,
@@ -72,7 +69,8 @@ module.exports = {
         )
             return;
 
-        if (!currentTrack.artwork) app.discord.presenceData.largeImageKey = config.get("cover");
+        if (!currentTrack.artwork)
+            app.discord.presenceData.largeImageKey = app.config.get("cover");
         app.discord.presenceData.isLive = false;
         app.discord.currentTrack = currentTrack;
 
@@ -183,9 +181,9 @@ module.exports = {
         )
             return;
         if (
-            (!currentTrack.name && config.get(cfg).includes("%title%")) ||
-            (!currentTrack.album && config.get(cfg).includes("%album%")) ||
-            (!currentTrack.artist && config.get(cfg).includes("%artist%"))
+            (!currentTrack.name && app.config.get(cfg).includes("%title%")) ||
+            (!currentTrack.album && app.config.get(cfg).includes("%album%")) ||
+            (!currentTrack.artist && app.config.get(cfg).includes("%artist%"))
         )
             return;
 
@@ -200,11 +198,11 @@ module.exports = {
 
     checkCover: (currentTrack) => {
         if (!currentTrack || currentTrack.playerState === "stopped") return;
-        if (!config.get("showAlbumArtwork") || !currentTrack.artwork)
+        if (!app.config.get("showAlbumArtwork") || !currentTrack.artwork)
             return (app.discord.presenceData.largeImageKey =
-                config.get("cover"));
+                app.config.get("cover"));
         if (
-            appData.get("nineelevenCovers") &&
+            app.appData.get("nineelevenCovers") &&
             new Date().getMonth() + 1 === 9 &&
             new Date().getDate() === 11
         )

@@ -1,7 +1,4 @@
-const Store = require("electron-store"),
-    { updateActivity, clearActivity } = require("../managers/discord.js"),
-    config = new Store({}),
-    appData = new Store({ name: "data" }),
+const { updateActivity, clearActivity } = require("../managers/discord.js"),
     http = require("http");
 
 const requestListener = function (req, res) {

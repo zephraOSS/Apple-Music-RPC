@@ -7,9 +7,6 @@ const {
         BrowserWindow,
         nativeTheme,
     } = require("electron"),
-    Store = require("electron-store"),
-    config = new Store({}),
-    appData = new Store({ name: "data" }),
     path = require("path"),
     { autoUpdater } = require("electron-updater"),
     AutoLaunch = require("auto-launch"),
@@ -19,13 +16,11 @@ const {
     { connect } = require("../managers/discord.js"),
     { installAMEPlugin } = require("../utils/plugin.js");
 
-let langString = require(`../language/${config.get("language")}.json`);
+let langString = require(`../language/${app.config.get("language")}.json`);
 
-app.dev = app.isPackaged ? false : true;
-app.addLog = log.log;
 console.log = app.addLog;
 
-if (!config.get("hardwareAcceleration")) app.disableHardwareAcceleration();
+if (!app.config.get("hardwareAcceleration")) app.disableHardwareAcceleration();
 
 app.on("ready", () => {
     console.log("[APP] Starting...");
@@ -45,7 +40,7 @@ app.on("ready", () => {
             },
             {
                 label:
-                    config.get("service") === "ame"
+                    app.config.get("service") === "ame"
                         ? "Apple Music Electron"
                         : "iTunes",
                 enabled: false,
@@ -89,7 +84,7 @@ app.on("ready", () => {
     tray.on("right-click", () => tray.update());
     tray.on("click", () => app.mainWindow.show());
 
-    if (config.get("autolaunch")) autoLaunch.enable();
+    if (app.config.get("autolaunch")) autoLaunch.enable();
     else autoLaunch.disable();
 
     app.mainWindow = new BrowserWindow({
@@ -155,29 +150,29 @@ app.on("ready", () => {
 
         app.mainWindow.show();
         app.sendToMainWindow("update-downloaded", {});
-    
-        if (appData.get("installUpdate")) autoUpdater.quitAndInstall();
+
+        if (app.appData.get("installUpdate")) autoUpdater.quitAndInstall();
     });
 
     ipcMain.handle("update-download", (e, install) => {
-        if (install) appData.set("installUpdate", true);
+        if (install) app.appData.set("installUpdate", true);
 
         autoUpdater.downloadUpdate();
     });
 
     ipcMain.handle("update-install", (e) => {
-        appData.delete("installUpdate");
+        app.appData.delete("installUpdate");
 
         autoUpdater.quitAndInstall();
     });
 
     ipcMain.handle("autolaunch-change", (e, d) => {
-        if (config.get("autolaunch")) autoLaunch.enable();
+        if (app.config.get("autolaunch")) autoLaunch.enable();
         else autoLaunch.disable();
 
         console.log(
             `[SETTINGS] Autolaunch is now ${
-                config.get("autolaunch") ? "enabled" : "disabled"
+                app.config.get("autolaunch") ? "enabled" : "disabled"
             }`
         );
     });
@@ -195,11 +190,11 @@ app.on("ready", () => {
     });
 
     ipcMain.handle("getConfig", (e, k) => {
-        return config.get(k);
+        return app.config.get(k);
     });
 
     ipcMain.handle("getAppData", (e, k) => {
-        return appData.get(k);
+        return app.appData.get(k);
     });
 
     ipcMain.handle("installAMEPlugin", () => {
@@ -212,9 +207,9 @@ app.on("ready", () => {
         app.langString = require(`../language/${language}.json`);
     });
 
-    ipcMain.handle("updateConfig", (e, k, v) => config.set(k, v));
+    ipcMain.handle("updateConfig", (e, k, v) => app.config.set(k, v));
 
-    ipcMain.handle("updateAppData", (e, k, v) => appData.set(k, v));
+    ipcMain.handle("updateAppData", (e, k, v) => app.appData.set(k, v));
 
     ipcMain.handle("windowControl", (e, action) => {
         if (action === "show") app.mainWindow.show();
@@ -236,7 +231,7 @@ app.on("ready", () => {
             }`
         );
 
-        if (config.get("colorTheme") === "os") {
+        if (app.config.get("colorTheme") === "os") {
             app.mainWindow.webContents.send("update-system-theme", {
                 theme: nativeTheme.shouldUseDarkColors ? "dark" : "light",
             });

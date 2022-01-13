@@ -1,15 +1,12 @@
 const { app } = require("electron"),
     iTunes = require("itunes-bridge"),
     iTunesEmitter = iTunes.emitter,
-    Store = require("electron-store"),
     {
         connect,
         updateActivity,
         clearActivity,
         replaceRPCVars,
-    } = require("../managers/discord.js"),
-    config = new Store({}),
-    appData = new Store({ name: "data" });
+    } = require("../managers/discord.js");
 
 console.log = app.addLog;
 
@@ -56,7 +53,7 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
                 Math.floor(Date.now() / 1000) -
                 currentTrack.elapsedTime +
                 (currentTrack.duration +
-                    (config.get("performanceMode") ? 1.75 : 1));
+                    (app.config.get("performanceMode") ? 1.75 : 1));
             app.discord.presenceData.isLive = false;
 
             if (app.discord.presenceData.isReady)
@@ -78,7 +75,7 @@ iTunesEmitter.on("timeChange", async (type, currentTrack) => {
                 Math.floor(Date.now() / 1000) -
                 currentTrack.elapsedTime +
                 (currentTrack.duration +
-                    (config.get("performanceMode") ? 1.75 : 1));
+                    (app.config.get("performanceMode") ? 1.75 : 1));
 
             if (app.discord.presenceData.isReady)
                 app.discord.client.setActivity(app.discord.presenceData);
