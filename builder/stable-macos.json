@@ -67,6 +67,7 @@
 		"publish": {
 			"provider": "github",
 			"releaseType": "draft"
-		}
+		},
+		"darkModeSupport": true
 	}
 }
