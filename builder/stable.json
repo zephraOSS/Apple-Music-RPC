@@ -3,6 +3,14 @@
     "productName": "AMRPC",
     "artifactName": "AMRPC.${ext}",
     "copyright": "Copyright © 2022 zephra",
+    "protocols": [
+        {
+            "name": "AMRPC",
+            "schemes": [
+                "amrpc"
+            ]
+        }
+    ],
     "asar": "true",
     "asarUnpack": [
         "node_modules/itunes-bridge/wscript",

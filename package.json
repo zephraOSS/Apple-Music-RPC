@@ -1,5 +1,5 @@
 {
-  "name": "apple-music-rpc",
+  "name": "amrpc",
   "version": "3.2.1",
   "description": "Discord RPC for Apple Music",
   "main": "index.js",
