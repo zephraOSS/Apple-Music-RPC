@@ -12,7 +12,6 @@ const {
     AutoLaunch = require("auto-launch"),
     fetch = require("fetch").fetchUrl,
     fs = require("fs"),
-    log = require("electron-log"),
     { connect } = require("../managers/discord.js"),
     { installAMEPlugin } = require("../utils/plugin.js");
 

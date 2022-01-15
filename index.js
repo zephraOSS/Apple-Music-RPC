@@ -1,4 +1,5 @@
 const { app, dialog } = require("electron"),
+    log = require("electron-log"),
     Store = require("electron-store");
 
 app.config = new Store({
