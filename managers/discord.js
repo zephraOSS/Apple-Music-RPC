@@ -188,7 +188,7 @@ module.exports = {
             return;
 
         app.discord.presenceData[cfg === "rpcDetails" ? "details" : "state"] =
-            config
+            app.config
                 .get(cfg)
                 .replace("%title%", currentTrack.name)
                 .replace("%album%", currentTrack.album)
