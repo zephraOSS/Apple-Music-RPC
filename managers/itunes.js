@@ -2,7 +2,6 @@ const { app } = require("electron"),
     iTunes = require("itunes-bridge"),
     iTunesEmitter = iTunes.emitter,
     {
-        connect,
         updateActivity,
         clearActivity,
         replaceRPCVars,
