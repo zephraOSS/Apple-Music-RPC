@@ -10,8 +10,6 @@ const {
     path = require("path"),
     { autoUpdater } = require("electron-updater"),
     AutoLaunch = require("auto-launch"),
-    fetch = require("fetch").fetchUrl,
-    fs = require("fs"),
     { connect } = require("../managers/discord.js"),
     { installAMEPlugin } = require("../utils/plugin.js");
 
