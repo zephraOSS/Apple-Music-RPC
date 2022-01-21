@@ -157,7 +157,9 @@ document.querySelectorAll("div.setting select").forEach(async (select) => {
 
             newModal(
                 langString.settings.modal.amePlugin.title,
-                langString.settings.modal.amePlugin[pluginInstall ? "description" : "descriptionError"],
+                langString.settings.modal.amePlugin[
+                    pluginInstall ? "description" : "descriptionError"
+                ],
                 [
                     {
                         text: langString.settings.modal.buttons.okay,
@@ -175,7 +177,7 @@ document.querySelectorAll("div.setting select").forEach(async (select) => {
                         events: [
                             {
                                 name: "onclick",
-                                value: "window.electron.openURL(\"https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Apple-Music-Electron#how-to-use-amrpc-for-ame\")",
+                                value: 'window.electron.openURL("https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Apple-Music-Electron#how-to-use-amrpc-for-ame")',
                             },
                         ],
                     },
