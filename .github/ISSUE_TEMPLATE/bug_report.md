@@ -3,7 +3,7 @@ name: Bug report
 about: Create a report to help us improve
 title: BUG | short description of your bug
 labels: bug
-assignees: N0chteil
+assignees: ''
 
 ---
 
@@ -11,11 +11,7 @@ assignees: N0chteil
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
-1. Press **WIN** + **R**
-2. Insert **%appdata%**
-3. Select the **apple-music-rpc** folder and then the **logs** folder
-4. Open **main.log**
+[Steps to reproduce the behavior](https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Creating-a-bug-report#steps-to-reproduce-the-behavior)
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
