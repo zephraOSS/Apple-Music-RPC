@@ -5,11 +5,7 @@
 * Open the **AMRPC-installer.exe** file
 * Done
 
-## Requirements
-* Windows 7 or later
-* [iTunes for Windows](https://www.microsoft.com/p/itunes/9pb2mz1zmb1s?rtc=1&activetab=pivot:overviewtab) or [Apple Music Electron](https://github.com/Apple-Music-Electron/Apple-Music-Electron/releases/latest)
-
-[More](https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Installation)
+[Requirements](https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Installation)
 
 ## You need help?
 * Take a look into [the Wiki](https://github.com/ZephraCloud/Apple-Music-RPC/wiki)
@@ -20,9 +16,6 @@ No, AMRPC is not a virus. View the test results on [VirusTotal](https://www.viru
 
 ## Information
 This RPC is only for the Windows program. If you use Apple Music in your browser (macOS, Windows, Linux), check out [Apple Music RPC for PreMiD](https://premid.app/store/presences/Apple%20Music)!
-
-## To Do
-* Support for macOS
 
 ## Support
 <div align="center">

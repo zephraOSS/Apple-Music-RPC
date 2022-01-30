@@ -13,7 +13,6 @@
 	],
 	"asar": "true",
 	"asarUnpack": [
-		"node_modules/itunes-bridge/wscript",
 		"node_modules/itunes-bridge/jxa",
 		"modals.js",
 		"language/"
@@ -51,11 +50,11 @@
 				"path": "/Applications"
 			}
 		],
-		"title": "Discord RPC for Apple Music",
+		"title": "AMRPC",
 		"writeUpdateInfo": false
 	},
 	"mac": {
-		"icon": "assets/icons/mac/icon.icns",
+		"icon": "assets/icons/darwin/icon.icns",
 		"target": {
 			"target": "default",
 			"arch": [

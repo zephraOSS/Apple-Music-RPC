@@ -2,3 +2,4 @@ node_modules/
 package-lock.json
 /app/
 /browser/zephra.js
+.DS_Store

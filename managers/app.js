@@ -11,7 +11,8 @@ const {
     { autoUpdater } = require("electron-updater"),
     AutoLaunch = require("auto-launch"),
     { connect } = require("../managers/discord.js"),
-    { installAMEPlugin } = require("../utils/plugin.js");
+    { installAMEPlugin } = require("../utils/plugin.js"),
+    functions = require("../utils/functions.js");
 
 let langString = require(`../language/${app.config.get("language")}.json`);
 
@@ -19,10 +20,17 @@ console.log = app.addLog;
 
 if (!app.config.get("hardwareAcceleration")) app.disableHardwareAcceleration();
 
+if (process.platform === "darwin") app.dock.hide();
+
 app.on("ready", () => {
     console.log("[APP] Starting...");
 
-    let tray = new Tray(path.join(app.getAppPath(), "assets/logo.png")),
+    let tray = new Tray(
+            path.join(
+                app.getAppPath(),
+                `assets/icons/${process.platform ?? "win32"}/logo.png`
+            )
+        ),
         autoLaunch = new AutoLaunch({
             name: app.dev ? "AMRPC - DEV" : "AMRPC",
             path: app.getPath("exe"),
@@ -108,7 +116,8 @@ app.on("ready", () => {
     autoUpdater.on("update-available", (info) => {
         console.log(`[UPDATER] Update available (${info.version})`);
 
-        app.mainWindow.show();
+        if (process.platform === "darwin") functions.bounce("critical");
+        else app.mainWindow.show();
 
         app.sendToMainWindow("new-update-available", {
             version: info.version,
@@ -145,7 +154,9 @@ app.on("ready", () => {
     autoUpdater.on("update-downloaded", (info) => {
         console.log(`[UPDATER] Update downloaded (${info.version})`);
 
-        app.mainWindow.show();
+        if (process.platform === "darwin") functions.bounce("critical");
+        else app.mainWindow.show();
+
         app.sendToMainWindow("update-downloaded", {});
 
         if (app.appData.get("installUpdate")) autoUpdater.quitAndInstall();
@@ -176,6 +187,10 @@ app.on("ready", () => {
 
     ipcMain.handle("appVersion", () => {
         return app.getVersion();
+    });
+
+    ipcMain.handle("getPlatform", () => {
+        return process.platform;
     });
 
     ipcMain.handle("isDeveloper", () => {

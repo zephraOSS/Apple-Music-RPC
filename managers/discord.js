@@ -162,13 +162,13 @@ module.exports = {
         if (log) console.log("[DiscordRPC] Clear Activity");
 
         if (remove) {
-            delete app.discord.presenceData?.details;
-            delete app.discord.presenceData?.state;
-            delete app.discord.presenceData?.endTimestamp;
-            delete app.discord.currentTrack;
+            delete app.discord?.presenceData?.details;
+            delete app.discord?.presenceData?.state;
+            delete app.discord?.presenceData?.endTimestamp;
+            delete app.discord?.currentTrack;
         }
 
-        if (!app.discord.disconnected && app.discord.client)
+        if (app.discord && !app.discord.disconnected && app.discord.client)
             app.discord.client.clearActivity();
     },
 

@@ -7,6 +7,9 @@ contextBridge.exposeInMainWorld("electron", {
     appVersion: async () => {
         return await ipcRenderer.invoke("appVersion");
     },
+    getPlatform: async () => {
+        return await ipcRenderer.invoke("getPlatform");
+    },
     isDeveloper: async () => {
         return await ipcRenderer.invoke("isDeveloper");
     },

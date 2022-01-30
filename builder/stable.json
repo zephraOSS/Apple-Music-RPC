@@ -14,7 +14,6 @@
     "asar": "true",
     "asarUnpack": [
         "node_modules/itunes-bridge/wscript",
-        "node_modules/itunes-bridge/jxa",
         "modals.js",
         "language/"
     ],
@@ -39,7 +38,7 @@
     },
     "win": {
         "target": "nsis",
-        "icon": "assets/icons/win/icon.ico",
+        "icon": "assets/icons/win32/icon.ico",
         "artifactName": "AMRPC-Installer.exe",
         "publisherName": "zephra",
         "publish": [

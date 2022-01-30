@@ -1,14 +1,20 @@
 let appVersion,
     restartRequiredMemory = {},
-    langString = {};
+    langString = {},
+    platform;
 
 (async () => {
     const seenChangelogs = await window.electron.appData.get("changelog");
     appVersion = await window.electron.appVersion();
+    platform = await window.electron.getPlatform();
 
     document.querySelector("span#extra_version").textContent = `${
-        window.electron.isDeveloper() ? "Developer" : ""
+        (await window.electron.isDeveloper()) ? "Developer" : ""
     } V.${appVersion}`;
+
+    document.querySelectorAll("input[os], option[os]").forEach((ele) => {
+        if (ele.getAttribute("os") !== platform) ele.parentNode?.remove();
+    });
 
     if (!seenChangelogs[appVersion]) {
         const changelog = await window.electron.fetchChangelog();
