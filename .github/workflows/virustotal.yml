@@ -16,3 +16,4 @@ jobs:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
             .exe$
+            .dmg$
