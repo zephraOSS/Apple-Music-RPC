@@ -1,4 +1,4 @@
-name: released
+name: VirusTotal - Release
 
 on:
   release:
@@ -11,8 +11,8 @@ jobs:
       -
         name: VirusTotal Scan
         uses: crazy-max/ghaction-virustotal@v2
-        update_release_body: true
         with:
+          update_release_body: true
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
             .exe$
