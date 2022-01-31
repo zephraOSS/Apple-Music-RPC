@@ -16,6 +16,9 @@ let appVersion,
         if (ele.getAttribute("os") !== platform) ele.parentNode?.remove();
     });
 
+    if (platform === "darwin")
+        document.querySelector("select[name='config_service'] option[value='itunes']").textContent = "iTunes / Apple Music";
+
     if (!seenChangelogs[appVersion]) {
         const changelog = await window.electron.fetchChangelog();
 

@@ -47,7 +47,7 @@ app.on("ready", () => {
                 label:
                     app.config.get("service") === "ame"
                         ? "Apple Music Electron"
-                        : "iTunes",
+                        : process.platform === "darwin" ? "iTunes / Apple Music" : "iTunes",
                 enabled: false,
             },
             { type: "separator" },
