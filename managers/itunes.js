@@ -9,6 +9,12 @@ const { app } = require("electron"),
 
 console.log = app.addLog;
 
+iTunes.getCurrentTrack().then((currentTrack) => {
+    setTimeout(() => {
+        iTunesEmitter.emit(currentTrack.playerState, "new_track", currentTrack);
+    }, 500);
+});
+
 iTunesEmitter.on("playing", (type, currentTrack) => {
     console.log("[iTunes] Playing");
     if (!currentTrack) return console.log("[iTunes] No Track detected");
