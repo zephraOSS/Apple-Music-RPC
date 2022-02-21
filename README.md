@@ -2,7 +2,7 @@
 
 ## Installation
 * Download the [latest release](https://github.com/ZephraCloud/Apple-Music-RPC/releases/latest)
-* Open the **AMRPC-installer.exe** file
+* Open the **AMRPC-Installer.exe** file
 * Done
 
 [Requirements](https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Installation)
