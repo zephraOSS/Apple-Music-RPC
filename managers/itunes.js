@@ -4,7 +4,7 @@ const { app } = require("electron"),
     {
         updateActivity,
         clearActivity,
-        replaceRPCVars,
+        replaceRPCVars
     } = require("../managers/discord.js");
 
 console.log = app.addLog;

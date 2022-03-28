@@ -18,9 +18,9 @@ if (
                 events: [
                     {
                         name: "onclick",
-                        value: "appData.set('nineElevenCovers', false), appData.set('nineElevenAsked', true), closeModal(this.parentElement.id)",
-                    },
-                ],
+                        value: "appData.set('nineElevenCovers', false), appData.set('nineElevenAsked', true), closeModal(this.parentElement.id)"
+                    }
+                ]
             },
             {
                 text: langString.settings.modal["911"].buttons.okcover,
@@ -28,10 +28,10 @@ if (
                 events: [
                     {
                         name: "onclick",
-                        value: "appData.set('nineElevenCovers', true), appData.set('nineElevenAsked', true), closeModal(this.parentElement.id)",
-                    },
-                ],
-            },
+                        value: "appData.set('nineElevenCovers', true), appData.set('nineElevenAsked', true), closeModal(this.parentElement.id)"
+                    }
+                ]
+            }
         ]
     );
 }
@@ -56,10 +56,10 @@ if (
                 events: [
                     {
                         name: "onclick",
-                        value: "appData.set('appleEventAsked', true), closeModal(this.parentElement.id)",
-                    },
-                ],
-            },
+                        value: "appData.set('appleEventAsked', true), closeModal(this.parentElement.id)"
+                    }
+                ]
+            }
         ]
     );
 }

@@ -29,7 +29,7 @@ const requestListener = function (req, res) {
                         artwork: track.artwork
                             .replace("{w}", "500")
                             .replace("{h}", "500"),
-                        endTime: track.endTime,
+                        endTime: track.endTime
                     },
                     "ame",
                     req.headers["ame-log"]

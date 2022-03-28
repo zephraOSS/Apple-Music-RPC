@@ -5,7 +5,7 @@ const {
         Notification,
         Tray,
         BrowserWindow,
-        nativeTheme,
+        nativeTheme
     } = require("electron"),
     path = require("path"),
     { autoUpdater } = require("electron-updater"),
@@ -33,7 +33,7 @@ app.on("ready", () => {
         ),
         autoLaunch = new AutoLaunch({
             name: app.dev ? "AMRPC - DEV" : "AMRPC",
-            path: app.getPath("exe"),
+            path: app.getPath("exe")
         }),
         cmenu = Menu.buildFromTemplate([
             {
@@ -41,42 +41,44 @@ app.on("ready", () => {
                     app.dev ? "AMRPC - DEV" : "AMRPC"
                 } V.${app.getVersion()}`,
                 icon: path.join(app.getAppPath(), "assets/tray/logo@18.png"),
-                enabled: false,
+                enabled: false
             },
             {
                 label:
                     app.config.get("service") === "ame"
                         ? "Apple Music Electron"
-                        : process.platform === "darwin" ? "iTunes / Apple Music" : "iTunes",
-                enabled: false,
+                        : process.platform === "darwin"
+                        ? "iTunes / Apple Music"
+                        : "iTunes",
+                enabled: false
             },
             { type: "separator" },
             {
                 label: langString.tray.restart,
                 click() {
                     app.restart();
-                },
+                }
             },
             {
                 label: langString.tray.checkForUpdates,
                 click() {
                     app.checkForUpdates();
-                },
+                }
             },
             { type: "separator" },
             {
                 label: langString.tray.openSettings,
                 click() {
                     app.mainWindow.show();
-                },
+                }
             },
             { type: "separator" },
             {
                 label: langString.tray.quit,
                 click() {
                     (app.isQuiting = true), app.quit();
-                },
-            },
+                }
+            }
         ]);
 
     app.on("quit", () => tray.destroy());
@@ -94,12 +96,12 @@ app.on("ready", () => {
 
     app.mainWindow = new BrowserWindow({
         webPreferences: {
-            preload: path.join(app.getAppPath(), "browser/preload.js"),
+            preload: path.join(app.getAppPath(), "browser/preload.js")
         },
         icon: path.join(app.getAppPath(), "assets/logo.png"),
         frame: false,
         resizable: false,
-        devTools: app.dev,
+        devTools: app.dev
     });
 
     app.mainWindow.loadFile(path.join(app.getAppPath(), "browser/index.html"));
@@ -120,7 +122,7 @@ app.on("ready", () => {
         else app.mainWindow.show();
 
         app.sendToMainWindow("new-update-available", {
-            version: info.version,
+            version: info.version
         });
     });
 
@@ -147,7 +149,7 @@ app.on("ready", () => {
             percent: progressObj.percent,
             transferred: progressObj.transferred,
             total: progressObj.total,
-            speed: progressObj.bytesPerSecond,
+            speed: progressObj.bytesPerSecond
         });
     });
 
@@ -245,7 +247,7 @@ app.on("ready", () => {
 
         if (app.config.get("colorTheme") === "os") {
             app.mainWindow.webContents.send("update-system-theme", {
-                theme: nativeTheme.shouldUseDarkColors ? "dark" : "light",
+                theme: nativeTheme.shouldUseDarkColors ? "dark" : "light"
             });
         }
     });
@@ -274,7 +276,7 @@ app.showNotification = (title, body) => {
     new Notification({
         title: title,
         body: body,
-        icon: path.join(app.getAppPath(), "assets/logo.png"),
+        icon: path.join(app.getAppPath(), "assets/logo.png")
     }).show();
 };
 

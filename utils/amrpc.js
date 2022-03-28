@@ -38,7 +38,7 @@ class AMRPCPlugin extends AMEPluginHelper {
                         artwork: currentTrack.artwork.url,
                         endTime:
                             currentTrack.endTime ??
-                            +new Date() + currentTrack.durationInMillis,
+                            +new Date() + currentTrack.durationInMillis
                     })
                 )
             );
@@ -47,7 +47,7 @@ class AMRPCPlugin extends AMEPluginHelper {
                 "ame-track",
                 encodeURI(
                     JSON.stringify({
-                        type: "paused",
+                        type: "paused"
                     })
                 )
             );
@@ -79,7 +79,7 @@ class AMRPCPlugin extends AMEPluginHelper {
                             ? currentTrack.duration
                             : currentTrack.durationInMillis,
                         artwork: currentTrack.artwork.url,
-                        endTime: currentTrack.endTime,
+                        endTime: currentTrack.endTime
                     })
                 )
             );
@@ -88,7 +88,7 @@ class AMRPCPlugin extends AMEPluginHelper {
                 "ame-track",
                 encodeURI(
                     JSON.stringify({
-                        type: "paused",
+                        type: "paused"
                     })
                 )
             );

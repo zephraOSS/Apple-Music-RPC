@@ -25,7 +25,7 @@ contextBridge.exposeInMainWorld("electron", {
         },
         get: (k) => {
             return ipcRenderer.invoke("getAppData", k);
-        },
+        }
     },
     config: {
         set: (k, v) => {
@@ -33,7 +33,7 @@ contextBridge.exposeInMainWorld("electron", {
         },
         get: (k) => {
             return ipcRenderer.invoke("getConfig", k);
-        },
+        }
     },
     installAMEPlugin: async () => {
         return await ipcRenderer.invoke("installAMEPlugin");
@@ -43,7 +43,7 @@ contextBridge.exposeInMainWorld("electron", {
             fetch(
                 "https://api.github.com/repos/ZephraCloud/Apple-Music-RPC/releases/latest",
                 {
-                    cache: "no-store",
+                    cache: "no-store"
                 },
                 (error, meta, body) => {
                     if (error) return reject(error);
@@ -67,7 +67,7 @@ contextBridge.exposeInMainWorld("electron", {
     maximize: () => ipcRenderer.invoke("windowControl", "maximize"),
     hide: () => ipcRenderer.invoke("windowControl", "hide"),
     reload: () => ipcRenderer.invoke("windowControl", "reload"),
-    restart: () => ipcRenderer.invoke("appControl", "restart"),
+    restart: () => ipcRenderer.invoke("appControl", "restart")
 });
 
 contextBridge.exposeInMainWorld("api", {
@@ -81,10 +81,10 @@ contextBridge.exposeInMainWorld("api", {
             "update-system-theme",
             "new-update-available",
             "update-download-progress-update",
-            "update-downloaded",
+            "update-downloaded"
         ];
 
         if (validChannels.includes(channel))
             ipcRenderer.on(channel, (event, ...args) => func(...args));
-    },
+    }
 });

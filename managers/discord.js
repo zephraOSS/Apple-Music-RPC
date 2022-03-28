@@ -11,7 +11,7 @@ module.exports = {
             presenceData: {},
             currentTrack: {},
             disconnected: false,
-            prevCover: null,
+            prevCover: null
         };
 
         const client = new DiscordRPC.Client({ transport: "ipc" });
@@ -30,7 +30,7 @@ module.exports = {
                 app.dev ? "AMRPC - DEV" : "AMRPC"
             } - V.${app.getVersion()}`,
             isLive: false,
-            isReady: false,
+            isReady: false
         };
 
         client.on("ready", () => {
@@ -111,8 +111,8 @@ module.exports = {
                     app.discord.presenceData.buttons = [
                         {
                             label: "Play on Apple Music",
-                            url: res.url,
-                        },
+                            url: res.url
+                        }
                     ];
 
                     if (!currentTrack.artwork) {
@@ -248,10 +248,10 @@ module.exports = {
                         artwork: res.artworkUrl100.replace(
                             "100x100bb",
                             "500x500bb"
-                        ),
+                        )
                     });
                 else callback(null, true);
             }
         );
-    },
+    }
 };

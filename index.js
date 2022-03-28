@@ -16,8 +16,8 @@ app.config = new Store({
         language: "en_US",
         cover: "applemusic-logo",
         rpcDetails: "%title% - %album%",
-        rpcState: "%artist%",
-    },
+        rpcState: "%artist%"
+    }
 });
 
 app.appData = new Store({
@@ -30,9 +30,9 @@ app.appData = new Store({
         zephra: {
             userId: false,
             userAuth: false,
-            lastAuth: false,
-        },
-    },
+            lastAuth: false
+        }
+    }
 });
 
 app.dev = app.isPackaged ? false : true;
