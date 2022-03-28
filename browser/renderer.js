@@ -17,7 +17,9 @@ let appVersion,
     });
 
     if (platform === "darwin")
-        document.querySelector("select[name='config_service'] option[value='itunes']").textContent = "iTunes / Apple Music";
+        document.querySelector(
+            "select[name='config_service'] option[value='itunes']"
+        ).textContent = "iTunes / Apple Music";
 
     if (!seenChangelogs[appVersion]) {
         const changelog = await window.electron.fetchChangelog();
@@ -33,10 +35,10 @@ let appVersion,
                         events: [
                             {
                                 name: "onclick",
-                                value: "updateDataChangelog(appVersion, true), closeModal(this.parentElement.id)",
-                            },
-                        ],
-                    },
+                                value: "updateDataChangelog(appVersion, true), closeModal(this.parentElement.id)"
+                            }
+                        ]
+                    }
                 ]
             );
         }
@@ -66,7 +68,7 @@ document
         window.electron.hide();
     });
 
-document.querySelectorAll("div.setting input").forEach(async (input) => {
+document.querySelectorAll(".settings_setting input").forEach(async (input) => {
     if (input.type == "checkbox") {
         input.addEventListener("click", (e) => {
             window.electron.config.set(
@@ -122,83 +124,88 @@ document.querySelectorAll("div.setting input").forEach(async (input) => {
     updateSCPM();
 });
 
-document.querySelectorAll("div.setting select").forEach(async (select) => {
-    select.addEventListener("change", async (e) => {
-        console.log(select.name.replace("config_", ""), select.value);
+document
+    .querySelectorAll(".settings_setting select")
+    .forEach(async (select) => {
+        select.addEventListener("change", async (e) => {
+            console.log(select.name.replace("config_", ""), select.value);
 
-        if (select.getAttribute("rR") === "true") {
-            if (
-                select.value?.toString() ===
-                restartRequiredMemory[select.name]?.toString()
-            ) {
-                delete restartRequiredMemory[select.name];
+            if (select.getAttribute("rR") === "true") {
+                if (
+                    select.value?.toString() ===
+                    restartRequiredMemory[select.name]?.toString()
+                ) {
+                    delete restartRequiredMemory[select.name];
 
-                document.querySelector("span#restartApp").style["display"] =
-                    "none";
-                document.querySelector("span#reloadPage").style["display"] =
-                    "inline";
-            } else {
-                restartRequiredMemory[select.name] =
-                    await window.electron.config.get(
-                        select.name.replace("config_", "")
-                    );
+                    document.querySelector("span#restartApp").style["display"] =
+                        "none";
+                    document.querySelector("span#reloadPage").style["display"] =
+                        "inline";
+                } else {
+                    restartRequiredMemory[select.name] =
+                        await window.electron.config.get(
+                            select.name.replace("config_", "")
+                        );
 
-                document.querySelector("span#restartApp").style["display"] =
-                    "inline";
-                document.querySelector("span#reloadPage").style["display"] =
-                    "none";
+                    document.querySelector("span#restartApp").style["display"] =
+                        "inline";
+                    document.querySelector("span#reloadPage").style["display"] =
+                        "none";
+                }
             }
-        }
 
-        window.electron.config.set(
-            select.name.replace("config_", ""),
-            select.value === "true" || select.value === "false"
-                ? select.value === "true"
-                    ? true
-                    : false
-                : select.value
-        );
-
-        if (select.name === "config_colorTheme") updateTheme();
-        else if (select.name === "config_language") updateLanguage();
-        else if (select.name === "config_service" && select.value === "ame") {
-            const pluginInstall = await window.electron.installAMEPlugin();
-
-            newModal(
-                langString.settings.modal.amePlugin.title,
-                langString.settings.modal.amePlugin[
-                    pluginInstall ? "description" : "descriptionError"
-                ],
-                [
-                    {
-                        text: langString.settings.modal.buttons.okay,
-                        style: "btn-grey",
-                        events: [
-                            {
-                                name: "onclick",
-                                value: "closeModal(this.parentElement.id)",
-                            },
-                        ],
-                    },
-                    {
-                        text: langString.settings.modal.buttons.learnMore,
-                        style: "btn-grey",
-                        events: [
-                            {
-                                name: "onclick",
-                                value: 'window.electron.openURL("https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Apple-Music-Electron#how-to-use-amrpc-for-ame")',
-                            },
-                        ],
-                    },
-                ]
+            window.electron.config.set(
+                select.name.replace("config_", ""),
+                select.value === "true" || select.value === "false"
+                    ? select.value === "true"
+                        ? true
+                        : false
+                    : select.value
             );
-        }
-    });
 
-    select.value = await window.electron.config.get(
-        select.name.replace("config_", "")
-    );
-});
+            if (select.name === "config_colorTheme") updateTheme();
+            else if (select.name === "config_language") updateLanguage();
+            else if (
+                select.name === "config_service" &&
+                select.value === "ame"
+            ) {
+                const pluginInstall = await window.electron.installAMEPlugin();
+
+                newModal(
+                    langString.settings.modal.amePlugin.title,
+                    langString.settings.modal.amePlugin[
+                        pluginInstall ? "description" : "descriptionError"
+                    ],
+                    [
+                        {
+                            text: langString.settings.modal.buttons.okay,
+                            style: "btn-grey",
+                            events: [
+                                {
+                                    name: "onclick",
+                                    value: "closeModal(this.parentElement.id)"
+                                }
+                            ]
+                        },
+                        {
+                            text: langString.settings.modal.buttons.learnMore,
+                            style: "btn-grey",
+                            events: [
+                                {
+                                    name: "onclick",
+                                    value: 'window.electron.openURL("https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Apple-Music-Electron#how-to-use-amrpc-for-ame")'
+                                }
+                            ]
+                        }
+                    ]
+                );
+            }
+        });
+
+        select.value = await window.electron.config.get(
+            select.name.replace("config_", "")
+        );
+    });
 
 window.api.receive("update-system-theme", (e, theme) => {
     console.log(`[BROWSER RENDERER] Changed theme to ${theme}`);
@@ -221,9 +228,9 @@ window.api.receive("new-update-available", (e, data) => {
                 events: [
                     {
                         name: "onclick",
-                        value: "window.api.send('update-download', true), closeModal(this.parentElement.id)",
-                    },
-                ],
+                        value: "window.api.send('update-download', true), closeModal(this.parentElement.id)"
+                    }
+                ]
             },
             {
                 text: langString.settings.modal["newUpdate"].buttons.download,
@@ -231,10 +238,10 @@ window.api.receive("new-update-available", (e, data) => {
                 events: [
                     {
                         name: "onclick",
-                        value: "window.api.send('update-download', false), closeModal(this.parentElement.id)",
-                    },
-                ],
-            },
+                        value: "window.api.send('update-download', false), closeModal(this.parentElement.id)"
+                    }
+                ]
+            }
         ]
     );
 });
@@ -262,9 +269,9 @@ window.api.receive("update-downloaded", (e, data) => {
                 events: [
                     {
                         name: "onclick",
-                        value: "window.api.send('update-install', {}), closeModal(this.parentElement.id)",
-                    },
-                ],
+                        value: "window.api.send('update-install', {}), closeModal(this.parentElement.id)"
+                    }
+                ]
             },
             {
                 text: langString.settings.modal["newUpdate"].installed.buttons
@@ -273,10 +280,10 @@ window.api.receive("update-downloaded", (e, data) => {
                 events: [
                     {
                         name: "onclick",
-                        value: "closeModal(this.parentElement.id)",
-                    },
-                ],
-            },
+                        value: "closeModal(this.parentElement.id)"
+                    }
+                ]
+            }
         ]
     );
 });
@@ -298,14 +305,14 @@ async function updateTheme(theme) {
 async function updateSCPM() {
     const e = {
         performanceMode: document.querySelector(
-            "div.setting input[name='config_performanceMode']"
+            ".settings_setting input[name='config_performanceMode']"
         ),
         showRPC: document.querySelector(
-            "div.setting input[name='config_show']"
+            ".settings_setting input[name='config_show']"
         ),
         hideOnPause: document.querySelector(
-            "div.setting input[name='config_hideOnPause']"
-        ),
+            ".settings_setting input[name='config_hideOnPause']"
+        )
     };
 
     if (e.performanceMode.checked) {
@@ -326,7 +333,7 @@ async function updateLanguage() {
 
     window.electron.updateLanguage(language);
 
-    document.querySelectorAll("div.setting label").forEach((ele) => {
+    document.querySelectorAll(".settings_setting label").forEach((ele) => {
         const ls =
             langString.settings.config[
                 ele.getAttribute("for").replace("config_", "")
@@ -338,14 +345,18 @@ async function updateLanguage() {
         }
     });
 
-    document.querySelectorAll("div.setting select option").forEach((ele) => {
-        const ls =
-            langString.settings.config[
-                ele.parentElement.getAttribute("name").replace("config_", "")
-            ]?.[ele.getAttribute("value")];
+    document
+        .querySelectorAll(".settings_setting select option")
+        .forEach((ele) => {
+            const ls =
+                langString.settings.config[
+                    ele.parentElement
+                        .getAttribute("name")
+                        .replace("config_", "")
+                ]?.[ele.getAttribute("value")];
 
-        if (ls) ele.textContent = ls;
-    });
+            if (ls) ele.textContent = ls;
+        });
 
     document.querySelectorAll(".extra span").forEach((ele) => {
         const ls = langString.settings.extra[ele.parentElement.id];
@@ -359,7 +370,7 @@ function newModal(title, description, buttons) {
         modal: document.createElement("div"),
         title: document.createElement("h1"),
         description: document.createElement("p"),
-        body: document.body,
+        body: document.body
     };
 
     e.body.appendChild(e.modal);

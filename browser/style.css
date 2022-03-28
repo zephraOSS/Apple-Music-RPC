@@ -170,9 +170,12 @@ div.content {
     padding: 15px;
 }
 
-div.content form .setting {
+div.content form .settings_setting {
     position: relative;
-    display: flow-root;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 80%;
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.08);
@@ -182,7 +185,7 @@ div.content form .setting {
     box-sizing: border-box;
 }
 
-div.content form .setting > * {
+div.content form .settings_setting > * {
     position: relative;
     display: inline-block;
 }
@@ -194,19 +197,6 @@ div.content .settings {
     margin: 0 auto;
     margin-bottom: 20px;
     box-sizing: border-box;
-}
-
-div.content form .settingsLeft {
-    float: left;
-    width: 45%;
-    max-width: 45%;
-    margin-right: 5%;
-}
-
-div.content form .settingsRight {
-    display: inline-block;
-    width: 45%;
-    max-width: 45%;
 }
 
 div.extra {
@@ -391,8 +381,8 @@ div.modal .btn.btn-usaflag:hover {
     background-image: url("assets/app/usaflag.gif");
 }
 
-div.setting input[type="text"],
-div.setting select {
+.settings_setting input[type="text"],
+.settings_setting select {
     display: block !important;
     background-color: transparent;
     border-color: #e5e5e5;
@@ -406,24 +396,19 @@ div.setting select {
     max-height: 60%;
 }
 
-body[data-theme="dark"] div.setting input[type="text"],
-body[data-theme="dark"] div.setting select {
+body[data-theme="dark"] .settings_setting input[type="text"],
+body[data-theme="dark"] .settings_setting select {
     background-color: #1d1d1d;
     border-color: #2d2d2d;
     color: white;
 }
 
-div.setting label {
-    display: block;
-    margin-bottom: 10px;
-}
-
 input[type="checkbox"] {
     position: relative;
+    flex: 0 0 35px;
     width: 35px;
     height: 21px;
     appearance: none;
-    float: right;
     outline: none;
     cursor: pointer;
     background-color: #ffffff;
