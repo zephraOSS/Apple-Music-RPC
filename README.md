@@ -1,10 +1,5 @@
 # Apple Music RPC for Discord
 
-# IMPORTANT
-AMRPC will temporarily not receive updates as we focus on other projects. We apologize for any problems caused by the break.
-
-__*No, the project is not discontinued*__
-
 ## Installation
 * Download the [latest release](https://github.com/ZephraCloud/Apple-Music-RPC/releases/latest)
 * Open the **AMRPC-Installer.exe** file
