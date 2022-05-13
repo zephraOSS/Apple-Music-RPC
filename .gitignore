@@ -1,5 +1,6 @@
-node_modules/
-package-lock.json
-/app/
+/.idea
+/app
+/node_modules
 /browser/zephra.js
+package-lock.json
 .DS_Store
