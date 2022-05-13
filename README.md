@@ -1,10 +1,5 @@
 # Apple Music RPC for Discord
 
-# IMPORTANT
-AMRPC will temporarily not receive updates as we focus on other projects. We apologize for any problems caused by the break.
-
-__*No, the project is not discontinued*__
-
 ## Installation
 * Download the [latest release](https://github.com/ZephraCloud/Apple-Music-RPC/releases/latest)
 * Open the **AMRPC-Installer.exe** file
@@ -20,7 +15,7 @@ __*No, the project is not discontinued*__
 No, AMRPC is not a virus. View the test results on [VirusTotal](https://www.virustotal.com/gui/file/92bc47c327ee2be03b2ae21d64c0370e4dfa52bd57b7aa42ddcbef549aa153b3/detection)
 
 ## Information
-This RPC is only for the Windows program. If you use Apple Music in your browser (macOS, Windows, Linux), check out [Apple Music RPC for PreMiD](https://premid.app/store/presences/Apple%20Music)!
+This RPC is only for iTunes/Apple Music (Electron). If you use Apple Music in your browser (macOS, Windows, Linux), check out [Apple Music RPC for PreMiD](https://premid.app/store/presences/Apple%20Music)!
 
 ## Support
 <div align="center">
