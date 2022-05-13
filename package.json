@@ -1,14 +1,12 @@
 {
   "name": "amrpc",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "Discord RPC for Apple Music",
-  "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "pack": "electron-builder --dir --config builder/stable.json",
-    "pack-macos": "electron-builder --dir --config builder/stable-macos.json",
-    "dist": "electron-builder --config builder/stable.json",
-    "dist-macos": "electron-builder --config builder/stable-macos.json"
+    "start": "npm run build && electron ./dist/index.js",
+    "build": "tsc",
+    "build:win": "tsc && copy package.json dist && electron-builder --config builder/stable.json",
+    "build:macos": "tsc && copy package.json dist && electron-builder --config builder/stable-macos.json"
   },
   "repository": {
     "type": "git",
@@ -28,6 +26,7 @@
   },
   "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
   "dependencies": {
+    "@sentry/electron": "^3.0.7",
     "auto-launch": "^5.0.5",
     "child-process-promise": "^2.2.1",
     "discord-rpc": "^4.0.1",
@@ -41,7 +40,12 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "electron": "^16.0.5",
-    "electron-builder": "^22.14.5"
+    "@types/auto-launch": "^5.0.2",
+    "@types/cron": "^1.7.3",
+    "@types/discord-rpc": "^4.0.2",
+    "@types/ws": "^8.5.3",
+    "electron": "^18.0.4",
+    "electron-builder": "^23.0.3",
+    "typescript": "^4.6.3"
   }
 }
