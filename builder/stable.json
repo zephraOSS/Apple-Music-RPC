@@ -11,34 +11,21 @@
             ]
         }
     ],
-    "asar": "true",
+    "asar": true,
     "asarUnpack": [
-        "node_modules/itunes-bridge/wscript",
-        "modals.js",
-        "language/"
+        "node_modules/itunes-bridge/wscript"
     ],
     "directories": {
-        "buildResources": "assets",
-        "output": "app/stable/win"
+        "app": "dist",
+        "buildResources": "src/assets",
+        "output": "app/win"
     },
-    "files": [
-        "node_modules/",
-        "language/",
-        "assets/",
-        "browser/",
-        "managers/",
-        "utils/",
-        "*.js",
-        "*.html",
-        "*.css",
-        "!node_modules/.cache/"
-    ],
     "nsis": {
         "createDesktopShortcut": "always"
     },
     "win": {
         "target": "nsis",
-        "icon": "assets/icons/win32/icon.ico",
+        "icon": "src/assets/icons/win32/icon.ico",
         "artifactName": "AMRPC-Installer.exe",
         "publisherName": "zephra",
         "publish": [
