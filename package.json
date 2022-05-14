@@ -1,51 +1,51 @@
 {
-  "name": "amrpc",
-  "version": "4.0.0",
-  "description": "Discord RPC for Apple Music",
-  "scripts": {
-    "start": "npm run build && electron ./dist/index.js",
-    "build": "tsc",
-    "build:win": "tsc && copy package.json dist && electron-builder --config builder/stable.json",
-    "build:macos": "tsc && copy package.json dist && electron-builder --config builder/stable-macos.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ZephraCloud/Apple-Music-RPC.git"
-  },
-  "keywords": [
-    "discord",
-    "rpc",
-    "iTunes",
-    "Apple",
-    "Music"
-  ],
-  "author": "zephra",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ZephraCloud/Apple-Music-RPC/issues"
-  },
-  "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
-  "dependencies": {
-    "@sentry/electron": "^3.0.7",
-    "auto-launch": "^5.0.5",
-    "child-process-promise": "^2.2.1",
-    "discord-rpc": "^4.0.1",
-    "electron-log": "^4.4.4",
-    "electron-store": "^8.0.1",
-    "electron-updater": "^4.6.1",
-    "fetch": "^1.1.0",
-    "fs": "0.0.1-security",
-    "http": "^0.0.1-security",
-    "itunes-bridge": "git+https://github.com/ZephraCloud/iTunes-bridge.git",
-    "url": "^0.11.0"
-  },
-  "devDependencies": {
-    "@types/auto-launch": "^5.0.2",
-    "@types/cron": "^1.7.3",
-    "@types/discord-rpc": "^4.0.2",
-    "@types/ws": "^8.5.3",
-    "electron": "^18.0.4",
-    "electron-builder": "^23.0.3",
-    "typescript": "^4.6.3"
-  }
+    "name": "amrpc",
+    "version": "4.0.0",
+    "description": "Discord RPC for Apple Music",
+    "scripts": {
+        "start": "npm run build && electron ./dist/index.js",
+        "build": "tsc",
+        "build:win": "tsc && copy package.json dist && electron-builder --config builder/stable.json",
+        "build:macos": "tsc && copy package.json dist && electron-builder --config builder/stable-macos.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ZephraCloud/Apple-Music-RPC.git"
+    },
+    "keywords": [
+        "discord",
+        "rpc",
+        "iTunes",
+        "Apple",
+        "Music"
+    ],
+    "author": "zephra",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ZephraCloud/Apple-Music-RPC/issues"
+    },
+    "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
+    "dependencies": {
+        "@sentry/electron": "^3.0.7",
+        "auto-launch": "^5.0.5",
+        "child-process-promise": "^2.2.1",
+        "discord-rpc": "^4.0.1",
+        "electron-log": "^4.4.4",
+        "electron-store": "^8.0.1",
+        "electron-updater": "^4.6.1",
+        "fetch": "^1.1.0",
+        "fs": "0.0.1-security",
+        "http": "^0.0.1-security",
+        "itunes-bridge": "git+https://github.com/ZephraCloud/iTunes-bridge.git",
+        "url": "^0.11.0"
+    },
+    "devDependencies": {
+        "@types/auto-launch": "^5.0.2",
+        "@types/cron": "^1.7.3",
+        "@types/discord-rpc": "^4.0.2",
+        "@types/ws": "^8.5.3",
+        "electron": "^18.0.4",
+        "electron-builder": "^23.0.3",
+        "typescript": "^4.6.3"
+    }
 }
