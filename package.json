@@ -3,11 +3,11 @@
     "version": "4.0.0",
     "description": "Discord RPC for Apple Music",
     "scripts": {
-        "start": "npm run copy && npm run build && electron ./dist/index.js",
-        "copy": "copyfiles -u 1 -a src/assets/** src/language/** dist/",
+        "start": "npm run copy && npm run build && electron ./dist/",
+        "copy": "copyfiles -u 1 -a src/assets/** src/language/** src/browser/*.css src/browser/*.html dist/ && copyfiles package.json dist/",
         "build": "tsc",
-        "build:win": "tsc && copy package.json dist && electron-builder --config builder/stable.json",
-        "build:macos": "tsc && copy package.json dist && electron-builder --config builder/stable-macos.json"
+        "build:win": "tsc && npm run copy && electron-builder --config builder/stable.json",
+        "build:macos": "tsc && npm run copy && electron-builder --config builder/stable-macos.json"
     },
     "repository": {
         "type": "git",
