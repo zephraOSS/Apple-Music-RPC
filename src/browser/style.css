@@ -85,28 +85,7 @@ div.control .center {
     width: max-content;
 }
 
-div.control .songinfo {
-    float: left;
-    margin-left: 80px;
-    margin-top: 5px;
-}
-
-div.control #songname,
-div.control #songartist {
-    display: block;
-    -webkit-app-region: no-drag;
-}
-
-body[data-theme="dark"] div.control #songname {
-    color: #e5e5e5;
-}
-
-div.control #songartist {
-    color: #808080;
-    font-size: 13px;
-}
-
-div.control #songlogo {
+div.control .logo {
     float: left;
     width: 40px;
     border-radius: 8px;
@@ -228,9 +207,12 @@ div.extra-left span {
     margin-right: 10px;
 }
 
-div.extra span svg,
+div.extra span i,
 div.extra-left span svg {
+    width: 22px;
+    color: grey;
     vertical-align: inherit;
+    margin-right: -3px;
 }
 
 div.extra span progress {
