@@ -1,5 +1,5 @@
-const { contextBridge, ipcRenderer, shell } = require("electron"),
-    fetch = require("fetch").fetchUrl;
+import { contextBridge, ipcRenderer } from "electron";
+import { fetchUrl as fetch } from "fetch";
 
 console.log("[BROWSER PRELOAD] Ready");
 
@@ -20,23 +20,16 @@ contextBridge.exposeInMainWorld("electron", {
         return ipcRenderer.invoke("getSystemTheme", {});
     },
     appData: {
-        set: (k, v) => {
-            return ipcRenderer.invoke("updateAppData", k, v);
-        },
+        set: (k, v) => ipcRenderer.invoke("updateAppData", k, v),
         get: (k) => {
             return ipcRenderer.invoke("getAppData", k);
         }
     },
     config: {
-        set: (k, v) => {
-            return ipcRenderer.invoke("updateConfig", k, v);
-        },
+        set: (k, v) => ipcRenderer.invoke("updateConfig", k, v),
         get: (k) => {
             return ipcRenderer.invoke("getConfig", k);
         }
-    },
-    installAMEPlugin: async () => {
-        return await ipcRenderer.invoke("installAMEPlugin");
     },
     fetchChangelog: () => {
         return new Promise((resolve, reject) => {
@@ -45,7 +38,7 @@ contextBridge.exposeInMainWorld("electron", {
                 {
                     cache: "no-store"
                 },
-                (error, meta, body) => {
+                (error, _meta, body) => {
                     if (error) return reject(error);
                     body = JSON.parse(body.toString());
 
@@ -55,14 +48,7 @@ contextBridge.exposeInMainWorld("electron", {
         });
     },
     updateLanguage: (lang) => ipcRenderer.invoke("updateLanguage", lang),
-    openURL: (url) => {
-        if (url.startsWith("http://"))
-            return console.log(
-                "[BROWSER PRELOAD] Didn't open URL because it's not secure."
-            );
-
-        shell.openExternal(url);
-    },
+    openURL: (url) => ipcRenderer.invoke("openURL", url),
     minimize: () => ipcRenderer.invoke("windowControl", "minimize"),
     maximize: () => ipcRenderer.invoke("windowControl", "maximize"),
     hide: () => ipcRenderer.invoke("windowControl", "hide"),
@@ -85,6 +71,6 @@ contextBridge.exposeInMainWorld("api", {
         ];
 
         if (validChannels.includes(channel))
-            ipcRenderer.on(channel, (event, ...args) => func(...args));
+            ipcRenderer.on(channel, (_event, ...args) => func(...args));
     }
 });
