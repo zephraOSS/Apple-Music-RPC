@@ -7,7 +7,7 @@ export function init() {
     if (!app.isPackaged) return;
 
     const autoLaunch = new AutoLaunch({
-        name: app.isPackaged ? "AMRPC" : "AMRPC - DEV",
+        name: "AMRPC",
         path: app.getPath("exe")
     });
 
