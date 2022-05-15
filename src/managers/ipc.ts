@@ -3,6 +3,7 @@ import { autoUpdater } from "electron-updater";
 import { getAppData, getConfig, setAppData, setConfig } from "./store";
 import { init as initAutoLaunch } from "./launch";
 import { Browser } from "./browser";
+import * as log from "electron-log";
 
 export function init() {
     ipcMain.handle("update-download", (_e, install) => {
@@ -46,7 +47,7 @@ export function init() {
     });
 
     ipcMain.handle("updateLanguage", (_e, language) => {
-        console.log(`[Backend] Changed language to ${language}`);
+        log.info(`[Backend] Changed language to ${language}`);
 
         /*app.langString = require(`../language/${language}.json`);*/
     });

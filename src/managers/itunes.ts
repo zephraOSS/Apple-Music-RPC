@@ -23,7 +23,7 @@ export function init() {
         );
 
         if (Object.keys(currentTrack).length === 0)
-            return console.log("[iTunes] No Track detected");
+            return log.warn("[iTunes] No Track detected");
 
         discord.setCurrentTrack(currentTrack);
     });
@@ -32,7 +32,7 @@ export function init() {
         log.info("[iTunes]", "Paused");
 
         if (Object.keys(currentTrack).length === 0)
-            return console.log("[iTunes] No Track detected");
+            return log.warn("[iTunes] No Track detected");
 
         discord.clearActivity();
     });

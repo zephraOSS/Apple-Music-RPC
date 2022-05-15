@@ -6,6 +6,7 @@ import { init as initAutoUpdater } from "./managers/updater";
 import { getConfig } from "./managers/store";
 import { Browser } from "./managers/browser";
 import { init as initITunes } from "./managers/itunes";
+import * as log from "electron-log";
 
 export let trayManager: TrayManager;
 
@@ -21,7 +22,7 @@ app.on("ready", () => {
     initITunes();
 
     nativeTheme.on("updated", () => {
-        console.log(
+        log.info(
             `[Backend] Theme changed to ${
                 nativeTheme.shouldUseDarkColors ? "dark" : "light"
             }`

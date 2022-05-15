@@ -9,7 +9,7 @@ export function init() {
     if (!app.isPackaged) return;
 
     autoUpdater.on("update-available", (info) => {
-        console.log(`[UPDATER] Update available (${info.version})`);
+        log.info(`[UPDATER] Update available (${info.version})`);
 
         if (process.platform === "darwin") bounce("critical");
         else Browser.windowAction("show");
@@ -20,11 +20,11 @@ export function init() {
     });
 
     autoUpdater.on("update-not-available", () => {
-        console.log("[UPDATER] No updates available");
+        log.info("[UPDATER] No updates available");
     });
 
     autoUpdater.on("error", (err) => {
-        console.log(`[UPDATER] Error in auto-updater. ${err}`);
+        log.info(`[UPDATER] Error in auto-updater. ${err}`);
     });
 
     autoUpdater.on("download-progress", (progressObj) => {
@@ -34,7 +34,7 @@ export function init() {
             progressObj.percent === 75 ||
             progressObj.percent === 100
         )
-            console.log(
+            log.info(
                 `[UPDATER] Downloading update... (${progressObj.percent}%)`
             );
 
@@ -47,7 +47,7 @@ export function init() {
     });
 
     autoUpdater.on("update-downloaded", (info) => {
-        console.log(`[UPDATER] Update downloaded (${info.version})`);
+        log.info(`[UPDATER] Update downloaded (${info.version})`);
 
         if (process.platform === "darwin") bounce("critical");
         else Browser.windowAction("show");
@@ -61,7 +61,7 @@ export function init() {
 
     setInterval(checkForUpdates, 1.8e6);
 
-    console.log("[UPDATER] AutoUpdater initialized");
+    log.info("[UPDATER] AutoUpdater initialized");
 }
 
 export function checkForUpdates() {
