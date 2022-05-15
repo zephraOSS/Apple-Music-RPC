@@ -9,16 +9,12 @@
         "openSettings": "Open Settings",
         "quit": "Quit"
     },
-    "notification": {
-        "modallistUpdated": "The modal list has been successfully updated.",
-        "alphaNotAllowed": "You are not allowed to use the alpha version!"
-    },
     "settings": {
         "config": {
-            "autolaunch": "Autolaunch",
+            "autoLaunch": "Auto Launch",
             "show": "Show Presence",
             "hideOnPause": "Hide Presence on Pause",
-            "showAlbumArtwork": "Show Artwork of the Album",
+            "showAlbumArtwork": "Show Album Artwork",
             "performanceMode": "Performance Mode",
             "hardwareAcceleration": "Hardware Acceleration",
             "colorTheme": {
@@ -30,7 +26,6 @@
             "language": {
                 "label": "Preferred Language",
                 "en_US": "English (US)",
-                "en_UK": "English (UK)",
                 "de_DE": "Deutsch (DE) - German (DE)"
             },
             "cover": {
