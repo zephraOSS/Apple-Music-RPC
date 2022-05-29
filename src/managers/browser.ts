@@ -1,10 +1,13 @@
 import { app, BrowserWindow } from "electron";
-import { getConfig, setConfig } from "./store";
+import { getConfig, setConfig, config } from "./store";
 import { init as initIPC } from "./ipc";
+import { AutoTheme } from "electron-autotheme";
 import path from "path";
 
 export class Browser {
     private window: BrowserWindow;
+    private autoTheme: AutoTheme;
+
     static instance: Browser;
 
     constructor() {
@@ -30,6 +33,12 @@ export class Browser {
 
         this.window.loadFile(path.join(app.getAppPath(), "browser/index.html"));
 
+        if (getConfig("colorTheme") === "auto") {
+            this.autoTheme = new AutoTheme((useDark) => {
+                this.send("update-system-theme", useDark ? "dark" : "light");
+            }, config);
+        }
+
         ["moved", "close"].forEach((event: any) => {
             this.window.on(event, Browser.saveWindowState);
         });
@@ -47,6 +56,8 @@ export class Browser {
                 break;
             case "close":
                 this.window.close();
+                this.autoTheme.stop();
+
                 break;
             case "minimize":
                 this.window.minimize();

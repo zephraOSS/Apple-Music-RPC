@@ -1,7 +1,7 @@
 import Store from "electron-store";
 import * as log from "electron-log";
 
-const config = new Store({
+export const config = new Store({
         defaults: {
             autoLaunch: true,
             show: true,
