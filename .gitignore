@@ -3,5 +3,5 @@
 /dist
 /node_modules
 /src/browser/zephra.ts
-package-lock.json
+
 .DS_Store
