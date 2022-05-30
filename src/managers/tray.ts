@@ -46,7 +46,12 @@ export class TrayManager {
                     app.exit();
                 }
             },
-            { label: "Quit", role: "quit" }
+            {
+                label: "Quit",
+                click() {
+                    app.quit();
+                }
+            }
         ]);
     }
 
