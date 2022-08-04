@@ -8,7 +8,7 @@
 [Requirements](https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Installation)
 
 ## You need help?
-* Take a look into [the Wiki](https://github.com/ZephraCloud/Apple-Music-RPC/wiki)
+* Take a look at [the documentation](https://docs.amrpc.zephra.cloud)
 * Join [our Discord](https://discord.gg/APDghNfJhQ)
 
 ## Virus?
