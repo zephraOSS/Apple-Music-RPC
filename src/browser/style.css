@@ -91,7 +91,6 @@ div.control .logo {
     border-radius: 8px;
     user-select: none;
     pointer-events: none;
-    -webkit-app-region: no-drag;
 }
 
 div.windowcontrols {
@@ -155,12 +154,11 @@ div.content form .settings_setting {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 15px;
     background-color: rgba(0, 0, 0, 0.08);
     padding: 10px;
     border-radius: 6px;
-    margin-bottom: 15px;
     box-sizing: border-box;
 }
 
@@ -173,8 +171,7 @@ div.content .settings {
     position: relative;
     display: block;
     width: 65%;
-    margin: 0 auto;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
     box-sizing: border-box;
 }
 
@@ -199,7 +196,7 @@ div.extra-left span {
 }
 
 div.extra span span {
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 div.extra-left span {
@@ -234,9 +231,7 @@ div.extra span progress::-webkit-progress-bar {
 
 div.extra span progress::-webkit-progress-value {
     background-color: #ffffff;
-    border-radius: 50px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-radius: 50px 0 0 50px;
 }
 
 div.modal {
@@ -328,7 +323,7 @@ div.modal .btn:hover {
 }
 
 div.modal .btn.btn-last {
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 div.modal .btn.btn-red {
