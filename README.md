@@ -1,3 +1,4 @@
+![banner](https://user-images.githubusercontent.com/53608074/187286753-db4a909a-9c6a-4ed3-91e1-1a5a85a732b9.png)
 # Apple Music RPC for Discord
 
 ## Installation
