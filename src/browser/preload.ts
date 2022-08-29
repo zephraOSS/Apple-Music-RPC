@@ -50,8 +50,17 @@ contextBridge.exposeInMainWorld("electron", {
             );
         });
     },
+    openURL: (url: string) => {
+        if (
+            !url.startsWith("https://") &&
+            !url.startsWith("http://") &&
+            !url.startsWith("mailto:")
+        )
+            return;
+
+        ipcRenderer.invoke("openURL", url);
+    },
     updateLanguage: (lang) => ipcRenderer.invoke("updateLanguage", lang),
-    openURL: (url) => ipcRenderer.invoke("openURL", url),
     minimize: () => ipcRenderer.invoke("windowControl", "minimize"),
     maximize: () => ipcRenderer.invoke("windowControl", "maximize"),
     hide: () => ipcRenderer.invoke("windowControl", "hide"),
