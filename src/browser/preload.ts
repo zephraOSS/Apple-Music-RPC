@@ -19,6 +19,9 @@ contextBridge.exposeInMainWorld("electron", {
     getSystemTheme: () => {
         return ipcRenderer.invoke("getSystemTheme", {});
     },
+    getCurrentTrack: () => {
+        return ipcRenderer.invoke("getCurrentTrack", {});
+    },
     appData: {
         set: (k, v) => ipcRenderer.invoke("updateAppData", k, v),
         get: (k) => {
@@ -67,7 +70,8 @@ contextBridge.exposeInMainWorld("api", {
             "update-system-theme",
             "new-update-available",
             "update-download-progress-update",
-            "update-downloaded"
+            "update-downloaded",
+            "getCurrentTrack"
         ];
 
         if (validChannels.includes(channel))
