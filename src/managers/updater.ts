@@ -14,7 +14,7 @@ export function init() {
         if (process.platform === "darwin") bounce("critical");
         else Browser.windowAction("show");
 
-        Browser.send("new-update-available", {
+        Browser.send("new-update-available", true, {
             version: info.version
         });
     });
@@ -38,7 +38,7 @@ export function init() {
                 `[UPDATER] Downloading update... (${progressObj.percent}%)`
             );
 
-        Browser.send("update-download-progress-update", {
+        Browser.send("update-download-progress-update", true, {
             percent: progressObj.percent,
             transferred: progressObj.transferred,
             total: progressObj.total,
@@ -52,7 +52,7 @@ export function init() {
         if (process.platform === "darwin") bounce("critical");
         else Browser.windowAction("show");
 
-        Browser.send("update-downloaded", {});
+        Browser.send("update-downloaded", true, {});
 
         if (getAppData("installUpdate")) autoUpdater.quitAndInstall();
     });

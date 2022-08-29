@@ -3,6 +3,7 @@ import { autoUpdater } from "electron-updater";
 import { getAppData, getConfig, setAppData, setConfig } from "./store";
 import { init as initAutoLaunch } from "./launch";
 import { Browser } from "./browser";
+import { Discord } from "./discord";
 import * as log from "electron-log";
 
 export function init() {
@@ -36,6 +37,13 @@ export function init() {
 
     ipcMain.handle("getSystemTheme", () => {
         return nativeTheme.shouldUseDarkColors ? "dark" : "light";
+    });
+
+    ipcMain.handle("getCurrentTrack", () => {
+        return {
+            artwork: Discord.instance.currentTrack.artwork,
+            playerState: Discord.instance.currentTrack.playerState
+        };
     });
 
     ipcMain.handle("getConfig", (_e, k: string) => {

@@ -96,7 +96,8 @@ export class Browser {
         Browser.getInstance().saveWindowState();
     }
 
-    static send(channel: string, ...args: any[]) {
-        Browser.getInstance().send(channel, ...args);
+    static send(channel: string, create: boolean = false, ...args: any[]) {
+        if (create || Browser.instance)
+            Browser.getInstance().send(channel, ...args);
     }
 }

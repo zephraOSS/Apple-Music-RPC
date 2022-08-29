@@ -40,6 +40,16 @@ updateLanguage();
                 (<HTMLElement>ele.parentNode)?.remove();
         });
 
+    window.electron.getCurrentTrack().then((data) => {
+        if (data && data.artwork && data.playerState === "playing") {
+            document.querySelector<HTMLImageElement>(".logo").src =
+                data.artwork.replace("500x500bb", "40x40bb");
+        } else {
+            document.querySelector<HTMLImageElement>(".logo").src =
+                "../assets/logo.png";
+        }
+    });
+
     if (!seenChangelogs[appVersion]) {
         const changelog = await window.electron.fetchChangelog();
 

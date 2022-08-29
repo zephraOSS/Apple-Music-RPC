@@ -1,6 +1,7 @@
 import iTunes from "itunes-bridge";
 import { Discord } from "./discord";
 import * as log from "electron-log";
+import { Browser } from "./browser";
 
 export function init() {
     const iTunesEmitter = iTunes.emitter,
@@ -35,6 +36,10 @@ export function init() {
             return log.warn("[iTunes] No Track detected");
 
         discord.clearActivity();
+
+        Browser.send("get-current-track", false, {
+            playerState: currentTrack.playerState
+        });
     });
 
     iTunesEmitter.on(

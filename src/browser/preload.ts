@@ -71,7 +71,7 @@ contextBridge.exposeInMainWorld("api", {
             "new-update-available",
             "update-download-progress-update",
             "update-downloaded",
-            "getCurrentTrack"
+            "get-current-track"
         ];
 
         if (validChannels.includes(channel))
