@@ -110,6 +110,11 @@ export class Discord {
                     if (!currentTrack.artwork)
                         currentTrack.artwork = res.artwork;
 
+                    Browser.send("get-current-track", false, {
+                        artwork: res.artwork,
+                        playerState: currentTrack.playerState
+                    });
+
                     if (getConfig("showAlbumArtwork"))
                         activity.largeImageKey = currentTrack.artwork;
 
