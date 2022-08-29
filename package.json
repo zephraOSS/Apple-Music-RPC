@@ -5,7 +5,7 @@
     "scripts": {
         "start": "npm run copy && npm run build && electron ./dist/",
         "copy": "copyfiles -u 1 -a src/assets/** src/language/** src/browser/*.css src/browser/*.html dist/ && copyfiles package.json dist/",
-        "build": "tsc",
+        "build": "tsc && cd src/browser/renderer/ && tsc",
         "build:win": "tsc && npm run copy && electron-builder --config builder/stable.json",
         "build:macos": "tsc && npm run copy && electron-builder --config builder/stable-macos.json"
     },
