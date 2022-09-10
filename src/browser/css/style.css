@@ -154,6 +154,36 @@ div.content {
     padding: 15px;
 }
 
+.settings_category:not(:last-of-type) {
+    margin-bottom: 50px;
+}
+
+.category__header {
+    text-transform: uppercase;
+}
+
+.settings_category .settings_setting:first-of-type {
+    border-radius: 8px 8px 0 0;
+}
+
+.settings_category .settings_setting:last-of-type {
+    border-radius: 0 0 8px 8px;
+}
+
+.settings_category .settings_setting:not(:last-of-type):after {
+    position: absolute;
+    width: calc(100% - 30px);
+    height: 1px;
+    bottom: 0;
+    right: 0;
+    content: "";
+    background: #ffffff1a;
+}
+
+.settings_category .settings_setting label {
+    margin-left: 20px;
+}
+
 div.content form .settings_setting {
     position: relative;
     display: flex;
@@ -161,10 +191,8 @@ div.content form .settings_setting {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 15px;
     background-color: rgba(0, 0, 0, 0.08);
     padding: 10px;
-    border-radius: 6px;
     box-sizing: border-box;
 }
 
@@ -346,11 +374,11 @@ div.modal .btn.btn-grey {
 
 div.modal .btn.btn-rainbow {
     background-image: linear-gradient(
-            90deg,
-            #00c0ff 0%,
-            #ffcf00 49%,
-            #fc4f4f 80%,
-            #00c0ff 100%
+        90deg,
+        #00c0ff 0%,
+        #ffcf00 49%,
+        #fc4f4f 80%,
+        #00c0ff 100%
     );
 }
 
@@ -401,7 +429,9 @@ input[type="checkbox"] {
     transition-duration: 200ms;
 }
 
-input[type="checkbox"]:disabled {
+input[type="checkbox"]:disabled,
+.cfg_loading {
+    pointer-events: none;
     cursor: not-allowed;
     opacity: 0.5;
 }

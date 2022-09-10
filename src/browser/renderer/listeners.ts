@@ -59,9 +59,14 @@ export function init() {
                 else if (select.id === "config_language") updateLanguage();
             });
 
-            select.value = await window.electron.config.get(
+            const configValue = await window.electron.config.get(
                 select.id.replace("config_", "")
             );
+
+            select.value = configValue;
+
+            if (configValue !== undefined)
+                select.classList.remove("cfg_loading");
         });
 
     document
@@ -97,6 +102,7 @@ export function init() {
                             ).style["display"] = "none";
                         }
                     }
+
                     if (input.id === "config_autolaunch")
                         window.api.send("autolaunch-change", {});
                 });
@@ -115,14 +121,15 @@ export function init() {
                 });
             }
 
-            if (input.type === "checkbox")
-                input.checked = await window.electron.config.get(
-                    input.id.replace("config_", "")
-                );
-            else if (input.type === "text")
-                input.value = await window.electron.config.get(
-                    input.id.replace("config_", "")
-                );
+            const configValue = await window.electron.config.get(
+                input.id.replace("config_", "")
+            );
+
+            if (input.type === "checkbox") input.checked = configValue;
+            else if (input.type === "text") input.value = configValue;
+
+            if (configValue !== undefined)
+                input.classList.remove("cfg_loading");
 
             updateSCPM();
         });
