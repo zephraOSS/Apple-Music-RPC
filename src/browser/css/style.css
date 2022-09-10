@@ -398,7 +398,7 @@ div.modal .btn.btn-usaflag:hover {
 .settings_setting select {
     display: block !important;
     background-color: transparent;
-    border-color: #e5e5e5;
+    border-color: var(--border-color);
     border-radius: 8px;
     border-width: 1.5px;
     border-style: solid;
@@ -412,7 +412,7 @@ div.modal .btn.btn-usaflag:hover {
 body[data-theme="dark"] .settings_setting input[type="text"],
 body[data-theme="dark"] .settings_setting select {
     background-color: #1d1d1d;
-    border-color: #2d2d2d;
+    border-color: var(--border-color);
     color: white;
 }
 
