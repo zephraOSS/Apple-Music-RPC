@@ -66,17 +66,20 @@ export async function updateLanguage() {
 
     await window.electron.updateLanguage(language);
 
-    document.querySelectorAll(".settings_setting label").forEach((ele) => {
-        const ls =
-            langString.settings.config[
-                ele.getAttribute("for").replace("config_", "")
-            ];
+    document
+        .querySelectorAll(".settings_setting label")
+        .forEach((ele: HTMLElement) => {
+            const ls =
+                langString.settings.config[
+                    ele.dataset.for?.replace("config_", "") ??
+                        ele.getAttribute("for")?.replace("config_", "")
+                ];
 
-        if (ls) {
-            if (typeof ls === "object") ele.textContent = ls["label"];
-            else ele.textContent = ls;
-        }
-    });
+            if (ls) {
+                if (typeof ls === "object") ele.textContent = ls["label"];
+                else ele.textContent = ls;
+            }
+        });
 
     document
         .querySelectorAll(".settings_setting select option")

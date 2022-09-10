@@ -65,8 +65,10 @@ export function init() {
 
             select.value = configValue;
 
-            if (configValue !== undefined)
+            if (configValue !== undefined) {
                 select.classList.remove("cfg_loading");
+                select.parentElement.classList.remove("cfg_loading");
+            }
         });
 
     document
@@ -128,8 +130,10 @@ export function init() {
             if (input.type === "checkbox") input.checked = configValue;
             else if (input.type === "text") input.value = configValue;
 
-            if (configValue !== undefined)
+            if (configValue !== undefined) {
                 input.classList.remove("cfg_loading");
+                input.parentElement.classList.remove("cfg_loading");
+            }
 
             updateSCPM();
         });

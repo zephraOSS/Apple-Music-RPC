@@ -3,11 +3,13 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #fff;
+    --border-color: #0000001a;
 }
 
 body[data-theme="dark"] {
     background-color: #1f1f1f;
     color: #ffffff8c;
+    --border-color: #ffffff1a;
 }
 
 ::-webkit-scrollbar {
@@ -69,7 +71,7 @@ div.control {
     -webkit-user-select: none;
     user-select: none;
     -webkit-app-region: drag;
-    border-bottom: 1px solid #ffffff1a;
+    border-bottom: 1px solid var(--border-color);
 }
 
 body[data-theme="dark"] div.control {
@@ -180,7 +182,7 @@ div.content {
     background: #ffffff1a;
 }
 
-.settings_category .settings_setting label {
+.settings_category .settings_setting label:first-of-type {
     margin-left: 20px;
 }
 
@@ -414,48 +416,88 @@ body[data-theme="dark"] .settings_setting select {
     color: white;
 }
 
-input[type="checkbox"] {
-    position: relative;
-    flex: 0 0 35px;
-    width: 35px;
-    height: 21px;
-    appearance: none;
-    outline: none;
-    cursor: pointer;
-    background-color: #ffffff;
-    border: 1px solid #d9dadc;
-    border-radius: 50px;
-    box-shadow: inset -14px 0 0 0 #ffffff;
-    transition-duration: 200ms;
+.cfgSwitch,
+.settings_setting input[type="text"],
+.settings_setting select {
+    margin-right: 20px;
 }
 
-input[type="checkbox"]:disabled,
+.cfgSwitch {
+    display: inline-block;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cfgSwitch:disabled,
 .cfg_loading {
     pointer-events: none;
     cursor: not-allowed;
     opacity: 0.5;
 }
 
-input[type="checkbox"]:after {
+.cfgSwitch i {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 26px;
+    background-color: #e6e6e6;
+    border-radius: 23px;
+    vertical-align: text-bottom;
+    transition: all 0.3s linear;
+}
+
+.cfgSwitch i::before {
     position: absolute;
-    width: 18.2px;
-    height: 18.2px;
+    width: 42px;
+    height: 22px;
+    left: 0;
     content: "";
-    top: 1px;
-    left: 1px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 11px;
+    background-color: #fff;
+    transform: translate3d(2px, 2px, 0) scale3d(1, 1, 1);
+    transition: all 0.25s linear;
 }
 
-input[type="checkbox"]:checked {
-    border-color: #4ed164;
-    box-shadow: inset 14px 0 0 0 #4ed164;
+body[data-theme="dark"] .cfgSwitch i::before,
+body[data-theme="dark"] .cfgSwitch i {
+    background-color: #2d2d2d;
 }
 
-input[type="checkbox"]:checked:after {
-    left: 14px;
-    box-shadow: -2px 4px 3px rgba(0, 0, 0, 0.05);
+.cfgSwitch i::after {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 0;
+    content: "";
+    border-radius: 11px;
+    background-color: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24);
+    transform: translate3d(2px, 2px, 0);
+    transition: all 0.2s ease-in-out;
+}
+.cfgSwitch:active i::after {
+    width: 28px;
+    transform: translate3d(2px, 2px, 0);
+}
+
+.cfgSwitch:active input:checked + i::after {
+    transform: translate3d(16px, 2px, 0);
+}
+
+.cfgSwitch input {
+    display: none;
+}
+
+.cfgSwitch input:checked + i {
+    background-color: #4bd763;
+}
+
+.cfgSwitch input:checked + i::before {
+    transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0);
+}
+
+.cfgSwitch input:checked + i::after {
+    transform: translate3d(22px, 2px, 0);
 }
 
 /* KEYFRAMES */
