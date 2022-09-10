@@ -37,6 +37,9 @@
             "rpcDetails": "Presence Details",
             "rpcState": "Presence State"
         },
+        "category": {
+            "general": "Allgemein"
+        },
         "extra": {
             "github": "Auf GitHub ansehen",
             "reloadPage": "Neu laden",
