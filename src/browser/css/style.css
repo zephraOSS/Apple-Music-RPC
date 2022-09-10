@@ -179,7 +179,7 @@ div.content {
     bottom: 0;
     right: 0;
     content: "";
-    background: #ffffff1a;
+    background: var(--border-color);
 }
 
 .settings_category .settings_setting label:first-of-type {
