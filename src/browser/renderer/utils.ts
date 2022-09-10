@@ -94,4 +94,20 @@ export async function updateLanguage() {
 
         if (ls) ele.textContent = ls;
     });
+
+    document
+        .querySelectorAll("[data-translang]")
+        .forEach((ele: HTMLElement) => {
+            let ls: any = langString,
+                key = ele.dataset.translang;
+
+            if (key.includes(".")) {
+                key.split(".").forEach((k, i) => {
+                    ls = ls[k];
+
+                    if (i === key.split(".").length - 1)
+                        if (ls) ele.textContent = ls;
+                });
+            }
+        });
 }
