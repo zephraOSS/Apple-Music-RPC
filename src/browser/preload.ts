@@ -19,6 +19,9 @@ contextBridge.exposeInMainWorld("electron", {
     getSystemTheme: () => {
         return ipcRenderer.invoke("getSystemTheme", {});
     },
+    getTheme: () => {
+        return ipcRenderer.invoke("getTheme", {});
+    },
     getCurrentTrack: () => {
         return ipcRenderer.invoke("getCurrentTrack", {});
     },

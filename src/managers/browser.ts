@@ -1,12 +1,10 @@
 import { app, BrowserWindow } from "electron";
 import { getConfig, setConfig, config } from "./store";
 import { init as initIPC } from "./ipc";
-import { AutoTheme } from "electron-autotheme";
 import path from "path";
 
 export class Browser {
     private window: BrowserWindow;
-    private autoTheme: AutoTheme;
 
     static instance: Browser;
 
@@ -33,12 +31,6 @@ export class Browser {
 
         this.window.loadFile(path.join(app.getAppPath(), "browser/index.html"));
 
-        if (getConfig("colorTheme") === "auto") {
-            this.autoTheme = new AutoTheme((useDark) => {
-                this.send("update-system-theme", useDark ? "dark" : "light");
-            }, config);
-        }
-
         ["moved", "close"].forEach((event: any) => {
             this.window.on(event, Browser.saveWindowState);
         });
@@ -50,26 +42,31 @@ export class Browser {
         switch (action) {
             case "show":
                 this.window.show();
+
                 break;
             case "hide":
                 this.window.hide();
+
                 break;
             case "close":
                 this.window.close();
-                this.autoTheme.stop();
 
                 break;
             case "minimize":
                 this.window.minimize();
+
                 break;
             case "maximize":
                 this.window.maximize();
+
                 break;
             case "restore":
                 this.window.restore();
+
                 break;
             case "reload":
                 this.window.reload();
+
                 break;
         }
     }
@@ -99,5 +96,10 @@ export class Browser {
     static send(channel: string, create: boolean = false, ...args: any[]) {
         if (create || Browser.instance)
             Browser.getInstance().send(channel, ...args);
+    }
+
+    static setTheme(theme: string) {
+        if (config.get("colorTheme") === "auto")
+            Browser.send("update-system-theme", false, theme);
     }
 }

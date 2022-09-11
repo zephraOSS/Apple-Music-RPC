@@ -4,6 +4,7 @@ import { getAppData, getConfig, setAppData, setConfig } from "./store";
 import { init as initAutoLaunch } from "./launch";
 import { Browser } from "./browser";
 import { Discord } from "./discord";
+import { useDarkMode } from "../utils/theme";
 import * as log from "electron-log";
 
 export function init() {
@@ -37,6 +38,15 @@ export function init() {
 
     ipcMain.handle("getSystemTheme", () => {
         return nativeTheme.shouldUseDarkColors ? "dark" : "light";
+    });
+
+    ipcMain.handle("getTheme", () => {
+        const config = getConfig("colorTheme");
+
+        if (config === "auto") return useDarkMode() ? "dark" : "light";
+        else if (config === "os")
+            return nativeTheme.shouldUseDarkColors ? "dark" : "light";
+        else return config;
     });
 
     ipcMain.handle("getCurrentTrack", () => {

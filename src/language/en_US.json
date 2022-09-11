@@ -21,6 +21,7 @@
                 "label": "Preferred Color Theme",
                 "light": "Light",
                 "dark": "Dark",
+                "auto": "Dark from Sunset to Sunrise",
                 "os": "System Default"
             },
             "language": {

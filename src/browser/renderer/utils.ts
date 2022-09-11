@@ -52,9 +52,7 @@ export async function updateSCPM() {
 }
 
 export async function updateTheme(theme?: string) {
-    const t = await window.electron.config.get("colorTheme");
-    if (!theme) theme = t;
-    if (theme === "os") theme = await window.electron.getSystemTheme();
+    if (!theme) theme = await window.electron.getTheme();
 
     document.querySelector("body").setAttribute("data-theme", theme);
 }

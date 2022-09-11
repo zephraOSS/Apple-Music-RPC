@@ -6,6 +6,7 @@ import { init as initAutoUpdater } from "./managers/updater";
 import { getConfig } from "./managers/store";
 import { Browser } from "./managers/browser";
 import { init as initITunes } from "./managers/itunes";
+import { init as initTheme } from "./utils/theme";
 import * as log from "electron-log";
 
 export let trayManager: TrayManager;
@@ -17,6 +18,7 @@ initSentry();
 app.on("ready", () => {
     trayManager = new TrayManager();
 
+    initTheme();
     initAutoLaunch();
     initAutoUpdater();
     initITunes();

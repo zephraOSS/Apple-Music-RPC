@@ -21,6 +21,7 @@
                 "label": "Bevorzugtes Farbschema",
                 "light": "Hell",
                 "dark": "Dunkel",
+                "auto": "Dunkel von Sonnenuntergang bis -aufgang",
                 "os": "System Farbschema"
             },
             "language": {
