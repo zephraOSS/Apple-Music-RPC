@@ -463,6 +463,11 @@ body[data-theme="dark"] .cfgSwitch i {
     background-color: #2d2d2d;
 }
 
+body[data-theme="christmas"] .cfgSwitch i::before,
+body[data-theme="christmas"] .cfgSwitch i {
+    background-color: #BB2528;
+}
+
 .cfgSwitch i::after {
     position: absolute;
     width: 22px;
@@ -475,6 +480,11 @@ body[data-theme="dark"] .cfgSwitch i {
     transform: translate3d(2px, 2px, 0);
     transition: all 0.2s ease-in-out;
 }
+
+body[data-theme="christmas"] .cfgSwitch i::after {
+    background-color: #F8B229;
+}
+
 .cfgSwitch:active i::after {
     width: 28px;
     transform: translate3d(2px, 2px, 0);
@@ -490,6 +500,10 @@ body[data-theme="dark"] .cfgSwitch i {
 
 .cfgSwitch input:checked + i {
     background-color: #4bd763;
+}
+
+body[data-theme="christmas"] .cfgSwitch input:checked + i {
+    background-color: #146B3A;
 }
 
 .cfgSwitch input:checked + i::before {
