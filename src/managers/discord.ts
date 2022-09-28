@@ -7,6 +7,7 @@ import * as log from "electron-log";
 export class Discord {
     private client: Client;
     private isReady: boolean = false;
+    private startUp: boolean = true;
 
     public activity: Presence = {};
     public isLive: boolean = false;
@@ -31,8 +32,17 @@ export class Discord {
             })
             .then((client) => {
                 log.info("[DISCORD]", `Client logged in ${client.user.id}`);
+
                 this.isReady = true;
+                this.startUp = false;
             });
+
+        this.client.on("disconnected", () => {
+            log.info("[DISCORD]", "Client disconnected");
+
+            this.isReady = false;
+            this.connect();
+        });
 
         register("842112189618978897");
     }
@@ -43,14 +53,19 @@ export class Discord {
         this.activity = activity;
         if (this.isReady) this.client.setActivity(activity);
         else {
-            setTimeout(() => this.setActivity(activity), 1000);
+            if (!this.startUp) this.connect();
+            setTimeout(
+                () => this.setActivity(activity),
+                this.startUp ? 1000 : 2500
+            );
         }
     }
 
     clearActivity() {
         if (this.isReady) this.client.clearActivity();
         else {
-            setTimeout(() => this.clearActivity, 1000);
+            if (!this.startUp) this.connect();
+            setTimeout(() => this.clearActivity(), this.startUp ? 1000 : 2500);
         }
     }
 
