@@ -36,6 +36,10 @@ export function init() {
         return !app.isPackaged;
     });
 
+    ipcMain.handle("isSupporter", () => {
+        return Discord.instance.isSupporter;
+    });
+
     ipcMain.handle("getSystemTheme", () => {
         return nativeTheme.shouldUseDarkColors ? "dark" : "light";
     });
@@ -70,7 +74,15 @@ export function init() {
         /*app.langString = require(`../language/${language}.json`);*/
     });
 
-    ipcMain.handle("updateConfig", (_e, k: string, v: any) => setConfig(k, v));
+    ipcMain.handle("updateConfig", (_e, k: string, v: any) => {
+        if (k === "rpcLargeImageText" && !Discord.instance.isSupporter)
+            return log.warn(
+                "[IPC][UPDATE_CONFIG]",
+                `User is not a supporter, cannot change large image text (isSupporter: ${Discord.instance.isSupporter})`
+            );
+
+        setConfig(k, v);
+    });
 
     ipcMain.handle("updateAppData", (_e, k: string, v: any) =>
         setAppData(k, v)

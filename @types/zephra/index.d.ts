@@ -53,5 +53,15 @@ interface ModalButtonEvent {
      * The value of the event
      * @example "closeModal(this.parentElement.id)"
      */
-    value: string;
+    value?: string;
+    type?: "close" | "delete";
+    /**
+     * The action of the event
+     */
+    action?: () => void;
+}
+
+interface APIUserRoles {
+    id: string;
+    name: string;
 }

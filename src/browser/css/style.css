@@ -428,6 +428,8 @@ body[data-theme="dark"] .settings_setting select {
     -webkit-tap-highlight-color: transparent;
 }
 
+input:disabled,
+select:disabled,
 .cfgSwitch:disabled,
 .cfg_loading {
     pointer-events: none;
@@ -465,7 +467,7 @@ body[data-theme="dark"] .cfgSwitch i {
 
 body[data-theme="christmas"] .cfgSwitch i::before,
 body[data-theme="christmas"] .cfgSwitch i {
-    background-color: #BB2528;
+    background-color: #bb2528;
 }
 
 .cfgSwitch i::after {
@@ -482,7 +484,7 @@ body[data-theme="christmas"] .cfgSwitch i {
 }
 
 body[data-theme="christmas"] .cfgSwitch i::after {
-    background-color: #F8B229;
+    background-color: #f8b229;
 }
 
 .cfgSwitch:active i::after {
@@ -503,7 +505,7 @@ body[data-theme="christmas"] .cfgSwitch i::after {
 }
 
 body[data-theme="christmas"] .cfgSwitch input:checked + i {
-    background-color: #146B3A;
+    background-color: #146b3a;
 }
 
 .cfgSwitch input:checked + i::before {

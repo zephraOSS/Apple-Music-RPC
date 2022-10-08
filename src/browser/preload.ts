@@ -13,6 +13,9 @@ contextBridge.exposeInMainWorld("electron", {
     isDeveloper: async () => {
         return await ipcRenderer.invoke("isDeveloper");
     },
+    isSupporter: async () => {
+        return await ipcRenderer.invoke("isSupporter");
+    },
     getLangStrings: (lang) => {
         return require(`../language/${lang}.json`);
     },

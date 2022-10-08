@@ -1,8 +1,12 @@
 import { Client, Presence, register } from "discord-rpc";
 import { app } from "electron";
+import { getConfig, setConfig } from "./store";
+import { Browser } from "./browser";
+
 import { fetchUrl as fetch } from "fetch";
-import { getConfig } from "./store";
+
 import * as log from "electron-log";
+import { checkSupporter } from "../utils/checkSupporter";
 
 export class Discord {
     private client: Client;
@@ -12,6 +16,7 @@ export class Discord {
     public activity: Presence = {};
     public isLive: boolean = false;
     public currentTrack: currentTrack;
+    public isSupporter: boolean = null;
 
     static instance: Discord;
 
@@ -30,8 +35,17 @@ export class Discord {
             .login({
                 clientId: "842112189618978897"
             })
-            .then((client) => {
+            .then(async (client) => {
                 log.info("[DISCORD]", `Client logged in ${client.user.id}`);
+
+                this.isSupporter = await checkSupporter(client.user.id);
+
+                if (!this.isSupporter) {
+                    setConfig(
+                        "rpcLargeImageText",
+                        `AMRPC - V.${app.getVersion()}`
+                    );
+                }
 
                 this.isReady = true;
                 this.startUp = false;
@@ -48,8 +62,6 @@ export class Discord {
     }
 
     setActivity(activity: Presence) {
-        activity.largeImageText = `AMRPC - V.${app.getVersion()}`;
-
         this.activity = activity;
         if (this.isReady) this.client.setActivity(activity);
         else {
@@ -73,11 +85,14 @@ export class Discord {
         const thisCurrenTrack = this.currentTrack;
 
         if (thisCurrenTrack) delete thisCurrenTrack.url;
-
         if (thisCurrenTrack === currentTrack) return;
 
         const activity: Presence = {};
 
+        activity.largeImageText = replaceVariables(
+            currentTrack,
+            "rpcLargeImageText"
+        )?.substring(0, 128);
         activity.largeImageKey = getConfig("artwork");
         activity.details = replaceVariables(
             currentTrack,

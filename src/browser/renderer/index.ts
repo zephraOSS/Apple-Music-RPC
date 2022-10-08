@@ -13,7 +13,8 @@ declare global {
 
 export let appVersion,
     restartRequiredMemory = {},
-    platform;
+    platform,
+    isSupporter: boolean = null;
 
 console.log("[BROWSER][RENDERER] Loading...");
 
@@ -28,6 +29,7 @@ updateLanguage();
 
     appVersion = await window.electron.appVersion();
     platform = await window.electron.getPlatform();
+    isSupporter = await window.electron.isSupporter();
 
     document.querySelector("span#extra_version").textContent = `${
         (await window.electron.isDeveloper()) ? "Developer" : ""
@@ -39,6 +41,35 @@ updateLanguage();
             if (ele.getAttribute("os") !== platform)
                 (<HTMLElement>ele.parentNode)?.remove();
         });
+
+    if (isSupporter) {
+        document
+            .querySelectorAll(".settings_setting_premium")
+            .forEach((ele) => {
+                const formEle = ele.querySelector("input, select");
+
+                ele.classList.remove("settings_setting_premium");
+
+                if (formEle) formEle.removeAttribute("disabled");
+            });
+    } else {
+        document
+            .querySelectorAll(".settings_setting_premium")
+            .forEach((ele) => {
+                ele.addEventListener("click", () => {
+                    new Modal(
+                        "Requires Premium",
+                        "This Feature requires a Ko-fi one-time donation or a membership subscription. You can donate or subscribe <a href='https://ko-fi.com/zephra'>here</a>.",
+                        [
+                            {
+                                label: langString.settings.modal.buttons.okay,
+                                style: "btn-grey"
+                            }
+                        ]
+                    );
+                });
+            });
+    }
 
     window.electron.getCurrentTrack().then((data) => {
         if (data && data.artwork && data.playerState === "playing") {
