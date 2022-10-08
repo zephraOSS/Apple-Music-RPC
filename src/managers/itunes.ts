@@ -1,23 +1,29 @@
-import iTunes from "itunes-bridge";
 import { Discord } from "./discord";
-import * as log from "electron-log";
 import { Browser } from "./browser";
+import { AppleBridge } from "apple-bridge";
+import { fetchITunes } from "apple-bridge/dist/win32";
+
+import * as log from "electron-log";
 
 export function init() {
-    const iTunesEmitter = iTunes.emitter,
-        discord = new Discord();
+    const bridge = new AppleBridge(),
+        discord = new Discord(),
+        currentTrack = fetchITunes();
 
-    iTunes.getCurrentTrack().then((currentTrack: currentTrack) => {
-        setTimeout(() => {
-            iTunesEmitter.emit(
-                currentTrack.playerState,
-                "new_track",
-                currentTrack
-            );
-        }, 500);
-    });
+    let lastTrack: any = {};
 
-    iTunesEmitter.on("playing", (_type, currentTrack: currentTrack) => {
+    setTimeout(() => {
+        bridge.emit(currentTrack.playerState, "music", currentTrack);
+    }, 500);
+
+    bridge.on("playing", "music", (currentTrack) => {
+        if (
+            currentTrack.name === lastTrack.name &&
+            currentTrack.artist === lastTrack.artist &&
+            currentTrack.duration === lastTrack.duration
+        )
+            return;
+
         log.info(
             "[iTunes]",
             `Playing "${currentTrack.name}" by ${currentTrack.artist}`
@@ -26,14 +32,20 @@ export function init() {
         if (Object.keys(currentTrack).length === 0)
             return log.warn("[iTunes] No Track detected");
 
+        lastTrack = currentTrack;
+
         discord.setCurrentTrack(currentTrack);
     });
 
-    iTunesEmitter.on("paused", (_type, currentTrack: currentTrack) => {
+    bridge.on("paused", "music", (currentTrack) => {
+        if (lastTrack.length === 0) return;
+
         log.info("[iTunes]", "Paused");
 
         if (Object.keys(currentTrack).length === 0)
             return log.warn("[iTunes] No Track detected");
+
+        lastTrack = {};
 
         discord.clearActivity();
 
@@ -42,7 +54,7 @@ export function init() {
         });
     });
 
-    iTunesEmitter.on(
+    /*iTunesEmitter.on(
         "timeChange",
         async (_type, currentTrack: currentTrack) => {
             if (Object.keys(currentTrack).length === 0) return;
@@ -78,10 +90,15 @@ export function init() {
                 await discord.setCurrentTrack(currentTrack);
             }
         }
-    );
+    );*/
 
-    iTunesEmitter.on("stopped", () => {
+    bridge.on("stopped", "music", () => {
+        if (lastTrack.length === 0) return;
+
         log.info("[iTunes]", "Stopped");
+
+        lastTrack = {};
+
         discord.clearActivity();
     });
 }

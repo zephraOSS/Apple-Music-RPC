@@ -28,6 +28,7 @@
     "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
     "dependencies": {
         "@sentry/electron": "^3.0.7",
+        "apple-bridge": "^1.0.1-beta.5",
         "auto-launch": "^5.0.5",
         "child-process-promise": "^2.2.1",
         "discord-rpc": "^4.0.1",
@@ -38,8 +39,8 @@
         "fetch": "^1.1.0",
         "fs": "0.0.1-security",
         "http": "^0.0.1-security",
-        "itunes-bridge": "git+https://github.com/ZephraCloud/iTunes-bridge.git",
-        "url": "^0.11.0"
+        "url": "^0.11.0",
+        "ws": "^8.6.0"
     },
     "devDependencies": {
         "@types/auto-launch": "^5.0.2",
