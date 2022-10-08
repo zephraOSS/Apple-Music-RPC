@@ -24,33 +24,6 @@ export async function updateDataChangelog(k: string, v: string) {
     window.electron.appData.set("changelog", changelog);
 }
 
-export async function updateSCPM() {
-    const ele = {
-        performanceMode: document.querySelector<HTMLInputElement>(
-            ".settings_setting input[id='config_performanceMode']"
-        ),
-        showRPC: document.querySelector<HTMLInputElement>(
-            ".settings_setting input[id='config_show']"
-        ),
-        hideOnPause: document.querySelector<HTMLInputElement>(
-            ".settings_setting input[id='config_hideOnPause']"
-        )
-    };
-
-    if (ele.performanceMode.checked) {
-        if (await window.electron.config.get("show"))
-            ele.showRPC.disabled = true;
-
-        ele.hideOnPause.checked = true;
-        ele.hideOnPause.disabled = true;
-    } else {
-        if (await window.electron.config.get("show"))
-            ele.showRPC.disabled = false;
-
-        ele.hideOnPause.disabled = false;
-    }
-}
-
 export async function updateTheme(theme?: string) {
     if (!theme) theme = await window.electron.getTheme();
 

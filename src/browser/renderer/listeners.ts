@@ -1,5 +1,5 @@
 import { restartRequiredMemory } from "./index.js";
-import { updateSCPM, updateTheme, updateLanguage } from "./utils.js";
+import { updateTheme, updateLanguage } from "./utils.js";
 
 export function init() {
     document
