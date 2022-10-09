@@ -1,5 +1,4 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { fetchUrl as fetch } from "fetch";
 
 console.log("[BROWSER PRELOAD] Ready");
 
@@ -17,7 +16,7 @@ contextBridge.exposeInMainWorld("electron", {
         return await ipcRenderer.invoke("isSupporter");
     },
     getLangStrings: (lang) => {
-        return require(`../language/${lang}.json`);
+        return ipcRenderer.invoke("getLangStrings", lang);
     },
     getSystemTheme: () => {
         return ipcRenderer.invoke("getSystemTheme", {});
@@ -40,21 +39,8 @@ contextBridge.exposeInMainWorld("electron", {
             return ipcRenderer.invoke("getConfig", k);
         }
     },
-    fetchChangelog: () => {
-        return new Promise((resolve, reject) => {
-            fetch(
-                "https://api.github.com/repos/ZephraCloud/Apple-Music-RPC/releases/latest",
-                {
-                    cache: "no-store"
-                },
-                (error, _meta, body) => {
-                    if (error) return reject(error);
-                    body = JSON.parse(body.toString());
-
-                    resolve(body);
-                }
-            );
-        });
+    fetchChangelog: async () => {
+        return await ipcRenderer.invoke("fetchChangelog");
     },
     openURL: (url: string) => {
         if (

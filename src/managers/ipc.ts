@@ -5,7 +5,10 @@ import { init as initAutoLaunch } from "./launch";
 import { Browser } from "./browser";
 import { Discord } from "./discord";
 import { useDarkMode } from "../utils/theme";
+
 import * as log from "electron-log";
+
+import fetch from "node-fetch";
 
 export function init() {
     ipcMain.handle("update-download", (_e, install) => {
@@ -38,6 +41,10 @@ export function init() {
 
     ipcMain.handle("isSupporter", () => {
         return Discord.instance.isSupporter;
+    });
+
+    ipcMain.handle("getLangStrings", (_e, lang: string) => {
+        return require(`../language/${lang}.json`);
     });
 
     ipcMain.handle("getSystemTheme", () => {
@@ -97,6 +104,17 @@ export function init() {
             app.relaunch();
             app.exit();
         }
+    });
+
+    ipcMain.handle("fetchChangelog", async (_e) => {
+        const res = await fetch(
+            "https://api.github.com/repos/ZephraCloud/Apple-Music-RPC/releases/latest",
+            {
+                cache: "no-store"
+            }
+        );
+
+        return await res.json();
     });
 
     ipcMain.handle("openURL", (_e, url) => {

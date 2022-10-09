@@ -84,7 +84,7 @@ updateLanguage();
     if (!seenChangelogs[appVersion]) {
         const changelog = await window.electron.fetchChangelog();
 
-        if (changelog) {
+        if (changelog && appVersion === changelog.tag_name) {
             new Modal(
                 `Changelog ${changelog.name}`,
                 // @ts-ignore
