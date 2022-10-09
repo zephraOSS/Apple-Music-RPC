@@ -7,7 +7,6 @@ export const config = new Store({
             show: true,
             hideOnPause: true,
             showAlbumArtwork: true,
-            listenTogether: false,
             hardwareAcceleration: true,
             service: "itunes",
             colorTheme: "light",

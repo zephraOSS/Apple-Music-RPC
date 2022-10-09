@@ -1,6 +1,5 @@
 import { app, nativeTheme } from "electron";
 import { TrayManager } from "./managers/tray";
-//import { createRoom } from "./managers/listenTogether";
 import { getConfig } from "./managers/store";
 import { Browser } from "./managers/browser";
 
@@ -25,7 +24,6 @@ app.on("ready", () => {
     initAutoLaunch();
     initAutoUpdater();
     initITunes();
-    //createRoom();
 
     nativeTheme.on("updated", () => {
         log.info(
