@@ -1,13 +1,13 @@
 {
     "name": "amrpc",
-    "version": "4.0.0",
+    "version": "4.0.0-beta",
     "description": "Discord RPC for Apple Music",
     "scripts": {
         "start": "npm run copy && npm run build && electron ./dist/",
         "copy": "copyfiles -u 1 -a src/assets/** src/language/** src/browser/*.css src/browser/*.html src/browser/css/*.css dist/ && copyfiles package.json dist/",
         "build": "tsc && cd src/browser/renderer/ && tsc",
-        "build:win": "tsc && npm run copy && electron-builder --config builder/stable.json",
-        "build:macos": "tsc && npm run copy && electron-builder --config builder/stable-macos.json"
+        "build:win": "npm run build && npm run copy && electron-builder --config builder/stable.json",
+        "build:macos": "npm run build && npm run copy && electron-builder --config builder/stable-macos.json"
     },
     "repository": {
         "type": "git",
