@@ -81,8 +81,6 @@ export function init() {
                     );
 
                     if (input.dataset.restart === "true") {
-                        updateSCPM();
-
                         if (input.checked === restartRequiredMemory[input.id]) {
                             delete restartRequiredMemory[input.id];
 
