@@ -1,5 +1,5 @@
 import { Modal } from "./modal.js";
-import { updateTheme, updateLanguage, langString } from "./utils.js";
+import { updateTheme, updateLanguage, langString, openURL } from "./utils.js";
 
 import { init as initAPI } from "./api.js";
 import { init as initListeners } from "./listeners.js";
@@ -58,12 +58,30 @@ updateLanguage();
             .forEach((ele) => {
                 ele.addEventListener("click", () => {
                     new Modal(
-                        "Requires Premium",
-                        "This Feature requires a Ko-fi one-time donation or a membership subscription. You can donate or subscribe <a href='https://ko-fi.com/zephra'>here</a>.",
+                        langString.settings.modal["ko-fi"].title,
+                        langString.settings.modal["ko-fi"].description,
                         [
                             {
-                                label: langString.settings.modal.buttons.okay,
-                                style: "btn-grey"
+                                label: langString.settings.modal.buttons.later,
+                                style: "btn-grey",
+                                events: [
+                                    {
+                                        name: "click",
+                                        type: "delete"
+                                    }
+                                ]
+                            },
+                            {
+                                label: "Ko-fi",
+                                style: "btn-primary",
+                                events: [
+                                    {
+                                        name: "click",
+                                        action: () => {
+                                            openURL("https://ko-fi.com/zephra");
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     );

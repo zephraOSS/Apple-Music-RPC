@@ -89,6 +89,10 @@
                 "description": "The plugin was installed successfully.",
                 "descriptionError": "The plugin could not be installed."
             },
+            "ko-fi": {
+                "title": "Requires Premium",
+                "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+            },
             "buttons": {
                 "no": "No",
                 "later": "Not now",

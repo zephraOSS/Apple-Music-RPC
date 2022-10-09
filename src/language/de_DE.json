@@ -82,6 +82,10 @@
                 "description": "Das Plugin wurde erfolgreich installiert.",
                 "descriptionError": "Das Plugin konnte nicht installiert werden."
             },
+            "ko-fi": {
+                "title": "Erfordert Premium",
+                "description": "Um dieses Feature nutzen zu können, ist eine one-time Spende oder Mitgliedschaft erfoderlich. Du kannst <a href='https://ko-fi.com/zephra'>hier</a> spenden. Solltest du bereits gespendet haben, starte einmal AMRPC neu. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Mehr erfahren</a>"
+            },
             "buttons": {
                 "no": "Nein",
                 "later": "Nicht jetzt",

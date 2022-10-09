@@ -5,7 +5,8 @@ export class Modal {
     private readonly description: string;
     // @ts-ignore
     private buttons: ModalButton[];
-    private modalId: string;
+
+    public modalId: string;
 
     // @ts-ignore
     constructor(title: string, description: string, buttons: ModalButton[]) {
@@ -31,7 +32,8 @@ export class Modal {
         ELE.title.innerHTML = this.title;
         ELE.description.innerHTML = this.description;
 
-        ELE.modal.id = generateEleId();
+        this.modalId = generateEleId();
+        ELE.modal.id = this.modalId;
 
         for (let i = 0; i < buttons.length; i++) {
             if (i > 2) return;
@@ -49,7 +51,13 @@ export class Modal {
                 for (let i2 = 0; i2 < buttons[i].events.length; i2++) {
                     const event = buttons[i].events[i2];
 
-                    ele.setAttribute(event.name, event.value);
+                    if (event.value) ele.setAttribute(event.name, event.value);
+                    else if (event.type === "close")
+                        ele.addEventListener(event.name, () => this.close());
+                    else if (event.type === "delete")
+                        ele.addEventListener(event.name, () => this.delete());
+                    else if (event.action)
+                        ele.addEventListener(event.name, () => event.action());
                 }
             }
 
