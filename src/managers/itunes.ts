@@ -37,13 +37,10 @@ export function init() {
         discord.setCurrentTrack(currentTrack);
     });
 
-    bridge.on("paused", "music", (currentTrack) => {
-        if (lastTrack.length === 0) return;
+    bridge.on("paused", "music", () => {
+        if (Object.keys(lastTrack).length === 0) return;
 
         log.info("[iTunes]", "Paused");
-
-        if (Object.keys(currentTrack).length === 0)
-            return log.warn("[iTunes] No Track detected");
 
         lastTrack = {};
 
@@ -93,7 +90,7 @@ export function init() {
     );*/
 
     bridge.on("stopped", "music", () => {
-        if (lastTrack.length === 0) return;
+        if (Object.keys(lastTrack).length === 0) return;
 
         log.info("[iTunes]", "Stopped");
 

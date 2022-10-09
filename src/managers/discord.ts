@@ -56,7 +56,6 @@ export class Discord {
             log.info("[DISCORD]", "Client disconnected");
 
             this.isReady = false;
-            this.connect();
         });
 
         register("842112189618978897");
@@ -69,10 +68,8 @@ export class Discord {
         if (this.isReady) this.client.setActivity(activity);
         else {
             if (!this.startUp) this.connect();
-            setTimeout(
-                () => this.setActivity(activity),
-                this.startUp ? 1000 : 2500
-            );
+
+            setTimeout(() => this.setActivity(activity), 4500);
         }
     }
 
