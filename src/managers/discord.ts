@@ -12,6 +12,7 @@ export class Discord {
     private client: Client;
     private isReady: boolean = false;
     private startUp: boolean = true;
+    private defaultLIT: string = `AMRPC - V.${app.getVersion()}`;
 
     public activity: Presence = {};
     public isLive: boolean = false;
@@ -62,6 +63,8 @@ export class Discord {
     }
 
     setActivity(activity: Presence) {
+        if (!this.isSupporter) activity.largeImageText = this.defaultLIT;
+
         this.activity = activity;
         if (this.isReady) this.client.setActivity(activity);
         else {
