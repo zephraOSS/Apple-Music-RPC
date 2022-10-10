@@ -49,7 +49,7 @@ export class TrayManager {
             {
                 label: "Quit",
                 click() {
-                    app.quit();
+                    app.exit();
                 }
             }
         ]);
