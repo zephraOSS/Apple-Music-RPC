@@ -51,43 +51,40 @@ export function init() {
         });
     });
 
-    /*iTunesEmitter.on(
-        "timeChange",
-        async (_type, currentTrack: currentTrack) => {
-            if (Object.keys(currentTrack).length === 0) return;
+    bridge.on("timeChange", "music", async (currentTrack: currentTrack) => {
+        if (Object.keys(currentTrack).length === 0) return;
 
-            const { duration, elapsedTime } = currentTrack,
-                activity = discord.activity,
-                endTimestamp =
-                    Math.floor(Date.now() / 1000) - elapsedTime + duration;
+        const { duration, elapsedTime } = currentTrack,
+            activity = discord.activity,
+            endTimestamp =
+                Math.floor(Date.now() / 1000) - elapsedTime + duration;
 
-            if (activity.endTimestamp) {
-                if (duration === 0) {
-                    activity.state = "LIVE";
-                    delete activity.endTimestamp;
+        if (activity.endTimestamp) {
+            if (duration === 0) {
+                activity.state = "LIVE";
+                delete activity.endTimestamp;
 
-                    discord.setActivity(activity);
-                } else if (elapsedTime === 0) {
-                    delete activity.endTimestamp;
+                discord.setActivity(activity);
+            } else if (elapsedTime === 0) {
+                delete activity.endTimestamp;
 
-                    discord.setActivity(activity);
-                } else if (activity.endTimestamp !== endTimestamp) {
-                    activity.endTimestamp = endTimestamp;
+                discord.setActivity(activity);
+            } else if (activity.endTimestamp !== endTimestamp) {
+                activity.endTimestamp = endTimestamp;
 
-                    discord.setActivity(activity);
-                } else if (elapsedTime >= duration) discord.clearActivity();
-                else {
-                    const dif =
-                        +new Date(activity.endTimestamp.toString()) -
-                        +new Date() / 1000;
+                discord.setActivity(activity);
+            } else if (elapsedTime >= duration) discord.clearActivity();
+            else {
+                const dif =
+                    +new Date(activity.endTimestamp.toString()) -
+                    +new Date() / 1000;
 
-                    if (dif <= 0) return discord.clearActivity();
-                }
-            } else if (discord.isLive && duration > 0) {
-                await discord.setCurrentTrack(currentTrack);
+                if (dif <= 0) return discord.clearActivity();
             }
+        } else if (discord.isLive && duration > 0) {
+            await discord.setCurrentTrack(currentTrack);
         }
-    );*/
+    });
 
     bridge.on("stopped", "music", () => {
         if (Object.keys(lastTrack).length === 0) return;

@@ -28,7 +28,7 @@
     "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
     "dependencies": {
         "@sentry/electron": "^3.0.7",
-        "apple-bridge": "^1.0.1-beta.5",
+        "apple-bridge": "^1.0.1-beta.6",
         "auto-launch": "^5.0.5",
         "child-process-promise": "^2.2.1",
         "discord-rpc": "^4.0.1",
