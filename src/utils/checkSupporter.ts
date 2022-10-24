@@ -5,8 +5,7 @@ export async function checkSupporter(userId: string) {
 
     return res.some(
         (role) =>
-            role.id === "928447423624405002" /* ko-fi */ ||
-            role.id === "928447527852843040" /* ko-fi monthly */ ||
+            role.id === "1034108574537883708" /* Features+ */ ||
             role.id === "810577364051951648" /* Staff */
     );
 }
