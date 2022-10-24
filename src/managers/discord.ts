@@ -1,6 +1,6 @@
 import { Client, Presence, register } from "discord-rpc";
 import { app } from "electron";
-import { getConfig, setConfig } from "./store";
+import { config, getConfig, setConfig } from "./store";
 import { Browser } from "./browser";
 
 import { fetchUrl as fetch } from "fetch";
@@ -25,6 +25,28 @@ export class Discord {
         this.connect();
 
         Discord.instance = this;
+
+        config.onDidChange("rpcLargeImageText", () =>
+            configChange("rpcLargeImageText")
+        );
+        config.onDidChange("rpcDetails", () => configChange("rpcDetails"));
+        config.onDidChange("rpcState", () => configChange("rpcState"));
+
+        function configChange(type: string) {
+            if (
+                Discord.instance.currentTrack &&
+                Object.keys(Discord.instance.currentTrack).length > 0 &&
+                !Discord.instance.isLive
+            ) {
+                const discordType = type.replace("rpc", "");
+
+                Discord.instance.activity[
+                    discordType.charAt(0).toLowerCase() + discordType.slice(1)
+                ] = replaceVariables(Discord.instance.currentTrack, type);
+
+                Discord.setActivity(Discord.instance.activity);
+            }
+        }
     }
 
     connect() {
