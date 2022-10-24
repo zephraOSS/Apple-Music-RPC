@@ -37,6 +37,9 @@ contextBridge.exposeInMainWorld("electron", {
         set: (k, v) => ipcRenderer.invoke("updateConfig", k, v),
         get: (k) => {
             return ipcRenderer.invoke("getConfig", k);
+        },
+        reset: (k) => {
+            return ipcRenderer.invoke("resetConfig", k);
         }
     },
     fetchChangelog: async () => {

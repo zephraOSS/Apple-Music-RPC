@@ -29,7 +29,9 @@
                 <div class="settings">
                     <div class="settings_category">
                         <div class="category__header">
-                            <h3 data-translang="settings.category.general">General</h3>
+                            <h3 data-translang="settings.category.general">
+                                General
+                            </h3>
                         </div>
 
                         <div class="category__content">
@@ -38,7 +40,10 @@
                                     >Auto Launch</label
                                 >
                                 <label class="cfgSwitch cfg_loading">
-                                    <input type="checkbox" id="config_autoLaunch" />
+                                    <input
+                                        type="checkbox"
+                                        id="config_autoLaunch"
+                                    />
                                     <i></i>
                                 </label>
                             </div>
@@ -48,7 +53,11 @@
                                     >Hardware Acceleration</label
                                 >
                                 <label class="cfgSwitch cfg_loading">
-                                    <input type="checkbox" id="config_hardwareAcceleration" data-restart="true" />
+                                    <input
+                                        type="checkbox"
+                                        id="config_hardwareAcceleration"
+                                        data-restart="true"
+                                    />
                                     <i></i>
                                 </label>
                             </div>
@@ -63,7 +72,9 @@
                                 >
                                     <option value="dark">Dark</option>
                                     <option value="light">Light</option>
-                                    <option value="auto">Dark from Sunset to Sunrise</option>
+                                    <option value="auto">
+                                        Dark from Sunset to Sunrise
+                                    </option>
                                     <option value="os">System theme</option>
                                 </select>
                             </div>
@@ -90,7 +101,9 @@
 
                         <div class="category__content">
                             <div class="settings_setting">
-                                <label data-for="config_show">Show Presence</label>
+                                <label data-for="config_show"
+                                    >Show Presence</label
+                                >
                                 <label class="cfgSwitch cfg_loading">
                                     <input type="checkbox" id="config_show" />
                                     <i></i>
@@ -102,7 +115,10 @@
                                     >Hide Presence on Pause</label
                                 >
                                 <label class="cfgSwitch cfg_loading">
-                                    <input type="checkbox" id="config_hideOnPause" />
+                                    <input
+                                        type="checkbox"
+                                        id="config_hideOnPause"
+                                    />
                                     <i></i>
                                 </label>
                             </div>
@@ -112,7 +128,10 @@
                                     >Show Album Artwork</label
                                 >
                                 <label class="cfgSwitch cfg_loading">
-                                    <input type="checkbox" id="config_showAlbumArtwork" />
+                                    <input
+                                        type="checkbox"
+                                        id="config_showAlbumArtwork"
+                                    />
                                     <i></i>
                                 </label>
                             </div>
@@ -131,19 +150,25 @@
                                 </select>
                             </div>
 
-                            <div class="settings_setting settings_setting_premium">
+                            <div
+                                class="settings_setting settings_setting_premium"
+                                data-enableReset="true"
+                            >
                                 <label for="config_rpcLargeImageText">
                                     Presence Large Image Text
                                 </label>
                                 <input
-                                        type="text"
-                                        class="cfg_loading"
-                                        id="config_rpcLargeImageText"
-                                        disabled
+                                    type="text"
+                                    class="cfg_loading"
+                                    id="config_rpcLargeImageText"
+                                    disabled
                                 />
                             </div>
 
-                            <div class="settings_setting">
+                            <div
+                                class="settings_setting"
+                                data-enableReset="true"
+                            >
                                 <label for="config_rpcDetails"
                                     >Presence Details</label
                                 >
@@ -154,7 +179,10 @@
                                 />
                             </div>
 
-                            <div class="settings_setting">
+                            <div
+                                class="settings_setting"
+                                data-enableReset="true"
+                            >
                                 <label for="config_rpcState"
                                     >Presence State</label
                                 >

@@ -1,6 +1,6 @@
 import { app, ipcMain, nativeTheme, shell } from "electron";
 import { autoUpdater } from "electron-updater";
-import { getAppData, getConfig, setAppData, setConfig } from "./store";
+import { config, getAppData, getConfig, setAppData, setConfig } from "./store";
 import { init as initAutoLaunch } from "./launch";
 import { Browser } from "./browser";
 import { Discord } from "./discord";
@@ -69,6 +69,13 @@ export function init() {
 
     ipcMain.handle("getConfig", (_e, k: string) => {
         return getConfig(k);
+    });
+
+    ipcMain.handle("resetConfig", (_e, k: string) => {
+        // @ts-ignore
+        config.reset(k);
+
+        return config.get(k);
     });
 
     ipcMain.handle("getAppData", (_e, k: string) => {

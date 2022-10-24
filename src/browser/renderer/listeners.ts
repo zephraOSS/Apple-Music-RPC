@@ -132,4 +132,27 @@ export function init() {
                 input.parentElement.classList.remove("cfg_loading");
             }
         });
+
+    document
+        .querySelectorAll(".settings_setting[data-enableReset='true']")
+        .forEach((ele) => {
+            const formField: HTMLInputElement | HTMLSelectElement =
+                    ele.querySelector("input, select"),
+                label = ele.querySelector("label:first-of-type");
+
+            const resetButton = document.createElement("span");
+
+            resetButton.classList.add("resetButton");
+            resetButton.innerHTML = `<i class="fa-solid fa-arrow-rotate-left"></i>`;
+
+            resetButton.addEventListener("click", async () => {
+                const configKey = label
+                    .getAttribute("for")
+                    .replace("config_", "");
+
+                formField.value = await window.electron.config.reset(configKey);
+            });
+
+            ele.appendChild(resetButton);
+        });
 }

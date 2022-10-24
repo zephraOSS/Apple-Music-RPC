@@ -12,6 +12,7 @@ export const config = new Store({
             colorTheme: "light",
             language: "en_US",
             artwork: "applemusic-logo",
+            rpcLargeImageText: "AMRPC - %version%",
             rpcDetails: "%title% - %album%",
             rpcState: "%artist%"
         }

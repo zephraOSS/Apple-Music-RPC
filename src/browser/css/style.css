@@ -204,6 +204,22 @@ div.content form .settings_setting > * {
     display: inline-block;
 }
 
+.settings_setting .resetButton {
+    display: block !important;
+    position: absolute !important;
+    opacity: 0.75;
+    width: 15px;
+    height: 15px;
+    left: 8px;
+    color: #5194da;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+}
+
+.settings_setting .resetButton:hover {
+    opacity: 1;
+}
+
 .settings_setting_info label:first-of-type:before {
     display: block;
     position: absolute;
