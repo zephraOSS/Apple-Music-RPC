@@ -62,8 +62,8 @@ export function init() {
 
     ipcMain.handle("getCurrentTrack", () => {
         return {
-            artwork: Discord.instance.currentTrack.artwork,
-            playerState: Discord.instance.currentTrack.playerState
+            artwork: Discord.instance.currentTrack?.artwork ?? null,
+            playerState: Discord.instance.currentTrack?.playerState ?? "stopped"
         };
     });
 
