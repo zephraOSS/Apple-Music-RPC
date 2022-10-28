@@ -26,11 +26,10 @@ export class Discord {
 
         Discord.instance = this;
 
-        config.onDidChange("rpcLargeImageText", () =>
-            configChange("rpcLargeImageText")
-        );
-        config.onDidChange("rpcDetails", () => configChange("rpcDetails"));
-        config.onDidChange("rpcState", () => configChange("rpcState"));
+        ["rpcDetails", "rpcState", "rpcLargeImageText"].forEach((key) => {
+            // @ts-ignore
+            config.onDidChange(key, () => configChange(key));
+        });
 
         function configChange(type: string) {
             if (
