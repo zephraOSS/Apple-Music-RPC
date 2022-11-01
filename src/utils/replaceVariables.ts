@@ -67,7 +67,7 @@ export class replaceVariables {
                 if (!cfgValue && e !== config.replace(regex, "").trim()) return;
                 if (returnStr) returnStr += ` ${separator} `;
 
-                returnStr += cfgValue;
+                returnStr += cfgValue ?? e;
             });
 
         return returnStr ? returnStr.substring(0, 128) : undefined;
@@ -84,7 +84,7 @@ export class replaceVariables {
             case "version":
                 return app.getVersion();
             default:
-                return "";
+                return undefined;
         }
     }
 }
