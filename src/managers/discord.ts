@@ -1,12 +1,13 @@
-import { Client, Presence, register } from "discord-rpc";
 import { app } from "electron";
-import { config, getConfig, setConfig } from "./store";
 import { Browser } from "./browser";
+import { config, getConfig, setConfig } from "./store";
+import { Client, Presence, register } from "discord-rpc";
+import { checkSupporter } from "../utils/checkSupporter";
+import { replaceVariables } from "../utils/replaceVariables";
 
 import { fetchUrl as fetch } from "fetch";
 
 import * as log from "electron-log";
-import { checkSupporter } from "../utils/checkSupporter";
 
 export class Discord {
     private client: Client;
@@ -41,7 +42,9 @@ export class Discord {
 
                 Discord.instance.activity[
                     discordType.charAt(0).toLowerCase() + discordType.slice(1)
-                ] = replaceVariables(Discord.instance.currentTrack, type);
+                ] = new replaceVariables(
+                    Discord.instance.currentTrack
+                ).getResult(type);
 
                 Discord.setActivity(Discord.instance.activity);
             }
@@ -108,21 +111,13 @@ export class Discord {
         if (thisCurrenTrack) delete thisCurrenTrack.url;
         if (thisCurrenTrack === currentTrack) return;
 
-        const activity: Presence = {};
+        const activity: Presence = {},
+            replacedVars = new replaceVariables(currentTrack);
 
-        activity.largeImageText = replaceVariables(
-            currentTrack,
-            "rpcLargeImageText"
-        )?.substring(0, 128);
+        activity.largeImageText = replacedVars.getResult("largeImageText");
         activity.largeImageKey = getConfig("artwork");
-        activity.details = replaceVariables(
-            currentTrack,
-            "rpcDetails"
-        )?.substring(0, 128);
-        activity.state = replaceVariables(currentTrack, "rpcState")?.substring(
-            0,
-            128
-        );
+        activity.details = replacedVars.getResult("details");
+        activity.state = replacedVars.getResult("state");
 
         if (currentTrack.duration > 0) {
             activity.endTimestamp =
@@ -228,18 +223,15 @@ export class Discord {
     }
 }
 
-export function replaceVariables(currentTrack: currentTrack, cfg: string) {
-    const config = getConfig(cfg);
+export function getUserData() {
+    return new Promise((resolve, reject) => {
+        const client = new Client({ transport: "ipc" });
 
-    if (
-        (!currentTrack.name && config.includes("%title%")) ||
-        (!currentTrack.album && config.includes("%album%")) ||
-        (!currentTrack.artist && config.includes("%artist%"))
-    )
-        return;
-
-    return config
-        .replace("%title%", currentTrack.name)
-        .replace("%album%", currentTrack.album)
-        .replace("%artist%", currentTrack.artist);
+        client
+            .login({
+                clientId: "686635833226166279"
+            })
+            .then(({ user }) => client.destroy().then(() => resolve(user)))
+            .catch(reject);
+    });
 }
