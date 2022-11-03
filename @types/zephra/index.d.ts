@@ -37,6 +37,17 @@ interface PresenceDataButton {
     url: string;
 }
 
+interface ModalData {
+    id?: string;
+    title: string;
+    description: string;
+    priority?: boolean;
+    i18n?: {
+        [language: string]: ModalI18n;
+    };
+    buttons?: ModalButton[];
+}
+
 interface ModalButton {
     label: string;
     style: string;
@@ -59,6 +70,14 @@ interface ModalButtonEvent {
      * The action of the event
      */
     action?: () => void;
+}
+
+interface ModalI18n {
+    title: string;
+    description: string;
+    buttons?: {
+        [label: string]: string;
+    };
 }
 
 interface APIUserRoles {

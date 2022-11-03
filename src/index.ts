@@ -1,7 +1,8 @@
 import { app, nativeTheme } from "electron";
 import { TrayManager } from "./managers/tray";
-import { getConfig } from "./managers/store";
+import { ModalWatcher } from "./managers/modal";
 import { Browser } from "./managers/browser";
+import { getConfig } from "./managers/store";
 
 import { init as initSentry } from "./managers/sentry";
 import { init as initAutoLaunch } from "./managers/launch";
@@ -12,6 +13,7 @@ import { init as initTheme } from "./utils/theme";
 import * as log from "electron-log";
 
 export let trayManager: TrayManager;
+export let modalWatcher: ModalWatcher;
 
 if (!app.requestSingleInstanceLock()) app.quit();
 
@@ -19,6 +21,7 @@ initSentry();
 
 app.on("ready", () => {
     trayManager = new TrayManager();
+    modalWatcher = new ModalWatcher();
 
     initTheme();
     initAutoLaunch();
