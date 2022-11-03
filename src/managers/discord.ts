@@ -1,6 +1,6 @@
 import { app } from "electron";
 import { Browser } from "./browser";
-import { config, getConfig, setConfig } from "./store";
+import { cache, config, getConfig, setConfig } from "./store";
 import { Client, Presence, register } from "discord-rpc";
 import { checkSupporter } from "../utils/checkSupporter";
 import { replaceVariables } from "../utils/replaceVariables";
@@ -195,8 +195,11 @@ export class Discord {
         callback
     ) {
         const reqParam = encodeURIComponent(`${title} ${album} ${artist}`)
-            .replace(/"/g, "%27")
-            .replace(/"/g, "%22");
+                .replace(/"/g, "%27")
+                .replace(/"/g, "%22"),
+            cacheItem = cache.get(`${title}_:_${album}_:_${artist}`);
+
+        if (cacheItem) return callback(cacheItem);
 
         fetch(
             `https://itunes.apple.com/search?term=${reqParam}&entity=musicTrack`,
@@ -206,8 +209,8 @@ export class Discord {
 
                 const res = JSON.parse(body.toString()).results[0];
 
-                if (res)
-                    callback({
+                if (res) {
+                    const result = {
                         url: res.trackViewUrl,
                         collectionId: res.collectionId,
                         trackId: res.trackId,
@@ -216,8 +219,11 @@ export class Discord {
                             "100x100bb",
                             "500x500bb"
                         )
-                    });
-                else callback(null, true);
+                    };
+
+                    cache.set(`${title}_:_${album}_:_${artist}`, result);
+                    callback(result);
+                } else callback(null, true);
             }
         );
     }

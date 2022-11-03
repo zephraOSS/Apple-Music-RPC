@@ -32,6 +32,10 @@ export const config = new Store({
                 lastAuth: false
             }
         }
+    }),
+    // Key format: "songName_:_albumName_:_artistName"
+    cache = new Store({
+        name: "cache"
     });
 
 export function getConfig(key: string): any {
