@@ -35,7 +35,8 @@ export const config = new Store({
     }),
     // Key format: "songName_:_albumName_:_artistName"
     cache = new Store({
-        name: "cache"
+        name: "cache",
+        accessPropertiesByDotNotation: false
     });
 
 export function getConfig(key: string): any {
