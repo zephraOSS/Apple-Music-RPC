@@ -260,10 +260,6 @@ div.extra-left span {
     margin-left: 10px;
 }
 
-div.extra span span {
-    margin-left: 0;
-}
-
 div.extra-left span {
     margin-left: 0;
     margin-right: 10px;
@@ -271,10 +267,16 @@ div.extra-left span {
 
 div.extra span i,
 div.extra-left span svg {
-    width: 22px;
+    width: 25px;
     color: grey;
+    font-size: 20px;
     vertical-align: inherit;
     margin-right: -3px;
+    transition: color 0.25s ease;
+}
+
+div.extra span i:hover {
+    color: #e5e5e5;
 }
 
 div.extra span progress {
