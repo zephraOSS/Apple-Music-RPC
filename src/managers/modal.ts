@@ -14,10 +14,11 @@ export class ModalWatcher {
     }
 
     private checkForModals() {
-        apiRequest("modals.json", "https://api.zephra.cloud/amrpc/").then(
-            (data) => {
-                data = JSON.parse(data) as ModalData[];
+        log.info("[ModalWatcher][checkForModals] Checking for modals");
 
+        apiRequest("modals.json", "https://api.zephra.cloud/amrpc/").then(
+            (data: ModalData[]) => {
+                if (data && typeof data === "string") data = JSON.parse(data);
                 if (!data || Object.keys(data).length === 0) return;
 
                 data.forEach((modal: ModalData) => {
