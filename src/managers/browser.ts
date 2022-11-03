@@ -5,6 +5,7 @@ import path from "path";
 
 export class Browser {
     private window: BrowserWindow;
+    private awaitsSend: { channel: string; args: any[] }[] = [];
 
     static instance: Browser;
 
@@ -34,6 +35,12 @@ export class Browser {
         ["moved", "close"].forEach((event: any) => {
             this.window.on(event, Browser.saveWindowState);
         });
+
+        if (this.awaitsSend.length > 0) {
+            this.awaitsSend.forEach((data) => {
+                this.send(data.channel, ...data.args);
+            });
+        }
 
         Browser.instance = this;
     }
@@ -96,6 +103,7 @@ export class Browser {
     static send(channel: string, create: boolean = false, ...args: any[]) {
         if (create || Browser.instance)
             Browser.getInstance().send(channel, ...args);
+        else Browser.getInstance().awaitsSend.push({ channel, args });
     }
 
     static setTheme(theme: string) {
