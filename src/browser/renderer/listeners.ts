@@ -104,6 +104,23 @@ export function init() {
 
                     if (input.id === "config_autolaunch")
                         window.api.send("autolaunch-change", {});
+                    else if (input.id === "config_wakandaForeverMode") {
+                        if (input.checked) {
+                            const ele: HTMLLinkElement =
+                                document.createElement("link");
+
+                            ele.rel = "stylesheet";
+                            ele.href = "css/wakandaForever.css";
+
+                            document.head.appendChild(ele);
+                        } else {
+                            document
+                                .querySelector<HTMLLinkElement>(
+                                    "link[href='css/wakandaForever.css']"
+                                )
+                                ?.remove();
+                        }
+                    }
                 });
             } else if (input.type === "text") {
                 let timeout;
@@ -130,6 +147,15 @@ export function init() {
 
                 input.classList.remove("cfg_loading");
                 input.parentElement.classList.remove("cfg_loading");
+
+                if (input.id === "config_wakandaForeverMode" && configValue) {
+                    const ele: HTMLLinkElement = document.createElement("link");
+
+                    ele.rel = "stylesheet";
+                    ele.href = "css/wakandaForever.css";
+
+                    document.head.appendChild(ele);
+                }
             }
         });
 

@@ -1,0 +1,26 @@
+body {
+    background-color: #0c0b13 !important;
+    color: #ffffff8c !important;
+    --border-color: #664eae !important;
+}
+
+div.control {
+    background-color: #252046 !important;
+}
+
+div.content form .settings_setting {
+    background-color: rgb(0 0 0 / 75%) !important;
+}
+
+.cfgSwitch i::before,
+.cfgSwitch i {
+    background-color: #1a0554 !important;
+}
+
+.cfgSwitch i::after {
+    background-color: #c4a8ff !important;
+}
+
+.cfgSwitch input:checked + i {
+    background-color: #664eae !important;
+}
