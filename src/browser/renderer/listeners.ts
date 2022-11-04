@@ -20,33 +20,8 @@ export function init() {
             select.addEventListener("change", async () => {
                 console.log(select.id.replace("config_", ""), select.value);
 
-                if (select.dataset.restart === "true") {
-                    if (
-                        select.value?.toString() ===
-                        restartRequiredMemory[select.id]?.toString()
-                    ) {
-                        delete restartRequiredMemory[select.id];
-
-                        document.querySelector<HTMLSpanElement>(
-                            "span#restartApp"
-                        ).style["display"] = "none";
-                        document.querySelector<HTMLSpanElement>(
-                            "span#reloadPage"
-                        ).style["display"] = "inline";
-                    } else {
-                        restartRequiredMemory[select.id] =
-                            await window.electron.config.get(
-                                select.id.replace("config_", "")
-                            );
-
-                        document.querySelector<HTMLSpanElement>(
-                            "span#restartApp"
-                        ).style["display"] = "inline";
-                        document.querySelector<HTMLSpanElement>(
-                            "span#reloadPage"
-                        ).style["display"] = "none";
-                    }
-                }
+                if (select.dataset.restart === "true")
+                    checkRestartRequired(select.value, select.id);
 
                 window.electron.config.set(
                     select.id.replace("config_", ""),
@@ -67,6 +42,9 @@ export function init() {
                 select.value = configValue;
                 select.classList.remove("cfg_loading");
                 select.parentElement.classList.remove("cfg_loading");
+
+                if (select.dataset.restart === "true")
+                    restartRequiredMemory[select.id] = configValue.toString();
             }
         });
 
@@ -80,27 +58,8 @@ export function init() {
                         input.checked
                     );
 
-                    if (input.dataset.restart === "true") {
-                        if (input.checked === restartRequiredMemory[input.id]) {
-                            delete restartRequiredMemory[input.id];
-
-                            document.querySelector<HTMLSpanElement>(
-                                "span#restartApp"
-                            ).style["display"] = "none";
-                            document.querySelector<HTMLSpanElement>(
-                                "span#reloadPage"
-                            ).style["display"] = "inline";
-                        } else {
-                            restartRequiredMemory[input.id] = !input.checked;
-
-                            document.querySelector<HTMLSpanElement>(
-                                "span#restartApp"
-                            ).style["display"] = "inline";
-                            document.querySelector<HTMLSpanElement>(
-                                "span#reloadPage"
-                            ).style["display"] = "none";
-                        }
-                    }
+                    if (input.dataset.restart === "true")
+                        checkRestartRequired(input.checked, input.id);
 
                     if (input.id === "config_autolaunch")
                         window.api.send("autolaunch-change", {});
@@ -147,6 +106,9 @@ export function init() {
 
                 input.classList.remove("cfg_loading");
                 input.parentElement.classList.remove("cfg_loading");
+
+                if (input.dataset.restart === "true")
+                    restartRequiredMemory[input.id] = configValue.toString();
 
                 if (input.id === "config_wakandaForeverMode" && configValue) {
                     const ele: HTMLLinkElement = document.createElement("link");
@@ -204,4 +166,18 @@ export function init() {
 
             ele.querySelector(".setting_main").appendChild(resetButton);
         });
+}
+
+async function checkRestartRequired(
+    value: string | boolean,
+    id: string
+): Promise<void> {
+    const restartAppSpan =
+            document.querySelector<HTMLSpanElement>("span#restartApp"),
+        reloadAppSpan =
+            document.querySelector<HTMLSpanElement>("span#reloadPage"),
+        isSame = value.toString() === restartRequiredMemory[id];
+
+    restartAppSpan.style["display"] = isSame ? "none" : "inline";
+    reloadAppSpan.style["display"] = isSame ? "inline" : "none";
 }
