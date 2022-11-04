@@ -315,20 +315,31 @@
             >
                 <i class="fa-solid fa-hand-holding-heart"></i>
             </span>
-            <span onclick="window.electron.reload()" id="reloadPage">
+            <span onclick="reload(this)" id="reloadPage">
                 <i class="fa-solid fa-rotate-right"></i>
             </span>
             <span
                 onclick="window.electron.restart()"
-                style="display: none; color: #ef4a4a"
+                style="display: none"
                 id="restartApp"
             >
-                <i class="fa-solid fa-rotate-right"></i>
+                <i class="fa-solid fa-rotate-right" style="color: #ef4a4a"></i>
                 <span style="color: #ef4a4a">Restart required</span>
             </span>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <script type="module" src="renderer/index.js"></script>
+        <script>
+            function reload(ele) {
+                const i = ele.querySelector("i");
+
+                i.style.width = "unset";
+                i.classList.remove("fa-rotate-right");
+                i.classList.add("fa-sync", "fa-spin");
+
+                window.electron.reload();
+            }
+        </script>
     </body>
 </html>
