@@ -44,7 +44,7 @@ export class Discord {
                     discordType.charAt(0).toLowerCase() + discordType.slice(1)
                 ] = new replaceVariables(
                     Discord.instance.currentTrack
-                ).getResult(type);
+                ).getResult(discordType);
 
                 Discord.setActivity(Discord.instance.activity);
             }
