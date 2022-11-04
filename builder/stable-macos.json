@@ -13,7 +13,7 @@
 	],
 	"asar": true,
 	"asarUnpack": [
-		"node_modules/itunes-bridge/wscript"
+		"node_modules/apple-bridge/dist/darwin/*.scpt"
 	],
 	"directories": {
 		"app": "dist",
