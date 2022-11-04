@@ -2,7 +2,7 @@ export function init() {
     const data = [
         {
             selector: ".settings_setting:has(input#config_wakandaForeverMode)",
-            dates: ["YYYY-08-28", "YYYY-11-11"],
+            dates: ["YYYY-08-28", "2022-11-11"],
             configKey: "wakandaForeverMode",
             disabledConfigValue: false
         }
