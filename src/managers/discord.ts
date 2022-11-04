@@ -194,6 +194,8 @@ export class Discord {
         artist: string,
         callback
     ) {
+        if (title === "Connecting…") return callback(null, true);
+
         const reqParam = encodeURIComponent(`${title} ${album} ${artist}`)
                 .replace(/"/g, "%27")
                 .replace(/"/g, "%22"),
