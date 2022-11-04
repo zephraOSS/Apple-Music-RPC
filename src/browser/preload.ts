@@ -55,6 +55,7 @@ contextBridge.exposeInMainWorld("electron", {
 
         ipcRenderer.invoke("openURL", url);
     },
+    resetCache: () => ipcRenderer.invoke("resetCache"),
     updateLanguage: (lang) => ipcRenderer.invoke("updateLanguage", lang),
     minimize: () => ipcRenderer.invoke("windowControl", "minimize"),
     maximize: () => ipcRenderer.invoke("windowControl", "maximize"),

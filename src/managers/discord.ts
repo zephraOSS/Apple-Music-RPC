@@ -223,7 +223,9 @@ export class Discord {
                         )
                     };
 
-                    cache.set(`${title}_:_${album}_:_${artist}`, result);
+                    if (config.get("enableCache"))
+                        cache.set(`${title}_:_${album}_:_${artist}`, result);
+
                     callback(result);
                 } else callback(null, true);
             }

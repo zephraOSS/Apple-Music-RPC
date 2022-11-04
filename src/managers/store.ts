@@ -8,6 +8,7 @@ export const config = new Store({
             hideOnPause: true,
             showAlbumArtwork: true,
             hardwareAcceleration: true,
+            enableCache: true,
             service: "itunes",
             colorTheme: "light",
             language: "en_US",

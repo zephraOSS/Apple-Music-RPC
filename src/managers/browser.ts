@@ -1,7 +1,10 @@
 import { app, BrowserWindow } from "electron";
 import { getConfig, setConfig, config } from "./store";
 import { init as initIPC } from "./ipc";
-import path from "path";
+import { exec } from "child_process";
+
+import * as path from "path";
+import * as log from "electron-log";
 
 export class Browser {
     private window: BrowserWindow;
@@ -43,7 +46,7 @@ export class Browser {
         Browser.instance = this;
     }
 
-    windowAction(action: string) {
+    async windowAction(action: string) {
         switch (action) {
             case "show":
                 this.window.show();
@@ -71,6 +74,7 @@ export class Browser {
 
                 break;
             case "reload":
+                if (!app.isPackaged) await this.copyBrowserFiles();
                 this.window.reload();
 
                 break;
@@ -94,6 +98,31 @@ export class Browser {
                 this.send(data.channel, ...data.args);
             });
         }
+    }
+
+    async copyBrowserFiles() {
+        if (app.isPackaged) return;
+
+        return new Promise(function (resolve) {
+            const execute = exec(
+                "npm run copy && cd src/browser/renderer/ && tsc",
+                (error, _stdout, stderr) => {
+                    if (error)
+                        return log.error(
+                            "[Browser][copyBrowserFiles][exec] Error",
+                            error.message
+                        );
+                    if (stderr)
+                        return log.error(
+                            "[Browser][copyBrowserFiles][exec] Stderr",
+                            stderr
+                        );
+                }
+            );
+
+            execute.addListener("error", resolve);
+            execute.addListener("exit", resolve);
+        });
     }
 
     static getInstance(): Browser {

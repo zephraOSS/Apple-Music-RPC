@@ -1,6 +1,13 @@
 import { app, ipcMain, nativeTheme, shell } from "electron";
 import { autoUpdater } from "electron-updater";
-import { config, getAppData, getConfig, setAppData, setConfig } from "./store";
+import {
+    cache,
+    config,
+    getAppData,
+    getConfig,
+    setAppData,
+    setConfig
+} from "./store";
 import { init as initAutoLaunch } from "./launch";
 import { Browser } from "./browser";
 import { Discord } from "./discord";
@@ -89,11 +96,14 @@ export function init() {
     });
 
     ipcMain.handle("updateConfig", (_e, k: string, v: any) => {
-        if (k === "rpcLargeImageText" && !Discord.instance.isSupporter)
+        if (k === "rpcLargeImageText" && !Discord.instance.isSupporter) {
             return log.warn(
                 "[IPC][UPDATE_CONFIG]",
                 `User is not a supporter, cannot change large image text (isSupporter: ${Discord.instance.isSupporter})`
             );
+        }
+
+        if (k === "enableCache" && !v) cache.clear();
 
         setConfig(k, v);
     });
@@ -138,5 +148,10 @@ export function init() {
 
     ipcMain.handle("isReady", (_e, isReady: boolean) => {
         Browser.getInstance().isReady = isReady;
+    });
+
+    // Button actions
+    ipcMain.handle("resetCache", () => {
+        cache.clear();
     });
 }

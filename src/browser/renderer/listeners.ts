@@ -160,6 +160,29 @@ export function init() {
         });
 
     document
+        .querySelectorAll(".settings_setting button")
+        .forEach(async (button: HTMLButtonElement) => {
+            button.addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                if (!button.dataset.action) return;
+
+                const Await = button.dataset.await === "true";
+
+                if (!Await) window.electron[button.dataset.action]();
+                else {
+                    const innerText = button.innerText;
+
+                    button.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+
+                    await window.electron[button.dataset.action]();
+
+                    button.innerText = innerText;
+                }
+            });
+        });
+
+    document
         .querySelectorAll(".settings_setting[data-enableReset='true']")
         .forEach((ele) => {
             const formField: HTMLInputElement | HTMLSelectElement =
