@@ -36,7 +36,7 @@ export class ModalWatcher {
         log.info("[ModalWatcher][openModal] Opening modal", data.id);
 
         Browser.send(
-            "openModal",
+            "open-modal",
             data.priority?.toString() ? data.priority : false,
             data
         );

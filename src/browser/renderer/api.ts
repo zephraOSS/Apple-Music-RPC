@@ -94,4 +94,23 @@ export function init() {
                 "../assets/logo.png";
         }
     });
+
+    window.api.receive("open-modal", async (data) => {
+        if (data.i18n) {
+            const lang = await window.electron.config.get("language");
+
+            if (data.i18n[lang]) {
+                data.title = data.i18n[lang].title;
+                data.description = data.i18n[lang].description;
+
+                if (data.buttons.length > 0 && data.i18n[lang].buttons) {
+                    data.buttons.forEach((button) => {
+                        button.label = data.i18n[lang].buttons[button.label];
+                    });
+                }
+            }
+        }
+
+        new Modal(data.title, data.description, data.buttons);
+    });
 }
