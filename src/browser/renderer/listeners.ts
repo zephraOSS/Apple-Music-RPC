@@ -60,7 +60,7 @@ export function init() {
 
             const configValue = await window.electron.config.get(configKey);
 
-            if (configValue) {
+            if (configValue.toString()) {
                 eleValue(configValue);
 
                 ele.classList.remove("cfg_loading");
