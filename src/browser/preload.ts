@@ -83,3 +83,5 @@ contextBridge.exposeInMainWorld("api", {
             ipcRenderer.on(channel, (_event, ...args) => func(...args));
     }
 });
+
+ipcRenderer.invoke("isReady", true);

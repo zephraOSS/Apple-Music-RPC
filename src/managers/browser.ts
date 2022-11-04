@@ -6,6 +6,8 @@ import path from "path";
 export class Browser {
     private window: BrowserWindow;
 
+    public isReady: boolean = false;
+
     static awaitsSend: { channel: string; args: any[] }[] = [];
     static instance: Browser;
 
@@ -80,15 +82,14 @@ export class Browser {
     }
 
     send(channel: string, ...args: any[]) {
-        this.window.webContents.send(channel, ...args);
+        setTimeout(
+            () => this.window.webContents.send(channel, ...args),
+            this.isReady ? 0 : 2500
+        );
     }
 
     checkAwaits() {
-        if (
-            Browser.awaitsSend.length > 0 &&
-            Browser.instance &&
-            Browser.getInstance().window.isVisible()
-        ) {
+        if (Browser.awaitsSend.length > 0 && this.window.isVisible()) {
             Browser.awaitsSend.forEach((data) => {
                 this.send(data.channel, ...data.args);
             });

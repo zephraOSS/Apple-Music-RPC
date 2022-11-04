@@ -135,4 +135,8 @@ export function init() {
 
         shell.openExternal(url);
     });
+
+    ipcMain.handle("isReady", (_e, isReady: boolean) => {
+        Browser.getInstance().isReady = isReady;
+    });
 }
