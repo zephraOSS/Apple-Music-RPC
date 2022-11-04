@@ -32,8 +32,7 @@ export class Modal {
         ELE.title.innerHTML = this.title;
         ELE.description.innerHTML = this.description;
 
-        this.modalId = generateEleId();
-        ELE.modal.id = this.modalId;
+        ELE.modal.id = this.modalId = generateEleId();
 
         for (let i = 0; i < buttons.length; i++) {
             if (i > 2) return;
@@ -52,10 +51,10 @@ export class Modal {
                     const event = buttons[i].events[i2];
 
                     if (event.value) ele.setAttribute(event.name, event.value);
-                    else if (event.type === "close")
-                        ele.addEventListener(event.name, () => this.close());
-                    else if (event.type === "delete")
-                        ele.addEventListener(event.name, () => this.delete());
+                    if (event.type === "close" || event.type === "delete")
+                        ele.addEventListener(event.name, () =>
+                            this[event.type]()
+                        );
                     else if (event.action)
                         ele.addEventListener(event.name, () => event.action());
                 }

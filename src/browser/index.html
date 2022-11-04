@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>AMRPC</title>
+        <title>Settings - AMRPC</title>
         <link rel="stylesheet" href="css/style.css" />
         <link
             rel="stylesheet"
@@ -339,6 +339,16 @@
                 i.classList.add("fa-sync", "fa-spin");
 
                 window.electron.reload();
+            }
+
+            async function updateDataChangelogJS(version, state) {
+                const changelog = await window.electron.appData.get(
+                    "changelog"
+                );
+
+                changelog[version] = state;
+
+                window.electron.appData.set("changelog", changelog);
             }
         </script>
     </body>

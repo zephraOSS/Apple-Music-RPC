@@ -1,7 +1,6 @@
 import { Tray, Menu, app } from "electron";
 import { Browser } from "./browser";
 import * as path from "path";
-import { getConfig } from "./store";
 
 export class TrayManager {
     private tray: Tray;
@@ -31,11 +30,10 @@ export class TrayManager {
             },
             {
                 label:
-                    getConfig("service") === "ame"
-                        ? "Apple Music Electron"
-                        : process.platform === "darwin"
-                        ? "iTunes / Apple Music"
-                        : "iTunes",
+                    parseInt(process.release.toString().replace(".", "")) <=
+                        10.15 || process.platform === "win32"
+                        ? "iTunes"
+                        : "Apple Music",
                 enabled: false
             },
             { type: "separator" },

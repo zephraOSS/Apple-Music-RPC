@@ -16,14 +16,6 @@ export function generateEleId() {
     return result;
 }
 
-export async function updateDataChangelog(k: string, v: string) {
-    const changelog = await window.electron.appData.get("changelog");
-
-    changelog[k] = v;
-
-    window.electron.appData.set("changelog", changelog);
-}
-
 export async function updateTheme(theme?: string) {
     if (!theme) theme = await window.electron.getTheme();
 

@@ -15,7 +15,8 @@ declare global {
 export let appVersion,
     restartRequiredMemory = {},
     platform,
-    isSupporter: boolean = null;
+    isSupporter: boolean = null,
+    isDeveloper: boolean = null;
 
 console.log("[BROWSER][RENDERER] Loading...");
 
@@ -32,10 +33,17 @@ updateLanguage();
     appVersion = await window.electron.appVersion();
     platform = await window.electron.getPlatform();
     isSupporter = await window.electron.isSupporter();
+    isDeveloper = await window.electron.isDeveloper();
 
     document.querySelector("span#extra_version").textContent = `${
-        (await window.electron.isDeveloper()) ? "Developer" : ""
+        isDeveloper ? "Developer" : ""
     } V.${appVersion}`;
+
+    if (isDeveloper) {
+        document.querySelector<HTMLInputElement>(
+            ".settings_setting input#config_autoLaunch"
+        ).disabled = true;
+    }
 
     document
         .querySelectorAll("input[os], option[os]")
@@ -116,7 +124,8 @@ updateLanguage();
                         events: [
                             {
                                 name: "onclick",
-                                value: "updateDataChangelog(appVersion, true), closeModal(this.parentElement.id)"
+                                value: "updateDataChangelogJS(appVersion, true)",
+                                type: "delete"
                             }
                         ]
                     }

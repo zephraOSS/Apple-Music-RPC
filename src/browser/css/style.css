@@ -492,7 +492,7 @@ body[data-theme="dark"] .settings_setting select {
 
 input:disabled,
 select:disabled,
-.cfgSwitch:disabled,
+.cfgSwitch:has(input:disabled, select:disabled),
 .cfg_loading {
     pointer-events: none;
     cursor: not-allowed;
