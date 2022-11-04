@@ -3,6 +3,7 @@ import { updateTheme, updateLanguage, langString, openURL } from "./utils.js";
 
 import { init as initAPI } from "./api.js";
 import { init as initListeners } from "./listeners.js";
+import { init as initEventSettings } from "./eventSettings.js";
 
 declare global {
     interface Window {
@@ -19,6 +20,7 @@ export let appVersion,
 console.log("[BROWSER][RENDERER] Loading...");
 
 initAPI();
+initEventSettings();
 initListeners();
 
 updateTheme();
