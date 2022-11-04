@@ -202,6 +202,6 @@ export function init() {
                 formField.value = await window.electron.config.reset(configKey);
             });
 
-            ele.appendChild(resetButton);
+            ele.querySelector(".setting_main").appendChild(resetButton);
         });
 }
