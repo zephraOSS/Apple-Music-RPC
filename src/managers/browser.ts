@@ -5,8 +5,8 @@ import path from "path";
 
 export class Browser {
     private window: BrowserWindow;
-    private awaitsSend: { channel: string; args: any[] }[] = [];
 
+    static awaitsSend: { channel: string; args: any[] }[] = [];
     static instance: Browser;
 
     constructor() {
@@ -36,11 +36,7 @@ export class Browser {
             this.window.on(event, Browser.saveWindowState);
         });
 
-        if (this.awaitsSend.length > 0) {
-            this.awaitsSend.forEach((data) => {
-                this.send(data.channel, ...data.args);
-            });
-        }
+        this.checkAwaits();
 
         Browser.instance = this;
     }
@@ -49,6 +45,7 @@ export class Browser {
         switch (action) {
             case "show":
                 this.window.show();
+                this.checkAwaits();
 
                 break;
             case "hide":
@@ -86,6 +83,18 @@ export class Browser {
         this.window.webContents.send(channel, ...args);
     }
 
+    checkAwaits() {
+        if (
+            Browser.awaitsSend.length > 0 &&
+            Browser.instance &&
+            Browser.getInstance().window.isVisible()
+        ) {
+            Browser.awaitsSend.forEach((data) => {
+                this.send(data.channel, ...data.args);
+            });
+        }
+    }
+
     static getInstance(): Browser {
         if (!Browser.instance) Browser.instance = new Browser();
 
@@ -103,7 +112,7 @@ export class Browser {
     static send(channel: string, create: boolean = false, ...args: any[]) {
         if (create || Browser.instance)
             Browser.getInstance().send(channel, ...args);
-        else Browser.getInstance().awaitsSend.push({ channel, args });
+        else Browser.awaitsSend.push({ channel, args });
     }
 
     static setTheme(theme: string) {
