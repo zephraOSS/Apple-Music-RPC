@@ -15,102 +15,61 @@ export function init() {
         ?.addEventListener("click", window.electron.hide);
 
     document
-        .querySelectorAll(".settings_setting select")
-        .forEach(async (select: HTMLSelectElement) => {
-            select.addEventListener("change", async () => {
-                console.log(select.id.replace("config_", ""), select.value);
+        .querySelectorAll(".settings_setting input, select")
+        .forEach(async (ele: HTMLInputElement | HTMLSelectElement) => {
+            const configKey = ele.id.replace("config_", ""),
+                eleTag = ele.tagName.toLowerCase(),
+                eleValue = (value?: string | boolean): string | boolean => {
+                    if (value) {
+                        if (eleTag === "input" && ele.type === "checkbox") {
+                            (ele as HTMLInputElement).checked =
+                                value as boolean;
+                        } else ele.value = value.toString();
 
-                if (select.dataset.restart === "true")
-                    checkRestartRequired(select.value, select.id);
-
-                window.electron.config.set(
-                    select.id.replace("config_", ""),
-                    select.value === "true" || select.value === "false"
-                        ? select.value === "true"
-                        : select.value
-                );
-
-                if (select.id === "config_colorTheme") updateTheme();
-                else if (select.id === "config_language") updateLanguage();
-            });
-
-            const configValue = await window.electron.config.get(
-                select.id.replace("config_", "")
-            );
-
-            if (configValue) {
-                select.value = configValue;
-                select.classList.remove("cfg_loading");
-                select.parentElement.classList.remove("cfg_loading");
-
-                if (select.dataset.restart === "true")
-                    restartRequiredMemory[select.id] = configValue.toString();
-            }
-        });
-
-    document
-        .querySelectorAll(".settings_setting input")
-        .forEach(async (input: HTMLInputElement) => {
-            if (input.type == "checkbox") {
-                input.addEventListener("click", () => {
-                    window.electron.config.set(
-                        input.id.replace("config_", ""),
-                        input.checked
-                    );
-
-                    if (input.dataset.restart === "true")
-                        checkRestartRequired(input.checked, input.id);
-
-                    if (input.id === "config_autolaunch")
-                        window.api.send("autolaunch-change", {});
-                    else if (input.id === "config_wakandaForeverMode") {
-                        if (input.checked) {
-                            const ele: HTMLLinkElement =
-                                document.createElement("link");
-
-                            ele.rel = "stylesheet";
-                            ele.href = "css/wakandaForever.css";
-
-                            document.head.appendChild(ele);
-                        } else {
-                            document
-                                .querySelector<HTMLLinkElement>(
-                                    "link[href='css/wakandaForever.css']"
-                                )
-                                ?.remove();
-                        }
+                        return;
                     }
-                });
-            } else if (input.type === "text") {
+
+                    if (eleTag === "input" && ele.type === "checkbox")
+                        return (ele as HTMLInputElement).checked;
+                    else return ele.value;
+                };
+
+            if (ele.type === "text") {
                 let timeout;
 
-                input.addEventListener("keyup", function () {
+                ele.addEventListener("keyup", () => {
                     clearTimeout(timeout);
 
-                    timeout = setTimeout(function () {
-                        window.electron.config.set(
-                            input.id.replace("config_", ""),
-                            input.value
-                        );
+                    timeout = setTimeout(() => {
+                        window.electron.config.set(configKey, eleValue());
                     }, 1500);
+                });
+            } else {
+                ele.addEventListener("change", async () => {
+                    const value = eleValue(),
+                        configKey = ele.id.replace("config_", "");
+
+                    if (ele.dataset.restart === "true")
+                        checkRestartRequired(value, ele.id);
+
+                    window.electron.config.set(configKey, value);
+
+                    valueChangeEvents(ele);
                 });
             }
 
-            const configValue = await window.electron.config.get(
-                input.id.replace("config_", "")
-            );
+            const configValue = await window.electron.config.get(configKey);
 
-            if (configValue !== undefined) {
-                if (input.type === "checkbox") input.checked = configValue;
-                else if (input.type === "text") input.value = configValue;
+            if (configValue) {
+                eleValue(configValue);
 
-                input.classList.remove("cfg_loading");
-                input.parentElement.classList.remove("cfg_loading");
+                ele.classList.remove("cfg_loading");
+                ele.parentElement.classList.remove("cfg_loading");
 
-                if (input.dataset.restart === "true")
-                    restartRequiredMemory[input.id] = configValue.toString();
+                if (ele.dataset.restart === "true")
+                    restartRequiredMemory[ele.id] = configValue.toString();
 
-                if (input.id === "config_wakandaForeverMode" && configValue) {
+                if (ele.id === "config_wakandaForeverMode" && configValue) {
                     const ele: HTMLLinkElement = document.createElement("link");
 
                     ele.rel = "stylesheet";
@@ -180,4 +139,27 @@ async function checkRestartRequired(
 
     restartAppSpan.style["display"] = isSame ? "none" : "inline";
     reloadAppSpan.style["display"] = isSame ? "inline" : "none";
+}
+
+function valueChangeEvents(ele): void {
+    if (ele.id === "config_colorTheme") updateTheme();
+    else if (ele.id === "config_language") updateLanguage();
+    else if (ele.id === "config_autoLaunch")
+        window.api.send("autolaunch-change", {});
+    else if (ele.id === "config_wakandaForeverMode") {
+        if (ele.checked) {
+            const ele: HTMLLinkElement = document.createElement("link");
+
+            ele.rel = "stylesheet";
+            ele.href = "css/wakandaForever.css";
+
+            document.head.appendChild(ele);
+        } else {
+            document
+                .querySelector<HTMLLinkElement>(
+                    "link[href='css/wakandaForever.css']"
+                )
+                ?.remove();
+        }
+    }
 }
