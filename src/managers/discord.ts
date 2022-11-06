@@ -1,7 +1,7 @@
 import { app } from "electron";
 import { Browser } from "./browser";
 import { cache, config, getConfig, setConfig } from "./store";
-import { Client, Presence, register } from "discord-rpc";
+import { Client, Presence, register, User } from "discord-rpc";
 import { checkSupporter } from "../utils/checkSupporter";
 import { replaceVariables } from "../utils/replaceVariables";
 
@@ -233,7 +233,7 @@ export class Discord {
     }
 }
 
-export function getUserData() {
+export function getUserData(): Promise<User> {
     return new Promise((resolve, reject) => {
         const client = new Client({ transport: "ipc" });
 
