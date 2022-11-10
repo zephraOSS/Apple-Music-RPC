@@ -1,5 +1,6 @@
 import { Discord } from "./discord";
 import { Browser } from "./browser";
+import { config } from "./store";
 import { AppleBridge } from "apple-bridge";
 import { fetchITunes } from "apple-bridge/dist/win32";
 
@@ -44,7 +45,13 @@ export function init() {
 
         lastTrack = {};
 
-        discord.clearActivity();
+        if (config.get("hideOnPause")) discord.clearActivity();
+        else {
+            discord.activity.startTimestamp = null;
+            discord.activity.endTimestamp = null;
+
+            Discord.setActivity(discord.activity);
+        }
 
         Browser.send("get-current-track", false, {
             playerState: currentTrack.playerState
