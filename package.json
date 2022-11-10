@@ -1,6 +1,6 @@
 {
     "name": "amrpc",
-    "version": "4.0.0-beta",
+    "version": "4.0.0",
     "description": "Discord RPC for Apple Music",
     "scripts": {
         "start": "npm run copy && npm run build && electron ./dist/",
