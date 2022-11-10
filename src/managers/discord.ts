@@ -13,7 +13,7 @@ export class Discord {
     private client: Client;
     private isReady: boolean = false;
     private startUp: boolean = true;
-    private defaultLIT: string = `AMRPC - V.${app.getVersion()}`;
+    private defaultLIT: string = `AMRPC - ${app.getVersion()}`;
 
     public activity: Presence = {};
     public isLive: boolean = false;
@@ -66,10 +66,9 @@ export class Discord {
                 this.isSupporter = await checkSupporter(client.user.id);
 
                 if (!this.isSupporter) {
-                    setConfig(
-                        "rpcLargeImageText",
-                        `AMRPC - V.${app.getVersion()}`
-                    );
+                    this.activity.largeImageText = this.defaultLIT;
+
+                    setConfig("rpcLargeImageText", `AMRPC - %version%`);
                 }
 
                 this.isReady = true;
