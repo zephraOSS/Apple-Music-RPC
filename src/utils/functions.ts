@@ -1,4 +1,4 @@
-const { app } = require("electron");
+import { app } from "electron";
 
 export function bounce(type: "informational" | "critical") {
     if (process.platform !== "darwin") return false;
