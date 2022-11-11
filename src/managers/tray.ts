@@ -1,5 +1,6 @@
 import { Tray, Menu, app } from "electron";
 import { Browser } from "./browser";
+
 import * as path from "path";
 
 export class TrayManager {
@@ -9,12 +10,10 @@ export class TrayManager {
         this.tray = new Tray(
             path.join(app.getAppPath(), "assets/tray/logo@32.png")
         );
+
         this.tray.setToolTip("AMRPC");
         this.tray.setContextMenu(this.createContextMenu());
-
-        this.tray.on("click", () => {
-            new Browser();
-        });
+        this.tray.on("click", () => new Browser());
 
         app.on("before-quit", this.tray.destroy);
     }
