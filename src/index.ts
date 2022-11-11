@@ -15,6 +15,8 @@ import * as log from "electron-log";
 export let trayManager: TrayManager;
 export let modalWatcher: ModalWatcher;
 
+Object.assign(console, log.functions);
+
 if (!app.requestSingleInstanceLock()) app.quit();
 
 initSentry();
