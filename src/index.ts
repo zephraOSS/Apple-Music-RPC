@@ -7,7 +7,7 @@ import { getConfig } from "./managers/store";
 import { init as initSentry } from "./managers/sentry";
 import { init as initAutoLaunch } from "./managers/launch";
 import { init as initAutoUpdater } from "./managers/updater";
-import { init as initITunes } from "./managers/itunes";
+import { init as initITunes } from "./managers/bridge";
 import { init as initTheme } from "./utils/theme";
 
 import * as log from "electron-log";
