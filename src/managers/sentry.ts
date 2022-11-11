@@ -3,7 +3,7 @@ import * as log from "electron-log";
 
 import { app } from "electron";
 
-export async function init() {
+export function init() {
     if (!app.isPackaged) return log.info("[SENTRY]", "Sentry is disabled");
 
     Sentry.init({
