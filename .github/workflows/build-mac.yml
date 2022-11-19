@@ -32,4 +32,4 @@ jobs:
               run: npm i
 
             - name: Build
-              run: npm run build:mac
+              run: npm run build:macos
