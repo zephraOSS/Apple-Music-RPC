@@ -3,10 +3,12 @@ import { autoUpdater } from "electron-updater";
 import { bounce } from "../utils/functions";
 import { Browser } from "./browser";
 import { getAppData } from "./store";
+import { checkIfMSStore } from "../utils/checkIfMSStore";
+
 import * as log from "electron-log";
 
 export function init() {
-    if (!app.isPackaged) return;
+    if (!app.isPackaged || checkIfMSStore()) return;
 
     autoUpdater.on("update-available", (info) => {
         log.info(`[UPDATER] Update available (${info.version})`);
