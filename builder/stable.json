@@ -6,19 +6,15 @@
     "protocols": [
         {
             "name": "AMRPC",
-            "schemes": [
-                "amrpc"
-            ]
+            "schemes": ["amrpc"]
         }
     ],
     "asar": true,
-    "asarUnpack": [
-        "node_modules/apple-bridge/dist/win32/wscript/"
-    ],
+    "asarUnpack": ["node_modules/apple-bridge/dist/win32/wscript/"],
     "directories": {
         "app": "dist",
         "buildResources": "src/assets",
-        "output": "app/win"
+        "output": "app/win/normal"
     },
     "nsis": {
         "createDesktopShortcut": "always"
@@ -28,8 +24,6 @@
         "icon": "src/assets/icons/win32/icon.ico",
         "artifactName": "AMRPC-Installer.exe",
         "publisherName": "zephra",
-        "publish": [
-            "github"
-        ]
+        "publish": ["github"]
     }
 }
