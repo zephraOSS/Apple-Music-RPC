@@ -1,6 +1,14 @@
 name: Build (macOS)
 
 on: push
+paths-ignore:
+    - "README.md"
+    - "LICENSE"
+    - "@types"
+    - ".gitignore"
+    - ".prettierrc.json"
+    - ".vscode"
+    - "tsconfig.json"
 
 jobs:
     release:
@@ -25,5 +33,5 @@ jobs:
                   # GitHub token, automatically provided to the action
                   # (No need to define this secret in the repo settings)
                   github_token: ${{ secrets.github_token }}
-                  build_script_name: "build:mac"
+                  build_script_name: "build && npm run copy"
                   args: "--config builder/stable-macos.json"
