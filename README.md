@@ -1,4 +1,4 @@
-![banner](https://user-images.githubusercontent.com/53608074/187286753-db4a909a-9c6a-4ed3-91e1-1a5a85a732b9.png)
+![banner](https://user-images.githubusercontent.com/53608074/201397177-1d08c4ed-d595-41ab-86cb-3e8bd1da46dd.png)
 # Apple Music RPC for Discord
 
 ## Installation
@@ -6,7 +6,7 @@
 * Open the **AMRPC-Installer.exe** file
 * Done
 
-[Requirements](https://github.com/ZephraCloud/Apple-Music-RPC/wiki/Installation)
+[Requirements](https://docs.amrpc.zephra.cloud/installation/windows)
 
 ## You need help?
 * Take a look at [the documentation](https://docs.amrpc.zephra.cloud)
