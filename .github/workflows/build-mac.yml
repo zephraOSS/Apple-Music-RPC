@@ -33,3 +33,4 @@ jobs:
 
             - name: Build
               run: npm run build:macos
+              USE_HARD_LINKS: false
