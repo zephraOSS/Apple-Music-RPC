@@ -1,14 +1,15 @@
 name: Build (macOS)
 
-on: push
-paths-ignore:
-    - "README.md"
-    - "LICENSE"
-    - "@types"
-    - ".gitignore"
-    - ".prettierrc.json"
-    - ".vscode"
-    - "tsconfig.json"
+on:
+    push:
+        paths-ignore:
+            - "README.md"
+            - "LICENSE"
+            - "@types"
+            - ".gitignore"
+            - ".prettierrc.json"
+            - ".vscode"
+            - "tsconfig.json"
 
 jobs:
     release:
