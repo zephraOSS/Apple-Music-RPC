@@ -38,6 +38,12 @@ updateLanguage();
     document.querySelector("span#extra_version").textContent = `${
         isDeveloper ? "Developer" : ""
     } V.${appVersion}`;
+    document
+        .querySelector("span#extra_version")
+        .setAttribute(
+            "onclick",
+            `window.electron.openURL('https://github.com/ZephraCloud/Apple-Music-RPC/releases/tag/v${appVersion}')`
+        );
 
     if (isDeveloper) {
         document.querySelector<HTMLInputElement>(
