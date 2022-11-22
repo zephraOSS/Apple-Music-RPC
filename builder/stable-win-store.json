@@ -13,7 +13,7 @@
     "asarUnpack": ["node_modules/apple-bridge/dist/win32/wscript/"],
     "directories": {
         "app": "dist",
-        "buildResources": "Resources",
+        "buildResources": "src/assets",
         "output": "app/win/store"
     },
     "appx": {
@@ -28,6 +28,6 @@
     },
     "win": {
         "target": "appx",
-        "icon": "src/assets/icons/win32/icon.ico"
+        "icon": "src/assets/appx/StoreLogo.png"
     }
 }
