@@ -4,6 +4,7 @@ import { cache, config, getConfig, setConfig } from "./store";
 import { Client, Presence, register, User } from "discord-rpc";
 import { checkSupporter } from "../utils/checkSupporter";
 import { replaceVariables } from "../utils/replaceVariables";
+import { appDependencies } from "../index";
 
 import { fetchUrl as fetch } from "fetch";
 
@@ -23,6 +24,8 @@ export class Discord {
     static instance: Discord;
 
     constructor() {
+        if (!appDependencies.discord) return;
+
         this.connect();
 
         Discord.instance = this;

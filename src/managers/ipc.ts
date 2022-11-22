@@ -8,10 +8,12 @@ import {
     setAppData,
     setConfig
 } from "./store";
-import { init as initAutoLaunch } from "./launch";
 import { Browser } from "./browser";
 import { Discord } from "./discord";
 import { useDarkMode } from "../utils/theme";
+import { appDependencies } from "../index";
+
+import { init as initAutoLaunch } from "./launch";
 
 import * as log from "electron-log";
 
@@ -47,7 +49,7 @@ export function init() {
     });
 
     ipcMain.handle("isSupporter", () => {
-        return Discord.instance.isSupporter;
+        return appDependencies.discord ? Discord.instance.isSupporter : false;
     });
 
     ipcMain.handle("getLangStrings", (_e, lang: string) => {
@@ -68,6 +70,9 @@ export function init() {
     });
 
     ipcMain.handle("getCurrentTrack", () => {
+        if (!appDependencies.discord)
+            return { artwork: null, playerState: null };
+
         return {
             artwork: Discord.instance.currentTrack?.artwork ?? null,
             playerState: Discord.instance.currentTrack?.playerState ?? "stopped"
@@ -148,6 +153,10 @@ export function init() {
 
     ipcMain.handle("isReady", (_e, isReady: boolean) => {
         Browser.getInstance().isReady = isReady;
+    });
+
+    ipcMain.handle("checkAppDependencies", () => {
+        return appDependencies;
     });
 
     // Button actions

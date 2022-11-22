@@ -27,6 +27,9 @@ contextBridge.exposeInMainWorld("electron", {
     getCurrentTrack: () => {
         return ipcRenderer.invoke("getCurrentTrack", {});
     },
+    checkAppDependencies: () => {
+        return ipcRenderer.invoke("checkAppDependencies", {});
+    },
     appData: {
         set: (k, v) => ipcRenderer.invoke("updateAppData", k, v),
         get: (k) => {

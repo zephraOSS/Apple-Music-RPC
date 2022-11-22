@@ -77,3 +77,25 @@ export async function updateLanguage() {
             }
         });
 }
+
+export function newNote(
+    type: string,
+    titleText: string,
+    descriptionText: string
+) {
+    const note = document.createElement("div"),
+        title: HTMLHeadingElement = document.createElement("h3"),
+        description: HTMLParagraphElement = document.createElement("p");
+
+    note.classList.add("note");
+    note.classList.add(`note-${type}`);
+    title.classList.add("noteTitle");
+    description.classList.add("noteDescription");
+
+    title.innerText = titleText;
+    description.innerText = descriptionText;
+
+    note.appendChild(title);
+    note.appendChild(description);
+    document.querySelector(".notes").appendChild(note);
+}

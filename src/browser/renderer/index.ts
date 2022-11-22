@@ -1,5 +1,11 @@
 import { Modal } from "./modal.js";
-import { updateTheme, updateLanguage, langString, openURL } from "./utils.js";
+import {
+    updateTheme,
+    updateLanguage,
+    langString,
+    openURL,
+    newNote
+} from "./utils.js";
 
 import { init as initAPI } from "./api.js";
 import { init as initListeners } from "./listeners.js";
@@ -16,7 +22,11 @@ export let appVersion,
     restartRequiredMemory = {},
     platform,
     isSupporter: boolean = null,
-    isDeveloper: boolean = null;
+    isDeveloper: boolean = null,
+    appDependencies: {
+        music: boolean;
+        discord: boolean;
+    } = null;
 
 console.log("[BROWSER][RENDERER] Loading...");
 
@@ -34,6 +44,7 @@ updateLanguage();
     platform = await window.electron.getPlatform();
     isSupporter = await window.electron.isSupporter();
     isDeveloper = await window.electron.isDeveloper();
+    appDependencies = await window.electron.checkAppDependencies();
 
     document.querySelector("span#extra_version").textContent = `${
         isDeveloper ? "Developer" : ""
@@ -57,6 +68,22 @@ updateLanguage();
             if (ele.getAttribute("os") !== platform)
                 (<HTMLElement>ele.parentNode)?.remove();
         });
+
+    if (!appDependencies.music) {
+        newNote(
+            "warn",
+            langString.settings.warn.music.title,
+            langString.settings.warn.music.description
+        );
+    }
+
+    if (!appDependencies.discord) {
+        newNote(
+            "warn",
+            langString.settings.warn.discord.title,
+            langString.settings.warn.discord.description
+        );
+    }
 
     if (isSupporter) {
         document

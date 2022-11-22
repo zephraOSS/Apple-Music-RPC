@@ -84,3 +84,8 @@ interface APIUserRoles {
     id: string;
     name: string;
 }
+
+interface AppDependencies {
+    music: boolean;
+    discord: boolean;
+}

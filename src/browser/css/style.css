@@ -578,6 +578,29 @@ body[data-theme="christmas"] .cfgSwitch input:checked + i {
     transform: translate3d(22px, 2px, 0);
 }
 
+.notes:has(.note) {
+    margin-bottom: 50px;
+}
+
+.notes .note:not(:last-of-type) {
+    margin-bottom: 25px;
+}
+
+.note {
+    position: relative;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.noteTitle {
+    margin-top: 0;
+}
+
+.noteDescription {
+    margin-bottom: 0;
+}
+
 /* KEYFRAMES */
 @keyframes slidebg {
     to {
