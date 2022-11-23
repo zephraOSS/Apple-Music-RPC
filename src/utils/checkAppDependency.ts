@@ -1,8 +1,16 @@
 import { exec } from "child_process";
 
+import * as log from "electron-log";
+
 export async function checkAppDependency(): Promise<AppDependencies> {
+    const music = await checkIfAppIsInstalled("iTunes", "Music");
+
+    log[!music ? "warn" : "info"](
+        `[checkAppDependency][Music] ${music ? "Found" : "Not found"}`
+    );
+
     return {
-        music: await checkIfAppIsInstalled("iTunes", "Music"),
+        music,
         discord: true
     };
 }
