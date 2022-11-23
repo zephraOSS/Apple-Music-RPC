@@ -101,7 +101,11 @@ export function init() {
     });
 
     ipcMain.handle("updateConfig", (_e, k: string, v: any) => {
-        if (k === "rpcLargeImageText" && !Discord.instance.isSupporter) {
+        if (
+            k === "rpcLargeImageText" &&
+            appDependencies.discord &&
+            !Discord.instance.isSupporter
+        ) {
             return log.warn(
                 "[IPC][UPDATE_CONFIG]",
                 `User is not a supporter, cannot change large image text (isSupporter: ${Discord.instance.isSupporter})`

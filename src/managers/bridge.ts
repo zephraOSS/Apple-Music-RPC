@@ -5,8 +5,14 @@ import { AppleBridge } from "apple-bridge";
 import { fetchITunes } from "apple-bridge/dist/win32";
 
 import * as log from "electron-log";
+import { appDependencies } from "../index";
 
 export function init() {
+    if (!appDependencies.music || !appDependencies.discord)
+        return log.warn(
+            "[Bridge] Music or Discord not found, skipping bridge init"
+        );
+
     const bridge = new AppleBridge(),
         discord = new Discord(),
         currentTrack = fetchITunes();
