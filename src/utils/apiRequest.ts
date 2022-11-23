@@ -1,3 +1,5 @@
+import { JSONParse } from "./json";
+
 import fetch from "node-fetch";
 
 /**
@@ -14,5 +16,5 @@ export async function apiRequest(
         }
     });
 
-    return await res.json();
+    return JSONParse(await res.text());
 }
