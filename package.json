@@ -1,6 +1,6 @@
 {
     "name": "amrpc",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "description": "Discord RPC for Apple Music",
     "scripts": {
         "start": "npm run copy && npm run build && electron ./dist/",
@@ -28,7 +28,7 @@
     },
     "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
     "dependencies": {
-        "@sentry/electron": "^4.1.1",
+        "@sentry/electron": "^4.1.2",
         "apple-bridge": "^1.0.1-beta.9",
         "auto-launch": "^5.0.5",
         "child-process-promise": "^2.2.1",
