@@ -95,8 +95,11 @@ export class Discord {
 
         this.activity = activity;
 
-        if (this.isReady) this.client.setActivity(activity);
-        else {
+        if (this.isReady) {
+            this.client.setActivity(activity).catch((err) => {
+                log.error("[DISCORD][setActivity]", `Client error: ${err}`);
+            });
+        } else {
             if (!this.startUp) this.connect();
 
             setTimeout(() => this.setActivity(activity), 4500);
@@ -104,8 +107,11 @@ export class Discord {
     }
 
     clearActivity() {
-        if (this.isReady) this.client.clearActivity();
-        else {
+        if (this.isReady) {
+            this.client.clearActivity().catch((err) => {
+                log.error("[DISCORD][clearActivity]", `Client error: ${err}`);
+            });
+        } else {
             if (!this.startUp) this.connect();
             setTimeout(() => this.clearActivity(), this.startUp ? 1000 : 2500);
         }
