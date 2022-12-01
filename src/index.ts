@@ -19,7 +19,10 @@ export let appDependencies: AppDependencies;
 
 Object.assign(console, log.functions);
 
+if (!app.isPackaged) log.transports.file.fileName = "development.log";
 if (!app.requestSingleInstanceLock()) app.quit();
+
+if (process.windowsStore) log.info("[READY]", "Detected Windows Store build");
 
 initSentry();
 
