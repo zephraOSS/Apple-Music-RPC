@@ -76,6 +76,9 @@ export class Discord {
 
                 this.isReady = true;
                 this.startUp = false;
+            })
+            .catch((err) => {
+                log.error("[DISCORD]", `Client login error: ${err}`);
             });
 
         this.client.on("disconnected", () => {
@@ -91,6 +94,7 @@ export class Discord {
         if (!this.isSupporter) activity.largeImageText = this.defaultLIT;
 
         this.activity = activity;
+
         if (this.isReady) this.client.setActivity(activity);
         else {
             if (!this.startUp) this.connect();
