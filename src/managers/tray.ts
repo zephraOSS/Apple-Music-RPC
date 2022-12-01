@@ -23,7 +23,7 @@ export class TrayManager {
             {
                 label: `${
                     app.isPackaged ? "AMRPC" : "AMRPC - DEV"
-                } V.${app.getVersion()}`,
+                } v${app.getVersion()}`,
                 icon: path.join(app.getAppPath(), "assets/tray/logo@18.png"),
                 enabled: false
             },
