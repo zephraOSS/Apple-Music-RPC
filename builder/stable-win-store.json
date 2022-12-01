@@ -18,7 +18,7 @@
     },
     "appx": {
         "applicationId": "zephra.AMRPC",
-        "backgroundColor": "#fa586a",
+        "backgroundColor": "transparent",
         "displayName": "AMRPC",
         "identityName": "62976zephra.AMRPC",
         "publisher": "CN=11A3B5E5-0C40-4A2A-9E60-5A3AC8090080",
