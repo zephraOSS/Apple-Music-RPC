@@ -103,12 +103,19 @@
                 "title": "Requires Premium",
                 "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
             },
+            "microsoftStore": {
+                "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+                "buttons": {
+                    "download": "Download now"
+                }
+            },
             "buttons": {
                 "no": "No",
                 "later": "Not now",
                 "yes": "Yes",
                 "okay": "Okay",
-                "learnMore": "Learn more"
+                "learnMore": "Learn more",
+                "close": "Close"
             }
         }
     }

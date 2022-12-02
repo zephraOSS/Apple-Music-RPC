@@ -10,6 +10,7 @@ import { init as initAutoLaunch } from "./managers/launch";
 import { init as initAutoUpdater } from "./managers/updater";
 import { init as initITunes } from "./managers/bridge";
 import { init as initTheme } from "./utils/theme";
+import { init as initMsStoreModal } from "./utils/msStoreModal";
 
 import * as log from "electron-log";
 
@@ -34,6 +35,7 @@ app.on("ready", async () => {
     initTheme();
     initAutoLaunch();
     initAutoUpdater();
+    initMsStoreModal();
 
     if (appDependencies.music && appDependencies.discord) initITunes();
     else Browser.windowAction("show");

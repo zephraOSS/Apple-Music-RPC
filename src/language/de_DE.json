@@ -86,12 +86,19 @@
                 "title": "Erfordert Premium",
                 "description": "Um dieses Feature nutzen zu können, ist eine one-time Spende oder Mitgliedschaft erfoderlich. Du kannst <a href='https://ko-fi.com/zephra'>hier</a> spenden. Solltest du bereits gespendet haben, starte einmal AMRPC neu. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Mehr erfahren</a>"
             },
+            "microsoftStore": {
+                "description": "Wusstest du, dass du AMRPC auch im Microsoft Store herunterladen kannst? Aber stelle sicher, dass du <b>Auto Launch</b> in den Einstellungen deaktivierst, bevor du AMRPC im Microsoft Store installierst.",
+                "buttons": {
+                    "download": "Download now"
+                }
+            },
             "buttons": {
                 "no": "Nein",
                 "later": "Nicht jetzt",
                 "yes": "Ja",
                 "okay": "Okay",
-                "learnMore": "Mehr erfahren"
+                "learnMore": "Mehr erfahren",
+                "close": "Schließen"
             }
         }
     }

@@ -19,7 +19,7 @@ export class Modal {
 
         this.title = title;
         this.description = description;
-        this.buttons = buttons;
+        this.buttons = buttons || [];
 
         ELE.body.appendChild(ELE.modal);
         ELE.modal.appendChild(ELE.title);
@@ -51,11 +51,13 @@ export class Modal {
                     const event = buttons[i].events[i2];
 
                     if (event.value) ele.setAttribute(event.name, event.value);
-                    if (event.type === "close" || event.type === "delete")
-                        ele.addEventListener(event.name, () =>
-                            this[event.type]()
-                        );
-                    else if (event.action)
+                    if (event.type === "close" || event.type === "delete") {
+                        ele.addEventListener(event.name, () => {
+                            this[event.type]();
+                            if (event.save)
+                                window.electron.appData.set(event.save, true);
+                        });
+                    } else if (event.action)
                         ele.addEventListener(event.name, () => event.action());
                 }
             }

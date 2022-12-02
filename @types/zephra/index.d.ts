@@ -66,6 +66,7 @@ interface ModalButtonEvent {
      */
     value?: string;
     type?: "close" | "delete";
+    save?: string;
     /**
      * The action of the event
      */

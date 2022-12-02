@@ -347,7 +347,7 @@ div.modal img {
 }
 
 body.modalIsOpen div.content {
-    filter: blur(5px) grayscale(90%);
+    filter: blur(15px) grayscale(90%);
     user-select: none;
     pointer-events: none;
 }
