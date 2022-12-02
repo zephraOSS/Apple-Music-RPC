@@ -34,7 +34,7 @@ export class Modal {
 
         ELE.modal.id = this.modalId = generateEleId();
 
-        for (let i = 0; i < buttons.length; i++) {
+        for (let i = 0; i < this.buttons.length; i++) {
             if (i > 2) return;
             const btn = buttons[i],
                 ele = document.createElement("p");
