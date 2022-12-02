@@ -1,4 +1,5 @@
 import { app, Notification } from "electron";
+
 import path from "path";
 
 export function createNotification(
