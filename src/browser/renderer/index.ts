@@ -168,4 +168,17 @@ updateLanguage();
     }
 })();
 
+function fetchCacheSize() {
+    window.electron.fetchCacheSize().then((stats) => {
+        document.querySelector(
+            "#cacheNoteSize"
+        ).textContent = `Current cache size: ${stats.fileSize.toFixed(2)} MB, ${
+            stats.size
+        } items`;
+    });
+}
+
+fetchCacheSize();
+setInterval(fetchCacheSize, 30000);
+
 console.log("[BROWSER][RENDERER] Loaded");

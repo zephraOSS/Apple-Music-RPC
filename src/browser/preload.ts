@@ -58,6 +58,9 @@ contextBridge.exposeInMainWorld("electron", {
 
         ipcRenderer.invoke("openURL", url);
     },
+    fetchCacheSize: () => {
+        return ipcRenderer.invoke("fetchCacheSize");
+    },
     resetCache: () => ipcRenderer.invoke("resetCache"),
     updateLanguage: (lang) => ipcRenderer.invoke("updateLanguage", lang),
     minimize: () => ipcRenderer.invoke("windowControl", "minimize"),

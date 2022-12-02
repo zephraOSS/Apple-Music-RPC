@@ -209,6 +209,13 @@ div.content form .settings_setting {
     padding: 0 20px;
 }
 
+.setting_note hr {
+    width: 50%;
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}
+
 div.content form .settings_setting .setting_main > * {
     position: relative;
     display: inline-block;

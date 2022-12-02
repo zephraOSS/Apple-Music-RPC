@@ -16,6 +16,7 @@ import { appDependencies } from "../index";
 import { init as initAutoLaunch } from "./launch";
 
 import * as log from "electron-log";
+import * as fs from "fs";
 
 import fetch from "node-fetch";
 
@@ -153,6 +154,13 @@ export function init() {
             return;
 
         shell.openExternal(url);
+    });
+
+    ipcMain.handle("fetchCacheSize", (_e) => {
+        return {
+            size: cache.size,
+            fileSize: fs.statSync(cache.path).size / (1024 * 1024)
+        };
     });
 
     ipcMain.handle("isReady", (_e, isReady: boolean) => {
