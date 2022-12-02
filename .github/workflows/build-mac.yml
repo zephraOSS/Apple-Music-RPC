@@ -34,4 +34,5 @@ jobs:
             - name: Build
               run: npm run build:macos
               env:
+                  ELECTRON: true
                   USE_HARD_LINKS: false
