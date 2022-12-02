@@ -34,5 +34,6 @@ jobs:
             - name: Build
               run: npm run build:macos
               env:
+                  GH_TOKEN: ${{ secrets.github_token }}
                   ELECTRON: true
                   USE_HARD_LINKS: false
