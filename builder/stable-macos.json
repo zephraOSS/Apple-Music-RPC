@@ -1,59 +1,52 @@
 {
-	"appId": "com.zephra.amrpc",
-	"productName": "AMRPC",
-	"artifactName": "AMRPC.${ext}",
-	"copyright": "Copyright © 2022 zephra",
-	"protocols": [
-		{
-			"name": "AMRPC",
-			"schemes": [
-				"amrpc"
-			]
-		}
-	],
-	"asar": true,
-	"asarUnpack": [
-		"node_modules/apple-bridge/dist/darwin/*.scpt"
-	],
-	"directories": {
-		"app": "dist",
-		"buildResources": "src/assets",
-		"output": "app/macos"
-	},
-	"dmg": {
-		"window": {
-			"width": 660,
-			"height": 400
-		},
-		"contents": [
-			{
-				"x": 180,
-				"y": 170
-			},
-			{
-				"x": 480,
-				"y": 170,
-				"type": "link",
-				"path": "/Applications"
-			}
-		],
-		"title": "AMRPC",
-		"writeUpdateInfo": false
-	},
-	"mac": {
-		"icon": "src/assets/icons/darwin/icon.icns",
-		"target": {
-			"target": "default",
-			"arch": [
-				"x64",
-				"arm64"
-			]
-		},
-		"artifactName": "AMRPC-Installer-macOS-${arch}.${ext}",
-		"publish": {
-			"provider": "github",
-			"releaseType": "draft"
-		},
-		"darkModeSupport": true
-	}
+    "appId": "com.zephra.amrpc",
+    "productName": "AMRPC",
+    "artifactName": "AMRPC.${ext}",
+    "copyright": "Copyright © 2022 zephra",
+    "protocols": [
+        {
+            "name": "AMRPC",
+            "schemes": ["amrpc"]
+        }
+    ],
+    "asar": true,
+    "asarUnpack": ["node_modules/apple-bridge/dist/darwin/osascript/"],
+    "directories": {
+        "app": "dist",
+        "buildResources": "src/assets",
+        "output": "app/macos"
+    },
+    "dmg": {
+        "window": {
+            "width": 660,
+            "height": 400
+        },
+        "contents": [
+            {
+                "x": 180,
+                "y": 170
+            },
+            {
+                "x": 480,
+                "y": 170,
+                "type": "link",
+                "path": "/Applications"
+            }
+        ],
+        "title": "AMRPC",
+        "writeUpdateInfo": false
+    },
+    "mac": {
+        "icon": "src/assets/icons/darwin/icon.icns",
+        "target": {
+            "target": "default",
+            "arch": ["x64", "arm64"]
+        },
+        "artifactName": "AMRPC-Installer-macOS-${arch}.${ext}",
+        "publish": {
+            "provider": "github",
+            "releaseType": "draft"
+        },
+        "darkModeSupport": true
+    }
 }
