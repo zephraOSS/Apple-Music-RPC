@@ -16,12 +16,7 @@
         "buildResources": "src/assets",
         "output": "app/macos"
     },
-    "files": [
-        "dist/**/*",
-        "src/assets/app",
-        "src/assets/icons",
-        "src/assets/tray"
-    ],
+    "extraFiles": ["src/assets/app", "src/assets/icons", "src/assets/tray"],
     "dmg": {
         "window": {
             "width": 660,
