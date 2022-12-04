@@ -10,6 +10,8 @@ on:
             - ".prettierrc.json"
             - ".vscode"
             - "tsconfig.json"
+            - "builder/stable.json"
+            - "builder/stable-win-store.json"
 
 jobs:
     release:
