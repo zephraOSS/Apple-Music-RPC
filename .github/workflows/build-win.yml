@@ -1,0 +1,41 @@
+name: Build (Windows)
+
+on:
+    push:
+        paths-ignore:
+            - "README.md"
+            - "LICENSE"
+            - "@types"
+            - ".gitignore"
+            - ".prettierrc.json"
+            - ".vscode"
+            - "tsconfig.json"
+            - "builder/stable-macos.json"
+            - "builder/stable-win-store.json"
+
+jobs:
+    release:
+        runs-on: ${{ matrix.os }}
+
+        strategy:
+            matrix:
+                os: [windows-latest]
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v1
+
+            - name: Install Node.js, NPM and Yarn
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 16
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build
+              run: npm run build:win
+              env:
+                  GH_TOKEN: ${{ secrets.github_token }}
+                  ELECTRON: true
+                  USE_HARD_LINKS: false
