@@ -50,7 +50,9 @@ export function init() {
     });
 
     ipcMain.handle("isSupporter", () => {
-        return appDependencies.discord ? Discord.instance.isSupporter : false;
+        return appDependencies.discord
+            ? Discord.instance?.isSupporter ?? false
+            : false;
     });
 
     ipcMain.handle("getLangStrings", (_e, lang: string) => {
@@ -104,12 +106,13 @@ export function init() {
     ipcMain.handle("updateConfig", (_e, k: string, v: any) => {
         if (
             k === "rpcLargeImageText" &&
-            appDependencies.discord &&
-            !Discord.instance.isSupporter
+            (!appDependencies.discord ||
+                !Discord.instance ||
+                (appDependencies.discord && !Discord.instance.isSupporter))
         ) {
             return log.warn(
                 "[IPC][UPDATE_CONFIG]",
-                `User is not a supporter, cannot change large image text (isSupporter: ${Discord.instance.isSupporter})`
+                `User is not a supporter, cannot change large image text (isSupporter: ${Discord.instance?.isSupporter})`
             );
         }
 
