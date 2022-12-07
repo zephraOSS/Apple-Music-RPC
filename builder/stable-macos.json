@@ -16,7 +16,6 @@
         "buildResources": "src/assets",
         "output": "app/macos"
     },
-    "files": ["**/*", "dist/assets/**/*"],
     "dmg": {
         "window": {
             "width": 660,
@@ -43,6 +42,8 @@
             "target": "default",
             "arch": ["x64", "arm64"]
         },
+        "files": ["**/*", "dist/assets/**/*"],
+        "category": "public.app-category.utilities",
         "artifactName": "AMRPC-Installer-macOS-${arch}.${ext}",
         "publish": {
             "provider": "github",
