@@ -11,6 +11,7 @@
     ],
     "asar": true,
     "asarUnpack": ["node_modules/apple-bridge/dist/darwin/osascript/"],
+    "files": ["**/*", "dist/assets/tray/"],
     "directories": {
         "app": "dist",
         "buildResources": "src/assets",
@@ -42,7 +43,6 @@
             "target": "default",
             "arch": ["x64", "arm64"]
         },
-        "files": ["**/*", "dist/assets/**/*"],
         "category": "public.app-category.utilities",
         "artifactName": "AMRPC-Installer-macOS-${arch}.${ext}",
         "publish": {
