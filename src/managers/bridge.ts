@@ -20,7 +20,8 @@ export function init() {
     let lastTrack: any = {};
 
     setTimeout(() => {
-        bridge.emit(currentTrack.playerState, "music", currentTrack);
+        if (currentTrack && Object.keys(currentTrack).length > 0)
+            bridge.emit(currentTrack.playerState, "music", currentTrack);
     }, 500);
 
     bridge.on("playing", "music", (currentTrack) => {
