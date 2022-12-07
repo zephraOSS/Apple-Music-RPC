@@ -8,7 +8,7 @@ export class TrayManager {
 
     constructor() {
         this.tray = new Tray(
-            path.join(app.getAppPath(), "assets/tray/logo@32.png")
+            path.join(app.getAppPath(), "assets/trayLogo@32.png")
         );
 
         this.tray.setToolTip("AMRPC");
@@ -24,7 +24,7 @@ export class TrayManager {
                 label: `${
                     app.isPackaged ? "AMRPC" : "AMRPC - DEV"
                 } v${app.getVersion()}`,
-                icon: path.join(app.getAppPath(), "assets/tray/logo@18.png"),
+                icon: path.join(app.getAppPath(), "assets/trayLogo@18.png"),
                 enabled: false
             },
             {
