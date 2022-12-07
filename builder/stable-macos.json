@@ -11,7 +11,7 @@
     ],
     "asar": true,
     "asarUnpack": ["node_modules/apple-bridge/dist/darwin/osascript/"],
-    "files": ["**/*", "src/assets/tray/"],
+    "files": ["**/*", "src/assets/tray/*"],
     "directories": {
         "app": "dist",
         "buildResources": "src/assets",
