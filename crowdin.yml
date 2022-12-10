@@ -1,0 +1,4 @@
+files:
+  - source: /src/language/en_US.json
+    translation: %locale_with_underscore%.json
+    update_option: update_as_unapproved
