@@ -8,7 +8,7 @@ on:
             - "/@types/"
             - "/builder/stable-macos.json"
             - "/builder/stable-win-store.json"
-            - "/i18n/"
+            - "/i18n/*"
             - ".gitignore"
             - ".prettierrc.json"
             - "LICENSE"
