@@ -9,6 +9,7 @@ on:
             - ".gitignore"
             - ".prettierrc.json"
             - ".vscode"
+            - "crowdin.yml"
             - "tsconfig.json"
             - "builder/stable.json"
             - "builder/stable-win-store.json"

@@ -2,6 +2,6 @@
 /app
 /dist
 /node_modules
-/src/browser/zephra.ts
+/src/language
 
 .DS_Store
