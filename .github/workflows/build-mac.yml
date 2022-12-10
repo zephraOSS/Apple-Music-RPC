@@ -3,15 +3,18 @@ name: Build (macOS)
 on:
     push:
         paths-ignore:
-            - "README.md"
-            - "LICENSE"
-            - "@types"
+            - "!/.github/workflows/build-mac.yml"
+            - "/.vscode/"
+            - "/@types/"
+            - "/builder/stable.json"
+            - "/builder/stable-win-store.json"
+            - "/i18n/"
             - ".gitignore"
             - ".prettierrc.json"
-            - ".vscode"
+            - "LICENSE"
+            - "README.md"
+            - "crowdin.yml"
             - "tsconfig.json"
-            - "builder/stable.json"
-            - "builder/stable-win-store.json"
 
 jobs:
     release:

@@ -1,0 +1,122 @@
+{
+  "error": {
+    "admin": "Please do not run AMRPC with administrator privileges!",
+    "noTrack": "No track detected"
+  },
+  "tray": {
+    "restart": "Restart AMRPC",
+    "checkForUpdates": "Check for Updates",
+    "openSettings": "Open Settings",
+    "quit": "Quit"
+  },
+  "settings": {
+    "config": {
+      "autoLaunch": "Auto Launch",
+      "show": "Show Presence",
+      "hideOnPause": "Hide Presence on Pause",
+      "showAlbumArtwork": "Show Album Artwork",
+      "performanceMode": "Performance Mode",
+      "hardwareAcceleration": "Hardware Acceleration",
+      "colorTheme": {
+        "label": "Preferred Color Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "auto": "Dark from Sunset to Sunrise",
+        "os": "System Default"
+      },
+      "language": {
+        "label": "Preferred Language",
+        "en_US": "English (US)",
+        "de_DE": "Deutsch (DE) - German (DE)"
+      },
+      "cover": {
+        "label": "Default Artwork",
+        "applemusic-logo": "Default",
+        "applemusic-logo-rainbow": "Rainbow"
+      },
+      "service": "Service",
+      "rpcDetails": "Presence Details",
+      "rpcState": "Presence State"
+    },
+    "category": {
+      "general": "General"
+    },
+    "warn": {
+      "music": {
+        "title": "Attention",
+        "description": "The Music app could not be found. Please make sure that the Music app is installed."
+      },
+      "discord": {
+        "title": "Attention",
+        "description": "Discord could not be found. Please make sure that Discord is installed."
+      }
+    },
+    "extra": {
+      "github": "View on GitHub",
+      "ko-fi": "Donate",
+      "reloadPage": "Reload",
+      "restartApp": "Restart required"
+    },
+    "modal": {
+      "911": {
+        "title": "In memory of the victims of September 11",
+        "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+        "buttons": {
+          "okcover": "Okay, change the covers!"
+        }
+      },
+      "appleEvent": {
+        "title": "Do not forget!",
+        "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
+        "buttons": {
+          "okcool": "Okay, cool!"
+        }
+      },
+      "newUpdate": {
+        "title": "Software Update",
+        "description": "Version %version% is available for your PC.",
+        "installed": {
+          "description": "Version %version% is available for your PC and is ready to install.",
+          "buttons": {
+            "install": "Install now",
+            "later": "Later"
+          }
+        },
+        "buttons": {
+          "downandinst": "Download & install",
+          "download": "Download & install later"
+        }
+      },
+      "alphaVersion": {
+        "title": "Alpha version",
+        "description": "Hello user! We are happy to announce that we have just released our alpha version of AMRPC. For now, we only have a few spots for the alpha version. So be quick if you want to test!",
+        "buttons": {
+          "register": "Register"
+        }
+      },
+      "amePlugin": {
+        "title": "Apple Music Electron Plugin",
+        "description": "The plugin was installed successfully.",
+        "descriptionError": "The plugin could not be installed."
+      },
+      "ko-fi": {
+        "title": "Requires Premium",
+        "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+      },
+      "microsoftStore": {
+        "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+        "buttons": {
+          "download": "Download now"
+        }
+      },
+      "buttons": {
+        "no": "No",
+        "later": "Not now",
+        "yes": "Yes",
+        "okay": "Okay",
+        "learnMore": "Learn more",
+        "close": "Close"
+      }
+    }
+  }
+}
