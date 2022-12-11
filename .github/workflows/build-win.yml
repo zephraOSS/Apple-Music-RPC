@@ -3,7 +3,6 @@ name: Build (Windows)
 on:
     push:
         paths-ignore:
-            - "!/.github/workflows/build-win.yml"
             - "/.vscode/"
             - "/@types/"
             - "/builder/stable-macos.json"
@@ -15,6 +14,7 @@ on:
             - "README.md"
             - "crowdin.yml"
             - "tsconfig.json"
+            - "!/.github/workflows/build-win.yml"
 
 jobs:
     release:
