@@ -45,7 +45,9 @@ export async function updateLanguage() {
         });
 
     document
-        .querySelectorAll(".settings_setting select option")
+        .querySelectorAll(
+            ".settings_setting select:not(#config_language) option"
+        )
         .forEach((ele) => {
             const ls =
                 langString.settings.config[
@@ -53,6 +55,33 @@ export async function updateLanguage() {
                 ]?.[ele.getAttribute("value")];
 
             if (ls) ele.textContent = ls;
+        });
+
+    document
+        .querySelectorAll(".settings_setting select#config_language option")
+        .forEach((ele: HTMLOptionElement) => {
+            const optionLang = ele.value.replace("_", "-"),
+                optionLangCountry = optionLang.split("-")[1],
+                languageNames = new Intl.DisplayNames([optionLang], {
+                    type: "language",
+                    languageDisplay: "standard"
+                }),
+                languageNamesEnglish = new Intl.DisplayNames(["en"], {
+                    type: "language",
+                    languageDisplay: "standard"
+                });
+
+            const nativeLang = languageNames
+                    .of(optionLang)
+                    .replace(/\((.*?)\)/, `(${optionLangCountry})`),
+                englishLang = languageNamesEnglish
+                    .of(optionLang)
+                    .replace(/\((.*?)\)/, `(${optionLangCountry})`);
+
+            ele.textContent =
+                nativeLang === englishLang
+                    ? nativeLang
+                    : `${nativeLang} - ${englishLang}`;
         });
 
     document.querySelectorAll(".extra span").forEach((ele) => {

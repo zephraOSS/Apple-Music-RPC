@@ -24,11 +24,7 @@
         "auto": "Dark from Sunset to Sunrise",
         "os": "System Default"
       },
-      "language": {
-        "label": "Preferred Language",
-        "en_US": "English (US)",
-        "de_DE": "Deutsch (DE) - German (DE)"
-      },
+      "language": "Preferred Language",
       "cover": {
         "label": "Default Artwork",
         "applemusic-logo": "Default",
