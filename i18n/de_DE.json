@@ -24,11 +24,7 @@
         "auto": "Dunkel von Sonnenuntergang bis -aufgang",
         "os": "System Farbschema"
       },
-      "language": {
-        "label": "Bevorzugte Sprache",
-        "en_US": "Englisch (US) - English (US)",
-        "de_DE": "Deutsch (DE) - German (DE)"
-      },
+      "language": "Preferred Language",
       "cover": {
         "label": "Standard Artwork",
         "applemusic-logo": "Standard",
@@ -36,7 +32,8 @@
       },
       "service": "Service",
       "rpcDetails": "Presence Details",
-      "rpcState": "Presence State"
+      "rpcState": "Presence State",
+      "enableCache": "Enable Cache"
     },
     "category": {
       "general": "Allgemein"
@@ -49,6 +46,14 @@
       "discord": {
         "title": "Attention",
         "description": "Discord could not be found. Please make sure that Discord is installed."
+      }
+    },
+    "note": {
+      "language": "If your language is missing, <a href='https://discord.gg/qqAgCHS'>contact us</a>.",
+      "cache": {
+        "size": "Current cache size: %size%, %count% items",
+        "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
+        "info": "The cache stores all album artwork and other data to reduce the amount of requests to Apple. This will improve the loading time of the album artwork and link."
       }
     },
     "extra": {
