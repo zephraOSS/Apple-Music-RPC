@@ -1,34 +1,34 @@
 {
   "error": {
-    "admin": "Please do not run AMRPC with administrator privileges!",
+    "admin": "Bitte starte AMRPC nicht mit Administrator-Rechten!",
     "noTrack": "No track detected"
   },
   "tray": {
-    "restart": "Restart AMRPC",
-    "checkForUpdates": "Check for Updates",
-    "openSettings": "Open Settings",
-    "quit": "Quit"
+    "restart": "AMRPC neu starten",
+    "checkForUpdates": "Nach Updates suchen",
+    "openSettings": "Einstellungen öffnen",
+    "quit": "Beenden"
   },
   "settings": {
     "config": {
-      "autoLaunch": "Auto Launch",
-      "show": "Show Presence",
-      "hideOnPause": "Hide Presence on Pause",
-      "showAlbumArtwork": "Show Album Artwork",
+      "autoLaunch": "Autostart",
+      "show": "Presence anzeigen",
+      "hideOnPause": "Presence während Pause ausblenden",
+      "showAlbumArtwork": "Album Artwork anzeigen",
       "performanceMode": "Performance Mode",
-      "hardwareAcceleration": "Hardware Acceleration",
+      "hardwareAcceleration": "Hardware-Beschleunigung",
       "colorTheme": {
-        "label": "Preferred Color Theme",
-        "light": "Light",
-        "dark": "Dark",
-        "auto": "Dark from Sunset to Sunrise",
-        "os": "System Default"
+        "label": "Bevorzugtes Farbschema",
+        "light": "Hell",
+        "dark": "Dunkel",
+        "auto": "Dunkel von Sonnenuntergang bis -aufgang",
+        "os": "System Farbschema"
       },
       "language": "Preferred Language",
       "cover": {
-        "label": "Default Artwork",
-        "applemusic-logo": "Default",
-        "applemusic-logo-rainbow": "Rainbow"
+        "label": "Standard Artwork",
+        "applemusic-logo": "Standard",
+        "applemusic-logo-rainbow": "Regenbogen"
       },
       "service": "Service",
       "rpcDetails": "Presence Details",
@@ -36,7 +36,7 @@
       "enableCache": "Enable Cache"
     },
     "category": {
-      "general": "General"
+      "general": "Allgemein"
     },
     "warn": {
       "music": {
@@ -57,39 +57,39 @@
       }
     },
     "extra": {
-      "github": "View on GitHub",
-      "ko-fi": "Donate",
-      "reloadPage": "Reload",
-      "restartApp": "Restart required"
+      "github": "Auf GitHub ansehen",
+      "ko-fi": "Spenden",
+      "reloadPage": "Neu laden",
+      "restartApp": "Neustart erforderlich"
     },
     "modal": {
       "911": {
-        "title": "In memory of the victims of September 11",
-        "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+        "title": "Zum Gedenken an die Opfer des 11. September",
+        "description": "Zu Ehren der Opfer des 11. Septembers haben wir für diese Songs individuelle Albumcover erstellt: %s\nUnd wenn du möchtest, kannst du alle deine Covers ändern (nur für heute).",
         "buttons": {
-          "okcover": "Okay, change the covers!"
+          "okcover": "Okay, ändere die Covers!"
         }
       },
       "appleEvent": {
-        "title": "Do not forget!",
-        "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
+        "title": "Nicht vergessen!",
+        "description": "Heute um %d Uhr (10.00 Uhr PDT) ist das Apple Event! Schaue es hier live: %s",
         "buttons": {
           "okcool": "Okay, cool!"
         }
       },
       "newUpdate": {
         "title": "Software Update",
-        "description": "Version %version% is available for your PC.",
+        "description": "Die Version %version% ist für deinen PC verfügbar.",
         "installed": {
-          "description": "Version %version% is available for your PC and is ready to install.",
+          "description": "Die Version %version% ist für deinen PC verfügbar und kann installiert werden.",
           "buttons": {
-            "install": "Install now",
-            "later": "Later"
+            "install": "Jetzt installieren",
+            "later": "Später"
           }
         },
         "buttons": {
-          "downandinst": "Download & install",
-          "download": "Download & install later"
+          "downandinst": "Laden & installieren",
+          "download": "Laden & später installieren"
         }
       },
       "alphaVersion": {
@@ -101,26 +101,26 @@
       },
       "amePlugin": {
         "title": "Apple Music Electron Plugin",
-        "description": "The plugin was installed successfully.",
-        "descriptionError": "The plugin could not be installed."
+        "description": "Das Plugin wurde erfolgreich installiert.",
+        "descriptionError": "Das Plugin konnte nicht installiert werden."
       },
       "ko-fi": {
-        "title": "Requires Premium",
-        "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+        "title": "Erfordert Premium",
+        "description": "Um dieses Feature nutzen zu können, ist eine one-time Spende oder Mitgliedschaft erforderlich. Du kannst <a href='https://ko-fi.com/zephra'>hier</a> spenden. Solltest du bereits gespendet haben, starte einmal AMRPC neu. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Mehr erfahren</a>"
       },
       "microsoftStore": {
-        "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+        "description": "Wusstest du, dass du AMRPC auch im Microsoft Store herunterladen kannst? Aber stelle sicher, dass du <b>Auto Launch</b> in den Einstellungen deaktivierst, bevor du AMRPC im Microsoft Store installierst.",
         "buttons": {
           "download": "Download now"
         }
       },
       "buttons": {
-        "no": "No",
-        "later": "Not now",
-        "yes": "Yes",
+        "no": "Nein",
+        "later": "Nicht jetzt",
+        "yes": "Ja",
         "okay": "Okay",
-        "learnMore": "Learn more",
-        "close": "Close"
+        "learnMore": "Mehr erfahren",
+        "close": "Schließen"
       }
     }
   }
