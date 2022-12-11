@@ -11,7 +11,7 @@ export const config = new Store({
             enableCache: true,
             service: "itunes",
             colorTheme: "light",
-            language: "en_US",
+            language: "en-US",
             artwork: "applemusic-logo",
             rpcLargeImageText: "AMRPC - %version%",
             rpcDetails: "%title% - %album%",
@@ -39,6 +39,9 @@ export const config = new Store({
         name: "cache",
         accessPropertiesByDotNotation: false
     });
+
+// Change old language config to new language config
+if (config.get("language").includes("_")) config.reset("language");
 
 export function getConfig(key: string): any {
     return config.get(key);

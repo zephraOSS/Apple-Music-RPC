@@ -11,6 +11,7 @@ import { init as initAutoUpdater } from "./managers/updater";
 import { init as initITunes } from "./managers/bridge";
 import { init as initTheme } from "./utils/theme";
 import { init as initMsStoreModal } from "./utils/msStoreModal";
+import { init as initCrowdin } from "./utils/crowdin";
 
 import * as log from "electron-log";
 
@@ -28,6 +29,8 @@ if (process.windowsStore) log.info("[READY]", "Detected Windows Store build");
 initSentry();
 
 app.on("ready", async () => {
+    await initCrowdin();
+
     trayManager = new TrayManager();
     modalWatcher = new ModalWatcher();
     appDependencies = await checkAppDependency();

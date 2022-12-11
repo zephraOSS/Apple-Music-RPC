@@ -28,6 +28,7 @@
     },
     "homepage": "https://github.com/ZephraCloud/Apple-Music-RPC#readme",
     "dependencies": {
+        "@crowdin/ota-client": "^0.7.0",
         "@sentry/electron": "^4.1.2",
         "apple-bridge": "^1.0.1-rc.3",
         "auto-launch": "^5.0.5",

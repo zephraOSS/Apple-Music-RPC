@@ -61,7 +61,8 @@ export async function updateLanguage() {
         .querySelectorAll(".settings_setting select#config_language option")
         .forEach((ele: HTMLOptionElement) => {
             const optionLang = ele.value.replace("_", "-"),
-                optionLangCountry = optionLang.split("-")[1],
+                optionLangCountry =
+                    optionLang.split("-")[1] ?? optionLang.toUpperCase(),
                 languageNames = new Intl.DisplayNames([optionLang], {
                     type: "language",
                     languageDisplay: "standard"
