@@ -79,7 +79,7 @@ export async function updateLanguage() {
                     .of(optionLang)
                     .replace(/\((.*?)\)/, `(${optionLangCountry})`);
 
-            ele.innerHTML =
+            ele.textContent =
                 nativeLang === englishLang
                     ? nativeLang
                     : `${nativeLang} - ${englishLang}`;
