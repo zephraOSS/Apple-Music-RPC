@@ -14,6 +14,13 @@ export function init() {
         .querySelector("span.dot.close")
         ?.addEventListener("click", window.electron.hide);
 
+    document.body.addEventListener("click", (e) => {
+        if (e.target instanceof HTMLAnchorElement && e.target.href) {
+            e.preventDefault();
+            window.electron.openURL(e.target.href);
+        }
+    });
+
     document
         .querySelectorAll(".settings_setting input, select")
         .forEach(async (ele: HTMLInputElement | HTMLSelectElement) => {
