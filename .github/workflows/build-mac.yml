@@ -3,7 +3,6 @@ name: Build (macOS)
 on:
     push:
         paths-ignore:
-            - "!/.github/workflows/build-mac.yml"
             - "/.vscode/"
             - "/@types/"
             - "/builder/stable.json"
@@ -15,6 +14,7 @@ on:
             - "README.md"
             - "crowdin.yml"
             - "tsconfig.json"
+            - "!/.github/workflows/build-mac.yml"
 
 jobs:
     release:
