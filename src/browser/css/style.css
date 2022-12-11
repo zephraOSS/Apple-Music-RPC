@@ -3,12 +3,14 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #fff;
+    --color: #000;
     --border-color: #0000001a;
 }
 
 body[data-theme="dark"] {
     background-color: #1f1f1f;
     color: #ffffff8c;
+    --color: #ffffff8c;
     --border-color: #ffffff1a;
 }
 
@@ -214,6 +216,11 @@ div.content form .settings_setting {
     margin: 10px 0;
     border: 0;
     border-top: 1px solid var(--border-color);
+}
+
+.setting_note a {
+    color: #fa586a;
+    text-decoration: none;
 }
 
 div.content form .settings_setting .setting_main > * {

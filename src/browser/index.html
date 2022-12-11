@@ -40,8 +40,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label data-for="config_autoLaunch"
-                                        >Auto Launch</label
-                                    >
+                                        >Auto Launch
+                                    </label>
                                     <label class="cfgSwitch cfg_loading">
                                         <input
                                             type="checkbox"
@@ -56,8 +56,8 @@
                                 <div class="setting_main">
                                     <label
                                         data-for="config_hardwareAcceleration"
-                                        >Hardware Acceleration</label
-                                    >
+                                        >Hardware Acceleration
+                                    </label>
                                     <label class="cfgSwitch cfg_loading">
                                         <input
                                             type="checkbox"
@@ -72,8 +72,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label data-for="config_wakandaForeverMode"
-                                        >Wakanda Forever Mode</label
-                                    >
+                                        >Wakanda Forever Mode
+                                    </label>
                                     <label class="cfgSwitch">
                                         <input
                                             type="checkbox"
@@ -87,8 +87,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label for="config_colorTheme"
-                                        >Preferred Color Theme</label
-                                    >
+                                        >Preferred Color Theme
+                                    </label>
                                     <select
                                         class="cfg_loading"
                                         id="config_colorTheme"
@@ -106,8 +106,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label for="config_language"
-                                        >App Language</label
-                                    >
+                                        >App Language
+                                    </label>
                                     <select
                                         class="cfg_loading"
                                         id="config_language"
@@ -119,6 +119,16 @@
                                             Deutsch (DE)
                                         </option>
                                     </select>
+                                </div>
+                                <div class="setting_note">
+                                    <span
+                                        data-translang="settings.note.language"
+                                    >
+                                        If your language is missing,
+                                        <a href="https://discord.gg/qqAgCHS"
+                                            >contact us </a
+                                        >.
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -133,8 +143,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label data-for="config_show"
-                                        >Show Presence</label
-                                    >
+                                        >Show Presence
+                                    </label>
                                     <label class="cfgSwitch cfg_loading">
                                         <input
                                             type="checkbox"
@@ -148,8 +158,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label data-for="config_hideOnPause"
-                                        >Hide Presence on Pause</label
-                                    >
+                                        >Hide Presence on Pause
+                                    </label>
                                     <label class="cfgSwitch cfg_loading">
                                         <input
                                             type="checkbox"
@@ -163,8 +173,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label data-for="config_showAlbumArtwork"
-                                        >Show Album Artwork</label
-                                    >
+                                        >Show Album Artwork
+                                    </label>
                                     <label class="cfgSwitch cfg_loading">
                                         <input
                                             type="checkbox"
@@ -178,8 +188,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label for="config_artwork"
-                                        >Default Artwork</label
-                                    >
+                                        >Default Artwork
+                                    </label>
                                     <select
                                         class="cfg_loading"
                                         id="config_artwork"
@@ -217,8 +227,8 @@
                             >
                                 <div class="setting_main">
                                     <label for="config_rpcDetails"
-                                        >Presence Details</label
-                                    >
+                                        >Presence Details
+                                    </label>
                                     <input
                                         type="text"
                                         class="cfg_loading"
@@ -233,8 +243,8 @@
                             >
                                 <div class="setting_main">
                                     <label for="config_rpcState"
-                                        >Presence State</label
-                                    >
+                                        >Presence State
+                                    </label>
                                     <input
                                         type="text"
                                         class="cfg_loading"
@@ -254,8 +264,8 @@
                             <div class="settings_setting">
                                 <div class="setting_main">
                                     <label data-for="config_enableCache"
-                                        >Enable Cache</label
-                                    >
+                                        >Enable Cache
+                                    </label>
                                     <label class="cfgSwitch cfg_loading">
                                         <input
                                             type="checkbox"
@@ -265,28 +275,32 @@
                                     </label>
                                 </div>
                                 <div class="setting_note">
-                                    <span id="cacheNoteSize">
+                                    <span
+                                        data-translang="settings.note.cache.size"
+                                        id="cacheNoteSize"
+                                    >
                                         Current cache size: ...
                                     </span>
                                     <hr />
-                                    <span>
+                                    <span
+                                        data-translang="settings.note.cache.warn"
+                                    >
                                         <b>WARNING</b> Disabling the cache will
                                         delete all cached data.
                                     </span>
                                     <br />
                                     <span
+                                        data-translang="settings.note.cache.info"
                                         >Song data such as the artwork or link
                                         is saved so that it can be displayed
-                                        faster in the RPC.</span
-                                    >
+                                        faster in the RPC.
+                                    </span>
                                 </div>
                             </div>
 
                             <div class="settings_setting">
                                 <div class="setting_main">
-                                    <label data-for="config_enableCache"
-                                        >Reset Cache</label
-                                    >
+                                    <label>Reset Cache</label>
                                     <button
                                         class="cfgButton red"
                                         data-action="resetCache"

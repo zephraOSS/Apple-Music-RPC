@@ -35,7 +35,9 @@ initEventSettings();
 initListeners();
 
 updateTheme();
-updateLanguage();
+updateLanguage().then(() => {
+    fetchCacheSize();
+});
 
 (async () => {
     const seenChangelogs = await window.electron.appData.get("changelog");
@@ -170,15 +172,14 @@ updateLanguage();
 
 function fetchCacheSize() {
     window.electron.fetchCacheSize().then((stats) => {
-        document.querySelector(
-            "#cacheNoteSize"
-        ).textContent = `Current cache size: ${stats.fileSize.toFixed(2)} MB, ${
-            stats.size
-        } items`;
+        const ele = document.querySelector("#cacheNoteSize");
+
+        ele.textContent = ele.textContent
+            .replace("%size%", `${stats.fileSize.toFixed(2)} MB`)
+            .replace("%count%", stats.size);
     });
 }
 
-fetchCacheSize();
 setInterval(fetchCacheSize, 30000);
 
 console.log("[BROWSER][RENDERER] Loaded");

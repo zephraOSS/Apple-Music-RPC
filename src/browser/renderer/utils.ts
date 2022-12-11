@@ -39,8 +39,8 @@ export async function updateLanguage() {
                 ];
 
             if (ls) {
-                if (typeof ls === "object") ele.textContent = ls["label"];
-                else ele.textContent = ls;
+                if (typeof ls === "object") ele.innerHTML = ls["label"];
+                else ele.innerHTML = ls;
             }
         });
 
@@ -54,7 +54,7 @@ export async function updateLanguage() {
                     ele.parentElement.getAttribute("id").replace("config_", "")
                 ]?.[ele.getAttribute("value")];
 
-            if (ls) ele.textContent = ls;
+            if (ls) ele.innerHTML = ls;
         });
 
     document
@@ -78,7 +78,7 @@ export async function updateLanguage() {
                     .of(optionLang)
                     .replace(/\((.*?)\)/, `(${optionLangCountry})`);
 
-            ele.textContent =
+            ele.innerHTML =
                 nativeLang === englishLang
                     ? nativeLang
                     : `${nativeLang} - ${englishLang}`;
@@ -87,7 +87,7 @@ export async function updateLanguage() {
     document.querySelectorAll(".extra span").forEach((ele) => {
         const ls = langString.settings.extra[ele.parentElement.id];
 
-        if (ls) ele.textContent = ls;
+        if (ls) ele.innerHTML = ls;
     });
 
     document
@@ -98,10 +98,10 @@ export async function updateLanguage() {
 
             if (key.includes(".")) {
                 key.split(".").forEach((k, i) => {
-                    ls = ls[k];
+                    ls = ls?.[k];
 
                     if (i === key.split(".").length - 1)
-                        if (ls) ele.textContent = ls;
+                        if (ls) ele.innerHTML = ls;
                 });
             }
         });
