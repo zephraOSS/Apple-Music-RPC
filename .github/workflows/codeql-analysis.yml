@@ -14,8 +14,9 @@ name: "CodeQL"
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - "!/src/"
+    paths:
+      - ".github/workflows/codeql-analysis.yml"
+      - "src/**"
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]

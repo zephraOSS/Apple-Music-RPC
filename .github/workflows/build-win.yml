@@ -2,19 +2,9 @@ name: Build (Windows)
 
 on:
     push:
-        paths-ignore:
-            - "/.vscode/"
-            - "/@types/"
-            - "/builder/stable-macos.json"
-            - "/builder/stable-win-store.json"
-            - "/i18n/*"
-            - ".gitignore"
-            - ".prettierrc.json"
-            - "LICENSE"
-            - "README.md"
-            - "crowdin.yml"
-            - "tsconfig.json"
-            - "!/.github/workflows/build-win.yml"
+        paths:
+            - ".github/workflows/build-win.yml"
+            - "src/**"
 
 jobs:
     release:
