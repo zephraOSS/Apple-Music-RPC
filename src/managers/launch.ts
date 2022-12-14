@@ -20,11 +20,7 @@ export function init() {
             );
 
         const explorerExePath = path.join("C:", "Windows", "explorer.exe"),
-            appPath = path.join(
-                "shell:AppsFolder",
-                info as string,
-                "AMRPC.exe"
-            );
+            appPath = path.join("shell:AppsFolder", info as string);
 
         const autoLaunch = new AutoLaunch({
             name: "AMRPC",
