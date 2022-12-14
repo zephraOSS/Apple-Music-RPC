@@ -1,21 +1,40 @@
 import { app } from "electron";
 import { getConfig } from "./store";
-import { WindowsStoreAutoLaunch } from "electron-winstore-auto-launch";
+import { getMicrosoftAppInfo } from "../utils/getMicrosoftAppInfo";
 
 import AutoLaunch from "auto-launch";
 
 import * as log from "electron-log";
+import * as path from "path";
 
 export function init() {
     if (!app.isPackaged) return;
 
     if (process.windowsStore) {
-        if (getConfig("autoLaunch") && !WindowsStoreAutoLaunch.getStatus())
-            WindowsStoreAutoLaunch.enable();
-        else if (WindowsStoreAutoLaunch.getStatus())
-            WindowsStoreAutoLaunch.disable();
+        const info = getMicrosoftAppInfo();
 
-        log.info("[AUTOLAUNCH][WINDOWS-STORE]", "AutoLaunch initialized");
+        if (!info)
+            return log.warn(
+                "[AutoLaunch]",
+                "Could not find Microsoft Store app info"
+            );
+
+        const explorerExePath = path.join("C:", "Windows", "explorer.exe"),
+            appPath = path.join(
+                "shell:AppsFolder",
+                info as string,
+                "AMRPC.exe"
+            );
+
+        const autoLaunch = new AutoLaunch({
+            name: "AMRPC",
+            path: `${explorerExePath} ${appPath}`
+        });
+
+        if (getConfig("autoLaunch")) autoLaunch.enable();
+        else autoLaunch.disable();
+
+        log.info("[AutoLaunch][Windows-Store]", "AutoLaunch initialized");
     } else {
         const autoLaunch = new AutoLaunch({
             name: "AMRPC",
@@ -25,6 +44,6 @@ export function init() {
         if (getConfig("autoLaunch")) autoLaunch.enable();
         else autoLaunch.disable();
 
-        log.info("[AUTOLAUNCH]", "AutoLaunch initialized");
+        log.info("[AutoLaunch]", "AutoLaunch initialized");
     }
 }
