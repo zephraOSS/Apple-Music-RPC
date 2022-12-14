@@ -35,9 +35,7 @@ initEventSettings();
 initListeners();
 
 updateTheme();
-updateLanguage().then(() => {
-    fetchCacheSize();
-});
+updateLanguage();
 
 (async () => {
     const seenChangelogs = await window.electron.appData.get("changelog");
@@ -170,7 +168,7 @@ updateLanguage().then(() => {
     }
 })();
 
-function fetchCacheSize() {
+export function fetchCacheSize() {
     window.electron.fetchCacheSize().then((stats) => {
         const ele = document.querySelector("#cacheNoteSize");
 

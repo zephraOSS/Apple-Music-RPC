@@ -1,3 +1,5 @@
+import { fetchCacheSize } from "./";
+
 export let langString: { [key: string]: any } = {};
 
 export function openURL(url) {
@@ -104,6 +106,8 @@ export async function updateLanguage() {
                 });
             }
         });
+
+    fetchCacheSize();
 }
 
 export function newNote(
