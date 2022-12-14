@@ -7,8 +7,9 @@ export function openURL(url) {
 }
 
 export function generateEleId() {
-    let result = "",
-        characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    let result = "";
 
     for (let i = 0; i < characters.length; i++)
         result += characters.charAt(
@@ -92,8 +93,9 @@ export async function updateLanguage() {
     document
         .querySelectorAll("[data-translang]")
         .forEach((ele: HTMLElement) => {
-            let ls: any = langString,
-                key = ele.dataset.translang;
+            const key = ele.dataset.translang;
+
+            let ls: any = langString;
 
             if (key.includes(".")) {
                 key.split(".").forEach((k, i) => {

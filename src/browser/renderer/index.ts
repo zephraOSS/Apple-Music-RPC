@@ -18,8 +18,9 @@ declare global {
     }
 }
 
+export const restartRequiredMemory = {};
+
 export let appVersion,
-    restartRequiredMemory = {},
     platform,
     isSupporter: boolean = null,
     isDeveloper: boolean = null,

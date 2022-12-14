@@ -30,7 +30,7 @@ export class replaceVariables {
         // e.g. "%title% - %album%" =>
         // "TITLE_IS_AV - ALBUM_IS_AV" or
         // " - ALBUM_IS_AV"
-        let testStr = config
+        const testStr = config
             .replace(
                 "%title%",
                 this.currentTrack.name ? "_TITLE_IS_AV_" : "_TITLE_NOT_AV_"

@@ -131,7 +131,7 @@ export function init() {
         }
     });
 
-    ipcMain.handle("fetchChangelog", async (_e) => {
+    ipcMain.handle("fetchChangelog", async () => {
         const res = await fetch(
             "https://api.github.com/repos/ZephraCloud/Apple-Music-RPC/releases/latest",
             {
@@ -154,7 +154,7 @@ export function init() {
         shell.openExternal(url);
     });
 
-    ipcMain.handle("fetchCacheSize", (_e) => {
+    ipcMain.handle("fetchCacheSize", () => {
         return {
             size: cache.size,
             fileSize: fs.statSync(cache.path).size / (1024 * 1024)
