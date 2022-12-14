@@ -27,8 +27,6 @@ export async function updateLanguage() {
 
     langString = await window.electron.getLangStrings(language);
 
-    await window.electron.updateLanguage(language);
-
     document
         .querySelectorAll(".settings_setting label")
         .forEach((ele: HTMLElement) => {

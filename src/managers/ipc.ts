@@ -97,12 +97,6 @@ export function init() {
         return getAppData(k);
     });
 
-    ipcMain.handle("updateLanguage", (_e, language) => {
-        log.info(`[Backend] Changed language to ${language}`);
-
-        /*app.langString = require(`../language/${language}.json`);*/
-    });
-
     ipcMain.handle("updateConfig", (_e, k: string, v: any) => {
         if (
             k === "rpcLargeImageText" &&

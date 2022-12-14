@@ -62,7 +62,6 @@ contextBridge.exposeInMainWorld("electron", {
         return ipcRenderer.invoke("fetchCacheSize");
     },
     resetCache: () => ipcRenderer.invoke("resetCache"),
-    updateLanguage: (lang) => ipcRenderer.invoke("updateLanguage", lang),
     minimize: () => ipcRenderer.invoke("windowControl", "minimize"),
     maximize: () => ipcRenderer.invoke("windowControl", "maximize"),
     hide: () => ipcRenderer.invoke("windowControl", "hide"),
