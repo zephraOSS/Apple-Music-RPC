@@ -1,4 +1,4 @@
-import { fetchCacheSize } from "./";
+import { fetchCacheSize } from "./index.js";
 
 export let langString: { [key: string]: any } = {};
 
