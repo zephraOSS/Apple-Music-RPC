@@ -25,9 +25,7 @@ export async function updateTheme(theme?: string) {
 }
 
 export async function updateLanguage() {
-    const language = await window.electron.config.get("language");
-
-    langString = await window.electron.getLangStrings(language);
+    langString = await window.electron.getLangStrings();
 
     document
         .querySelectorAll(".settings_setting label")

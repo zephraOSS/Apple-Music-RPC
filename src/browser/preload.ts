@@ -15,8 +15,8 @@ contextBridge.exposeInMainWorld("electron", {
     isSupporter: async () => {
         return await ipcRenderer.invoke("isSupporter");
     },
-    getLangStrings: (lang) => {
-        return ipcRenderer.invoke("getLangStrings", lang);
+    getLangStrings: () => {
+        return ipcRenderer.invoke("getLangStrings");
     },
     getSystemTheme: () => {
         return ipcRenderer.invoke("getSystemTheme", {});
