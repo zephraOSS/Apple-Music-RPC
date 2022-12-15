@@ -1,4 +1,4 @@
-import { Tray, Menu, app } from "electron";
+import { Tray, Menu, app, shell } from "electron";
 import { Browser } from "./browser";
 
 import * as path from "path";
@@ -34,6 +34,13 @@ export class TrayManager {
                         ? "iTunes"
                         : "Apple Music",
                 enabled: false
+            },
+            { type: "separator" },
+            {
+                label: "Report a Problem",
+                click() {
+                    shell.openExternal("https://discord.gg/APDghNfJhQ");
+                }
             },
             { type: "separator" },
             {
