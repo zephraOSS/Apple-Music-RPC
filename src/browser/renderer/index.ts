@@ -171,9 +171,10 @@ updateLanguage();
 
 export function fetchCacheSize() {
     window.electron.fetchCacheSize().then((stats) => {
-        const ele = document.querySelector("#cacheNoteSize");
+        const ele = document.querySelector("#cacheNoteSize"),
+            string: string = langString.settings.note.cache.size;
 
-        ele.textContent = ele.textContent
+        ele.textContent = string
             .replace("%size%", `${stats.fileSize.toFixed(2)} MB`)
             .replace("%count%", stats.size);
     });

@@ -1,4 +1,4 @@
-import { restartRequiredMemory } from "./index.js";
+import { fetchCacheSize, restartRequiredMemory } from "./index.js";
 import { updateTheme, updateLanguage } from "./utils.js";
 
 export function init() {
@@ -107,6 +107,8 @@ export function init() {
 
                     button.innerText = innerText;
                 }
+
+                if (button.dataset.action === "resetCache") fetchCacheSize();
             });
         });
 
