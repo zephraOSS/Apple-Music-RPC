@@ -33,10 +33,10 @@
       "rpcDetails": "Presence Details",
       "rpcState": "Presence State",
       "enableCache": "Cache aktivieren",
-      "resetCache": "Reset Cache"
+      "resetCache": "Cache löschen"
     },
     "common": {
-      "reset": "Reset"
+      "reset": "Löschen"
     },
     "category": {
       "general": "Allgemein"
