@@ -30,10 +30,13 @@
         "applemusic-logo": "Default",
         "applemusic-logo-rainbow": "Rainbow"
       },
-      "service": "Service",
       "rpcDetails": "Presence Details",
       "rpcState": "Presence State",
-      "enableCache": "Enable Cache"
+      "enableCache": "Enable Cache",
+      "resetCache": "Reset Cache"
+    },
+    "common": {
+      "reset": "Reset"
     },
     "category": {
       "general": "General"
@@ -91,18 +94,6 @@
           "downandinst": "Download & install",
           "download": "Download & install later"
         }
-      },
-      "alphaVersion": {
-        "title": "Alpha version",
-        "description": "Hello user! We are happy to announce that we have just released our alpha version of AMRPC. For now, we only have a few spots for the alpha version. So be quick if you want to test!",
-        "buttons": {
-          "register": "Register"
-        }
-      },
-      "amePlugin": {
-        "title": "Apple Music Electron Plugin",
-        "description": "The plugin was installed successfully.",
-        "descriptionError": "The plugin could not be installed."
       },
       "ko-fi": {
         "title": "Requires Premium",
