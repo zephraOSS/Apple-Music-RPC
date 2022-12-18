@@ -5,6 +5,7 @@ import { Client, Presence, register, User } from "discord-rpc";
 import { checkSupporter } from "../utils/checkSupporter";
 import { replaceVariables } from "../utils/replaceVariables";
 import { appDependencies } from "../index";
+import { JSONParse } from "../utils/json";
 
 import { fetchUrl as fetch } from "fetch";
 
@@ -221,7 +222,7 @@ export class Discord {
             (_error, _meta, body) => {
                 if (!body) return callback(null, true);
 
-                const res = JSON.parse(body.toString()).results[0];
+                const res = JSONParse(body.toString())?.results[0];
 
                 if (res) {
                     const result = {
