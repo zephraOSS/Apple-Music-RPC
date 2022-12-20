@@ -1,6 +1,5 @@
 import { app } from "electron";
 import { getConfig } from "./store";
-import { getMicrosoftAppInfo } from "../utils/getMicrosoftAppInfo";
 
 import AutoLaunch from "auto-launch";
 
@@ -10,36 +9,30 @@ import * as path from "path";
 export function init() {
     if (!app.isPackaged) return;
 
-    if (process.windowsStore) {
-        const info = getMicrosoftAppInfo();
+    const logNote = process.windowsStore
+        ? "[AutoLaunch][Windows-Store]"
+        : "[AutoLaunch]";
 
-        if (!info)
-            return log.warn(
-                "[AutoLaunch]",
-                "Could not find Microsoft Store app info"
-            );
+    const paths = {
+        explorer: path.join("C:", "Windows", "explorer.exe"),
+        app: path.join(
+            "shell:AppsFolder",
+            "62976zephra.AMRPC_xe0z77jsegffp!62976zephra.AMRPC"
+        )
+    };
 
-        const explorerExePath = path.join("C:", "Windows", "explorer.exe"),
-            appPath = path.join("shell:AppsFolder", info as string);
+    const autoLaunch = new AutoLaunch({
+        name: "AMRPC",
+        path: process.windowsStore
+            ? `${paths.explorer} ${paths.app}`
+            : app.getPath("exe")
+    });
 
-        const autoLaunch = new AutoLaunch({
-            name: "AMRPC",
-            path: `${explorerExePath} ${appPath}`
-        });
+    autoLaunch[getConfig("autoLaunch") ? "enable" : "disable"]().catch(
+        (err) => {
+            log.warn(`${logNote}[Error]`, err);
+        }
+    );
 
-        if (getConfig("autoLaunch")) autoLaunch.enable();
-        else autoLaunch.disable();
-
-        log.info("[AutoLaunch][Windows-Store]", "AutoLaunch initialized");
-    } else {
-        const autoLaunch = new AutoLaunch({
-            name: "AMRPC",
-            path: app.getPath("exe")
-        });
-
-        if (getConfig("autoLaunch")) autoLaunch.enable();
-        else autoLaunch.disable();
-
-        log.info("[AutoLaunch]", "AutoLaunch initialized");
-    }
+    log.info(logNote, "AutoLaunch initialized");
 }
