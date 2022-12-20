@@ -621,3 +621,18 @@ body[data-theme="christmas"] .cfgSwitch input:checked + i {
         background-position: 20vw;
     }
 }
+
+@keyframes cache-loading {
+    0% {
+        width: 0;
+        border-top-color: #5194da;
+    }
+    95% {
+        width: 50%;
+    }
+
+    100% {
+        width: 0;
+        border-top-color: #5194da;
+    }
+}
