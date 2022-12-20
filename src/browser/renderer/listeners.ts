@@ -2,6 +2,14 @@ import { fetchCacheSize, restartRequiredMemory } from "./index.js";
 import { updateTheme, updateLanguage } from "./utils.js";
 
 export function init() {
+    window.addEventListener("offline", () => {
+        document.body.classList.add("offline");
+    });
+
+    window.addEventListener("online", () => {
+        document.body.classList.remove("offline");
+    });
+
     document
         .querySelector("span.dot.minimize")
         ?.addEventListener("click", window.electron.minimize);
@@ -19,6 +27,14 @@ export function init() {
             e.preventDefault();
             window.electron.openURL(e.target.href);
         }
+    });
+
+    document.querySelectorAll("#thumbsUp, #thumbsDown").forEach((ele) => {
+        ele.addEventListener("click", (e) => {
+            window.electron.songDataFeedback(
+                (<HTMLElement>e.target).id === "thumbsUp"
+            );
+        });
     });
 
     document

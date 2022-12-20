@@ -89,9 +89,21 @@ export function init() {
         if (data && data.artwork && data.playerState === "playing") {
             document.querySelector<HTMLImageElement>(".logo").src =
                 data.artwork.replace("500x500bb", "40x40bb");
+
+            document
+                .querySelectorAll("#thumbsUp, #thumbsDown")
+                .forEach((ele: HTMLElement) => {
+                    ele.style.display = "unset";
+                });
         } else {
             document.querySelector<HTMLImageElement>(".logo").src =
                 "../assets/logo.png";
+
+            document
+                .querySelectorAll("#thumbsUp, #thumbsDown")
+                .forEach((ele: HTMLElement) => {
+                    ele.style.display = "none";
+                });
         }
     });
 

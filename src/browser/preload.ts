@@ -61,6 +61,7 @@ contextBridge.exposeInMainWorld("electron", {
     fetchCacheSize: () => {
         return ipcRenderer.invoke("fetchCacheSize");
     },
+    songDataFeedback: (data) => ipcRenderer.invoke("songDataFeedback", data),
     resetCache: () => ipcRenderer.invoke("resetCache"),
     minimize: () => ipcRenderer.invoke("windowControl", "minimize"),
     maximize: () => ipcRenderer.invoke("windowControl", "maximize"),

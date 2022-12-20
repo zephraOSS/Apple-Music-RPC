@@ -161,6 +161,15 @@ export function init() {
         };
     });
 
+    ipcMain.handle("songDataFeedback", (_e, _isPositive) => {
+        if (!appDependencies.discord || !Discord.instance) return;
+
+        // @ts-ignore
+        const songDataHistory = Discord.instance.songData.history;
+
+        // TODO: Get current song data and send feedback to the API
+    });
+
     ipcMain.handle("isReady", (_e, isReady: boolean) => {
         Browser.getInstance().isReady = isReady;
     });

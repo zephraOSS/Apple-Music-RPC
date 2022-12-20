@@ -87,12 +87,43 @@ div.control::after {
 }
 
 div.control .center {
-    text-align: center;
+    display: flex;
     position: absolute;
+    width: 20%;
+    justify-content: space-between;
+    align-items: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: max-content;
+}
+
+div.control .center div:not(:nth-child(2)) {
+    -webkit-app-region: no-drag;
+}
+
+div.control #thumbsUp {
+    color: rgb(76, 175, 80);
+}
+
+div.control #thumbsDown {
+    color: rgb(244, 67, 54);
+}
+
+body.offline #thumbsUp,
+body.offline #thumbsDown {
+    display: none;
+}
+
+div.control #thumbsUp,
+div.control #thumbsDown {
+    cursor: pointer;
+    opacity: 0.75;
+    transition: 0.25s opacity;
+}
+
+div.control #thumbsUp:hover,
+div.control #thumbsDown:hover {
+    opacity: 1;
 }
 
 div.control .logo {
