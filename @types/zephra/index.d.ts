@@ -90,3 +90,11 @@ interface AppDependencies {
     music: boolean;
     discord: boolean;
 }
+
+interface SongDataT {
+    url: string;
+    collectionId: number | string;
+    trackId: number | string;
+    explicit: boolean;
+    artwork: string;
+}

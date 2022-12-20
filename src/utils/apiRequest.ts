@@ -16,7 +16,8 @@ export async function apiRequest(
         const res = await fetch(host + path, {
             headers: {
                 "User-Agent": "AMRPC"
-            }
+            },
+            cache: "no-store"
         });
 
         return JSONParse(await res.text());

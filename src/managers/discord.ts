@@ -1,13 +1,14 @@
-import { app } from "electron";
-import { Browser } from "./browser";
-import { cache, config, getConfig, setConfig } from "./store";
 import { Client, Presence, register, User } from "discord-rpc";
+import { app } from "electron";
+
+import { appDependencies } from "../index";
+
+import { config, getConfig, setConfig } from "./store";
+import { Browser } from "./browser";
+import { SongData } from "./SongData";
+
 import { checkSupporter } from "../utils/checkSupporter";
 import { replaceVariables } from "../utils/replaceVariables";
-import { appDependencies } from "../index";
-import { JSONParse } from "../utils/json";
-
-import { fetchUrl as fetch } from "fetch";
 
 import * as log from "electron-log";
 
@@ -21,6 +22,7 @@ export class Discord {
     public isLive: boolean = false;
     public currentTrack: currentTrack;
     public isSupporter: boolean = null;
+    public songData: SongData = new SongData();
 
     static instance: Discord;
 
@@ -149,38 +151,45 @@ export class Discord {
         }
 
         this.currentTrack = currentTrack;
+
         this.setActivity(activity);
+        this.songData
+            .getSongData(
+                currentTrack.name,
+                currentTrack.album,
+                currentTrack.artist
+            )
+            .then((data) => {
+                currentTrack.url = data.url;
 
-        Discord.getAppleMusicData(
-            currentTrack.name,
-            currentTrack.album,
-            currentTrack.artist,
-            (res, err) => {
-                if (!err) {
-                    currentTrack.url = res.url;
+                activity.buttons = [
+                    {
+                        label: "Play on Apple Music",
+                        url: data.url
+                    }
+                ];
 
-                    activity.buttons = [
-                        {
-                            label: "Play on Apple Music",
-                            url: res.url
-                        }
-                    ];
+                if (!currentTrack.artwork) currentTrack.artwork = data.artwork;
 
-                    if (!currentTrack.artwork)
-                        currentTrack.artwork = res.artwork;
+                Browser.send("get-current-track", false, {
+                    artwork: data.artwork,
+                    playerState: currentTrack.playerState
+                });
 
-                    Browser.send("get-current-track", false, {
-                        artwork: res.artwork,
-                        playerState: currentTrack.playerState
-                    });
+                if (getConfig("showAlbumArtwork"))
+                    activity.largeImageKey = currentTrack.artwork;
 
-                    if (getConfig("showAlbumArtwork"))
-                        activity.largeImageKey = currentTrack.artwork;
+                this.setActivity(activity);
+            })
+            .catch((err) => {
+                log.error(
+                    "[DISCORD][setCurrentTrack][getSongData]",
+                    `Error: ${err}`
+                );
 
-                    this.setActivity(activity);
-                } else if (activity.buttons) delete activity.buttons;
-            }
-        );
+                delete activity.buttons;
+                delete this.activity.buttons;
+            });
     }
 
     static getInstance() {
@@ -199,50 +208,6 @@ export class Discord {
 
     static setCurrentTrack(currentTrack: currentTrack) {
         Discord.getInstance().setCurrentTrack(currentTrack);
-    }
-
-    static getAppleMusicData(
-        title: string,
-        album: string,
-        artist: string,
-        callback
-    ) {
-        if (title === "Connecting…") return callback(null, true);
-
-        const reqParam = encodeURIComponent(`${title} ${album} ${artist}`)
-                .replace(/"/g, "%27")
-                .replace(/"/g, "%22"),
-            cacheItem = cache.get(`${title}_:_${album}_:_${artist}`);
-
-        if (cacheItem) return callback(cacheItem);
-
-        fetch(
-            `https://itunes.apple.com/search?term=${reqParam}&entity=musicTrack`,
-            { cache: "no-store" },
-            (_error, _meta, body) => {
-                if (!body) return callback(null, true);
-
-                const res = JSONParse(body.toString())?.results[0];
-
-                if (res) {
-                    const result = {
-                        url: res.trackViewUrl,
-                        collectionId: res.collectionId,
-                        trackId: res.trackId,
-                        explicit: !res.notExplicit,
-                        artwork: res.artworkUrl100.replace(
-                            "100x100bb",
-                            "500x500bb"
-                        )
-                    };
-
-                    if (config.get("enableCache"))
-                        cache.set(`${title}_:_${album}_:_${artist}`, result);
-
-                    callback(result);
-                } else callback(null, true);
-            }
-        );
     }
 }
 
