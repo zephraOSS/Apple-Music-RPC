@@ -1,7 +1,8 @@
 {
   "error": {
     "admin": "Please do not run AMRPC with administrator privileges!",
-    "noTrack": "No track detected"
+    "noTrack": "No track detected",
+    "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more."
   },
   "tray": {
     "restart": "Restart AMRPC",
