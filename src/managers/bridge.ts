@@ -1,11 +1,14 @@
 import { Discord } from "./discord";
 import { Browser } from "./browser";
 import { config } from "./store";
+import { appDependencies } from "../index";
+import { getLangStrings } from "../utils/i18n";
+
+import { dialog, shell } from "electron";
 import { AppleBridge } from "apple-bridge";
 import { fetchITunes } from "apple-bridge/dist/win32";
 
 import * as log from "electron-log";
-import { appDependencies } from "../index";
 
 export function init() {
     if (!appDependencies.music || !appDependencies.discord)
@@ -108,5 +111,24 @@ export function init() {
         lastTrack = {};
 
         discord.clearActivity();
+    });
+
+    bridge.on("jsFileExtensionError", "music", () => {
+        log.error("[iTunes]", "JS File Extension Error.");
+
+        const strings = getLangStrings();
+
+        if (
+            dialog.showMessageBoxSync({
+                type: "error",
+                title: "AMRPC - Apple Bridge Error",
+                message: strings.error.jsFileExtension,
+                buttons: [strings.settings.modal.buttons.learnMore]
+            }) === 0
+        ) {
+            shell.openExternal(
+                "https://docs.amrpc.zephra.cloud/articles/js-file-extension-error"
+            );
+        }
     });
 }
