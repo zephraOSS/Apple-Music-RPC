@@ -1,7 +1,8 @@
 {
   "error": {
     "admin": "Bitte starte AMRPC nicht mit Administrator-Rechten!",
-    "noTrack": "Kein Lied erkannt"
+    "noTrack": "Kein Lied erkannt",
+    "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more."
   },
   "tray": {
     "restart": "AMRPC neu starten",
@@ -33,10 +34,10 @@
       "rpcDetails": "Presence Details",
       "rpcState": "Presence State",
       "enableCache": "Cache aktivieren",
-      "resetCache": "Reset Cache"
+      "resetCache": "Cache löschen"
     },
     "common": {
-      "reset": "Reset"
+      "reset": "Löschen"
     },
     "category": {
       "general": "Allgemein"
