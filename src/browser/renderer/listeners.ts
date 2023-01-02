@@ -84,7 +84,7 @@ export function init() {
             const configValue = await window.electron.config.get(configKey);
 
             if (configValue.toString()) {
-                eleValue(configValue);
+                if (ele.id !== "config_language") eleValue(configValue);
 
                 ele.classList.remove("cfg_loading");
                 ele.parentElement.classList.remove("cfg_loading");

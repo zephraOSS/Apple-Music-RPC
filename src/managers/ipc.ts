@@ -12,7 +12,7 @@ import { Browser } from "./browser";
 import { Discord } from "./discord";
 import { useDarkMode } from "../utils/theme";
 import { appDependencies } from "../index";
-import { getLangStrings } from "../utils/i18n";
+import { getLangStrings, getLanguages } from "../utils/i18n";
 
 import { init as initAutoLaunch } from "./launch";
 
@@ -54,6 +54,10 @@ export function init() {
         return appDependencies.discord
             ? Discord.instance?.isSupporter ?? false
             : false;
+    });
+
+    ipcMain.handle("getLanguages", () => {
+        return getLanguages();
     });
 
     ipcMain.handle("getLangStrings", () => {

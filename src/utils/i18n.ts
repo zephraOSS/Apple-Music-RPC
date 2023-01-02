@@ -6,7 +6,7 @@ import * as path from "path";
 
 const appDataPath = path.join(getAppDataPath(), "i18n");
 
-export function getLangStrings(): Object {
+export function getLangStrings() {
     const filePath = path.join(appDataPath, `${config.get("language")}.json`);
 
     if (!fs.existsSync(filePath)) return {};
@@ -30,6 +30,12 @@ export function deleteLangDir() {
     fs.rmSync(appDataPath, {
         recursive: true
     });
+}
+
+export function getLanguages() {
+    if (!fs.existsSync(appDataPath)) return [];
+
+    return fs.readdirSync(appDataPath).map((file) => file.replace(".json", ""));
 }
 
 function getAppDataPath() {

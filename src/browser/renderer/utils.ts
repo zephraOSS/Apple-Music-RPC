@@ -26,7 +26,24 @@ export async function updateTheme(theme?: string) {
 }
 
 export async function updateLanguage() {
+    const languages: Array<string> = await window.electron.getLanguages(),
+        userLanguage = await window.electron.config.get("language");
+
     langString = await window.electron.getLangStrings();
+
+    document.querySelector("select#config_language").innerHTML = "";
+
+    languages.forEach((lang) => {
+        const option = document.createElement("option");
+
+        option.value = lang;
+        option.innerText = lang;
+
+        document.querySelector("#config_language").appendChild(option);
+    });
+
+    document.querySelector<HTMLSelectElement>("select#config_language").value =
+        userLanguage;
 
     document
         .querySelectorAll(".settings_setting label")
