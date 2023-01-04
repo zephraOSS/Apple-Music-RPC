@@ -1,4 +1,7 @@
+import { dialog, shell } from "electron";
 import { exec } from "child_process";
+
+import { getLangStrings } from "./i18n";
 
 import * as log from "electron-log";
 
@@ -20,14 +23,44 @@ export async function checkIfAppIsInstalled(
     appNameMac?: string
 ): Promise<boolean> {
     return new Promise((resolve, reject) => {
-        exec(
-            process.platform === "win32"
-                ? `where ${appName}`
-                : `which ${appNameMac ?? appName}`,
-            (err, stdout) => {
-                if (err) reject(false);
-                else resolve(stdout.includes(appName));
+        try {
+            exec(
+                process.platform === "win32"
+                    ? `where ${appName}`
+                    : `which ${appNameMac ?? appName}`,
+                (err, stdout) => {
+                    if (err) reject(false);
+                    else resolve(stdout.includes(appName));
+                }
+            );
+        } catch (e) {
+            log.info(
+                "[checkAppDependency][checkIfAppIsInstalled]",
+                "Check the documentation for more information:",
+                "https://docs.amrpc.zephra.cloud/articles/command-prompt-error"
+            );
+            log.error(
+                "[checkAppDependency][checkIfAppIsInstalled]",
+                "Check if AMRPC has permission to access Command Prompt"
+            );
+            log.error("[checkAppDependency][checkIfAppIsInstalled]", e);
+
+            const strings = getLangStrings();
+
+            if (
+                dialog.showMessageBoxSync({
+                    type: "error",
+                    title: "AMRPC - Apple Bridge Error",
+                    message: strings.error.cmd,
+                    buttons: [strings.settings.modal.buttons.learnMore]
+                }) === 0
+            ) {
+                shell.openExternal(
+                    "https://docs.amrpc.zephra.cloud/articles/command-prompt-error"
+                );
             }
-        );
+
+            reject(false);
+        }
     });
 }
