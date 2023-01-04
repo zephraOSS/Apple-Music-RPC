@@ -32,20 +32,20 @@ export class replaceVariables {
         // " - ALBUM_IS_AV"
         const testStr = config
             .replace(
-                "%title%",
+                /%title%/g,
                 this.currentTrack.name ? "_TITLE_IS_AV_" : "_TITLE_NOT_AV_"
             )
             .replace(
-                "%album%",
-                this.currentTrack.album ? "_ALBUM_IS_AV_" : "_TITLE_NOT_AV_"
+                /%album%"/g,
+                this.currentTrack.album ? "_ALBUM_IS_AV_" : "_ALBUM_NOT_AV_"
             )
             .replace(
-                "%artist%",
-                this.currentTrack.artist ? "_ARTIST_IS_AV_" : "_TITLE_NOT_AV_"
+                /%artist%/g,
+                this.currentTrack.artist ? "_ARTIST_IS_AV_" : "_ARTIST_NOT_AV_"
             )
             .replace(
-                "%version%",
-                app.getVersion() ? "_VERSION_IS_AV_" : "_TITLE_NOT_AV_"
+                /%version%/g,
+                app.getVersion() ? "_VERSION_IS_AV_" : "_VERSION_NOT_AV_"
             );
 
         testStr
@@ -56,18 +56,27 @@ export class replaceVariables {
             .forEach((e) => {
                 e = e.trim();
 
-                // e.g. "TITLE_IS_AV" => "title"
-                const cfgElement = e
+                // e.g. "_TITLE_IS_AV" => "title"
+                const regexMatch = e.match(/_[a-zA-Z]*_IS_AV_|-/g)?.[0] ?? "",
+                    cfgElement = regexMatch
                         .replace("_IS_AV_", "")
                         .slice(1)
                         .toLowerCase(),
                     cfgValue = this.getValue(cfgElement),
                     regex = new RegExp(`%[a-z]*%|${separator}`, "g");
 
-                if (!cfgValue && e !== config.replace(regex, "").trim()) return;
+                if (
+                    regexMatch !== "" &&
+                    (!cfgElement ||
+                        (!cfgValue && e !== config.replace(regex, "").trim()))
+                )
+                    return;
                 if (returnStr) returnStr += ` ${separator} `;
 
-                returnStr += cfgValue ?? e;
+                returnStr +=
+                    cfgElement && cfgValue
+                        ? e.replace(regexMatch, cfgValue)
+                        : e;
             });
 
         return returnStr ? returnStr.substring(0, 128) : undefined;
