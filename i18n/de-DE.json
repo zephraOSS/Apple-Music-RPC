@@ -2,7 +2,8 @@
   "error": {
     "admin": "Bitte starte AMRPC nicht mit Administrator-Rechten!",
     "noTrack": "Kein Lied erkannt",
-    "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more."
+    "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more.",
+    "cmd": "There is an error with Command Prompt. Please click on the button below to learn more."
   },
   "tray": {
     "restart": "AMRPC neu starten",
