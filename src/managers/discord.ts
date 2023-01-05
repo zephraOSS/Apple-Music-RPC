@@ -17,6 +17,7 @@ export class Discord {
     private isReady: boolean = false;
     private startUp: boolean = true;
     private defaultLIT: string = `AMRPC - ${app.getVersion()}`;
+    private triggerAfterReady: (() => void)[] = [];
 
     public activity: Presence = {};
     public isLive: boolean = false;
@@ -79,9 +80,13 @@ export class Discord {
 
                 this.isReady = true;
                 this.startUp = false;
+
+                this.triggerAfterReady.forEach((func) => func());
+                this.triggerAfterReady = [];
             })
             .catch((err) => {
                 log.error("[DISCORD]", `Client login error: ${err}`);
+                this.connect();
             });
 
         this.client.on("disconnected", () => {
@@ -99,24 +104,48 @@ export class Discord {
         this.activity = activity;
 
         if (this.isReady) {
-            this.client.setActivity(activity).catch((err) => {
-                log.error("[DISCORD][setActivity]", `Client error: ${err}`);
-            });
+            const time = Date.now();
+
+            this.client
+                .setActivity(activity)
+                .then(() => {
+                    log.info(
+                        "[DISCORD][setActivity]",
+                        `Activity set (${Date.now() - time}ms)`
+                    );
+                })
+                .catch((err) => {
+                    log.error("[DISCORD][setActivity]", `Client error: ${err}`);
+                });
         } else {
             if (!this.startUp) this.connect();
 
-            setTimeout(() => this.setActivity(activity), 4500);
+            this.triggerAfterReady.push(() => this.setActivity(activity));
         }
     }
 
     clearActivity() {
         if (this.isReady) {
-            this.client.clearActivity().catch((err) => {
-                log.error("[DISCORD][clearActivity]", `Client error: ${err}`);
-            });
+            const time = Date.now();
+
+            this.client
+                .clearActivity()
+                .then(() => {
+                    log.info(
+                        "[DISCORD][clearActivity]",
+                        `Activity cleared (${Date.now() - time}ms)`
+                    );
+                })
+                .catch((err) => {
+                    log.error(
+                        "[DISCORD][clearActivity]",
+                        `Client error: ${err}`
+                    );
+                });
         } else {
             if (!this.startUp) this.connect();
-            setTimeout(() => this.clearActivity(), this.startUp ? 1000 : 2500);
+
+            this.triggerAfterReady.push(() => this.clearActivity());
         }
     }
 
