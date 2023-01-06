@@ -8,6 +8,7 @@ import { Browser } from "./browser";
 import { SongData } from "./SongData";
 
 import { checkSupporter } from "../utils/checkSupporter";
+import { songDataSearchStation } from "../utils/advancedSongDataSearch";
 import { replaceVariables } from "../utils/replaceVariables";
 
 import * as log from "electron-log";
@@ -182,43 +183,60 @@ export class Discord {
         this.currentTrack = currentTrack;
 
         this.setActivity(activity);
-        this.songData
-            .getSongData(
-                currentTrack.name,
-                currentTrack.album,
-                currentTrack.artist
-            )
-            .then((data) => {
-                currentTrack.url = data.url;
 
+        if (this.isLive) {
+            const songData = await songDataSearchStation(currentTrack.name);
+
+            if (songData.artwork) activity.largeImageKey = songData.artwork;
+            if (songData.url)
                 activity.buttons = [
                     {
                         label: "Play on Apple Music",
-                        url: data.url
+                        url: songData.url
                     }
                 ];
 
-                if (!currentTrack.artwork) currentTrack.artwork = data.artwork;
+            this.setActivity(activity);
+        } else {
+            this.songData
+                .getSongData(
+                    currentTrack.name,
+                    currentTrack.album,
+                    currentTrack.artist
+                )
+                .then((data) => {
+                    currentTrack.url = data.url;
 
-                Browser.send("get-current-track", false, {
-                    artwork: data.artwork,
-                    playerState: currentTrack.playerState
+                    activity.buttons = [
+                        {
+                            label: "Play on Apple Music",
+                            url: data.url
+                        }
+                    ];
+
+                    if (!currentTrack.artwork)
+                        currentTrack.artwork = data.artwork;
+
+                    Browser.send("get-current-track", false, {
+                        artwork: data.artwork,
+                        playerState: currentTrack.playerState
+                    });
+
+                    if (getConfig("showAlbumArtwork"))
+                        activity.largeImageKey = currentTrack.artwork;
+
+                    this.setActivity(activity);
+                })
+                .catch((err) => {
+                    log.error(
+                        "[DISCORD][setCurrentTrack][getSongData]",
+                        `Error: ${err}`
+                    );
+
+                    delete activity.buttons;
+                    delete this.activity.buttons;
                 });
-
-                if (getConfig("showAlbumArtwork"))
-                    activity.largeImageKey = currentTrack.artwork;
-
-                this.setActivity(activity);
-            })
-            .catch((err) => {
-                log.error(
-                    "[DISCORD][setCurrentTrack][getSongData]",
-                    `Error: ${err}`
-                );
-
-                delete activity.buttons;
-                delete this.activity.buttons;
-            });
+        }
     }
 
     static getInstance() {
