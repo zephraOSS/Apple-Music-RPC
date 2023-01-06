@@ -83,7 +83,6 @@ export function init() {
                     delete newCurrentTrack.elapsedTime;
 
                     if (
-                        newCurrentTrack &&
                         newCurrentTrack.playerState === "playing" &&
                         Object.keys(newCurrentTrack).length > 0 &&
                         objectEqual(currentTrack, newCurrentTrack)

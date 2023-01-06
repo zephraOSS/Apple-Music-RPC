@@ -25,7 +25,7 @@ export class SongData {
                 `search?term=${reqParam}&entity=musicTrack`,
                 "https://itunes.apple.com/"
             ).then((r) => {
-                if (!r || !r?.results?.[0]) return reject("not_found");
+                if (!r || !r.results?.[0]) return reject("not_found");
 
                 const res = r.results[0],
                     data: SongDataT = {
