@@ -41,6 +41,7 @@
         "fetch": "^1.1.0",
         "fs": "0.0.1-security",
         "http": "^0.0.1-security",
+        "lastfmapi": "^0.1.1",
         "url": "^0.11.0",
         "ws": "^8.6.0"
     },

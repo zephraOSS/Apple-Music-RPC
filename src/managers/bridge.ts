@@ -1,7 +1,7 @@
 import { Discord } from "./discord";
 import { Browser } from "./browser";
 import { config } from "./store";
-import { appDependencies } from "../index";
+import { appDependencies, lastFM } from "../index";
 import { getLangStrings } from "../utils/i18n";
 
 import { dialog, shell } from "electron";
@@ -20,7 +20,8 @@ export function init() {
         discord = new Discord(),
         currentTrack = fetchITunes();
 
-    let lastTrack: any = {};
+    let lastTrack: any = {},
+        pausedTrack: any = {};
 
     setTimeout(() => {
         if (currentTrack && Object.keys(currentTrack).length > 0)
@@ -43,9 +44,71 @@ export function init() {
         if (Object.keys(currentTrack).length === 0)
             return log.warn("[iTunes] No Track detected");
 
-        lastTrack = currentTrack;
+        currentTrack.snowflake = generateSnowflake();
 
         discord.setCurrentTrack(currentTrack);
+
+        if (lastFM && config.get("enableLastFM")) {
+            if (currentTrack.remainingTime <= 0) return;
+            if (
+                lastTrack.snowflake === currentTrack.snowflake &&
+                pausedTrack.remainingTime &&
+                currentTrack.remainingTime &&
+                pausedTrack.remainingTime - currentTrack.remainingTime <= 3
+            )
+                return log.info("[LastFM] Skipping scrobble due to same track");
+
+            log.info("[iTunes][lastFM]", "Updating now playing");
+
+            lastFM.nowPlaying({
+                artist: currentTrack.artist,
+                track: currentTrack.name,
+                album: currentTrack.album,
+                duration: currentTrack.duration
+            });
+
+            const timestamp = Math.floor(Date.now() / 1000);
+
+            setTimeout(
+                () => {
+                    const newCurrentTrack = fetchITunes();
+
+                    delete currentTrack.snowflake;
+                    delete currentTrack.remainingTime;
+                    delete currentTrack.elapsedTime;
+                    delete currentTrack.url;
+                    delete currentTrack.artwork;
+
+                    delete newCurrentTrack.remainingTime;
+                    delete newCurrentTrack.elapsedTime;
+
+                    if (
+                        newCurrentTrack &&
+                        newCurrentTrack.playerState === "playing" &&
+                        Object.keys(newCurrentTrack).length > 0 &&
+                        objectEqual(currentTrack, newCurrentTrack)
+                    ) {
+                        log.info(
+                            "[iTunes][lastFM]",
+                            `Scrobbling "${currentTrack.name}" by ${currentTrack.artist}`
+                        );
+
+                        lastFM.scrobble({
+                            artist: currentTrack.artist,
+                            track: currentTrack.name,
+                            album: currentTrack.album,
+                            duration: currentTrack.duration,
+                            timestamp
+                        });
+                    }
+                },
+                currentTrack.remainingTime > 5
+                    ? (currentTrack.remainingTime - 5) * 1000
+                    : 0
+            );
+        }
+
+        lastTrack = currentTrack;
     });
 
     bridge.on("paused", "music", () => {
@@ -53,6 +116,7 @@ export function init() {
 
         log.info("[iTunes]", "Paused");
 
+        pausedTrack = lastTrack;
         lastTrack = {};
 
         if (config.get("hideOnPause")) discord.clearActivity();
@@ -131,4 +195,37 @@ export function init() {
             );
         }
     });
+}
+
+function generateSnowflake() {
+    return BigInt(
+        Math.floor(Date.now() / 1000)
+            .toString(2)
+            .padStart(42, "0") + "0000000000".padStart(12, "0")
+    ).toString();
+}
+
+function objectEqual(object1, object2) {
+    const keys1 = Object.keys(object1);
+
+    if (keys1.length !== Object.keys(object2).length) return false;
+
+    for (const key of keys1) {
+        const val1 = object1[key],
+            val2 = object2[key];
+
+        const areObjects = isObject(val1) && isObject(val2);
+
+        if (
+            (areObjects && !objectEqual(val1, val2)) ||
+            (!areObjects && val1 !== val2)
+        )
+            return false;
+    }
+
+    return true;
+}
+
+function isObject(object) {
+    return object != null && typeof object === "object";
 }

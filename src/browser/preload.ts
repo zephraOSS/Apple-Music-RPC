@@ -48,6 +48,14 @@ contextBridge.exposeInMainWorld("electron", {
             return ipcRenderer.invoke("resetConfig", k);
         }
     },
+    lastFM: {
+        getUser: () => {
+            return ipcRenderer.invoke("lastfm-getUser");
+        },
+        connect: (connect: boolean = true) => {
+            return ipcRenderer.invoke("lastfm-connect", connect);
+        }
+    },
     fetchChangelog: async () => {
         return await ipcRenderer.invoke("fetchChangelog");
     },
@@ -86,7 +94,8 @@ contextBridge.exposeInMainWorld("api", {
             "update-download-progress-update",
             "update-downloaded",
             "get-current-track",
-            "open-modal"
+            "open-modal",
+            "lastfm-connect"
         ];
 
         if (validChannels.includes(channel))

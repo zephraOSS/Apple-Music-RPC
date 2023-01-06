@@ -9,13 +9,18 @@ export const config = new Store({
             showAlbumArtwork: true,
             hardwareAcceleration: true,
             enableCache: true,
+            enableLastFM: false,
             service: "itunes",
             colorTheme: "light",
             language: "en-US",
             artwork: "applemusic-logo",
             rpcLargeImageText: "AMRPC - %version%",
             rpcDetails: "%title% - %album%",
-            rpcState: "%artist%"
+            rpcState: "%artist%",
+            lastFM: {
+                username: "",
+                key: ""
+            }
         }
     }),
     appData = new Store({

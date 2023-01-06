@@ -11,7 +11,7 @@ import {
 import { Browser } from "./browser";
 import { Discord } from "./discord";
 import { useDarkMode } from "../utils/theme";
-import { appDependencies } from "../index";
+import { appDependencies, setLastFM } from "../index";
 import { getLangStrings, getLanguages } from "../utils/i18n";
 
 import { init as initAutoLaunch } from "./launch";
@@ -180,6 +180,15 @@ export function init() {
 
     ipcMain.handle("checkAppDependencies", () => {
         return appDependencies;
+    });
+
+    // Last.fm
+    ipcMain.handle("lastfm-getUser", () => {
+        return config.get("lastFM");
+    });
+
+    ipcMain.handle("lastfm-connect", (_e, connect: boolean = false) => {
+        setLastFM(connect);
     });
 
     // Button actions

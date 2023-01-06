@@ -8,6 +8,7 @@ import {
 } from "./utils.js";
 
 import { init as initAPI } from "./api.js";
+import { init as initLastFM } from "./lastFM.js";
 import { init as initListeners } from "./listeners.js";
 import { init as initEventSettings } from "./eventSettings.js";
 
@@ -32,6 +33,7 @@ export let appVersion,
 console.log("[BROWSER][RENDERER] Loading...");
 
 initAPI();
+initLastFM();
 initEventSettings();
 initListeners();
 

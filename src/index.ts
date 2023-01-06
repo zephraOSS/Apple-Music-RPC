@@ -1,9 +1,11 @@
 import { app, nativeTheme } from "electron";
+
+import { config, getConfig } from "./managers/store";
+
 import { TrayManager } from "./managers/tray";
 import { ModalWatcher } from "./managers/modal";
 import { Browser } from "./managers/browser";
-import { getConfig } from "./managers/store";
-import { checkAppDependency } from "./utils/checkAppDependency";
+import { LastFM } from "./managers/lastFM";
 
 import { init as initSentry } from "./managers/sentry";
 import { init as initAutoLaunch } from "./managers/launch";
@@ -13,11 +15,14 @@ import { init as initTheme } from "./utils/theme";
 import { init as initMsStoreModal } from "./utils/msStoreModal";
 import { init as initCrowdin } from "./utils/crowdin";
 
+import { checkAppDependency } from "./utils/checkAppDependency";
+
 import * as log from "electron-log";
 
 export let trayManager: TrayManager;
 export let modalWatcher: ModalWatcher;
 export let appDependencies: AppDependencies;
+export let lastFM: LastFM;
 
 Object.assign(console, log.functions);
 
@@ -34,6 +39,13 @@ app.on("ready", async () => {
     trayManager = new TrayManager();
     modalWatcher = new ModalWatcher();
     appDependencies = await checkAppDependency();
+
+    if (
+        config.get("enableLastFM") &&
+        config.get("lastFM.username") &&
+        config.get("lastFM.key")
+    )
+        lastFM = new LastFM();
 
     initTheme();
     initAutoLaunch();
@@ -57,3 +69,7 @@ app.on("ready", async () => {
         }
     });
 });
+
+export function setLastFM(connect: boolean) {
+    lastFM = new LastFM(connect);
+}

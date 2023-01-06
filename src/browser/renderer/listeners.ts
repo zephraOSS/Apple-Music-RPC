@@ -109,11 +109,18 @@ export function init() {
             button.addEventListener("click", async (e) => {
                 e.preventDefault();
 
-                if (!button.dataset.action) return;
+                if (
+                    !button.dataset.action ||
+                    button.classList.contains("disabled")
+                )
+                    return;
 
-                const Await = button.dataset.await === "true";
+                const Await = button.dataset.await === "true",
+                    func = button.dataset.action
+                        .split(".")
+                        .reduce((o, i) => o[i], window.electron);
 
-                if (!Await) window.electron[button.dataset.action]();
+                if (!Await) func();
                 else {
                     const innerText = button.innerText;
 

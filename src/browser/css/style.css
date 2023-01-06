@@ -529,6 +529,11 @@ body[data-theme="dark"] .settings_setting select {
     filter: brightness(90%);
 }
 
+.cfgButton.disabled {
+    cursor: not-allowed;
+    filter: brightness(50%);
+}
+
 .cfgSwitch {
     display: inline-block;
     cursor: pointer;
