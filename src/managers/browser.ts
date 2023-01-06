@@ -41,6 +41,8 @@ export class Browser {
             this.window.on(event, Browser.saveWindowState);
         });
 
+        this.isReady = true;
+
         this.checkAwaits();
 
         Browser.instance = this;
@@ -140,7 +142,7 @@ export class Browser {
     }
 
     static send(channel: string, create: boolean = false, ...args: any[]) {
-        if (create || Browser.instance)
+        if (create || (Browser.instance && Browser.instance.isReady))
             Browser.getInstance().send(channel, ...args);
         else Browser.awaitsSend.push({ channel, args });
     }
