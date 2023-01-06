@@ -21,7 +21,8 @@ export function init() {
         currentTrack = fetchITunes();
 
     let lastTrack: any = {},
-        pausedTrack: any = {};
+        pausedTrack: any = {},
+        scrobbleTimeout: NodeJS.Timeout;
 
     setTimeout(() => {
         if (currentTrack && Object.keys(currentTrack).length > 0)
@@ -30,9 +31,10 @@ export function init() {
 
     bridge.on("playing", "music", (currentTrack) => {
         if (
-            currentTrack.name === lastTrack.name &&
-            currentTrack.artist === lastTrack.artist &&
-            currentTrack.duration === lastTrack.duration
+            (currentTrack.name === lastTrack.name &&
+                currentTrack.artist === lastTrack.artist &&
+                currentTrack.duration === lastTrack.duration) ||
+            (discord.isLive && currentTrack.name === lastTrack.name)
         )
             return;
 
@@ -44,12 +46,17 @@ export function init() {
         if (Object.keys(currentTrack).length === 0)
             return log.warn("[iTunes] No Track detected");
 
-        currentTrack.snowflake = generateSnowflake();
+        if (currentTrack.remainingTime > 0)
+            currentTrack.snowflake = generateSnowflake();
 
         discord.setCurrentTrack(currentTrack);
 
         if (lastFM && config.get("enableLastFM")) {
-            if (currentTrack.remainingTime <= 0) return;
+            if (currentTrack.remainingTime <= 0) {
+                lastTrack = currentTrack;
+                return;
+            }
+
             if (
                 lastTrack.snowflake === currentTrack.snowflake ||
                 pausedTrack.snowflake === currentTrack.snowflake ||
@@ -76,7 +83,9 @@ export function init() {
 
             const timestamp = Math.floor(Date.now() / 1000);
 
-            setTimeout(
+            if (scrobbleTimeout) clearTimeout(scrobbleTimeout);
+
+            scrobbleTimeout = setTimeout(
                 () => {
                     const newTrack = fetchITunes(),
                         oldTrack = currentTrack;
@@ -152,11 +161,11 @@ export function init() {
                 activity.state = "LIVE";
                 delete activity.endTimestamp;
 
-                discord.setActivity(activity);
+                if (activity.state !== "LIVE") discord.setActivity(activity);
             } else if (elapsedTime === 0) {
                 delete activity.endTimestamp;
 
-                discord.setActivity(activity);
+                if (activity.endTimestamp) discord.setActivity(activity);
             } else if (activity.endTimestamp !== endTimestamp) {
                 activity.endTimestamp = endTimestamp;
 
