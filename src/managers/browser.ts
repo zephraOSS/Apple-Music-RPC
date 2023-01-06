@@ -22,6 +22,16 @@ export class Browser {
 
         initIPC();
 
+        this.initWindow();
+
+        this.isReady = true;
+
+        this.checkAwaits();
+
+        Browser.instance = this;
+    }
+
+    initWindow(show: boolean = false) {
         const windowState = getConfig("windowState");
 
         this.window = new BrowserWindow({
@@ -41,17 +51,19 @@ export class Browser {
             this.window.on(event, Browser.saveWindowState);
         });
 
-        this.isReady = true;
+        this.window.on("close", () => {
+            this.window = null;
+        });
 
-        this.checkAwaits();
-
-        Browser.instance = this;
+        if (show) this.window.show();
     }
 
     async windowAction(action: string) {
         switch (action) {
             case "show":
-                this.window.show();
+                if (this.window) this.window.show();
+                else this.initWindow(true);
+
                 this.checkAwaits();
 
                 break;
