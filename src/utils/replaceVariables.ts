@@ -36,7 +36,7 @@ export class replaceVariables {
                 this.currentTrack.name ? "_TITLE_IS_AV_" : "_TITLE_NOT_AV_"
             )
             .replace(
-                /%album%"/g,
+                /%album%/g,
                 this.currentTrack.album ? "_ALBUM_IS_AV_" : "_ALBUM_NOT_AV_"
             )
             .replace(
