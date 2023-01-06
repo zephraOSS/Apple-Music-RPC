@@ -171,7 +171,7 @@ export class Discord {
                 currentTrack.duration;
 
             this.isLive = false;
-        } else {
+        } else if (!currentTrack.artist && !currentTrack.album) {
             if (activity.endTimestamp) delete activity.endTimestamp;
 
             activity.details = currentTrack.name.substring(0, 128);
