@@ -60,7 +60,8 @@ export function init() {
             if (
                 lastTrack.snowflake === currentTrack.snowflake ||
                 pausedTrack.snowflake === currentTrack.snowflake ||
-                (pausedTrack.remainingTime &&
+                (pausedTrack.name === currentTrack.name &&
+                    pausedTrack.remainingTime &&
                     currentTrack.remainingTime &&
                     pausedTrack.remainingTime - currentTrack.remainingTime <=
                         25)
