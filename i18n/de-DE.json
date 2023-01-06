@@ -2,8 +2,8 @@
   "error": {
     "admin": "Bitte starte AMRPC nicht mit Administrator-Rechten!",
     "noTrack": "Kein Lied erkannt",
-    "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more.",
-    "cmd": "There is an error with Command Prompt. Please click on the button below to learn more."
+    "jsFileExtension": "Es liegt ein Fehler bei den JS-Dateizuordnungsdaten vor. Klicke auf den Button unten, um mehr zu erfahren.",
+    "cmd": "Es liegt ein Fehler mit der Eingabeaufforderung vor. Klicke auf den Button unten, um mehr zu erfahren."
   },
   "tray": {
     "restart": "AMRPC neu starten",
@@ -34,13 +34,13 @@
       },
       "rpcDetails": "Presence Details",
       "rpcState": "Presence State",
-      "enableLastFM": "Enable Last.fm",
+      "enableLastFM": "Last.fm aktivieren",
       "lastFMUser": {
-        "label": "Last.fm User",
-        "connect": "Connect",
-        "reconnect": "Reconnect",
-        "connecting": "Connecting...",
-        "cancel": "Cancel"
+        "label": "Last.fm Benutzer",
+        "connect": "Verbinden",
+        "reconnect": "Neu verbinden",
+        "connecting": "Verbinden...",
+        "cancel": "Abbrechen"
       },
       "enableCache": "Cache aktivieren",
       "resetCache": "Cache löschen"
