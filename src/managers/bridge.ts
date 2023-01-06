@@ -51,12 +51,19 @@ export function init() {
         if (lastFM && config.get("enableLastFM")) {
             if (currentTrack.remainingTime <= 0) return;
             if (
-                lastTrack.snowflake === currentTrack.snowflake &&
-                pausedTrack.remainingTime &&
-                currentTrack.remainingTime &&
-                pausedTrack.remainingTime - currentTrack.remainingTime <= 3
-            )
-                return log.info("[LastFM] Skipping scrobble due to same track");
+                lastTrack.snowflake === currentTrack.snowflake ||
+                pausedTrack.snowflake === currentTrack.snowflake ||
+                (pausedTrack.remainingTime &&
+                    currentTrack.remainingTime &&
+                    pausedTrack.remainingTime - currentTrack.remainingTime <=
+                        25)
+            ) {
+                log.info("[LastFM] Skipping scrobble due to same track");
+
+                lastTrack = currentTrack;
+
+                return;
+            }
 
             log.info("[iTunes][lastFM]", "Updating now playing");
 
@@ -71,21 +78,22 @@ export function init() {
 
             setTimeout(
                 () => {
-                    const newCurrentTrack = fetchITunes();
+                    const newTrack = fetchITunes(),
+                        oldTrack = currentTrack;
 
-                    delete currentTrack.snowflake;
-                    delete currentTrack.remainingTime;
-                    delete currentTrack.elapsedTime;
-                    delete currentTrack.url;
-                    delete currentTrack.artwork;
+                    delete oldTrack.snowflake;
+                    delete oldTrack.remainingTime;
+                    delete oldTrack.elapsedTime;
+                    delete oldTrack.url;
+                    delete oldTrack.artwork;
 
-                    delete newCurrentTrack.remainingTime;
-                    delete newCurrentTrack.elapsedTime;
+                    delete newTrack.remainingTime;
+                    delete newTrack.elapsedTime;
 
                     if (
-                        newCurrentTrack.playerState === "playing" &&
-                        Object.keys(newCurrentTrack).length > 0 &&
-                        objectEqual(currentTrack, newCurrentTrack)
+                        newTrack.playerState === "playing" &&
+                        Object.keys(newTrack).length > 0 &&
+                        objectEqual(oldTrack, newTrack)
                     ) {
                         log.info(
                             "[iTunes][lastFM]",
