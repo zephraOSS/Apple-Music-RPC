@@ -34,6 +34,14 @@
       },
       "rpcDetails": "Presence Details",
       "rpcState": "Presence State",
+      "enableLastFM": "Enable Last.fm",
+      "lastFMUser": {
+        "label": "Last.fm User",
+        "connect": "Connect",
+        "reconnect": "Reconnect",
+        "connecting": "Connecting...",
+        "cancel": "Cancel"
+      },
       "enableCache": "Enable Cache",
       "resetCache": "Reset Cache"
     },
