@@ -10,7 +10,11 @@ export class ModalWatcher {
     constructor() {
         this.checkForModals();
         // :00, :15, :30, :45
-        new CronJob("*/15 * * * *", this.checkForModals).start();
+        try {
+            new CronJob("*/15 * * * *", this.checkForModals).start();
+        } catch (e) {
+            log.error("[ModalWatcher]", e);
+        }
     }
 
     private checkForModals() {
