@@ -1,6 +1,9 @@
 ![banner](https://user-images.githubusercontent.com/53608074/201397177-1d08c4ed-d595-41ab-86cb-3e8bd1da46dd.png)
 # Apple Music RPC for Discord
 
+## Apple Music Preview
+We currently don't support [Apple Music Preview](https://apps.microsoft.com/store/detail/apple-music-preview/9PFHDD62MXS1), but we're doing our best to find a way to support it.
+
 ## Installation
 * [Microsoft Store](https://docs.amrpc.zephra.cloud/installation/windows/microsoft-store)
 * [Windows](https://docs.amrpc.zephra.cloud/installation/windows)
