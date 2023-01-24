@@ -1,4 +1,5 @@
 import { Tray, Menu, app, shell } from "electron";
+
 import { Browser } from "./browser";
 
 import * as path from "path";

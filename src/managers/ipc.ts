@@ -171,7 +171,7 @@ export function init() {
         // @ts-ignore
         const songDataHistory = Discord.instance.songData.history;
 
-        // TODO: Get current song data and send feedback to the API
+        // TODO: Get current song data and send feedback to the API :: Paused until new website is released
     });
 
     ipcMain.handle("isReady", (_e, isReady: boolean) => {

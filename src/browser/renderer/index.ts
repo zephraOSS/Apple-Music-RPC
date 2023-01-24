@@ -52,6 +52,7 @@ updateLanguage();
     document.querySelector("span#extra_version").textContent = `${
         isDeveloper ? "Developer" : ""
     } v${appVersion}`;
+
     document
         .querySelector("span#extra_version")
         .setAttribute(
