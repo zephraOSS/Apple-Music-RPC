@@ -5,8 +5,7 @@ import { appDependencies, lastFM } from "../index";
 import { getLangStrings } from "../utils/i18n";
 
 import { dialog, shell } from "electron";
-import { AppleBridge } from "apple-bridge";
-import { fetchITunes } from "apple-bridge/dist/win32";
+import { AppleBridge, fetchITunes } from "apple-bridge";
 
 import * as log from "electron-log";
 
