@@ -69,7 +69,7 @@ div.control {
     width: 100%;
     height: 30px;
     padding: 25px 0;
-    z-index: 9999;
+    z-index: 1;
     -webkit-user-select: none;
     user-select: none;
     -webkit-app-region: drag;
@@ -183,7 +183,7 @@ div.windowcontrols .dot:hover:not(.notavailable) {
 }
 
 div.content {
-    height: 425px;
+    height: 435px;
     overflow-y: auto;
     margin-top: 85px;
     padding: 15px;
@@ -469,11 +469,11 @@ div.modal .btn.btn-grey,
 div.modal .btn.btn-rainbow,
 .cfgButton.rainbow {
     background-image: linear-gradient(
-        90deg,
-        #00c0ff 0%,
-        #ffcf00 49%,
-        #fc4f4f 80%,
-        #00c0ff 100%
+            90deg,
+            #00c0ff 0%,
+            #ffcf00 49%,
+            #fc4f4f 80%,
+            #00c0ff 100%
     );
 }
 
