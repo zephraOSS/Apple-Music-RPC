@@ -51,7 +51,7 @@ export class Browser {
             this.window.on(event, Browser.saveWindowState);
         });
 
-        this.window.on("close", () => {
+        this.window.on("closed", () => {
             this.window = null;
         });
 
