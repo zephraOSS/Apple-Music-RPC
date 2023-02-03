@@ -7,6 +7,7 @@ export const config = new Store({
             show: true,
             hideOnPause: true,
             showAlbumArtwork: true,
+            showTimestamps: true,
             hardwareAcceleration: true,
             enableCache: true,
             enableLastFM: false,

@@ -71,7 +71,11 @@ export class Discord {
             .then(async (client) => {
                 log.info("[DISCORD]", `Client logged in ${client.user.id}`);
 
-                this.isSupporter = await checkSupporter(client.user.id);
+                try {
+                    this.isSupporter = await checkSupporter(client.user.id);
+                } catch (err) {
+                    log.error("[DISCORD]", `Supporter check error: ${err}`);
+                }
 
                 if (!this.isSupporter) {
                     this.activity.largeImageText = this.defaultLIT;
@@ -101,6 +105,7 @@ export class Discord {
 
     setActivity(activity: Presence) {
         if (!this.isSupporter) activity.largeImageText = this.defaultLIT;
+        if (!config.get("showTimestamps")) delete activity.endTimestamp;
 
         this.activity = activity;
 
