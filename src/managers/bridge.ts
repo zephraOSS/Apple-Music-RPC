@@ -165,7 +165,7 @@ export function init() {
             } else if (elapsedTime === 0) {
                 delete activity.endTimestamp;
 
-                if (activity.endTimestamp) discord.setActivity(activity);
+                discord.setActivity(activity);
             } else if (activity.endTimestamp !== endTimestamp) {
                 activity.endTimestamp = endTimestamp;
 

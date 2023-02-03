@@ -107,7 +107,7 @@ export function init() {
             k === "rpcLargeImageText" &&
             (!appDependencies.discord ||
                 !Discord.instance ||
-                (appDependencies.discord && !Discord.instance?.isSupporter))
+                (appDependencies.discord && !Discord.instance.isSupporter))
         ) {
             return log.warn(
                 "[IPC][UPDATE_CONFIG]",
