@@ -51,7 +51,7 @@ export function init() {
     });
 
     ipcMain.handle("isSupporter", () => {
-        return appDependencies.discord
+        return appDependencies?.discord
             ? Discord.instance?.isSupporter ?? false
             : false;
     });
