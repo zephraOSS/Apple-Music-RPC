@@ -144,7 +144,7 @@ export function init() {
         }
 
         Browser.send("get-current-track", false, {
-            playerState: currentTrack.playerState
+            playerState: "paused"
         });
     });
 
