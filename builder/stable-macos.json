@@ -37,7 +37,7 @@
         "writeUpdateInfo": false
     },
     "mac": {
-        "icon": "src/assets/icons/darwin/icon.icns",
+        "icon": "src/assets/icons/darwin/logo.png",
         "target": {
             "target": "default",
             "arch": ["x64", "arm64"]
