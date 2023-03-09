@@ -24,7 +24,11 @@ export function init() {
         scrobbleTimeout: NodeJS.Timeout;
 
     setTimeout(() => {
-        if (currentTrack && Object.keys(currentTrack).length > 0)
+        if (
+            currentTrack &&
+            typeof currentTrack === "object" &&
+            Object.keys(currentTrack).length > 0
+        )
             bridge.emit(currentTrack.playerState, "music", currentTrack);
     }, 500);
 
