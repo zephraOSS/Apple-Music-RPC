@@ -4,4 +4,6 @@
 /node_modules
 /src/language
 
+/builder/cert.pfx
+
 .DS_Store
