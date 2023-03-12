@@ -19,6 +19,8 @@ import { checkAppDependency } from "./utils/checkAppDependency";
 
 import * as log from "electron-log";
 
+export const isBeta = app.getVersion().includes("beta");
+
 export let trayManager: TrayManager;
 export let modalWatcher: ModalWatcher;
 export let appDependencies: AppDependencies;
@@ -29,6 +31,13 @@ Object.assign(console, log.functions);
 if (!app.isPackaged) log.transports.file.fileName = "development.log";
 if (!app.requestSingleInstanceLock()) app.quit();
 
+log.info(
+    "------------------------------------",
+    "STARTING",
+    "------------------------------------"
+);
+
+if (isBeta) log.info("[READY]", "Detected beta build");
 if (process.windowsStore) log.info("[READY]", "Detected Windows Store build");
 
 initSentry();
