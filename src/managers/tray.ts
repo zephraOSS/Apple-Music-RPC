@@ -30,7 +30,8 @@ export class TrayManager {
             },
             {
                 label:
-                    parseFloat(process.release.toString()) <= 10.15 ||
+                    (process.platform === "darwin" &&
+                        parseFloat(process.release.toString()) <= 10.15) ||
                     process.platform === "win32"
                         ? "iTunes"
                         : "Apple Music",
