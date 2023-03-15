@@ -29,8 +29,13 @@ export async function checkIfAppIsInstalled(
                     ? `where ${appName}`
                     : `which ${appNameMac ?? appName}`,
                 (err, stdout) => {
-                    if (err) reject(false);
-                    else resolve(stdout.includes(appName));
+                    if (err) {
+                        log.error(
+                            "[checkAppDependency][checkIfAppIsInstalled]",
+                            err
+                        );
+                        reject(false);
+                    } else resolve(stdout.includes(appName));
                 }
             );
         } catch (e) {
