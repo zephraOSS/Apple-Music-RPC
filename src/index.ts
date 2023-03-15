@@ -44,7 +44,7 @@ if (process.windowsStore) log.info("[READY]", "Detected Windows Store build");
 initSentry();
 
 app.on("ready", async () => {
-    await initCrowdin();
+    await initCrowdin().catch((err) => log.error("[READY][initCrowdin]", err));
 
     trayManager = new TrayManager();
     modalWatcher = new ModalWatcher();
