@@ -78,12 +78,16 @@ export function init() {
     });
 
     ipcMain.handle("getCurrentTrack", () => {
-        if (!appDependencies.discord)
+        if (
+            !appDependencies.discord ||
+            !Discord.instance ||
+            !Discord.instance.currentTrack
+        )
             return { artwork: null, playerState: null };
 
         return {
-            artwork: Discord.instance.currentTrack?.artwork ?? null,
-            playerState: Discord.instance.currentTrack?.playerState ?? "stopped"
+            artwork: Discord.instance.currentTrack.artwork ?? null,
+            playerState: Discord.instance.currentTrack.playerState ?? "stopped"
         };
     });
 
