@@ -13,50 +13,61 @@ export function init() {
     )
         return;
 
-    const string = require(`../language/${config.get("language")}.json`),
-        modal: ModalData = {
-            title: "Microsoft Store",
-            description: string.settings.modal.microsoftStore.description,
-            buttons: [
-                {
-                    label: string.settings.modal.microsoftStore.buttons
-                        .download,
-                    style: "btn-primary",
-                    events: [
-                        {
-                            name: "onclick",
-                            value: "window.electron.openURL('https://amrpc.zephra.cloud#download')"
-                        },
-                        {
-                            name: "click",
-                            type: "delete",
-                            save: "modals.msStoreModal"
-                        }
-                    ]
-                },
-                {
-                    label: string.settings.modal.buttons.close,
-                    style: "btn-grey",
-                    events: [
-                        {
-                            name: "click",
-                            type: "delete"
-                        }
-                    ]
-                },
-                {
-                    label: string.settings.modal.buttons.no,
-                    style: "btn-red",
-                    events: [
-                        {
-                            name: "click",
-                            type: "delete",
-                            save: "modals.msStoreModal"
-                        }
-                    ]
-                }
-            ]
-        };
+    let string;
+
+    try {
+        string = require(`../language/${config.get("language")}.json`);
+    } catch (e) {
+        log.error("[msStoreModal]", "Failed to load language file");
+    }
+
+    if (!string) {
+        log.warn("[msStoreModal]", "Canceled due to missing language file");
+        return;
+    }
+
+    const modal: ModalData = {
+        title: "Microsoft Store",
+        description: string.settings.modal.microsoftStore.description,
+        buttons: [
+            {
+                label: string.settings.modal.microsoftStore.buttons.download,
+                style: "btn-primary",
+                events: [
+                    {
+                        name: "onclick",
+                        value: "window.electron.openURL('https://amrpc.zephra.cloud#download')"
+                    },
+                    {
+                        name: "click",
+                        type: "delete",
+                        save: "modals.msStoreModal"
+                    }
+                ]
+            },
+            {
+                label: string.settings.modal.buttons.close,
+                style: "btn-grey",
+                events: [
+                    {
+                        name: "click",
+                        type: "delete"
+                    }
+                ]
+            },
+            {
+                label: string.settings.modal.buttons.no,
+                style: "btn-red",
+                events: [
+                    {
+                        name: "click",
+                        type: "delete",
+                        save: "modals.msStoreModal"
+                    }
+                ]
+            }
+        ]
+    };
 
     log.info("[msStoreModal]", "Initializing Microsoft Store modal");
 
