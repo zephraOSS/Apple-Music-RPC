@@ -1,5 +1,6 @@
 import { Tray, Menu, app, shell } from "electron";
 
+import { quitITunes } from "../utils/quitITunes";
 import { Browser } from "./browser";
 
 import * as path from "path";
@@ -45,6 +46,22 @@ export class TrayManager {
                 }
             },
             { type: "separator" },
+            {
+                label: "This takes about 3 seconds",
+                enabled: false,
+                visible: process.platform === "win32"
+            },
+            {
+                label: "Quit iTunes",
+                visible: process.platform === "win32",
+                click() {
+                    quitITunes();
+                }
+            },
+            {
+                type: "separator",
+                visible: process.platform === "win32"
+            },
             {
                 label: "Restart",
                 click() {

@@ -4,13 +4,13 @@ import { config, getConfig } from "./managers/store";
 
 import { TrayManager } from "./managers/tray";
 import { ModalWatcher } from "./managers/modal";
+import { Bridge } from "./managers/bridge";
 import { Browser } from "./managers/browser";
 import { LastFM } from "./managers/lastFM";
 
 import { init as initSentry } from "./managers/sentry";
 import { init as initAutoLaunch } from "./managers/launch";
 import { init as initAutoUpdater } from "./managers/updater";
-import { init as initITunes } from "./managers/bridge";
 import { init as initTheme } from "./utils/theme";
 import { init as initMsStoreModal } from "./utils/msStoreModal";
 import { init as initCrowdin } from "./utils/crowdin";
@@ -25,6 +25,7 @@ export let trayManager: TrayManager;
 export let modalWatcher: ModalWatcher;
 export let appDependencies: AppDependencies;
 export let lastFM: LastFM;
+export let bridge: Bridge;
 
 Object.assign(console, log.functions);
 
@@ -61,7 +62,7 @@ app.on("ready", async () => {
     initAutoUpdater();
     initMsStoreModal();
 
-    if (appDependencies.music && appDependencies.discord) initITunes();
+    if (appDependencies.music && appDependencies.discord) bridge = new Bridge();
     else Browser.windowAction("show");
 
     nativeTheme.on("updated", () => {
