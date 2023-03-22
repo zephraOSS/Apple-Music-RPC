@@ -163,6 +163,12 @@ export function init() {
     });
 
     ipcMain.handle("fetchCacheSize", () => {
+        if (!fs.existsSync(cache.path)) {
+            log.info("[IPC][fetchCacheSize]", "Cache file does not exist");
+
+            return { size: 0, fileSize: 0 };
+        }
+
         return {
             size: cache.size,
             fileSize: fs.statSync(cache.path).size / (1024 * 1024)
