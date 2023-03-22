@@ -1,6 +1,7 @@
 import { app } from "electron";
 import { Browser } from "../managers/browser";
-import { appData, config } from "../managers/store";
+import { appData } from "../managers/store";
+import { getLangStrings } from "./i18n";
 
 import * as log from "electron-log";
 
@@ -13,13 +14,7 @@ export function init() {
     )
         return;
 
-    let string;
-
-    try {
-        string = require(`../language/${config.get("language")}.json`);
-    } catch (e) {
-        log.error("[msStoreModal]", "Failed to load language file");
-    }
+    const string = getLangStrings();
 
     if (!string) {
         log.warn("[msStoreModal]", "Canceled due to missing language file");
