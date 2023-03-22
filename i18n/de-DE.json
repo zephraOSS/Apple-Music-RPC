@@ -16,7 +16,7 @@
       "autoLaunch": "Autostart",
       "show": "Presence anzeigen",
       "hideOnPause": "Presence während Pause ausblenden",
-      "showTimestamps": "Show Timestamps",
+      "showTimestamps": "Timestamps anzeigen",
       "showAlbumArtwork": "Album Artwork anzeigen",
       "performanceMode": "Performance Modus",
       "hardwareAcceleration": "Hardware-Beschleunigung",
@@ -29,9 +29,9 @@
       },
       "language": "Bevorzugte Sprache",
       "artwork": {
-        "label": "Default Artwork",
-        "applemusic-logo": "Default",
-        "applemusic-logo-rainbow": "Rainbow"
+        "label": "Standard Artwork",
+        "applemusic-logo": "Standard",
+        "applemusic-logo-rainbow": "Regenbogen"
       },
       "rpcDetails": "Presence Details",
       "rpcState": "Presence State",
