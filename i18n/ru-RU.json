@@ -16,6 +16,7 @@
       "autoLaunch": "Автозапуск",
       "show": "Показывать активность",
       "hideOnPause": "Скрывать активность, когда песня на паузе",
+      "showTimestamps": "Show Timestamps",
       "showAlbumArtwork": "Показывать обложку альбома",
       "performanceMode": "Режим производительности",
       "hardwareAcceleration": "Аппаратное ускорение",
@@ -27,10 +28,10 @@
         "os": "Системная"
       },
       "language": "Язык",
-      "cover": {
-        "label": "Обычная обложка Apple Music",
-        "applemusic-logo": "По умолчанию",
-        "applemusic-logo-rainbow": "Радужная обложка Apple Music"
+      "artwork": {
+        "label": "Default Artwork",
+        "applemusic-logo": "Default",
+        "applemusic-logo-rainbow": "Rainbow"
       },
       "rpcDetails": "Вторая строка в активности",
       "rpcState": "Третья строка в активности",
