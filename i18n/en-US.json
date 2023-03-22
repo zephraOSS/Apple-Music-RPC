@@ -16,6 +16,7 @@
       "autoLaunch": "Auto Launch",
       "show": "Show Presence",
       "hideOnPause": "Hide Presence on Pause",
+      "showTimestamps": "Show Timestamps",
       "showAlbumArtwork": "Show Album Artwork",
       "performanceMode": "Performance Mode",
       "hardwareAcceleration": "Hardware Acceleration",
@@ -27,7 +28,7 @@
         "os": "System Default"
       },
       "language": "Preferred Language",
-      "cover": {
+      "artwork": {
         "label": "Default Artwork",
         "applemusic-logo": "Default",
         "applemusic-logo-rainbow": "Rainbow"
