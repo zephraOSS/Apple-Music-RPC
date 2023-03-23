@@ -8,121 +8,121 @@
   "tray": {
     "restart": "Herbegin AMRPC",
     "checkForUpdates": "Kyk vir opdaterings",
-    "openSettings": "Open Settings",
-    "quit": "Quit"
+    "openSettings": "Maak Instellings oop",
+    "quit": "Hou op"
   },
   "settings": {
     "config": {
-      "autoLaunch": "Auto Launch",
-      "show": "Show Presence",
-      "hideOnPause": "Hide Presence on Pause",
-      "showTimestamps": "Show Timestamps",
-      "showAlbumArtwork": "Show Album Artwork",
-      "performanceMode": "Performance Mode",
-      "hardwareAcceleration": "Hardware Acceleration",
+      "autoLaunch": "Outomatiese bekendstelling",
+      "show": "Wys teenwoordigheid",
+      "hideOnPause": "Versteek teenwoordigheid op pouse",
+      "showTimestamps": "Wys Tydstempels",
+      "showAlbumArtwork": "Wys albumkunswerk",
+      "performanceMode": "Prestasiemodus",
+      "hardwareAcceleration": "Hardeware versnelling",
       "colorTheme": {
-        "label": "Preferred Color Theme",
-        "light": "Light",
-        "dark": "Dark",
-        "auto": "Dark from Sunset to Sunrise",
-        "os": "System Default"
+        "label": "Voorkeurkleurtema",
+        "light": "Lig",
+        "dark": "Donker",
+        "auto": "Donker van sonsondergang tot sonsopkoms",
+        "os": "Stelsel verstek"
       },
-      "language": "Preferred Language",
+      "language": "Verkose Taal",
       "artwork": {
-        "label": "Default Artwork",
-        "applemusic-logo": "Default",
-        "applemusic-logo-rainbow": "Rainbow"
+        "label": "Verstek Kunswerk",
+        "applemusic-logo": "Verstek",
+        "applemusic-logo-rainbow": "Reënboog"
       },
-      "rpcDetails": "Presence Details",
-      "rpcState": "Presence State",
-      "enableLastFM": "Enable Last.fm",
+      "rpcDetails": "Teenwoordigheid Besonderhede",
+      "rpcState": "Teenwoordigheid Staat",
+      "enableLastFM": "Aktiveer Last.fm",
       "lastFMUser": {
-        "label": "Last.fm User",
-        "connect": "Connect",
-        "reconnect": "Reconnect",
-        "connecting": "Connecting...",
-        "cancel": "Cancel"
+        "label": "Last.fm-gebruiker",
+        "connect": "Koppel",
+        "reconnect": "Herkoppel",
+        "connecting": "Koppeltans...",
+        "cancel": "Kanselleer"
       },
-      "enableCache": "Enable Cache",
-      "resetCache": "Reset Cache"
+      "enableCache": "Aktiveer Cache",
+      "resetCache": "Stel kas terug"
     },
     "common": {
-      "reset": "Reset"
+      "reset": "Herstel"
     },
     "category": {
-      "general": "General"
+      "general": "Algemeen"
     },
     "warn": {
       "music": {
-        "title": "Attention",
-        "description": "The Music app could not be found. Please make sure that the Music app is installed."
+        "title": "Aandag",
+        "description": "Die Musiek-toepassing kon nie gevind word nie. Maak asseblief seker dat die Musiek-toepassing geïnstalleer is."
       },
       "discord": {
-        "title": "Attention",
-        "description": "Discord could not be found. Please make sure that Discord is installed."
+        "title": "Aandag",
+        "description": "Onenigheid kon nie gevind word nie. Maak asseblief seker dat Discord geïnstalleer is."
       }
     },
     "note": {
-      "language": "If your language is missing, <a href='https://discord.gg/qqAgCHS'>contact us</a>.",
+      "language": "As jou taal ontbreek, <a href='https://discord.gg/qqAgCHS'>kontak ons</a>.",
       "cache": {
-        "size": "Current cache size: %size%, %count% items",
-        "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
-        "info": "The cache stores all album artwork and other data to reduce the amount of requests to Apple. This will improve the loading time of the album artwork and link."
+        "size": "Huidige kasgrootte: %size%, %count% items",
+        "warn": "<b>WAARSKUWING</b> As u die kas deaktiveer, sal alle gekasdata uitvee.",
+        "info": "Die kas stoor alle albumkunswerk en ander data om die hoeveelheid versoeke aan Apple te verminder. Dit sal die laaityd van die albumkunswerk en skakel verbeter."
       }
     },
     "extra": {
-      "github": "View on GitHub",
-      "ko-fi": "Donate",
-      "reloadPage": "Reload",
-      "restartApp": "Restart required"
+      "github": "Kyk op GitHub",
+      "ko-fi": "Skenk",
+      "reloadPage": "Herlaai",
+      "restartApp": "Herbegin vereis"
     },
     "modal": {
       "911": {
-        "title": "In memory of the victims of September 11",
-        "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+        "title": "Ter nagedagtenis aan die slagoffers van 11 September",
+        "description": "Om diegene te eer wat op 11 September gesterf het, het ons 'n paar pasgemaakte albumomslae vir hierdie liedjies bygevoeg: %s\nEn wanneer jy wil, kan jy al die omslae verander (slegs vir vandag).",
         "buttons": {
-          "okcover": "Okay, change the covers!"
+          "okcover": "Goed, verander die deksels!"
         }
       },
       "appleEvent": {
-        "title": "Do not forget!",
-        "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
+        "title": "Moenie vergeet nie!",
+        "description": "Vandag om %d uur (10:00 PDT) is die Apple-geleentheid! Kyk dit regstreeks hier: %s",
         "buttons": {
-          "okcool": "Okay, cool!"
+          "okcool": "Goed, cool!"
         }
       },
       "newUpdate": {
-        "title": "Software Update",
-        "description": "Version %version% is available for your PC.",
+        "title": "Sagteware opdatering",
+        "description": "Weergawe %version% is beskikbaar vir jou rekenaar.",
         "installed": {
-          "description": "Version %version% is available for your PC and is ready to install.",
+          "description": "Weergawe %version% is beskikbaar vir jou rekenaar en is gereed om te installeer.",
           "buttons": {
-            "install": "Install now",
+            "install": "Installeer nou",
             "later": "Later"
           }
         },
         "buttons": {
-          "downandinst": "Download & install",
-          "download": "Download & install later"
+          "downandinst": "Laai af en installeer",
+          "download": "Laai af en installeer later"
         }
       },
       "ko-fi": {
-        "title": "Requires Premium",
-        "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+        "title": "Vereis Premium",
+        "description": "Om hierdie kenmerk te gebruik, word 'n eenmalige skenking of 'n lidmaatskap vereis. Jy kan skenk <a href='https://ko-fi.com/zephra'>hier</a>. As jy reeds geskenk het, probeer om AMRPC te herbegin. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Leer meer</a>"
       },
       "microsoftStore": {
-        "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+        "description": "Het jy geweet dat jy AMRPC vanaf die Microsoft Store kan installeer? Maar maak seker dat u dit deaktiveer <b>Outomatiese bekendstelling</b> in die instellings voordat u dit vanaf die Microsoft Store installeer.",
         "buttons": {
-          "download": "Download now"
+          "download": "Laai nou af"
         }
       },
       "buttons": {
-        "no": "No",
-        "later": "Not now",
-        "yes": "Yes",
-        "okay": "Okay",
-        "learnMore": "Learn more",
-        "close": "Close"
+        "no": "Geen",
+        "later": "Nie nou nie",
+        "yes": "Ja",
+        "okay": "Goed",
+        "learnMore": "Leer meer",
+        "close": "Naby"
       }
     }
   }
