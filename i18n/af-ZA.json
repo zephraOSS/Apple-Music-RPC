@@ -40,14 +40,14 @@
         "label": "Last.fm-gebruiker",
         "connect": "Koppel",
         "reconnect": "Herkoppel",
-        "connecting": "Koppeltans...",
+        "connecting": "Koppel tans...",
         "cancel": "Kanselleer"
       },
       "enableCache": "Aktiveer Cache",
       "resetCache": "Stel kas terug"
     },
     "common": {
-      "reset": "Herstel"
+      "reset": "Terugstel"
     },
     "category": {
       "general": "Algemeen"
@@ -59,7 +59,7 @@
       },
       "discord": {
         "title": "Aandag",
-        "description": "Onenigheid kon nie gevind word nie. Maak asseblief seker dat Discord geïnstalleer is."
+        "description": "Discord kon nie gevind word nie. Maak asseblief seker dat Discord geïnstalleer is."
       }
     },
     "note": {
@@ -122,7 +122,7 @@
         "yes": "Ja",
         "okay": "Goed",
         "learnMore": "Leer meer",
-        "close": "Naby"
+        "close": "Gesluit"
       }
     }
   }
