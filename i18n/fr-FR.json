@@ -15,114 +15,114 @@
     "config": {
       "autoLaunch": "Lancement Automatique",
       "show": "Afficher la Présence",
-      "hideOnPause": "Hide Presence on Pause",
-      "showTimestamps": "Show Timestamps",
-      "showAlbumArtwork": "Show Album Artwork",
-      "performanceMode": "Performance Mode",
-      "hardwareAcceleration": "Hardware Acceleration",
+      "hideOnPause": "Cacher la Présence en Pause",
+      "showTimestamps": "Afficher le Timestamp",
+      "showAlbumArtwork": "Afficher la Pochette de l'Album",
+      "performanceMode": "Mode Performance",
+      "hardwareAcceleration": "Accélération Hardware",
       "colorTheme": {
-        "label": "Preferred Color Theme",
-        "light": "Light",
-        "dark": "Dark",
-        "auto": "Dark from Sunset to Sunrise",
-        "os": "System Default"
+        "label": "Thème de Couleur préféré",
+        "light": "Clair",
+        "dark": "Sombre",
+        "auto": "Sombre du coucher au lever du soleil",
+        "os": "Valeur par défaut du système"
       },
-      "language": "Preferred Language",
+      "language": "Langue Préféré",
       "artwork": {
-        "label": "Default Artwork",
-        "applemusic-logo": "Default",
-        "applemusic-logo-rainbow": "Rainbow"
+        "label": "Icône par Défaut",
+        "applemusic-logo": "Par défaut",
+        "applemusic-logo-rainbow": "Arc-en-ciel"
       },
-      "rpcDetails": "Presence Details",
-      "rpcState": "Presence State",
-      "enableLastFM": "Enable Last.fm",
+      "rpcDetails": "Détails de la Présence",
+      "rpcState": "État de la Présence",
+      "enableLastFM": "Activer Last.fm",
       "lastFMUser": {
-        "label": "Last.fm User",
-        "connect": "Connect",
-        "reconnect": "Reconnect",
-        "connecting": "Connecting...",
-        "cancel": "Cancel"
+        "label": "Utilisateur Last.fm",
+        "connect": "Connecter",
+        "reconnect": "Reconnecter",
+        "connecting": "Connection...",
+        "cancel": "Annuler"
       },
-      "enableCache": "Enable Cache",
-      "resetCache": "Reset Cache"
+      "enableCache": "Activer le Cache",
+      "resetCache": "Réinitialiser le Cache"
     },
     "common": {
-      "reset": "Reset"
+      "reset": "Réinitialiser"
     },
     "category": {
-      "general": "General"
+      "general": "Général"
     },
     "warn": {
       "music": {
         "title": "Attention",
-        "description": "The Music app could not be found. Please make sure that the Music app is installed."
+        "description": "L'app Musique n'a pas pu être trouvé. Merci de vérifier que l'app Musique est installé."
       },
       "discord": {
         "title": "Attention",
-        "description": "Discord could not be found. Please make sure that Discord is installed."
+        "description": "Discord n'a pas pu être trouvé. Merci de vérifier que Discord est bien installé."
       }
     },
     "note": {
-      "language": "If your language is missing, <a href='https://discord.gg/qqAgCHS'>contact us</a>.",
+      "language": "Si votre langue manque, <a href='https://discord.gg/qqAgCHS'>contactez nous</a>.",
       "cache": {
-        "size": "Current cache size: %size%, %count% items",
-        "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
-        "info": "The cache stores all album artwork and other data to reduce the amount of requests to Apple. This will improve the loading time of the album artwork and link."
+        "size": "Taille du cache actuelle : %size%, %count% éléments",
+        "warn": "<b>ATTENTION</b> Désactiver le cache va supprimer toutes les données en cache.",
+        "info": "Le cache sauvegarde toutes les couvertures d'album et autre données pour réduire le nombre de requêtes vers Apple. Cela améliore le temps de chargement des couvertures et des liens."
       }
     },
     "extra": {
-      "github": "View on GitHub",
-      "ko-fi": "Donate",
-      "reloadPage": "Reload",
-      "restartApp": "Restart required"
+      "github": "Voir sur GitHub",
+      "ko-fi": "Faire un Don",
+      "reloadPage": "Recharger",
+      "restartApp": "Rechargement requis"
     },
     "modal": {
       "911": {
-        "title": "In memory of the victims of September 11",
-        "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+        "title": "En mémoire aux victimes du 11 Septembre",
+        "description": "Pour honorer ceux qui sont morts le 11 Septembre, on a ajouté quelques couvertures d'album personnalisés pour ces musiques : %s\nEt si quand vous voulez, vous pouvez changer toutes les couvertures (seulement pour aujourd'hui).",
         "buttons": {
-          "okcover": "Okay, change the covers!"
+          "okcover": "Ok, changer les couvertures !"
         }
       },
       "appleEvent": {
-        "title": "Do not forget!",
-        "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
+        "title": "Ne pas oublier !",
+        "description": "Aujourd'hui à %dh (10h du matin PDT) il y a l'Apple Event ! Regardez le en direct ici : %s",
         "buttons": {
-          "okcool": "Okay, cool!"
+          "okcool": "Ok, cool !"
         }
       },
       "newUpdate": {
-        "title": "Software Update",
-        "description": "Version %version% is available for your PC.",
+        "title": "Mise à jour du Software",
+        "description": "La version %version% est disponible pour votre ordinateur.",
         "installed": {
-          "description": "Version %version% is available for your PC and is ready to install.",
+          "description": "La version %version% est disponible pour votre ordinateur et elle est prête à être installé.",
           "buttons": {
-            "install": "Install now",
-            "later": "Later"
+            "install": "Installer maintenant",
+            "later": "Plus tard"
           }
         },
         "buttons": {
-          "downandinst": "Download & install",
-          "download": "Download & install later"
+          "downandinst": "Télécharger & installer",
+          "download": "Télécharger & installer plus tard"
         }
       },
       "ko-fi": {
-        "title": "Requires Premium",
-        "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+        "title": "Nécessite Premium",
+        "description": "Pour utiliser cette fonctionnalité, une donation-en-une-fois ou un abonnement membre est nécessaire. Vous pouvez faire un don <a href='https://ko-fi.com/zephra'>ici</a>. Si vous avez déjà fait un don, essayer de redémarrer AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>En apprendre plus</a>"
       },
       "microsoftStore": {
-        "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+        "description": "Saviez vous que vous pouvez installer AMRPC depuis le Microsoft Store ? Mais désactivez <b>Lancement Automatique</b> dans les réglages avant de l'installer depuis le Microsoft Store.",
         "buttons": {
-          "download": "Download now"
+          "download": "Télécharger maintenant"
         }
       },
       "buttons": {
-        "no": "No",
-        "later": "Not now",
-        "yes": "Yes",
-        "okay": "Okay",
-        "learnMore": "Learn more",
-        "close": "Close"
+        "no": "Non",
+        "later": "Pas maintenant",
+        "yes": "Oui",
+        "okay": "Ok",
+        "learnMore": "En apprendre plus",
+        "close": "Fermer"
       }
     }
   }
