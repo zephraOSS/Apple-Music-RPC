@@ -1,0 +1,129 @@
+{
+  "error": {
+    "admin": "Merci de ne pas exécuter AMRPC avec les droits d'administrateur !",
+    "noTrack": "Aucune piste détécté",
+    "jsFileExtension": "Il y a une erreur avec la donnée d'association du fichier JS. Merci de cliquer sur le bouton ci-dessous pour en savoir plus.",
+    "cmd": "Il y a une erreur avec le terminal de commande. Merci de cliquer sur le bouton ci-dessous pour en savoir plus."
+  },
+  "tray": {
+    "restart": "Relancer AMRPC",
+    "checkForUpdates": "Recherche de Mise à Jour",
+    "openSettings": "Ouvrir les Réglages",
+    "quit": "Quitter"
+  },
+  "settings": {
+    "config": {
+      "autoLaunch": "Lancement Automatique",
+      "show": "Afficher la Présence",
+      "hideOnPause": "Hide Presence on Pause",
+      "showTimestamps": "Show Timestamps",
+      "showAlbumArtwork": "Show Album Artwork",
+      "performanceMode": "Performance Mode",
+      "hardwareAcceleration": "Hardware Acceleration",
+      "colorTheme": {
+        "label": "Preferred Color Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "auto": "Dark from Sunset to Sunrise",
+        "os": "System Default"
+      },
+      "language": "Preferred Language",
+      "artwork": {
+        "label": "Default Artwork",
+        "applemusic-logo": "Default",
+        "applemusic-logo-rainbow": "Rainbow"
+      },
+      "rpcDetails": "Presence Details",
+      "rpcState": "Presence State",
+      "enableLastFM": "Enable Last.fm",
+      "lastFMUser": {
+        "label": "Last.fm User",
+        "connect": "Connect",
+        "reconnect": "Reconnect",
+        "connecting": "Connecting...",
+        "cancel": "Cancel"
+      },
+      "enableCache": "Enable Cache",
+      "resetCache": "Reset Cache"
+    },
+    "common": {
+      "reset": "Reset"
+    },
+    "category": {
+      "general": "General"
+    },
+    "warn": {
+      "music": {
+        "title": "Attention",
+        "description": "The Music app could not be found. Please make sure that the Music app is installed."
+      },
+      "discord": {
+        "title": "Attention",
+        "description": "Discord could not be found. Please make sure that Discord is installed."
+      }
+    },
+    "note": {
+      "language": "If your language is missing, <a href='https://discord.gg/qqAgCHS'>contact us</a>.",
+      "cache": {
+        "size": "Current cache size: %size%, %count% items",
+        "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
+        "info": "The cache stores all album artwork and other data to reduce the amount of requests to Apple. This will improve the loading time of the album artwork and link."
+      }
+    },
+    "extra": {
+      "github": "View on GitHub",
+      "ko-fi": "Donate",
+      "reloadPage": "Reload",
+      "restartApp": "Restart required"
+    },
+    "modal": {
+      "911": {
+        "title": "In memory of the victims of September 11",
+        "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+        "buttons": {
+          "okcover": "Okay, change the covers!"
+        }
+      },
+      "appleEvent": {
+        "title": "Do not forget!",
+        "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
+        "buttons": {
+          "okcool": "Okay, cool!"
+        }
+      },
+      "newUpdate": {
+        "title": "Software Update",
+        "description": "Version %version% is available for your PC.",
+        "installed": {
+          "description": "Version %version% is available for your PC and is ready to install.",
+          "buttons": {
+            "install": "Install now",
+            "later": "Later"
+          }
+        },
+        "buttons": {
+          "downandinst": "Download & install",
+          "download": "Download & install later"
+        }
+      },
+      "ko-fi": {
+        "title": "Requires Premium",
+        "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+      },
+      "microsoftStore": {
+        "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+        "buttons": {
+          "download": "Download now"
+        }
+      },
+      "buttons": {
+        "no": "No",
+        "later": "Not now",
+        "yes": "Yes",
+        "okay": "Okay",
+        "learnMore": "Learn more",
+        "close": "Close"
+      }
+    }
+  }
+}
