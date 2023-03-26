@@ -1,9 +1,9 @@
 {
   "error": {
     "admin": "Merci de ne pas exécuter AMRPC avec les droits d'administrateur !",
-    "noTrack": "Aucune piste détécté",
-    "jsFileExtension": "Il y a une erreur avec la donnée d'association du fichier JS. Merci de cliquer sur le bouton ci-dessous pour en savoir plus.",
-    "cmd": "Il y a une erreur avec le terminal de commande. Merci de cliquer sur le bouton ci-dessous pour en savoir plus."
+    "noTrack": "Aucune piste détéctée",
+    "jsFileExtension": "Il y a une erreur dans les données d'association du fichier JS. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus.",
+    "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus."
   },
   "tray": {
     "restart": "Relancer AMRPC",
@@ -40,7 +40,7 @@
         "label": "Utilisateur Last.fm",
         "connect": "Connecter",
         "reconnect": "Reconnecter",
-        "connecting": "Connection...",
+        "connecting": "Connexion...",
         "cancel": "Annuler"
       },
       "enableCache": "Activer le Cache",
@@ -55,11 +55,11 @@
     "warn": {
       "music": {
         "title": "Attention",
-        "description": "L'app Musique n'a pas pu être trouvé. Merci de vérifier que l'app Musique est installé."
+        "description": "L'app Musique n'a pas pu être trouvé. Veuillez vérifier que l'app Musique est installé."
       },
       "discord": {
         "title": "Attention",
-        "description": "Discord n'a pas pu être trouvé. Merci de vérifier que Discord est bien installé."
+        "description": "Discord n'a pas pu être trouvé. Veuillez vérifier que Discord est bien installé."
       }
     },
     "note": {
@@ -67,7 +67,7 @@
       "cache": {
         "size": "Taille du cache actuelle : %size%, %count% éléments",
         "warn": "<b>ATTENTION</b> Désactiver le cache va supprimer toutes les données en cache.",
-        "info": "Le cache sauvegarde toutes les couvertures d'album et autre données pour réduire le nombre de requêtes vers Apple. Cela améliore le temps de chargement des couvertures et des liens."
+        "info": "Le cache sauvegarde toutes les couvertures d'album et autres données pour réduire le nombre de requêtes vers Apple. Cela améliore le temps de chargement des couvertures et des liens."
       }
     },
     "extra": {
@@ -79,20 +79,20 @@
     "modal": {
       "911": {
         "title": "En mémoire aux victimes du 11 Septembre",
-        "description": "Pour honorer ceux qui sont morts le 11 Septembre, on a ajouté quelques couvertures d'album personnalisés pour ces musiques : %s\nEt si quand vous voulez, vous pouvez changer toutes les couvertures (seulement pour aujourd'hui).",
+        "description": "Pour honorer ceux qui sont morts le 11 Septembre, on a ajouté quelques couvertures d'album personnalisées pour ces musiques : %s\nEt si quand vous voulez, vous pouvez changer toutes les couvertures (seulement pour aujourd'hui).",
         "buttons": {
           "okcover": "Ok, changer les couvertures !"
         }
       },
       "appleEvent": {
         "title": "Ne pas oublier !",
-        "description": "Aujourd'hui à %dh (10h du matin PDT) il y a l'Apple Event ! Regardez le en direct ici : %s",
+        "description": "Aujourd'hui à %dh (10h du matin PDT) il y a l'Apple Event ! Regardez-le en direct ici : %s",
         "buttons": {
           "okcool": "Ok, cool !"
         }
       },
       "newUpdate": {
-        "title": "Mise à jour du Software",
+        "title": "Mise à jour du Logiciel",
         "description": "La version %version% est disponible pour votre ordinateur.",
         "installed": {
           "description": "La version %version% est disponible pour votre ordinateur et elle est prête à être installé.",
@@ -111,7 +111,7 @@
         "description": "Pour utiliser cette fonctionnalité, une donation-en-une-fois ou un abonnement membre est nécessaire. Vous pouvez faire un don <a href='https://ko-fi.com/zephra'>ici</a>. Si vous avez déjà fait un don, essayer de redémarrer AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>En apprendre plus</a>"
       },
       "microsoftStore": {
-        "description": "Saviez vous que vous pouvez installer AMRPC depuis le Microsoft Store ? Mais désactivez <b>Lancement Automatique</b> dans les réglages avant de l'installer depuis le Microsoft Store.",
+        "description": "Saviez-vous que vous pouvez installer AMRPC depuis le Microsoft Store ? Mais désactivez <b>Lancement Automatique</b> dans les réglages avant de l'installer depuis le Microsoft Store.",
         "buttons": {
           "download": "Télécharger maintenant"
         }
