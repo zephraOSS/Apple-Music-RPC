@@ -6,7 +6,10 @@ import { getLangStrings } from "./i18n";
 import * as log from "electron-log";
 
 export async function checkAppDependency(): Promise<AppDependencies> {
-    const music = await checkIfAppIsInstalled("iTunes", "Music");
+    const music =
+        process.platform !== "win32"
+            ? true
+            : await checkIfAppIsInstalled("iTunes");
 
     log[!music ? "warn" : "info"](
         `[checkAppDependency][Music] ${music ? "Found" : "Not found"}`
@@ -18,26 +21,18 @@ export async function checkAppDependency(): Promise<AppDependencies> {
     };
 }
 
-export async function checkIfAppIsInstalled(
-    appName: string,
-    appNameMac?: string
-): Promise<boolean> {
+export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
         try {
-            exec(
-                process.platform === "win32"
-                    ? `where ${appName}`
-                    : `which ${appNameMac ?? appName}`,
-                (err, stdout) => {
-                    if (err) {
-                        log.error(
-                            "[checkAppDependency][checkIfAppIsInstalled]",
-                            err
-                        );
-                        reject(false);
-                    } else resolve(stdout.includes(appName));
-                }
-            );
+            exec(`where ${appName}`, (err, stdout) => {
+                if (err) {
+                    log.error(
+                        "[checkAppDependency][checkIfAppIsInstalled]",
+                        err
+                    );
+                    reject(false);
+                } else resolve(stdout.includes(appName));
+            });
         } catch (e) {
             log.info(
                 "[checkAppDependency][checkIfAppIsInstalled]",
