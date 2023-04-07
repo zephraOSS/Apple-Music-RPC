@@ -10,7 +10,12 @@ export class TrayManager {
 
     constructor() {
         this.tray = new Tray(
-            path.join(app.getAppPath(), "assets/trayLogo@32.png")
+            path.join(
+                app.getAppPath(),
+                process.platform === "darwin"
+                    ? "assets/statusBarLogo.png"
+                    : "assets/trayLogo@32.png"
+            )
         );
 
         this.tray.setToolTip("AMRPC");
