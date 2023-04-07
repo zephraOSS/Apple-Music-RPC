@@ -34,7 +34,7 @@ if (!app.requestSingleInstanceLock()) app.quit();
 
 log.info(
     "------------------------------------",
-    "STARTING",
+    `STARTING - ${app.getVersion()}`,
     "------------------------------------"
 );
 
