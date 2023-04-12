@@ -5,12 +5,12 @@
 We currently don't support [Apple Music Preview](https://apps.microsoft.com/store/detail/apple-music-preview/9PFHDD62MXS1), but we're doing our best to find a way to support it.
 
 ## Installation
-* [Microsoft Store](https://docs.amrpc.zephra.cloud/installation/windows/microsoft-store)
-* [Windows](https://docs.amrpc.zephra.cloud/installation/windows)
-* [macOS](https://docs.amrpc.zephra.cloud/installation/macos)
+* [Microsoft Store](https://docs.amrpc.zephra.org/installation/windows/microsoft-store)
+* [Windows](https://docs.amrpc.zephra.org/installation/windows)
+* [macOS](https://docs.amrpc.zephra.org/installation/macos)
 
 ## You need help?
-* Take a look at [the documentation](https://docs.amrpc.zephra.cloud)
+* Take a look at [the documentation](https://docs.amrpc.zephra.org)
 * Join [our Discord](https://discord.gg/APDghNfJhQ)
 
 ## Information
