@@ -21,8 +21,6 @@ export class TrayManager {
         this.tray.setToolTip("AMRPC");
         this.tray.setContextMenu(this.createContextMenu());
         this.tray.on("click", () => new Browser());
-
-        app.on("before-quit", this.tray.destroy);
     }
 
     private createContextMenu(): Electron.Menu {
