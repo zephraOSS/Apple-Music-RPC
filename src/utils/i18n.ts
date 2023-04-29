@@ -3,6 +3,7 @@ import { config } from "../managers/store";
 
 import * as fs from "fs";
 import * as path from "path";
+import * as log from "electron-log";
 
 const appDataPath = path.join(getAppDataPath(), "i18n");
 
@@ -18,10 +19,14 @@ export function writeLangStrings(lang: string, strings: any) {
     if (!fs.existsSync(appDataPath))
         fs.mkdirSync(appDataPath, { recursive: true });
 
-    return fs.writeFileSync(
-        path.join(appDataPath, `${lang}.json`),
-        JSON.stringify(strings, null, 4)
-    );
+    try {
+        fs.writeFileSync(
+            path.join(appDataPath, `${lang}.json`),
+            JSON.stringify(strings, null, 4)
+        );
+    } catch (e) {
+        log.error("[i18n][writeLangStrings]", e);
+    }
 }
 
 export function deleteLangDir() {
