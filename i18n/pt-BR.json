@@ -108,21 +108,21 @@
       },
       "ko-fi": {
         "title": "Requer Premium",
-        "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+        "description": "Para usar essa funcionalidade é necessário fazer uma doação única ou possuir uma inscrição. Você pode doar <a href='https://ko-fi.com/zephra'>aqui</a>. Se você já fez uma doação tente reiniciar o AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Saiba mais</a>"
       },
       "microsoftStore": {
-        "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+        "description": "Você sabia que pode instalar o AMRPC através da Loja Microsoft? Certifique-se de desabilitar a opção <b>Iniciar automaticamente</b> nas configurações antes de instalar a versão da Loja Microsoft.",
         "buttons": {
-          "download": "Download now"
+          "download": "Baixar agora"
         }
       },
       "buttons": {
-        "no": "No",
-        "later": "Not now",
-        "yes": "Yes",
-        "okay": "Okay",
-        "learnMore": "Learn more",
-        "close": "Close"
+        "no": "Não",
+        "later": "Agora não",
+        "yes": "Sim",
+        "okay": "Ok",
+        "learnMore": "Saiba mais",
+        "close": "Fechar"
       }
     }
   }
