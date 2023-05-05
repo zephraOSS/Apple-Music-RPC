@@ -1,69 +1,69 @@
 {
   "error": {
-    "admin": "Please do not run AMRPC with administrator privileges!",
-    "noTrack": "No track detected",
-    "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more.",
-    "cmd": "There is an error with Command Prompt. Please click on the button below to learn more."
+    "admin": "Por favor, não execute o AMRPC como administrador!",
+    "noTrack": "Nenhuma música detectada",
+    "jsFileExtension": "Há um erro com o arquivo JS de associação dos dados. Clique no botão abaixo para saber mais.",
+    "cmd": "Há um erro com o prompt de comando. Clique no botão abaixo para saber mais."
   },
   "tray": {
-    "restart": "Restart AMRPC",
-    "checkForUpdates": "Check for Updates",
-    "openSettings": "Open Settings",
-    "quit": "Quit"
+    "restart": "Reiniciar AMRPC",
+    "checkForUpdates": "Buscar por atualizações",
+    "openSettings": "Abrir configurações",
+    "quit": "Encerrar"
   },
   "settings": {
     "config": {
-      "autoLaunch": "Auto Launch",
-      "show": "Show Presence",
-      "hideOnPause": "Hide Presence on Pause",
-      "showTimestamps": "Show Timestamps",
-      "showAlbumArtwork": "Show Album Artwork",
-      "performanceMode": "Performance Mode",
-      "hardwareAcceleration": "Hardware Acceleration",
+      "autoLaunch": "Iniciar automaticamente",
+      "show": "Mostrar Presença",
+      "hideOnPause": "Esconder Presença quando pausar",
+      "showTimestamps": "Mostrar marcadores de tempo",
+      "showAlbumArtwork": "Mostrar arte do álbum",
+      "performanceMode": "Modo Desempenho",
+      "hardwareAcceleration": "Aceleração de hardware",
       "colorTheme": {
-        "label": "Preferred Color Theme",
-        "light": "Light",
-        "dark": "Dark",
-        "auto": "Dark from Sunset to Sunrise",
-        "os": "System Default"
+        "label": "Esquema de cores",
+        "light": "Claro",
+        "dark": "Escuro",
+        "auto": "Escuro do pôr do sol até nascer do sol",
+        "os": "Padrão do sistema"
       },
-      "language": "Preferred Language",
+      "language": "Idioma",
       "artwork": {
-        "label": "Default Artwork",
-        "applemusic-logo": "Default",
-        "applemusic-logo-rainbow": "Rainbow"
+        "label": "Arte do álbum padrão",
+        "applemusic-logo": "Padrão",
+        "applemusic-logo-rainbow": "Arco-íris"
       },
-      "rpcDetails": "Presence Details",
-      "rpcState": "Presence State",
-      "enableLastFM": "Enable Last.fm",
+      "rpcDetails": "Detalhes da presença",
+      "rpcState": "Estado da presença",
+      "enableLastFM": "Habilitar Last.fm",
       "lastFMUser": {
-        "label": "Last.fm User",
-        "connect": "Connect",
-        "reconnect": "Reconnect",
-        "connecting": "Connecting...",
-        "cancel": "Cancel"
+        "label": "Usuário do Last.fm",
+        "connect": "Conectar",
+        "reconnect": "Reconectar",
+        "connecting": "Conectando...",
+        "cancel": "Cancelar"
       },
-      "enableCache": "Enable Cache",
-      "resetCache": "Reset Cache"
+      "enableCache": "Habilitar Cache",
+      "resetCache": "Redefinir cache"
     },
     "common": {
-      "reset": "Reset"
+      "reset": "Redefinir"
     },
     "category": {
-      "general": "General"
+      "general": "Geral"
     },
     "warn": {
       "music": {
-        "title": "Attention",
-        "description": "The Music app could not be found. Please make sure that the Music app is installed."
+        "title": "Atenção",
+        "description": "O aplicativo música não pôde ser encontrado. Certifique-se de que o aplicativo música está instalado."
       },
       "discord": {
-        "title": "Attention",
-        "description": "Discord could not be found. Please make sure that Discord is installed."
+        "title": "Atenção",
+        "description": "O Discord não pôde ser encontrado. Certifique-se de que o Discord está instalado."
       }
     },
     "note": {
-      "language": "If your language is missing, <a href='https://discord.gg/qqAgCHS'>contact us</a>.",
+      "language": "Se seu idioma não está disponível, <a href='https://discord.gg/qqAgCHS'>entre em contato conosco</a>.",
       "cache": {
         "size": "Current cache size: %size%, %count% items",
         "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
