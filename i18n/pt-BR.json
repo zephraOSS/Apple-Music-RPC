@@ -65,49 +65,49 @@
     "note": {
       "language": "Se seu idioma não está disponível, <a href='https://discord.gg/qqAgCHS'>entre em contato conosco</a>.",
       "cache": {
-        "size": "Current cache size: %size%, %count% items",
-        "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
-        "info": "The cache stores all album artwork and other data to reduce the amount of requests to Apple. This will improve the loading time of the album artwork and link."
+        "size": "Tamanho atual do cache: %size%, %count% itens",
+        "warn": "<b>AVISO</b> Desabilitar o cache causará a remoção de todos os dados do cache.",
+        "info": "O cache guarda todas as artes de álbum e outros dados para reduzir o número de requisições feitos para Apple. Isso pode melhorar o tempo de carregamento da arte do álbum e do link."
       }
     },
     "extra": {
-      "github": "View on GitHub",
-      "ko-fi": "Donate",
-      "reloadPage": "Reload",
-      "restartApp": "Restart required"
+      "github": "Ver no GitHub",
+      "ko-fi": "Doar",
+      "reloadPage": "Recarregar",
+      "restartApp": "Reinício necessário"
     },
     "modal": {
       "911": {
-        "title": "In memory of the victims of September 11",
-        "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+        "title": "Em memória das vítimas do 11 de setembro",
+        "description": "Para honrar aqueles que morreram no 11 de setembro adicionamos algumas artes de álbum personalizadas para as músicas: %s\nE quando quiser, você pode mudar todas as capas (apenas hoje).",
         "buttons": {
-          "okcover": "Okay, change the covers!"
+          "okcover": "Ok, mude as capas!"
         }
       },
       "appleEvent": {
-        "title": "Do not forget!",
-        "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
+        "title": "Não esqueça!",
+        "description": "Hoje às %d (10 da manhã PDT) ocorrerá o evento da Apple! Assista ao vivo aqui: %s",
         "buttons": {
-          "okcool": "Okay, cool!"
+          "okcool": "Ok, legal!"
         }
       },
       "newUpdate": {
-        "title": "Software Update",
-        "description": "Version %version% is available for your PC.",
+        "title": "Atualização do programa",
+        "description": "A Versão %version% está disponível para seu PC.",
         "installed": {
-          "description": "Version %version% is available for your PC and is ready to install.",
+          "description": "A versão %version% está disponível para seu PC e pronta para ser instalada.",
           "buttons": {
-            "install": "Install now",
-            "later": "Later"
+            "install": "Instalar agora",
+            "later": "Mais tarde"
           }
         },
         "buttons": {
-          "downandinst": "Download & install",
-          "download": "Download & install later"
+          "downandinst": "Baixar e instalar",
+          "download": "Baixar e instalar mais tarde"
         }
       },
       "ko-fi": {
-        "title": "Requires Premium",
+        "title": "Requer Premium",
         "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
       },
       "microsoftStore": {
