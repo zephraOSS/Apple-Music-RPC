@@ -33,6 +33,7 @@
         "applemusic-logo": "Default",
         "applemusic-logo-rainbow": "Rainbow"
       },
+      "rpcLargeImageText": "Presence Large Image Text",
       "rpcDetails": "Presence Details",
       "rpcState": "Presence State",
       "enableLastFM": "Enable Last.fm",
