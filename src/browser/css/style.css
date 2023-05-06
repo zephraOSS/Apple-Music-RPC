@@ -21,7 +21,7 @@ body[data-theme="dark"] {
 ::-webkit-scrollbar-track {
     border-style: none;
     border-radius: 6px;
-    background-color: #fff;
+    background-color: #f2f1f6;
 }
 
 ::-webkit-scrollbar-thumb {
