@@ -51,7 +51,8 @@
       "reset": "Terugstel"
     },
     "category": {
-      "general": "Algemeen"
+      "general": "Algemeen",
+      "cache": "Cache Management"
     },
     "warn": {
       "music": {
