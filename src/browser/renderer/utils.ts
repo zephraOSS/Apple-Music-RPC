@@ -1,4 +1,4 @@
-import { fetchCacheSize } from "./index.js";
+import { fetchCacheSize, i18n } from "./index.js";
 
 export let langString: { [key: string]: any } = {};
 
@@ -107,22 +107,15 @@ export async function updateLanguage() {
         if (ls) ele.innerHTML = ls;
     });
 
-    document
-        .querySelectorAll("[data-translang]")
-        .forEach((ele: HTMLElement) => {
-            const key = ele.dataset.translang;
+    document.querySelectorAll("[data-i18n]").forEach((ele: HTMLElement) => {
+        const key = ele.dataset.i18n,
+            vars = ele.dataset.i18nVars ?? "";
 
-            let ls: any = langString;
-
-            if (key.includes(".")) {
-                key.split(".").forEach((k, i) => {
-                    ls = ls?.[k];
-
-                    if (i === key.split(".").length - 1)
-                        if (ls) ele.innerHTML = ls;
-                });
-            }
-        });
+        if (key) ele.innerHTML = i18n.getStringVar(key, vars);
+        else {
+            console.error("Element with data-i18n attribute has no key", ele);
+        }
+    });
 
     fetchCacheSize();
 }

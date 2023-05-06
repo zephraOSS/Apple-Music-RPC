@@ -1,4 +1,6 @@
 import { Modal } from "./modal.js";
+import { i18n as i18nClass } from "./i18n.js";
+
 import {
     updateTheme,
     updateLanguage,
@@ -19,7 +21,8 @@ declare global {
     }
 }
 
-export const restartRequiredMemory = {};
+export const restartRequiredMemory = {},
+    i18n = new i18nClass();
 
 export let appVersion,
     platform,
