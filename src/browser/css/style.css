@@ -510,6 +510,10 @@ div.modal .btn.btn-usaflag:hover {
     max-height: 60%;
 }
 
+.settings_setting select {
+    cursor: pointer;
+}
+
 body[data-theme="dark"] .settings_setting input[type="text"],
 body[data-theme="dark"] .settings_setting select {
     background-color: #1d1d1d;
