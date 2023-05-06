@@ -621,7 +621,7 @@ body[data-theme="christmas"] .cfgSwitch i::after {
 }
 
 .cfgSwitch input:checked + i {
-    background-color: #4bd763;
+    background-color: #67cd67;
 }
 
 body[data-theme="christmas"] .cfgSwitch input:checked + i {
