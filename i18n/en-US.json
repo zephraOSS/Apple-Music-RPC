@@ -51,7 +51,8 @@
       "reset": "Reset"
     },
     "category": {
-      "general": "General"
+      "general": "General",
+      "cache": "Cache Management"
     },
     "warn": {
       "music": {
