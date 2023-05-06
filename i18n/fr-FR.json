@@ -6,9 +6,12 @@
     "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus."
   },
   "tray": {
-    "restart": "Relancer AMRPC",
-    "checkForUpdates": "Recherche de Mise à Jour",
-    "openSettings": "Ouvrir les Réglages",
+    "restart": "Restart",
+    "reportProblem": "Report a Problem",
+    "quitITunes": {
+      "info": "This takes about 3 seconds",
+      "button": "Quit iTunes"
+    },
     "quit": "Quitter"
   },
   "settings": {
