@@ -2,7 +2,7 @@ body {
     border: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #fff;
+    background-color: #f2f1f6;
     --color: #000;
     --border-color: #0000001a;
 }
@@ -206,6 +206,10 @@ div.content {
     border-radius: 0 0 8px 8px;
 }
 
+.settings_category .settings_setting:last-of-type:first-of-type {
+    border-radius: 8px;
+}
+
 .settings_category .settings_setting:not(:last-of-type):after {
     position: absolute;
     width: calc(100% - 30px);
@@ -223,9 +227,13 @@ div.content {
 div.content form .settings_setting {
     position: relative;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: #fff;
     padding: 10px;
     box-sizing: border-box;
+}
+
+body[data-theme="dark"] div.content form .settings_setting {
+    background-color: #1c1c1e;
 }
 
 .setting_main {
@@ -469,11 +477,11 @@ div.modal .btn.btn-grey,
 div.modal .btn.btn-rainbow,
 .cfgButton.rainbow {
     background-image: linear-gradient(
-            90deg,
-            #00c0ff 0%,
-            #ffcf00 49%,
-            #fc4f4f 80%,
-            #00c0ff 100%
+        90deg,
+        #00c0ff 0%,
+        #ffcf00 49%,
+        #fc4f4f 80%,
+        #00c0ff 100%
     );
 }
 
@@ -554,7 +562,7 @@ select:disabled,
     display: inline-block;
     width: 46px;
     height: 26px;
-    background-color: #e6e6e6;
+    background-color: #e9e9eb;
     border-radius: 23px;
     vertical-align: text-bottom;
     transition: all 0.3s linear;
@@ -567,14 +575,14 @@ select:disabled,
     left: 0;
     content: "";
     border-radius: 11px;
-    background-color: #fff;
+    background-color: #e9e9eb;
     transform: translate3d(2px, 2px, 0) scale3d(1, 1, 1);
     transition: all 0.25s linear;
 }
 
 body[data-theme="dark"] .cfgSwitch i::before,
 body[data-theme="dark"] .cfgSwitch i {
-    background-color: #2d2d2d;
+    background-color: #39383d;
 }
 
 body[data-theme="christmas"] .cfgSwitch i::before,
