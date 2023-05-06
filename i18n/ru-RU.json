@@ -33,6 +33,7 @@
         "applemusic-logo": "Default",
         "applemusic-logo-rainbow": "Rainbow"
       },
+      "rpcLargeImageText": "Presence Large Image Text",
       "rpcDetails": "Вторая строка в активности",
       "rpcState": "Третья строка в активности",
       "enableLastFM": "Использовать Last.fm",
