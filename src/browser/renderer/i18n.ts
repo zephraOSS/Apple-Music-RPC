@@ -10,6 +10,8 @@ export class i18n {
     }
 
     public getString(key: string) {
+        if (!key) return;
+
         const keys = key.split(".");
 
         let value = this.strings;
@@ -23,6 +25,8 @@ export class i18n {
 
     public getStringVar(key: string, vars: { [key: string]: any } | string) {
         let string = this.getString(key);
+
+        if (!string) return;
 
         if (typeof vars === "string") vars = this.varConvert(vars);
 
@@ -43,6 +47,8 @@ export class i18n {
         }
 
         const string = this.getString(key);
+
+        if (!string) return;
 
         if (typeof string === "object") {
             ele.innerHTML = string["label"];
