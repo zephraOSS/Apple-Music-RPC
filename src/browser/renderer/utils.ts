@@ -115,8 +115,17 @@ export async function updateLanguage() {
         const key = ele.dataset.i18n,
             vars = ele.dataset.i18nVars ?? "";
 
-        if (key) ele.innerHTML = i18n.getStringVar(key, vars);
-        else {
+        if (key) {
+            const translation = i18n.getStringVar(key, vars);
+
+            if (translation) ele.innerHTML = translation;
+            else {
+                console.error(
+                    `Element with data-i18n attribute has no translation for key "${key}"`,
+                    ele
+                );
+            }
+        } else {
             console.error("Element with data-i18n attribute has no key", ele);
         }
     });
