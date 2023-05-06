@@ -6,11 +6,11 @@
     "cmd": "Es liegt ein Fehler mit der Eingabeaufforderung vor. Klicke auf den Button unten, um mehr zu erfahren."
   },
   "tray": {
-    "restart": "Restart",
-    "reportProblem": "Report a Problem",
+    "restart": "Neustart",
+    "reportProblem": "Problem melden",
     "quitITunes": {
-      "info": "This takes about 3 seconds",
-      "button": "Quit iTunes"
+      "info": "Vorgang dauert ca. 3 Sekunden",
+      "button": "iTunes beenden"
     },
     "quit": "Beenden"
   },
