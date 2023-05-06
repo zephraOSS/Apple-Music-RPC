@@ -88,12 +88,16 @@ export async function updateLanguage() {
                     languageDisplay: "standard"
                 });
 
-            const nativeLang = languageNames
-                    .of(optionLang)
-                    .replace(/\((.*?)\)/, `(${optionLangCountry})`),
-                englishLang = languageNamesEnglish
-                    .of(optionLang)
-                    .replace(/\((.*?)\)/, `(${optionLangCountry})`);
+            let nativeLang = languageNames
+                .of(optionLang)
+                .replace(/\((.*?)\)/, `(${optionLangCountry})`);
+
+            const englishLang = languageNamesEnglish
+                .of(optionLang)
+                .replace(/\((.*?)\)/, `(${optionLangCountry})`);
+
+            nativeLang =
+                nativeLang.charAt(0).toUpperCase() + nativeLang.slice(1);
 
             ele.textContent =
                 nativeLang === englishLang
