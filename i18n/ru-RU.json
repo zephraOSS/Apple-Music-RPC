@@ -51,7 +51,8 @@
       "reset": "Сброс"
     },
     "category": {
-      "general": "Основные"
+      "general": "Основные",
+      "cache": "Cache Management"
     },
     "warn": {
       "music": {
