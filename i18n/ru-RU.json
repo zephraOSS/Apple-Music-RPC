@@ -6,9 +6,12 @@
     "cmd": "Возникла ошибка с Командной строкой. Пожалуйста, нажмите на кнопку ниже, чтобы узнать больше."
   },
   "tray": {
-    "restart": "Перезапустить AMRPC",
-    "checkForUpdates": "Проверка обновлений",
-    "openSettings": "Открыть настройки",
+    "restart": "Restart",
+    "reportProblem": "Report a Problem",
+    "quitITunes": {
+      "info": "This takes about 3 seconds",
+      "button": "Quit iTunes"
+    },
     "quit": "Выйти"
   },
   "settings": {
