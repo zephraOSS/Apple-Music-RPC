@@ -145,7 +145,7 @@ export function init() {
             const resetButton = document.createElement("span");
 
             resetButton.classList.add("resetButton");
-            resetButton.innerHTML = `<i class="fa-solid fa-arrow-rotate-left"></i>`;
+            resetButton.innerHTML = `<i class="fa-solid fa-arrow-rotate-left" title="Reset to default"></i>`;
 
             resetButton.addEventListener("click", async () => {
                 const configKey = label
