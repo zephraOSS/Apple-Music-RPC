@@ -1,6 +1,6 @@
 {
   "error": {
-    "admin": "Por favor, não execute o AMRPC como administrador!",
+    "admin": "Não execute o AMRPC como administrador!",
     "noTrack": "Nenhuma música detectada",
     "jsFileExtension": "Há um erro com o arquivo JS de associação dos dados. Clique no botão abaixo para saber mais.",
     "cmd": "Há um erro com o prompt de comando. Clique no botão abaixo para saber mais."
@@ -33,6 +33,7 @@
         "applemusic-logo": "Padrão",
         "applemusic-logo-rainbow": "Arco-íris"
       },
+      "rpcLargeImageText": "Presence Large Image Text",
       "rpcDetails": "Detalhes da presença",
       "rpcState": "Estado da presença",
       "enableLastFM": "Habilitar Last.fm",
@@ -43,7 +44,7 @@
         "connecting": "Conectando...",
         "cancel": "Cancelar"
       },
-      "enableCache": "Habilitar Cache",
+      "enableCache": "Habilitar cache",
       "resetCache": "Redefinir cache"
     },
     "common": {
