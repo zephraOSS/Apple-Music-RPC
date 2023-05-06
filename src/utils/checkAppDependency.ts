@@ -1,7 +1,7 @@
 import { dialog, shell } from "electron";
 import { exec } from "child_process";
 
-import { getLangStrings } from "./i18n";
+import { i18n } from "../managers/i18n";
 
 import * as log from "electron-log";
 
@@ -45,7 +45,7 @@ export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
             );
             log.error("[checkAppDependency][checkIfAppIsInstalled]", e);
 
-            const strings = getLangStrings();
+            const strings = i18n.getLangStrings();
 
             if (
                 dialog.showMessageBoxSync({

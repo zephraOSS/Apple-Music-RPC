@@ -10,9 +10,10 @@ import {
 } from "./store";
 import { Browser } from "./browser";
 import { Discord } from "./discord";
+import { i18n } from "./i18n";
+
 import { useDarkMode } from "../utils/theme";
 import { appDependencies, setLastFM } from "../index";
-import { getLangStrings, getLanguages } from "../utils/i18n";
 
 import { init as initAutoLaunch } from "./launch";
 
@@ -57,11 +58,11 @@ export function init() {
     });
 
     ipcMain.handle("getLanguages", () => {
-        return getLanguages();
+        return i18n.getLanguages();
     });
 
     ipcMain.handle("getLangStrings", () => {
-        return getLangStrings();
+        return i18n.getLangStrings();
     });
 
     ipcMain.handle("getSystemTheme", () => {

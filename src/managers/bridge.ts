@@ -1,8 +1,8 @@
 import { Discord } from "./discord";
 import { Browser } from "./browser";
+import { i18n } from "./i18n";
 import { config } from "./store";
 import { appDependencies, lastFM } from "../index";
-import { getLangStrings } from "../utils/i18n";
 
 import { dialog, shell } from "electron";
 import { AppleBridge, fetchITunes } from "apple-bridge";
@@ -225,7 +225,7 @@ export class Bridge {
         this.bridge.on("jsFileExtensionError", "music", () => {
             log.error("[iTunes]", "JS File Extension Error.");
 
-            const strings = getLangStrings();
+            const strings = i18n.getLangStrings();
 
             if (
                 dialog.showMessageBoxSync({

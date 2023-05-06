@@ -1,7 +1,7 @@
 import { app } from "electron";
 import { Browser } from "../managers/browser";
 import { appData } from "../managers/store";
-import { getLangStrings } from "./i18n";
+import { i18n } from "../managers/i18n";
 
 import * as log from "electron-log";
 
@@ -14,7 +14,7 @@ export function init() {
     )
         return;
 
-    const string = getLangStrings();
+    const string = i18n.getLangStrings();
 
     if (!string) {
         log.warn("[msStoreModal]", "Canceled due to missing language file");

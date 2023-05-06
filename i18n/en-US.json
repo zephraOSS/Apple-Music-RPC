@@ -6,9 +6,12 @@
     "cmd": "There is an error with Command Prompt. Please click on the button below to learn more."
   },
   "tray": {
-    "restart": "Restart AMRPC",
-    "checkForUpdates": "Check for Updates",
-    "openSettings": "Open Settings",
+    "restart": "Restart",
+    "reportProblem": "Report a Problem",
+    "quitITunes": {
+      "info": "This takes about 3 seconds",
+      "button": "Quit iTunes"
+    },
     "quit": "Quit"
   },
   "settings": {

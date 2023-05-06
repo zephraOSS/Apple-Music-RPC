@@ -1,0 +1,56 @@
+import { config } from "./store";
+
+import * as fs from "fs";
+import * as path from "path";
+import * as log from "electron-log";
+
+import getAppDataPath from "../utils/getAppDataPath";
+
+export class i18n {
+    public static appDataPath = path.join(getAppDataPath(), "i18n");
+
+    public static onLanguageUpdate(func: (lang: string) => void) {
+        config.onDidChange("language", func);
+    }
+
+    public static getLangStrings() {
+        const filePath = path.join(
+            this.appDataPath,
+            `${config.get("language")}.json`
+        );
+
+        if (!fs.existsSync(filePath)) return {};
+
+        return JSON.parse(fs.readFileSync(filePath, "utf8"));
+    }
+
+    public static writeLangStrings(lang: string, strings: any) {
+        if (!fs.existsSync(this.appDataPath))
+            fs.mkdirSync(this.appDataPath, { recursive: true });
+
+        try {
+            fs.writeFileSync(
+                path.join(this.appDataPath, `${lang}.json`),
+                JSON.stringify(strings, null, 4)
+            );
+        } catch (e) {
+            log.error("[i18n][writeLangStrings]", e);
+        }
+    }
+
+    public static deleteLangDir() {
+        if (!fs.existsSync(this.appDataPath)) return;
+
+        fs.rmSync(this.appDataPath, {
+            recursive: true
+        });
+    }
+
+    public static getLanguages() {
+        if (!fs.existsSync(this.appDataPath)) return [];
+
+        return fs
+            .readdirSync(this.appDataPath)
+            .map((file) => file.replace(".json", ""));
+    }
+}
