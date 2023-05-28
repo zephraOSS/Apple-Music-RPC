@@ -19,6 +19,7 @@
       "autoLaunch": "Автозапуск",
       "show": "Показывать активность",
       "hideOnPause": "Скрывать активность, когда песня на паузе",
+      "artworkPrioLocal": "Prioritize Local Artwork",
       "showTimestamps": "Show Timestamps",
       "showAlbumArtwork": "Показывать обложку альбома",
       "performanceMode": "Режим производительности",
@@ -69,6 +70,7 @@
     },
     "note": {
       "language": "Если Вы не нашли ваш язык, <a href='https://discord.gg/qqAgCHS'>свяжитесь с нами</a>.",
+      "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
       "cache": {
         "size": "Размер кэша: %size%, %count% файлов",
         "warn": "<b>ВНИМАНИЕ</b> Отключение кэша удалит все кэшированные данные.",
