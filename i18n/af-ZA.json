@@ -19,6 +19,7 @@
       "autoLaunch": "Outomatiese bekendstelling",
       "show": "Wys teenwoordigheid",
       "hideOnPause": "Versteek teenwoordigheid op pouse",
+      "artworkPrioLocal": "Prioritize Local Artwork",
       "showTimestamps": "Wys Tydstempels",
       "showAlbumArtwork": "Wys albumkunswerk",
       "performanceMode": "Prestasiemodus",
@@ -69,6 +70,7 @@
     },
     "note": {
       "language": "As jou taal ontbreek, <a href='https://discord.gg/qqAgCHS'>kontak ons</a>.",
+      "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
       "cache": {
         "size": "Huidige kasgrootte: %size%, %count% items",
         "warn": "<b>WAARSKUWING</b> As u die kas deaktiveer, sal alle gekasdata uitvee.",
