@@ -6,6 +6,7 @@ export const config = new Store({
             autoLaunch: true,
             show: true,
             hideOnPause: true,
+            artworkPrioLocal: false,
             showAlbumArtwork: true,
             showTimestamps: true,
             hardwareAcceleration: true,
