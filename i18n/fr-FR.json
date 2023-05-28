@@ -6,9 +6,12 @@
     "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus."
   },
   "tray": {
-    "restart": "Relancer AMRPC",
-    "checkForUpdates": "Recherche de Mise à Jour",
-    "openSettings": "Ouvrir les Réglages",
+    "restart": "Restart",
+    "reportProblem": "Report a Problem",
+    "quitITunes": {
+      "info": "This takes about 3 seconds",
+      "button": "Quit iTunes"
+    },
     "quit": "Quitter"
   },
   "settings": {
@@ -16,6 +19,7 @@
       "autoLaunch": "Lancement Automatique",
       "show": "Afficher la Présence",
       "hideOnPause": "Cacher la Présence en Pause",
+      "artworkPrioLocal": "Prioritize Local Artwork",
       "showTimestamps": "Afficher le Timestamp",
       "showAlbumArtwork": "Afficher la Pochette de l'Album",
       "performanceMode": "Mode Performance",
@@ -33,6 +37,7 @@
         "applemusic-logo": "Par défaut",
         "applemusic-logo-rainbow": "Arc-en-ciel"
       },
+      "rpcLargeImageText": "Presence Large Image Text",
       "rpcDetails": "Détails de la Présence",
       "rpcState": "État de la Présence",
       "enableLastFM": "Activer Last.fm",
@@ -50,7 +55,8 @@
       "reset": "Réinitialiser"
     },
     "category": {
-      "general": "Général"
+      "general": "Général",
+      "cache": "Cache Management"
     },
     "warn": {
       "music": {
@@ -64,6 +70,7 @@
     },
     "note": {
       "language": "Si votre langue manque, <a href='https://discord.gg/qqAgCHS'>contactez nous</a>.",
+      "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
       "cache": {
         "size": "Taille du cache actuelle : %size%, %count% éléments",
         "warn": "<b>ATTENTION</b> Désactiver le cache va supprimer toutes les données en cache.",

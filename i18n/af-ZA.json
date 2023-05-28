@@ -6,9 +6,12 @@
     "cmd": "Daar is 'n fout met opdragprompt. Klik asseblief op die knoppie hieronder om meer te wete te kom."
   },
   "tray": {
-    "restart": "Herbegin AMRPC",
-    "checkForUpdates": "Kyk vir opdaterings",
-    "openSettings": "Maak Instellings oop",
+    "restart": "Restart",
+    "reportProblem": "Report a Problem",
+    "quitITunes": {
+      "info": "This takes about 3 seconds",
+      "button": "Quit iTunes"
+    },
     "quit": "Hou op"
   },
   "settings": {
@@ -16,6 +19,7 @@
       "autoLaunch": "Outomatiese bekendstelling",
       "show": "Wys teenwoordigheid",
       "hideOnPause": "Versteek teenwoordigheid op pouse",
+      "artworkPrioLocal": "Prioritize Local Artwork",
       "showTimestamps": "Wys Tydstempels",
       "showAlbumArtwork": "Wys albumkunswerk",
       "performanceMode": "Prestasiemodus",
@@ -33,6 +37,7 @@
         "applemusic-logo": "Verstek",
         "applemusic-logo-rainbow": "Reënboog"
       },
+      "rpcLargeImageText": "Presence Large Image Text",
       "rpcDetails": "Teenwoordigheid Besonderhede",
       "rpcState": "Teenwoordigheid Staat",
       "enableLastFM": "Aktiveer Last.fm",
@@ -50,7 +55,8 @@
       "reset": "Terugstel"
     },
     "category": {
-      "general": "Algemeen"
+      "general": "Algemeen",
+      "cache": "Cache Management"
     },
     "warn": {
       "music": {
@@ -64,6 +70,7 @@
     },
     "note": {
       "language": "As jou taal ontbreek, <a href='https://discord.gg/qqAgCHS'>kontak ons</a>.",
+      "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
       "cache": {
         "size": "Huidige kasgrootte: %size%, %count% items",
         "warn": "<b>WAARSKUWING</b> As u die kas deaktiveer, sal alle gekasdata uitvee.",

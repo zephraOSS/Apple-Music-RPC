@@ -6,9 +6,12 @@
     "cmd": "Возникла ошибка с Командной строкой. Пожалуйста, нажмите на кнопку ниже, чтобы узнать больше."
   },
   "tray": {
-    "restart": "Перезапустить AMRPC",
-    "checkForUpdates": "Проверка обновлений",
-    "openSettings": "Открыть настройки",
+    "restart": "Restart",
+    "reportProblem": "Report a Problem",
+    "quitITunes": {
+      "info": "This takes about 3 seconds",
+      "button": "Quit iTunes"
+    },
     "quit": "Выйти"
   },
   "settings": {
@@ -16,6 +19,7 @@
       "autoLaunch": "Автозапуск",
       "show": "Показывать активность",
       "hideOnPause": "Скрывать активность, когда песня на паузе",
+      "artworkPrioLocal": "Prioritize Local Artwork",
       "showTimestamps": "Show Timestamps",
       "showAlbumArtwork": "Показывать обложку альбома",
       "performanceMode": "Режим производительности",
@@ -33,6 +37,7 @@
         "applemusic-logo": "Default",
         "applemusic-logo-rainbow": "Rainbow"
       },
+      "rpcLargeImageText": "Presence Large Image Text",
       "rpcDetails": "Вторая строка в активности",
       "rpcState": "Третья строка в активности",
       "enableLastFM": "Использовать Last.fm",
@@ -50,7 +55,8 @@
       "reset": "Сброс"
     },
     "category": {
-      "general": "Основные"
+      "general": "Основные",
+      "cache": "Cache Management"
     },
     "warn": {
       "music": {
@@ -64,6 +70,7 @@
     },
     "note": {
       "language": "Если Вы не нашли ваш язык, <a href='https://discord.gg/qqAgCHS'>свяжитесь с нами</a>.",
+      "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
       "cache": {
         "size": "Размер кэша: %size%, %count% файлов",
         "warn": "<b>ВНИМАНИЕ</b> Отключение кэша удалит все кэшированные данные.",

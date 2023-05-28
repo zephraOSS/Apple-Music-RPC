@@ -6,9 +6,12 @@
     "cmd": "Es liegt ein Fehler mit der Eingabeaufforderung vor. Klicke auf den Button unten, um mehr zu erfahren."
   },
   "tray": {
-    "restart": "AMRPC neu starten",
-    "checkForUpdates": "Nach Updates suchen",
-    "openSettings": "Einstellungen öffnen",
+    "restart": "Neustart",
+    "reportProblem": "Problem melden",
+    "quitITunes": {
+      "info": "Vorgang dauert ca. 3 Sekunden",
+      "button": "iTunes beenden"
+    },
     "quit": "Beenden"
   },
   "settings": {
@@ -16,6 +19,7 @@
       "autoLaunch": "Autostart",
       "show": "Presence anzeigen",
       "hideOnPause": "Presence während Pause ausblenden",
+      "artworkPrioLocal": "Lokales Artwork priorisieren",
       "showTimestamps": "Timestamps anzeigen",
       "showAlbumArtwork": "Album Artwork anzeigen",
       "performanceMode": "Performance Modus",
@@ -33,6 +37,7 @@
         "applemusic-logo": "Standard",
         "applemusic-logo-rainbow": "Regenbogen"
       },
+      "rpcLargeImageText": "Presence Large Image Text",
       "rpcDetails": "Presence Details",
       "rpcState": "Presence State",
       "enableLastFM": "Last.fm aktivieren",
@@ -50,7 +55,8 @@
       "reset": "Löschen"
     },
     "category": {
-      "general": "Allgemein"
+      "general": "Allgemein",
+      "cache": "Cache Management"
     },
     "warn": {
       "music": {
@@ -64,6 +70,7 @@
     },
     "note": {
       "language": "Wenn deine Sprache fehlt, <a href='https://discord.gg/qqAgCHS'>kontaktiere uns</a>.",
+      "artworkPrioLocal": "Wenn ein lokales Artwork verfügbar ist, wird es anstelle des Artworks der Apple Music API verwendet.",
       "cache": {
         "size": "Derzeitige Cache-Größe: %size%, %count% Einträge",
         "warn": "<b>WARNUNG</b> Wenn der Cache deaktiviert wird, werden alle Daten gelöscht.",
