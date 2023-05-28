@@ -19,7 +19,7 @@
       "autoLaunch": "Autostart",
       "show": "Presence anzeigen",
       "hideOnPause": "Presence während Pause ausblenden",
-      "artworkPrioLocal": "Prioritize Local Artwork",
+      "artworkPrioLocal": "Lokales Artwork priorisieren",
       "showTimestamps": "Timestamps anzeigen",
       "showAlbumArtwork": "Album Artwork anzeigen",
       "performanceMode": "Performance Modus",
@@ -70,7 +70,7 @@
     },
     "note": {
       "language": "Wenn deine Sprache fehlt, <a href='https://discord.gg/qqAgCHS'>kontaktiere uns</a>.",
-      "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
+      "artworkPrioLocal": "Wenn ein lokales Artwork verfügbar ist, wird es anstelle des Artworks der Apple Music API verwendet.",
       "cache": {
         "size": "Derzeitige Cache-Größe: %size%, %count% Einträge",
         "warn": "<b>WARNUNG</b> Wenn der Cache deaktiviert wird, werden alle Daten gelöscht.",
