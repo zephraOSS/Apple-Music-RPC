@@ -19,7 +19,8 @@ import { checkAppDependency } from "./utils/checkAppDependency";
 
 import * as log from "electron-log";
 
-export const isBeta = app.getVersion().includes("beta");
+export const isBeta = app.getVersion().includes("beta"),
+    isRC = app.getVersion().includes("rc");
 
 export let trayManager: TrayManager;
 export let modalWatcher: ModalWatcher;
@@ -39,6 +40,7 @@ log.info(
 );
 
 if (isBeta) log.info("[READY]", "Detected beta build");
+if (isRC) log.info("[READY]", "Detected release candidate build");
 if (process.windowsStore) log.info("[READY]", "Detected Windows Store build");
 
 initSentry();
