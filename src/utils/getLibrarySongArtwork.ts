@@ -21,19 +21,18 @@ export function getLibrarySongArtwork(
             `${Date.now()}-${Math.random().toString().replace(".", "")}`
         );
 
-        const res = await fetch(
-            "https://www.zephra.cloud/api/amrpc/image-upload",
-            {
-                method: "POST",
-                headers: {
-                    "mime-type": "multipart/form-data"
-                },
-                body: form
-            }
-        );
-
         try {
-            const json = JSONParse(await res.text());
+            const res = await fetch(
+                    "https://www.zephra.cloud/api/amrpc/image-upload",
+                    {
+                        method: "POST",
+                        headers: {
+                            "mime-type": "multipart/form-data"
+                        },
+                        body: form
+                    }
+                ),
+                json = JSONParse(await res.text());
 
             resolve(json?.data);
         } catch (err) {
