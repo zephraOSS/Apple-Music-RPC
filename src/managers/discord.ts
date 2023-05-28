@@ -208,26 +208,22 @@ export class Discord {
             const artworkPrioLocal = config.get("artworkPrioLocal");
 
             if (!artworkPrioLocal) {
-                this.getSongData(currentTrack).then(() => {
-                    if (!this.activity.largeImageKey.startsWith("http"))
-                        this.setLocalArtwork(Bridge.getCurrentTrackArtwork())
-                            .then(() => {
-                                this.getSongData(
-                                    currentTrack,
-                                    this.activity,
-                                    true
-                                );
-                            })
-                            .catch(() => {
-                                this.activity.largeImageKey =
-                                    getConfig("artwork");
-                                this.setActivity(this.activity);
-                            });
+                this.getSongData(currentTrack).catch(() => {
+                    this.setLocalArtwork(Bridge.getCurrentTrackArtwork()).catch(
+                        () => {
+                            this.activity.largeImageKey = getConfig("artwork");
+                            this.setActivity(this.activity);
+                        }
+                    );
                 });
             } else {
                 this.setLocalArtwork(Bridge.getCurrentTrackArtwork())
                     .then(() => {
-                        this.getSongData(currentTrack, this.activity, true);
+                        this.getSongData(
+                            currentTrack,
+                            this.activity,
+                            true
+                        ).catch(() => {});
                     })
                     .catch(() => {
                         this.getSongData(currentTrack).catch(() => {
