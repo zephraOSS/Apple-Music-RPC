@@ -7,7 +7,10 @@ import { appDependencies, lastFM } from "../index";
 import { dialog, shell } from "electron";
 import { AppleBridge, fetchITunes } from "apple-bridge";
 
+import getAppDataPath from "../utils/getAppDataPath";
+
 import * as log from "electron-log";
+import * as path from "path";
 
 export class Bridge {
     private discord: Discord = new Discord();
@@ -240,6 +243,14 @@ export class Bridge {
                 );
             }
         });
+    }
+
+    public static getCurrentTrackArtwork() {
+        const artwork: string | undefined = fetchITunes(
+            `currentTrackArtwork "${path.join(getAppDataPath(), "artwork")}"`
+        )?.artwork;
+
+        return artwork;
     }
 }
 

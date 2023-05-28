@@ -5,10 +5,12 @@ import { appDependencies } from "../index";
 
 import { config, getConfig, setConfig } from "./store";
 import { Browser } from "./browser";
+import { Bridge } from "./bridge";
 import { SongData } from "./SongData";
 
 import { checkSupporter } from "../utils/checkSupporter";
 import { songDataSearchStation } from "../utils/advancedSongDataSearch";
+import { getLibrarySongArtwork } from "../utils/getLibrarySongArtwork";
 import { replaceVariables } from "../utils/replaceVariables";
 
 import * as log from "electron-log";
@@ -203,45 +205,58 @@ export class Discord {
 
             this.setActivity(activity);
         } else {
-            this.songData
-                .getSongData(
-                    currentTrack.name,
-                    currentTrack.album,
-                    currentTrack.artist
-                )
-                .then((data) => {
-                    currentTrack.url = data.url;
+            const artwork = Bridge.getCurrentTrackArtwork();
 
-                    activity.buttons = [
-                        {
-                            label: "Play on Apple Music",
-                            url: data.url
-                        }
-                    ];
+            if (artwork && config.get("showAlbumArtwork")) {
+                const artworkData = await getLibrarySongArtwork(artwork);
 
-                    if (!currentTrack.artwork)
-                        currentTrack.artwork = data.artwork;
-
-                    Browser.send("get-current-track", false, {
-                        artwork: data.artwork,
-                        playerState: currentTrack.playerState
-                    });
-
-                    if (getConfig("showAlbumArtwork"))
-                        activity.largeImageKey = currentTrack.artwork;
+                if (artworkData && artworkData.url) {
+                    activity.largeImageKey = artworkData.url;
 
                     this.setActivity(activity);
-                })
-                .catch((err) => {
-                    log.error(
-                        "[DISCORD][setCurrentTrack][getSongData]",
-                        `Error: ${err}`
-                    );
-
-                    delete activity.buttons;
-                    delete this.activity.buttons;
-                });
+                } else this.getSongData(currentTrack);
+            } else this.getSongData(currentTrack);
         }
+    }
+
+    getSongData(currentTrack, activity = this.activity, noArtwork = false) {
+        this.songData
+            .getSongData(
+                currentTrack.name,
+                currentTrack.album,
+                currentTrack.artist
+            )
+            .then((data) => {
+                currentTrack.url = data.url;
+
+                activity.buttons = [
+                    {
+                        label: "Play on Apple Music",
+                        url: data.url
+                    }
+                ];
+
+                if (!currentTrack.artwork) currentTrack.artwork = data.artwork;
+
+                Browser.send("get-current-track", false, {
+                    artwork: data.artwork,
+                    playerState: currentTrack.playerState
+                });
+
+                if (!noArtwork && getConfig("showAlbumArtwork"))
+                    activity.largeImageKey = currentTrack.artwork;
+
+                this.setActivity(activity);
+            })
+            .catch((err) => {
+                log.error(
+                    "[DISCORD][setCurrentTrack][getSongData]",
+                    `Error: ${err}`
+                );
+
+                delete activity.buttons;
+                delete this.activity.buttons;
+            });
     }
 
     static getInstance() {
