@@ -5,6 +5,8 @@ on:
         paths:
             - ".github/workflows/build-win.yml"
             - "src/**"
+    release:
+        types: [published]
 
 jobs:
     release:
