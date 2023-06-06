@@ -15,6 +15,16 @@ import * as path from "path";
 export class Bridge {
     private discord: Discord = new Discord();
     private currentTrack: any = fetchITunes();
+    private currentlyPlaying = {
+        name: "",
+        artist: "",
+        album: "",
+        genre: "",
+        releaseYear: 0,
+        duration: 0,
+        elapsedTime: 0,
+        remainingTime: 0
+    };
 
     public bridge: AppleBridge = new AppleBridge();
     public lastTrack: any = {};
@@ -56,7 +66,8 @@ export class Bridge {
             if (
                 (currentTrack.name === this.lastTrack.name &&
                     currentTrack.artist === this.lastTrack.artist &&
-                    currentTrack.duration === this.lastTrack.duration) ||
+                    currentTrack.duration === this.lastTrack.duration &&
+                    !this.checkCurrentlyPlaying(currentTrack)) ||
                 (this.discord.isLive &&
                     currentTrack.name === this.lastTrack.name)
             )
@@ -243,6 +254,45 @@ export class Bridge {
                 );
             }
         });
+    }
+
+    /**
+     * Checks if currently playing track is on repeat - Returns true if on repeat
+     * @param currentTrack
+     * @returns {boolean}
+     */
+    checkCurrentlyPlaying(currentTrack: currentTrack) {
+        if (Object.keys(currentTrack).length === 0) return;
+
+        const lastCurrentlyPlaying = this.currentlyPlaying;
+
+        Object.keys(this.currentlyPlaying).forEach((key) => {
+            this.currentlyPlaying[key] = currentTrack[key];
+        });
+
+        if (
+            Object.values(lastCurrentlyPlaying).every((value) => {
+                return value === "";
+            })
+        )
+            return true;
+
+        if (
+            lastCurrentlyPlaying.name !== this.currentlyPlaying.name ||
+            lastCurrentlyPlaying.artist !== this.currentlyPlaying.artist ||
+            lastCurrentlyPlaying.album !== this.currentlyPlaying.album ||
+            lastCurrentlyPlaying.duration !== this.currentlyPlaying.duration
+        )
+            return false;
+
+        if (
+            this.currentlyPlaying.elapsedTime === 0 &&
+            (lastCurrentlyPlaying.remainingTime ===
+                this.currentlyPlaying.duration ||
+                lastCurrentlyPlaying.remainingTime ===
+                    this.currentlyPlaying.duration - 1)
+        )
+            return true;
     }
 
     public static getCurrentTrackArtwork() {
