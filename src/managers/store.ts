@@ -12,6 +12,7 @@ export const config = new Store({
             hardwareAcceleration: true,
             enableCache: true,
             enableLastFM: false,
+            checkIfMusicInstalled: true,
             service: "itunes",
             colorTheme: "light",
             language: "en-US",

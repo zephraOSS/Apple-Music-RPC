@@ -2,12 +2,13 @@ import { dialog, shell } from "electron";
 import { exec } from "child_process";
 
 import { i18n } from "../managers/i18n";
+import { config } from "../managers/store";
 
 import * as log from "electron-log";
 
 export async function checkAppDependency(): Promise<AppDependencies> {
     const music =
-        process.platform !== "win32"
+        process.platform !== "win32" || !config.get("checkIfMusicInstalled")
             ? true
             : await checkIfAppIsInstalled("iTunes");
 
