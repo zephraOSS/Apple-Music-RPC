@@ -24,6 +24,7 @@
       "showAlbumArtwork": "Показывать обложку альбома",
       "performanceMode": "Режим производительности",
       "hardwareAcceleration": "Аппаратное ускорение",
+      "checkIfMusicInstalled": "Check if Music is installed",
       "colorTheme": {
         "label": "Предпочтительная тема",
         "light": "Светлая",
@@ -56,7 +57,8 @@
     },
     "category": {
       "general": "Основные",
-      "cache": "Cache Management"
+      "cache": "Cache Management",
+      "advanced": "Advanced"
     },
     "warn": {
       "music": {
@@ -75,7 +77,8 @@
         "size": "Размер кэша: %size%, %count% файлов",
         "warn": "<b>ВНИМАНИЕ</b> Отключение кэша удалит все кэшированные данные.",
         "info": "В кэш сохраняются все обложки альбомов и другие данные для уменьшения запросов к Apple. Это сократит время загрузки обложек и ссылок на песню."
-      }
+      },
+      "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
     },
     "extra": {
       "github": "Репозиторий на GitHub",
