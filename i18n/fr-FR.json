@@ -24,6 +24,7 @@
       "showAlbumArtwork": "Afficher la Pochette de l'Album",
       "performanceMode": "Mode Performance",
       "hardwareAcceleration": "Accélération Hardware",
+      "checkIfMusicInstalled": "Check if Music is installed",
       "colorTheme": {
         "label": "Thème de Couleur préféré",
         "light": "Clair",
@@ -56,7 +57,8 @@
     },
     "category": {
       "general": "Général",
-      "cache": "Cache Management"
+      "cache": "Cache Management",
+      "advanced": "Advanced"
     },
     "warn": {
       "music": {
@@ -75,7 +77,8 @@
         "size": "Taille du cache actuelle : %size%, %count% éléments",
         "warn": "<b>ATTENTION</b> Désactiver le cache va supprimer toutes les données en cache.",
         "info": "Le cache sauvegarde toutes les couvertures d'album et autres données pour réduire le nombre de requêtes vers Apple. Cela améliore le temps de chargement des couvertures et des liens."
-      }
+      },
+      "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
     },
     "extra": {
       "github": "Voir sur GitHub",
