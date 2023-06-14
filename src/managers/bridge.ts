@@ -76,12 +76,12 @@ export class Bridge {
                 return;
 
             log.info(
-                "[iTunes]",
+                "[Bridge]",
                 `Playing "${currentTrack.name}" by ${currentTrack.artist}`
             );
 
             if (Object.keys(currentTrack).length === 0)
-                return log.warn("[iTunes] No Track detected");
+                return log.warn("[Bridge] No Track detected");
 
             if (currentTrack.remainingTime > 0)
                 currentTrack.snowflake = generateSnowflake();
@@ -111,7 +111,7 @@ export class Bridge {
                     return;
                 }
 
-                log.info("[iTunes][lastFM]", "Updating now playing");
+                log.info("[Bridge][lastFM]", "Updating now playing");
 
                 lastFM.nowPlaying({
                     artist: currentTrack.artist,
@@ -144,7 +144,7 @@ export class Bridge {
                             objectEqual(oldTrack, newTrack)
                         ) {
                             log.info(
-                                "[iTunes][lastFM]",
+                                "[Bridge][lastFM]",
                                 `Scrobbling "${currentTrack.name}" by ${currentTrack.artist}`
                             );
 
@@ -169,7 +169,7 @@ export class Bridge {
         this.bridge.on("paused", "music", () => {
             if (Object.keys(this.lastTrack).length === 0) return;
 
-            log.info("[iTunes]", "Paused");
+            log.info("[Bridge]", "Paused");
 
             this.pausedTrack = this.lastTrack;
             this.lastTrack = {};
@@ -231,7 +231,7 @@ export class Bridge {
         this.bridge.on("stopped", "music", () => {
             if (Object.keys(this.lastTrack).length === 0) return;
 
-            log.info("[iTunes]", "Stopped");
+            log.info("[Bridge]", "Stopped");
 
             this.lastTrack = {};
 
@@ -239,7 +239,7 @@ export class Bridge {
         });
 
         this.bridge.on("jsFileExtensionError", "music", () => {
-            log.error("[iTunes]", "JS File Extension Error.");
+            log.error("[Bridge]", "JS File Extension Error.");
 
             const strings = i18n.getLangStrings();
 
