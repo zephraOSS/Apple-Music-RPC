@@ -297,10 +297,13 @@ export class Bridge {
             return true;
     }
 
-    public static getCurrentTrackArtwork() {
+    public static getCurrentTrackArtwork(logWarn: boolean = true) {
         const artwork: string | undefined = fetchITunes(
             `currentTrackArtwork "${path.join(getAppDataPath(), "artwork")}"`
         )?.artwork;
+
+        if (!artwork && logWarn)
+            log.warn("[Bridge][getCurrentTrackArtwork]", "No artwork found.");
 
         return artwork;
     }
