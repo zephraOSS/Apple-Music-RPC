@@ -186,7 +186,7 @@ export function init() {
     });
 
     ipcMain.handle("isReady", (_e, isReady: boolean) => {
-        Browser.getInstance().isReady = isReady;
+        Browser.setReady(isReady);
     });
 
     ipcMain.handle("checkAppDependencies", () => {

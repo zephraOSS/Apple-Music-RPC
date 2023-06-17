@@ -103,7 +103,7 @@ export class Browser {
     send(channel: string, ...args: any[]) {
         setTimeout(
             () => this.window.webContents.send(channel, ...args),
-            this.isReady ? 0 : 2500
+            this.isReady ? 200 : 2500
         );
     }
 
@@ -155,13 +155,24 @@ export class Browser {
     }
 
     static send(channel: string, create: boolean = false, ...args: any[]) {
-        if (create || (Browser.instance && Browser.instance.isReady))
+        if (create) {
+            Browser.awaitsSend.push({ channel, args });
+
+            Browser.getInstance();
+        } else if (Browser.instance && Browser.instance.isReady) {
             Browser.getInstance().send(channel, ...args);
-        else Browser.awaitsSend.push({ channel, args });
+        } else {
+            Browser.awaitsSend.push({ channel, args });
+        }
     }
 
     static setTheme(theme: string) {
         if (config.get("colorTheme") === "auto")
             Browser.send("update-system-theme", false, theme);
+    }
+
+    static setReady(ready: boolean = true) {
+        Browser.getInstance().isReady = ready;
+        Browser.getInstance().checkAwaits();
     }
 }
