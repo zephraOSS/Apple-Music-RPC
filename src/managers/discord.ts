@@ -205,9 +205,7 @@ export class Discord {
 
             this.setActivity(activity);
         } else {
-            const artworkPrioLocal = config.get("artworkPrioLocal");
-
-            if (!artworkPrioLocal) {
+            if (!config.get("artworkPrioLocal")) {
                 this.getSongData(currentTrack).catch(() => {
                     this.setLocalArtwork(Bridge.getCurrentTrackArtwork()).catch(
                         () => {
