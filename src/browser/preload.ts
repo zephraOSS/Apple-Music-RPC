@@ -95,7 +95,8 @@ contextBridge.exposeInMainWorld("api", {
             "update-downloaded",
             "get-current-track",
             "open-modal",
-            "lastfm-connect"
+            "lastfm-connect",
+            "url"
         ];
 
         if (validChannels.includes(channel))

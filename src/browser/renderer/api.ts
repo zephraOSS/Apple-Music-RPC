@@ -125,4 +125,13 @@ export function init() {
 
         new Modal(data.title, data.description, data.buttons);
     });
+
+    window.api.receive("url", async (url: string) => {
+        console.log("[BROWSER][RENDERER]", "Received URL", url);
+
+        document.getElementById(url).scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    });
 }

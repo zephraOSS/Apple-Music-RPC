@@ -14,6 +14,7 @@ import { init as initAutoUpdater } from "./managers/updater";
 import { init as initTheme } from "./utils/theme";
 import { init as initMsStoreModal } from "./utils/msStoreModal";
 import { init as initCrowdin } from "./utils/crowdin";
+import { init as initProtocol } from "./utils/protocol";
 
 import { checkAppDependency } from "./utils/checkAppDependency";
 
@@ -44,6 +45,7 @@ if (isRC) log.info("[READY]", "Detected release candidate build");
 if (process.windowsStore) log.info("[READY]", "Detected Windows Store build");
 
 initSentry();
+initProtocol();
 
 app.on("ready", async () => {
     await initCrowdin().catch((err) => log.error("[READY][initCrowdin]", err));

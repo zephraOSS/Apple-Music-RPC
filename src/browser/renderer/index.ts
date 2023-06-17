@@ -14,6 +14,8 @@ import { init as initLastFM } from "./lastFM.js";
 import { init as initListeners } from "./listeners.js";
 import { init as initEventSettings } from "./eventSettings.js";
 
+initAPI();
+
 declare global {
     interface Window {
         electron: any;
@@ -35,7 +37,6 @@ export let appVersion,
 
 console.log("[BROWSER][RENDERER] Loading...");
 
-initAPI();
 initLastFM();
 initEventSettings();
 initListeners();

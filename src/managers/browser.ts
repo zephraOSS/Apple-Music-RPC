@@ -14,7 +14,7 @@ export class Browser {
     static awaitsSend: { channel: string; args: any[] }[] = [];
     static instance: Browser;
 
-    constructor() {
+    constructor(url: string = "") {
         if (Browser.instance) {
             Browser.windowAction("show");
             return;
@@ -22,16 +22,12 @@ export class Browser {
 
         initIPC();
 
-        this.initWindow();
-
-        this.isReady = true;
-
-        this.checkAwaits();
+        this.initWindow(undefined, url);
 
         Browser.instance = this;
     }
 
-    initWindow(show: boolean = false) {
+    initWindow(show: boolean = false, url: string = "") {
         const windowState = getConfig("windowState");
 
         this.window = new BrowserWindow({
@@ -55,7 +51,12 @@ export class Browser {
             this.window = null;
         });
 
-        if (show) this.window.show();
+        if (show || url) this.window.show();
+        if (url) {
+            this.window.webContents.on("did-finish-load", () => {
+                this.window.webContents.send("url", url);
+            });
+        }
     }
 
     async windowAction(action: string) {
