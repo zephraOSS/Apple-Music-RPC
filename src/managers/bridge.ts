@@ -291,8 +291,8 @@ export class Bridge {
             this.currentlyPlaying.elapsedTime === 0 &&
             (lastCurrentlyPlaying.remainingTime ===
                 this.currentlyPlaying.duration ||
-                lastCurrentlyPlaying.remainingTime ===
-                    this.currentlyPlaying.duration - 1)
+                lastCurrentlyPlaying.remainingTime <=
+                    this.currentlyPlaying.duration - 2)
         )
             return true;
     }
