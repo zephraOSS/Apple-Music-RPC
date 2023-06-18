@@ -1,7 +1,7 @@
 ![banner](https://user-images.githubusercontent.com/53608074/201397177-1d08c4ed-d595-41ab-86cb-3e8bd1da46dd.png)
 # Apple Music RPC for Discord
 
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads-pre/zephraOSS/Apple-Music-RPC/total) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads-pre/zephraOSS/Apple-Music-RPC/latest/total) 
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads-pre/zephraOSS/Apple-Music-RPC/total) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads/zephraOSS/Apple-Music-RPC/latest/total) 
 
 ## Apple Music Preview
 We currently don't support [Apple Music Preview](https://apps.microsoft.com/store/detail/apple-music-preview/9PFHDD62MXS1), but we're doing our best to find a way to support it.
