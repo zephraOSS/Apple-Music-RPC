@@ -22,7 +22,10 @@ export class TrayManager {
 
         this.tray.setToolTip("AMRPC");
         this.tray.setContextMenu(this.createContextMenu());
-        this.tray.on("click", () => new Browser());
+        this.tray.on("click", () => {
+            if (process.platform === "win32") new Browser();
+            else this.tray.popUpContextMenu();
+        });
 
         i18n.onLanguageUpdate(() => {
             this.i18n = i18n.getLangStrings();
@@ -53,6 +56,13 @@ export class TrayManager {
                 label: this.i18n?.tray?.reportProblem ?? "Report a Problem",
                 click() {
                     shell.openExternal("https://discord.gg/APDghNfJhQ");
+                }
+            },
+            { type: "separator" },
+            {
+                label: "Settings",
+                click() {
+                    new Browser()
                 }
             },
             { type: "separator" },
