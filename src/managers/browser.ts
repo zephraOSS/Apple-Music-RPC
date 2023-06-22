@@ -49,7 +49,14 @@ export class Browser {
 
         this.window.on("closed", () => {
             this.window = null;
+
+            app.dock.hide();
         });
+
+        if (process.platform === "darwin") {
+            this.window.on("hide", app.dock.hide);
+            this.window.on("show", app.dock.show);
+        }
 
         if (show || url) this.window.show();
         if (url) {
