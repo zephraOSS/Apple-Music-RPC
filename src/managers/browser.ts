@@ -54,7 +54,11 @@ export class Browser {
         });
 
         if (process.platform === "darwin") {
-            this.window.on("hide", app.dock.hide);
+            this.window.on("hide", () => {
+                const isVisible = process.platform === "darwin" ? this.window.isVisibleOnAllWorkspaces() : this.window.isVisible();
+
+                if (!this.window.isMinimized() || (!isVisible && !this.window.isFocusable())) app.dock.hide();
+            });
             this.window.on("show", app.dock.show);
         }
 
