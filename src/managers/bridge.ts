@@ -45,7 +45,7 @@ export class Bridge {
             return;
         }
 
-        this.setCurrentTrack()
+        this.setCurrentTrack();
 
         setTimeout(() => {
             if (
@@ -108,8 +108,8 @@ export class Bridge {
                         this.pausedTrack.remainingTime &&
                         currentTrack.remainingTime &&
                         this.pausedTrack.remainingTime -
-                            currentTrack.remainingTime <=
-                            25)
+                        currentTrack.remainingTime <=
+                        25)
                 ) {
                     log.info("[LastFM] Skipping scrobble due to same track");
 
@@ -299,7 +299,7 @@ export class Bridge {
             (lastCurrentlyPlaying.remainingTime ===
                 this.currentlyPlaying.duration ||
                 lastCurrentlyPlaying.remainingTime <=
-                    this.currentlyPlaying.duration - 2)
+                this.currentlyPlaying.duration - 2)
         )
             return true;
     }
@@ -319,7 +319,7 @@ export class Bridge {
 
     public static async fetchMusic() {
         if (process.platform === "win32") return fetchITunes();
-        else return await fetchApp.appleMusic()
+        else return await fetchApp.appleMusic();
     }
 }
 
@@ -340,13 +340,14 @@ function objectEqual(object1, object2) {
         const val1 = object1[key],
             val2 = object2[key];
 
+        if (!val1 && !val2) continue;
+
         const areObjects = isObject(val1) && isObject(val2);
 
         if (
             (areObjects && !objectEqual(val1, val2)) ||
             (!areObjects && val1 !== val2)
-        )
-            return false;
+        ) return false;
     }
 
     return true;
