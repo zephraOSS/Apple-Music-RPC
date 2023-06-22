@@ -6,6 +6,7 @@ import { appDependencies, lastFM } from "../index";
 
 import { dialog, shell } from "electron";
 import { AppleBridge, fetchITunes } from "apple-bridge";
+import { fetchApp } from "apple-bridge/dist/darwin";
 
 import getAppDataPath from "../utils/getAppDataPath";
 
@@ -14,7 +15,7 @@ import * as path from "path";
 
 export class Bridge {
     private discord: Discord = new Discord();
-    private currentTrack: any = fetchITunes();
+    private currentTrack;
     private currentlyPlaying = {
         name: "",
         artist: "",
@@ -44,6 +45,8 @@ export class Bridge {
             return;
         }
 
+        this.setCurrentTrack()
+
         setTimeout(() => {
             if (
                 this.currentTrack &&
@@ -61,6 +64,10 @@ export class Bridge {
         this.initListeners();
 
         Bridge.instance = this;
+    }
+
+    private async setCurrentTrack() {
+        this.currentTrack = await Bridge.fetchMusic();
     }
 
     private initListeners() {
@@ -125,8 +132,8 @@ export class Bridge {
                 if (this.scrobbleTimeout) clearTimeout(this.scrobbleTimeout);
 
                 this.scrobbleTimeout = setTimeout(
-                    () => {
-                        const newTrack = fetchITunes(),
+                    async () => {
+                        const newTrack = await Bridge.fetchMusic(),
                             oldTrack = currentTrack;
 
                         delete oldTrack.snowflake;
@@ -297,7 +304,9 @@ export class Bridge {
             return true;
     }
 
-    public static getCurrentTrackArtwork(logWarn: boolean = true) {
+    public static async getCurrentTrackArtwork(logWarn: boolean = true) {
+        if (process.platform !== "win32") return;
+
         const artwork: string | undefined = fetchITunes(
             `currentTrackArtwork "${path.join(getAppDataPath(), "artwork")}"`
         )?.artwork;
@@ -306,6 +315,11 @@ export class Bridge {
             log.warn("[Bridge][getCurrentTrackArtwork]", "No artwork found.");
 
         return artwork;
+    }
+
+    public static async fetchMusic() {
+        if (process.platform === "win32") return fetchITunes();
+        else return await fetchApp.appleMusic()
     }
 }
 
