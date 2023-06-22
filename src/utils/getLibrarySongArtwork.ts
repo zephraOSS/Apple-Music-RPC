@@ -7,9 +7,11 @@ import FormData from "form-data";
 import * as fs from "fs";
 import * as log from "electron-log";
 
-export function getLibrarySongArtwork(
-    artwork = Bridge.getCurrentTrackArtwork()
+export async function getLibrarySongArtwork(
+    artwork
 ): Promise<ImgBBResponse["data"] | null> {
+    if (!artwork) artwork = await Bridge.getCurrentTrackArtwork();
+
     return new Promise(async (resolve, reject) => {
         if (!artwork) return resolve(null);
 

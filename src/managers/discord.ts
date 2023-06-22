@@ -206,8 +206,8 @@ export class Discord {
             this.setActivity(activity);
         } else {
             if (!config.get("artworkPrioLocal")) {
-                this.getSongData(currentTrack).catch(() => {
-                    this.setLocalArtwork(Bridge.getCurrentTrackArtwork()).catch(
+                this.getSongData(currentTrack).catch(async () => {
+                    this.setLocalArtwork(await Bridge.getCurrentTrackArtwork()).catch(
                         () => {
                             this.activity.largeImageKey = getConfig("artwork");
                             this.setActivity(this.activity);
@@ -215,7 +215,7 @@ export class Discord {
                     );
                 });
             } else {
-                this.setLocalArtwork(Bridge.getCurrentTrackArtwork())
+                this.setLocalArtwork(await Bridge.getCurrentTrackArtwork())
                     .then(() => {
                         this.getSongData(
                             currentTrack,
