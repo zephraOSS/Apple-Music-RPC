@@ -8,7 +8,7 @@ import * as log from "electron-log";
 
 export async function checkAppDependency(): Promise<AppDependencies> {
     const music =
-        process.platform !== "win32" || !config.get("checkIfMusicInstalled")
+        process.platform !== "win32"
             ? true
             : await checkIfAppIsInstalled("iTunes");
 
@@ -24,6 +24,15 @@ export async function checkAppDependency(): Promise<AppDependencies> {
 
 export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
+        if (appName === "iTunes" && !config.get("checkIfMusicInstalled")) {
+            log.info(
+                "[checkAppDependency][checkIfAppIsInstalled]",
+                "Skipping iTunes"
+            );
+
+            return resolve(true);
+        }
+
         try {
             exec(`where ${appName}`, (err, stdout) => {
                 if (err) {
