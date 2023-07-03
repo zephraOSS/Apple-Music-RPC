@@ -1,6 +1,7 @@
 import { Discord } from "./discord";
 import { Browser } from "./browser";
 import { i18n } from "./i18n";
+import { WatchDog } from "./watchdog";
 import { config } from "./store";
 import { appDependencies, lastFM } from "../index";
 
@@ -15,6 +16,7 @@ import * as path from "path";
 
 export class Bridge {
     private discord: Discord = new Discord();
+    private watchdog: WatchDog;
     private currentTrack;
     private currentlyPlaying = {
         name: "",
@@ -45,29 +47,43 @@ export class Bridge {
             return;
         }
 
-        this.setCurrentTrack();
+        log.info("[Bridge]", "Initializing Bridge");
 
-        setTimeout(() => {
-            if (
-                this.currentTrack &&
-                typeof this.currentTrack === "object" &&
-                Object.keys(this.currentTrack).length > 0
-            ) {
-                this.bridge.emit(
-                    this.currentTrack.playerState,
-                    "music",
-                    this.currentTrack
-                );
-            }
-        }, 500);
+        this.setCurrentTrack()
+            .then(() => {
+                setTimeout(() => {
+                    if (
+                        this.currentTrack &&
+                        typeof this.currentTrack === "object" &&
+                        Object.keys(this.currentTrack).length > 0
+                    ) {
+                        this.bridge.emit(
+                            this.currentTrack.playerState,
+                            "music",
+                            this.currentTrack
+                        );
+                    }
+                }, 500);
 
-        this.initListeners();
+                this.initListeners();
+
+                if (config.get("service") === "music") {
+                    log.info("[Bridge]", "Initializing WatchDog");
+
+                    this.watchdog = new WatchDog();
+                }
+            })
+            .catch((err) => {
+                log.error("[Bridge][constructor][setCurrentTrack]", err);
+            });
 
         Bridge.instance = this;
     }
 
     private async setCurrentTrack() {
-        this.currentTrack = await Bridge.fetchMusic();
+        if (config.get("service") === "music")
+            this.currentTrack = await this.watchdog.getCurrentTrack();
+        else this.currentTrack = await Bridge.fetchMusic();
     }
 
     private initListeners() {
@@ -307,6 +323,8 @@ export class Bridge {
     public static async getCurrentTrackArtwork(logWarn: boolean = true) {
         if (process.platform !== "win32") return;
 
+        // TODO: AMP support
+
         const artwork: string | undefined = fetchITunes(
             `currentTrackArtwork "${path.join(getAppDataPath(), "artwork")}"`
         )?.artwork;
@@ -318,7 +336,13 @@ export class Bridge {
     }
 
     public static async fetchMusic() {
-        if (process.platform === "win32") return fetchITunes();
+        if (process.platform === "win32" && config.get("service") === "itunes")
+            return fetchITunes();
+        else if (
+            process.platform === "win32" &&
+            config.get("service") === "music"
+        )
+            return Bridge.instance.watchdog.getCurrentTrack();
         else return await fetchApp.appleMusic();
     }
 }
@@ -347,7 +371,8 @@ function objectEqual(object1, object2) {
         if (
             (areObjects && !objectEqual(val1, val2)) ||
             (!areObjects && val1 !== val2)
-        ) return false;
+        )
+            return false;
     }
 
     return true;
