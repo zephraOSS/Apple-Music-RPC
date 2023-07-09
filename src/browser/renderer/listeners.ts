@@ -157,6 +157,20 @@ export function init() {
 
             ele.querySelector(".setting_main").appendChild(resetButton);
         });
+
+    document
+        .querySelectorAll(".settings_category[data-restriction-os]")
+        .forEach(async (ele: HTMLDivElement) => {
+            const os = ele.dataset.restrictionOs.split(",");
+
+            if (!os.includes(await window.electron.getPlatform())) ele.remove();
+        });
+
+    document
+        .querySelectorAll(".settings_category[data-restriction-store]")
+        .forEach(async (ele: HTMLDivElement) => {
+            if (await window.electron.isWindowsStore()) ele.remove();
+        });
 }
 
 async function checkRestartRequired(

@@ -1,23 +1,41 @@
 import { app } from "electron";
 import { autoUpdater } from "electron-updater";
+
 import { bounce } from "../utils/functions";
 import { Browser } from "./browser";
-import { getAppData } from "./store";
+import { config } from "./store";
 
 import * as log from "electron-log";
 
 export function init() {
-    if (!app.isPackaged || process.windowsStore) return;
+    if (
+        !app.isPackaged ||
+        process.windowsStore ||
+        process.platform === "darwin"
+    )
+        return;
+
+    autoUpdater.allowPrerelease = config.get("betaUpdates");
 
     autoUpdater.on("update-available", (info) => {
-        log.info(`[UPDATER] Update available (${info.version})`);
+        log.info(
+            "[UPDATER]",
+            ` Update available (${info.version})`,
+            `Auto Update: ${config.get("autoUpdate")}`
+        );
 
-        if (process.platform === "darwin") bounce("critical");
-        else Browser.windowAction("show");
+        if (config.get("autoUpdate")) {
+            autoUpdater.downloadUpdate().then((r) => {
+                log.info("[UPDATER]", "Downloading update...", r);
+            });
+        } else {
+            if (process.platform === "darwin") bounce("critical");
+            else Browser.windowAction("show");
 
-        Browser.send("new-update-available", true, {
-            version: info.version
-        });
+            Browser.send("new-update-available", true, {
+                version: info.version
+            });
+        }
     });
 
     autoUpdater.on("update-not-available", () => {
@@ -25,7 +43,7 @@ export function init() {
     });
 
     autoUpdater.on("error", (err) => {
-        log.info(`[UPDATER] Error in auto-updater. ${err}`);
+        log.error("[UPDATER]", `${err}`);
     });
 
     autoUpdater.on("download-progress", (progressObj) => {
@@ -36,7 +54,8 @@ export function init() {
             progressObj.percent === 100
         )
             log.info(
-                `[UPDATER] Downloading update... (${progressObj.percent}%)`
+                "[UPDATER]",
+                `Downloading update... (${progressObj.percent}%)`
             );
 
         Browser.send("update-download-progress-update", true, {
@@ -48,25 +67,29 @@ export function init() {
     });
 
     autoUpdater.on("update-downloaded", (info) => {
-        log.info(`[UPDATER] Update downloaded (${info.version})`);
+        log.info("[UPDATER]", `Update downloaded (${info.version})`);
 
         if (process.platform === "darwin") bounce("critical");
         else Browser.windowAction("show");
 
         Browser.send("update-downloaded", true, {});
-
-        if (getAppData("installUpdate")) autoUpdater.quitAndInstall();
     });
 
     checkForUpdates();
 
     setInterval(checkForUpdates, 1.8e6);
 
-    log.info("[UPDATER] AutoUpdater initialized");
+    log.info("[UPDATER]", "AutoUpdater initialized");
 }
 
 export function checkForUpdates() {
     log.log("[UPDATER]", "Checking for Updates...");
 
     autoUpdater.checkForUpdatesAndNotify();
+}
+
+export function installAppUpdate() {
+    log.info("[UPDATER]", " Installing update...");
+
+    autoUpdater.quitAndInstall();
 }

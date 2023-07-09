@@ -14,6 +14,7 @@ import { i18n } from "./i18n";
 
 import { useDarkMode } from "../utils/theme";
 import { appDependencies, setLastFM } from "../index";
+import { installAppUpdate } from "./updater";
 
 import { init as initAutoLaunch } from "./launch";
 
@@ -29,11 +30,7 @@ export function init() {
         autoUpdater.downloadUpdate();
     });
 
-    ipcMain.handle("update-install", () => {
-        setAppData("installUpdate", undefined);
-
-        autoUpdater.quitAndInstall();
-    });
+    ipcMain.handle("update-install", installAppUpdate);
 
     ipcMain.handle("autolaunch-change", () => {
         initAutoLaunch();
@@ -45,6 +42,10 @@ export function init() {
 
     ipcMain.handle("getPlatform", () => {
         return process.platform;
+    });
+
+    ipcMain.handle("isWindowsStore", () => {
+        return process.windowsStore;
     });
 
     ipcMain.handle("isDeveloper", () => {

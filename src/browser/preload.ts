@@ -9,6 +9,9 @@ contextBridge.exposeInMainWorld("electron", {
     getPlatform: async () => {
         return await ipcRenderer.invoke("getPlatform");
     },
+    isWindowsStore: async () => {
+        return await ipcRenderer.invoke("isWindowsStore");
+    },
     isDeveloper: async () => {
         return await ipcRenderer.invoke("isDeveloper");
     },

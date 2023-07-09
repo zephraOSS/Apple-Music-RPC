@@ -17,6 +17,8 @@
   "settings": {
     "config": {
       "autoLaunch": "Auto Launch",
+      "autoUpdates": "Automatic Updates",
+      "betaUpdates": "Beta Updates",
       "show": "Show Presence",
       "hideOnPause": "Hide Presence on Pause",
       "artworkPrioLocal": "Prioritize Local Artwork",
@@ -57,6 +59,7 @@
     },
     "category": {
       "general": "General",
+      "softwareUpdate": "Software Update",
       "cache": "Cache Management",
       "advanced": "Advanced"
     },

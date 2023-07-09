@@ -40,9 +40,13 @@ log.info(
     "------------------------------------"
 );
 
-if (isBeta) log.info("[READY]", "Detected beta build");
-if (isRC) log.info("[READY]", "Detected release candidate build");
-if (process.windowsStore) log.info("[READY]", "Detected Windows Store build");
+if (isBeta) {
+    log.info("[STARTUP]", "Detected beta build. Enabling beta updates");
+    config.set("betaUpdates", true);
+}
+
+if (isRC) log.info("[STARTUP]", "Detected release candidate build");
+if (process.windowsStore) log.info("[STARTUP]", "Detected Windows Store build");
 
 initSentry();
 initProtocol();

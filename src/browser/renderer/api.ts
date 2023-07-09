@@ -8,7 +8,9 @@ export function init() {
         updateTheme(theme);
     });
 
-    window.api.receive("new-update-available", (_e, data) => {
+    window.api.receive("new-update-available", (data) => {
+        console.log("[BROWSER RENDERER] New update available", data);
+
         new Modal(
             langString.settings.modal["newUpdate"].title,
             langString.settings.modal["newUpdate"].description.replace(
@@ -22,8 +24,9 @@ export function init() {
                     style: "btn-grey",
                     events: [
                         {
-                            name: "onclick",
-                            value: "window.api.send('update-download', true), closeModal(this.parentElement.id)"
+                            name: "click",
+                            value: "window.api.send('update-download', true)",
+                            type: "delete"
                         }
                     ]
                 },
@@ -33,8 +36,9 @@ export function init() {
                     style: "btn-grey",
                     events: [
                         {
-                            name: "onclick",
-                            value: "window.api.send('update-download', false), closeModal(this.parentElement.id)"
+                            name: "click",
+                            value: "window.api.send('update-download', false)",
+                            type: "delete"
                         }
                     ]
                 }
@@ -65,8 +69,9 @@ export function init() {
                     style: "btn-grey",
                     events: [
                         {
-                            name: "onclick",
-                            value: "window.api.send('update-install', {}), closeModal(this.parentElement.id)"
+                            name: "click",
+                            value: "window.api.send('update-install', {})",
+                            type: "delete"
                         }
                     ]
                 },
@@ -76,8 +81,8 @@ export function init() {
                     style: "btn-grey",
                     events: [
                         {
-                            name: "onclick",
-                            value: "closeModal(this.parentElement.id)"
+                            name: "click",
+                            type: "delete"
                         }
                     ]
                 }
