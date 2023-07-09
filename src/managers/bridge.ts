@@ -124,8 +124,8 @@ export class Bridge {
                         this.pausedTrack.remainingTime &&
                         currentTrack.remainingTime &&
                         this.pausedTrack.remainingTime -
-                        currentTrack.remainingTime <=
-                        25)
+                            currentTrack.remainingTime <=
+                            25)
                 ) {
                     log.info("[LastFM] Skipping scrobble due to same track");
 
@@ -315,7 +315,7 @@ export class Bridge {
             (lastCurrentlyPlaying.remainingTime ===
                 this.currentlyPlaying.duration ||
                 lastCurrentlyPlaying.remainingTime <=
-                this.currentlyPlaying.duration - 2)
+                    this.currentlyPlaying.duration - 2)
         )
             return true;
     }
