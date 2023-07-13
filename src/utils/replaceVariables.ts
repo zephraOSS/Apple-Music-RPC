@@ -91,7 +91,7 @@ export class replaceVariables {
             case "artist":
                 return this.currentTrack.artist;
             case "version":
-                return app.getVersion();
+                return app.isPackaged ? app.getVersion() : "Development";
             default:
                 return undefined;
         }
