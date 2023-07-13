@@ -6,7 +6,7 @@ import { appData, config } from "./store";
 import * as log from "electron-log";
 
 export class Updater {
-    private userNotified: Boolean | string = false;
+    private userNotified: boolean | string = false;
 
     constructor() {
         log.info("[UPDATER]", "Updater initialized");
