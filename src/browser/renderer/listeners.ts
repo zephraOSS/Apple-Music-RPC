@@ -1,5 +1,10 @@
-import { fetchCacheSize, restartRequiredMemory } from "./index.js";
-import { updateTheme, updateLanguage } from "./utils.js";
+import {
+    fetchCacheSize,
+    platform,
+    restartRequiredMemory,
+    i18n
+} from "./index.js";
+import { updateTheme } from "./utils.js";
 
 export function init() {
     window.addEventListener("offline", () => {
@@ -161,9 +166,25 @@ export function init() {
     document
         .querySelectorAll(".settings_category[data-restriction-os]")
         .forEach(async (ele: HTMLDivElement) => {
-            const os = ele.dataset.restrictionOs.split(",");
+            const restrictOS = ele.dataset.restrictionOs.split(","),
+                os = platform ?? (await window.electron.getPlatform());
 
-            if (!os.includes(await window.electron.getPlatform())) ele.remove();
+            if (!restrictOS.includes(os)) ele.remove();
+        });
+
+    document
+        .querySelectorAll(".settings_setting[data-restriction-os]")
+        .forEach(async (ele: HTMLDivElement) => {
+            const restrictOS = ele.dataset.restrictionOs.split(","),
+                os = platform ?? (await window.electron.getPlatform());
+
+            console.log(restrictOS, os);
+
+            if (!restrictOS.includes(platform)) {
+                ele.querySelector(
+                    "label.cfgSwitch, select, input"
+                ).classList.add("cfg_loading");
+            }
         });
 
     document
@@ -189,7 +210,7 @@ async function checkRestartRequired(
 
 function valueChangeEvents(ele): void {
     if (ele.id === "config_colorTheme") updateTheme();
-    else if (ele.id === "config_language") updateLanguage();
+    else if (ele.id === "config_language") i18n.updateLanguage();
     else if (ele.id === "config_autoLaunch")
         window.api.send("autolaunch-change", {});
     else if (ele.id === "config_wakandaForeverMode") {

@@ -134,8 +134,8 @@
                     <div
                         class="settings_category"
                         id="software-update"
-                        data-restriction-os="win32"
                         data-restriction-msstore
+                        data-restriction-os="win32"
                     >
                         <div class="category__header">
                             <h3 data-i18n="settings.category.softwareUpdate">
@@ -171,6 +171,27 @@
                                         />
                                         <i></i>
                                     </label>
+                                </div>
+                            </div>
+
+                            <div
+                                class="settings_setting"
+                                id="installUpdateSetting"
+                            >
+                                <div class="setting_main">
+                                    <label
+                                        data-i18n="settings.config.installUpdate.label"
+                                    >
+                                        Install Update
+                                    </label>
+                                    <button
+                                        class="cfgButton cfg_loading"
+                                        id="installUpdate"
+                                        data-i18n="settings.config.installUpdate.buttonNA"
+                                        data-i18n-vars="version=N/A"
+                                    >
+                                        No update available
+                                    </button>
                                 </div>
                             </div>
                         </div>
