@@ -1,139 +1,147 @@
 {
-  "error": {
-    "admin": "Пожалуйста, не запускайте AMRPC с правами администратора!",
-    "noTrack": "Песня не найдена",
-    "jsFileExtension": "Возникла ошибка с JS файлом. Пожалуйста, нажмите на кнопку, чтобы узнать больше.",
-    "cmd": "Возникла ошибка с Командной строкой. Пожалуйста, нажмите на кнопку ниже, чтобы узнать больше."
-  },
-  "tray": {
-    "restart": "Перезапустить",
-    "reportProblem": "Report a Problem",
-    "quitITunes": {
-      "info": "This takes about 3 seconds",
-      "button": "Quit iTunes"
+    "error": {
+        "admin": "Пожалуйста, не запускайте AMRPC с правами администратора!",
+        "noTrack": "Песня не найдена",
+        "jsFileExtension": "Возникла ошибка с JS файлом. Пожалуйста, нажмите на кнопку, чтобы узнать больше.",
+        "cmd": "Возникла ошибка с Командной строкой. Пожалуйста, нажмите на кнопку ниже, чтобы узнать больше."
     },
-    "quit": "Выйти"
-  },
-  "settings": {
-    "config": {
-      "autoLaunch": "Автозапуск",
-      "show": "Показывать активность",
-      "hideOnPause": "Скрывать активность, когда песня на паузе",
-      "artworkPrioLocal": "Prioritize Local Artwork",
-      "showTimestamps": "Show Timestamps",
-      "showAlbumArtwork": "Показывать обложку альбома",
-      "performanceMode": "Режим производительности",
-      "hardwareAcceleration": "Аппаратное ускорение",
-      "checkIfMusicInstalled": "Check if Music is installed",
-      "colorTheme": {
-        "label": "Предпочтительная тема",
-        "light": "Светлая",
-        "dark": "Тёмная",
-        "auto": "Тёмная только с вечера до утра",
-        "os": "Системная"
-      },
-      "language": "Язык",
-      "artwork": {
-        "label": "Default Artwork",
-        "applemusic-logo": "Default",
-        "applemusic-logo-rainbow": "Rainbow"
-      },
-      "rpcLargeImageText": "Presence Large Image Text",
-      "rpcDetails": "Вторая строка в активности",
-      "rpcState": "Третья строка в активности",
-      "enableLastFM": "Использовать Last.fm",
-      "lastFMUser": {
-        "label": "Пользователь Last.fm",
-        "connect": "Подключить",
-        "reconnect": "Переподключение",
-        "connecting": "Подключение...",
-        "cancel": "Отмена"
-      },
-      "enableCache": "Использовать кэш",
-      "resetCache": "Сбросить кэш"
-    },
-    "common": {
-      "reset": "Сброс"
-    },
-    "category": {
-      "general": "Основные",
-      "cache": "Cache Management",
-      "advanced": "Advanced"
-    },
-    "warn": {
-      "music": {
-        "title": "Внимание",
-        "description": "Музыкальное приложение не найдено. Пожалуйста, убедитесь, что музыкальное приложение установлено."
-      },
-      "discord": {
-        "title": "Внимание",
-        "description": "Discord не найден. Пожалуйста, убедитесь, что Discord установлен."
-      }
-    },
-    "note": {
-      "language": "Если Вы не нашли ваш язык, <a href='https://discord.gg/qqAgCHS'>свяжитесь с нами</a>.",
-      "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
-      "cache": {
-        "size": "Размер кэша: %size%, %count% файлов",
-        "warn": "<b>ВНИМАНИЕ</b> Отключение кэша удалит все кэшированные данные.",
-        "info": "В кэш сохраняются все обложки альбомов и другие данные для уменьшения запросов к Apple. Это сократит время загрузки обложек и ссылок на песню."
-      },
-      "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
-    },
-    "extra": {
-      "github": "Репозиторий на GitHub",
-      "ko-fi": "Пожертвовать",
-      "reloadPage": "Перезагрузить",
-      "restartApp": "Требуется перезагрузка"
-    },
-    "modal": {
-      "911": {
-        "title": "В память о жертвах 11 сентября",
-        "description": "В память о тех, кто погиб 11 сентября, мы добавили обложки для этих песен: %s\nЕсли хотите, Вы можете поменять их на все обложки (только сегодня).",
-        "buttons": {
-          "okcover": "Окей, поменять обложки!"
-        }
-      },
-      "appleEvent": {
-        "title": "Не забудь!",
-        "description": "Сегодня в %d (10 утра PDT) будет презентация Apple! Смотреть в прямом эфире можно здесь: %s",
-        "buttons": {
-          "okcool": "Окей, круто!"
-        }
-      },
-      "newUpdate": {
-        "title": "Обновление приложения",
-        "description": "Версия %version% доступна для Вашего ПК.",
-        "installed": {
-          "description": "Версия %version% доступна для Вашего ПК и готова к установке.",
-          "buttons": {
-            "install": "Установить сейчас",
-            "later": "Позже"
-          }
+    "tray": {
+        "restart": "Перезапустить",
+        "reportProblem": "Report a Problem",
+        "quitITunes": {
+            "info": "This takes about 3 seconds",
+            "button": "Quit iTunes"
         },
-        "buttons": {
-          "downandinst": "Скачать и установить",
-          "download": "Скачать и установить позже"
+        "quit": "Выйти"
+    },
+    "settings": {
+        "config": {
+            "autoLaunch": "Автозапуск",
+            "autoUpdates": "Automatic Updates",
+            "betaUpdates": "Beta Updates",
+            "installUpdate": {
+                "label": "Install Update",
+                "button": "Install %version%",
+                "buttonNA": "No update available"
+            },
+            "show": "Показывать активность",
+            "hideOnPause": "Скрывать активность, когда песня на паузе",
+            "artworkPrioLocal": "Prioritize Local Artwork",
+            "showTimestamps": "Show Timestamps",
+            "showAlbumArtwork": "Показывать обложку альбома",
+            "performanceMode": "Режим производительности",
+            "hardwareAcceleration": "Аппаратное ускорение",
+            "checkIfMusicInstalled": "Check if Music is installed",
+            "colorTheme": {
+                "label": "Предпочтительная тема",
+                "light": "Светлая",
+                "dark": "Тёмная",
+                "auto": "Тёмная только с вечера до утра",
+                "os": "Системная"
+            },
+            "language": "Язык",
+            "artwork": {
+                "label": "Default Artwork",
+                "applemusic-logo": "Default",
+                "applemusic-logo-rainbow": "Rainbow"
+            },
+            "rpcLargeImageText": "Presence Large Image Text",
+            "rpcDetails": "Вторая строка в активности",
+            "rpcState": "Третья строка в активности",
+            "enableLastFM": "Использовать Last.fm",
+            "lastFMUser": {
+                "label": "Пользователь Last.fm",
+                "connect": "Подключить",
+                "reconnect": "Переподключение",
+                "connecting": "Подключение...",
+                "cancel": "Отмена"
+            },
+            "enableCache": "Использовать кэш",
+            "resetCache": "Сбросить кэш"
+        },
+        "common": {
+            "reset": "Сброс"
+        },
+        "category": {
+            "general": "Основные",
+            "softwareUpdate": "Software Update",
+            "cache": "Cache Management",
+            "advanced": "Advanced"
+        },
+        "warn": {
+            "music": {
+                "title": "Внимание",
+                "description": "Музыкальное приложение не найдено. Пожалуйста, убедитесь, что музыкальное приложение установлено."
+            },
+            "discord": {
+                "title": "Внимание",
+                "description": "Discord не найден. Пожалуйста, убедитесь, что Discord установлен."
+            }
+        },
+        "note": {
+            "language": "Если Вы не нашли ваш язык, <a href='https://discord.gg/qqAgCHS'>свяжитесь с нами</a>.",
+            "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
+            "cache": {
+                "size": "Размер кэша: %size%, %count% файлов",
+                "warn": "<b>ВНИМАНИЕ</b> Отключение кэша удалит все кэшированные данные.",
+                "info": "В кэш сохраняются все обложки альбомов и другие данные для уменьшения запросов к Apple. Это сократит время загрузки обложек и ссылок на песню."
+            },
+            "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
+        },
+        "extra": {
+            "github": "Репозиторий на GitHub",
+            "ko-fi": "Пожертвовать",
+            "reloadPage": "Перезагрузить",
+            "restartApp": "Требуется перезагрузка"
+        },
+        "modal": {
+            "911": {
+                "title": "В память о жертвах 11 сентября",
+                "description": "В память о тех, кто погиб 11 сентября, мы добавили обложки для этих песен: %s\nЕсли хотите, Вы можете поменять их на все обложки (только сегодня).",
+                "buttons": {
+                    "okcover": "Окей, поменять обложки!"
+                }
+            },
+            "appleEvent": {
+                "title": "Не забудь!",
+                "description": "Сегодня в %d (10 утра PDT) будет презентация Apple! Смотреть в прямом эфире можно здесь: %s",
+                "buttons": {
+                    "okcool": "Окей, круто!"
+                }
+            },
+            "newUpdate": {
+                "title": "Обновление приложения",
+                "description": "Версия %version% доступна для Вашего ПК.",
+                "installed": {
+                    "description": "Версия %version% доступна для Вашего ПК и готова к установке.",
+                    "buttons": {
+                        "install": "Установить сейчас",
+                        "later": "Позже"
+                    }
+                },
+                "buttons": {
+                    "downandinst": "Скачать и установить",
+                    "download": "Скачать и установить позже"
+                }
+            },
+            "ko-fi": {
+                "title": "Требуется Премиум",
+                "description": "Чтобы использовать эту функцию Вам нужно совершить одно пожертвование или быть платным подписчиком. Вы можете пожертвовать <a href='https://ko-fi.com/zephra'>здесь</a>. Если Вы уже совершили пожертвование, перезапустите AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Читать больше</a>"
+            },
+            "microsoftStore": {
+                "description": "Вы знали, что Вы можете установить AMRPC в Microsoft Store? Но не забудьте отключить <b>Автозапуск</b> в настройках перед установкой.",
+                "buttons": {
+                    "download": "Скачать сейчас"
+                }
+            },
+            "buttons": {
+                "no": "Нет",
+                "later": "Не сейчас",
+                "yes": "Да",
+                "okay": "Окей",
+                "learnMore": "Читать больше",
+                "close": "Закрыть"
+            }
         }
-      },
-      "ko-fi": {
-        "title": "Требуется Премиум",
-        "description": "Чтобы использовать эту функцию Вам нужно совершить одно пожертвование или быть платным подписчиком. Вы можете пожертвовать <a href='https://ko-fi.com/zephra'>здесь</a>. Если Вы уже совершили пожертвование, перезапустите AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Читать больше</a>"
-      },
-      "microsoftStore": {
-        "description": "Вы знали, что Вы можете установить AMRPC в Microsoft Store? Но не забудьте отключить <b>Автозапуск</b> в настройках перед установкой.",
-        "buttons": {
-          "download": "Скачать сейчас"
-        }
-      },
-      "buttons": {
-        "no": "Нет",
-        "later": "Не сейчас",
-        "yes": "Да",
-        "okay": "Окей",
-        "learnMore": "Читать больше",
-        "close": "Закрыть"
-      }
     }
-  }
 }
