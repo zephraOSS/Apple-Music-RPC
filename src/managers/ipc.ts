@@ -1,19 +1,11 @@
 import { app, ipcMain, nativeTheme, shell } from "electron";
-import { autoUpdater } from "electron-updater";
-import {
-    cache,
-    config,
-    getAppData,
-    getConfig,
-    setAppData,
-    setConfig
-} from "./store";
+import { appData, cache, config } from "./store";
 import { Browser } from "./browser";
 import { Discord } from "./discord";
 import { i18n } from "./i18n";
 
 import { useDarkMode } from "../utils/theme";
-import { appDependencies, setLastFM } from "../index";
+import { appDependencies, updater, setLastFM } from "../index";
 
 import { init as initAutoLaunch } from "./launch";
 
@@ -23,17 +15,13 @@ import * as fs from "fs";
 import fetch from "node-fetch";
 
 export function init() {
-    ipcMain.handle("update-download", (_e, install) => {
-        if (install) setAppData("installUpdate", true);
+    ipcMain.on("update-download", (_e, install) => {
+        if (install) appData.set("installUpdate", true);
 
-        autoUpdater.downloadUpdate();
+        updater.downloadUpdate();
     });
 
-    ipcMain.handle("update-install", () => {
-        setAppData("installUpdate", undefined);
-
-        autoUpdater.quitAndInstall();
-    });
+    ipcMain.on("update-install", updater.installUpdate);
 
     ipcMain.handle("autolaunch-change", () => {
         initAutoLaunch();
@@ -45,6 +33,10 @@ export function init() {
 
     ipcMain.handle("getPlatform", () => {
         return process.platform;
+    });
+
+    ipcMain.handle("isWindowsStore", () => {
+        return process.windowsStore;
     });
 
     ipcMain.handle("isDeveloper", () => {
@@ -70,12 +62,12 @@ export function init() {
     });
 
     ipcMain.handle("getTheme", () => {
-        const config = getConfig("colorTheme");
+        const colorTheme = config.get("colorTheme");
 
-        if (config === "auto") return useDarkMode() ? "dark" : "light";
-        else if (config === "os")
+        if (colorTheme === "auto") return useDarkMode() ? "dark" : "light";
+        else if (colorTheme === "os")
             return nativeTheme.shouldUseDarkColors ? "dark" : "light";
-        else return config;
+        else return colorTheme;
     });
 
     ipcMain.handle("getCurrentTrack", () => {
@@ -93,7 +85,7 @@ export function init() {
     });
 
     ipcMain.handle("getConfig", (_e, k: string) => {
-        return getConfig(k);
+        return config.get(k);
     });
 
     ipcMain.handle("resetConfig", (_e, k: string) => {
@@ -104,7 +96,7 @@ export function init() {
     });
 
     ipcMain.handle("getAppData", (_e, k: string) => {
-        return getAppData(k);
+        return appData.get(k);
     });
 
     ipcMain.handle("updateConfig", (_e, k: string, v: any) => {
@@ -122,11 +114,11 @@ export function init() {
 
         if (k === "enableCache" && !v) cache.clear();
 
-        setConfig(k, v);
+        config.set(k, v);
     });
 
     ipcMain.handle("updateAppData", (_e, k: string, v: any) =>
-        setAppData(k, v)
+        appData.set(k, v)
     );
 
     ipcMain.handle("windowControl", (_e, action: string) => {

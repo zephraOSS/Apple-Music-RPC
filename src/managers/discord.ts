@@ -19,7 +19,9 @@ export class Discord {
     private client: Client;
     private isReady: boolean = false;
     private startUp: boolean = true;
-    private defaultLIT: string = `AMRPC - ${app.getVersion()}`;
+    private defaultLIT: string = `AMRPC - ${
+        app.isPackaged ? app.getVersion() : "Development"
+    }`;
     private triggerAfterReady: (() => void)[] = [];
 
     public activity: Presence = {};

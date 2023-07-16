@@ -1,139 +1,147 @@
 {
-  "error": {
-    "admin": "Please do not run AMRPC with administrator privileges!",
-    "noTrack": "No track detected",
-    "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more.",
-    "cmd": "There is an error with Command Prompt. Please click on the button below to learn more."
-  },
-  "tray": {
-    "restart": "Restart",
-    "reportProblem": "Report a Problem",
-    "quitITunes": {
-      "info": "This takes about 3 seconds",
-      "button": "Quit iTunes"
+    "error": {
+        "admin": "Please do not run AMRPC with administrator privileges!",
+        "noTrack": "No track detected",
+        "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more.",
+        "cmd": "There is an error with Command Prompt. Please click on the button below to learn more."
     },
-    "quit": "Quit"
-  },
-  "settings": {
-    "config": {
-      "autoLaunch": "Auto Launch",
-      "show": "Show Presence",
-      "hideOnPause": "Hide Presence on Pause",
-      "artworkPrioLocal": "Prioritize Local Artwork",
-      "showTimestamps": "Show Timestamps",
-      "showAlbumArtwork": "Show Album Artwork",
-      "performanceMode": "Performance Mode",
-      "hardwareAcceleration": "Hardware Acceleration",
-      "checkIfMusicInstalled": "Check if Music is installed",
-      "colorTheme": {
-        "label": "Preferred Color Theme",
-        "light": "Light",
-        "dark": "Dark",
-        "auto": "Dark from Sunset to Sunrise",
-        "os": "System Default"
-      },
-      "language": "Preferred Language",
-      "artwork": {
-        "label": "Default Artwork",
-        "applemusic-logo": "Default",
-        "applemusic-logo-rainbow": "Rainbow"
-      },
-      "rpcLargeImageText": "Presence Large Image Text",
-      "rpcDetails": "Presence Details",
-      "rpcState": "Presence State",
-      "enableLastFM": "Enable Last.fm",
-      "lastFMUser": {
-        "label": "Last.fm User",
-        "connect": "Connect",
-        "reconnect": "Reconnect",
-        "connecting": "Connecting...",
-        "cancel": "Cancel"
-      },
-      "enableCache": "Enable Cache",
-      "resetCache": "Reset Cache"
-    },
-    "common": {
-      "reset": "Reset"
-    },
-    "category": {
-      "general": "General",
-      "cache": "Cache Management",
-      "advanced": "Advanced"
-    },
-    "warn": {
-      "music": {
-        "title": "Attention",
-        "description": "The Music app could not be found. Please make sure that the Music app is installed."
-      },
-      "discord": {
-        "title": "Attention",
-        "description": "Discord could not be found. Please make sure that Discord is installed."
-      }
-    },
-    "note": {
-      "language": "If your language is missing, <a href='https://discord.gg/qqAgCHS'>contact us</a>.",
-      "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
-      "cache": {
-        "size": "Current cache size: %size%, %count% items",
-        "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
-        "info": "The cache stores all album artwork and other data to reduce the amount of requests to Apple. This will improve the loading time of the album artwork and link."
-      },
-      "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
-    },
-    "extra": {
-      "github": "View on GitHub",
-      "ko-fi": "Donate",
-      "reloadPage": "Reload",
-      "restartApp": "Restart required"
-    },
-    "modal": {
-      "911": {
-        "title": "In memory of the victims of September 11",
-        "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
-        "buttons": {
-          "okcover": "Okay, change the covers!"
-        }
-      },
-      "appleEvent": {
-        "title": "Do not forget!",
-        "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
-        "buttons": {
-          "okcool": "Okay, cool!"
-        }
-      },
-      "newUpdate": {
-        "title": "Software Update",
-        "description": "Version %version% is available for your PC.",
-        "installed": {
-          "description": "Version %version% is available for your PC and is ready to install.",
-          "buttons": {
-            "install": "Install now",
-            "later": "Later"
-          }
+    "tray": {
+        "restart": "Restart",
+        "reportProblem": "Report a Problem",
+        "quitITunes": {
+            "info": "This takes about 3 seconds",
+            "button": "Quit iTunes"
         },
-        "buttons": {
-          "downandinst": "Download & install",
-          "download": "Download & install later"
+        "quit": "Quit"
+    },
+    "settings": {
+        "config": {
+            "autoLaunch": "Auto Launch",
+            "autoUpdates": "Automatic Updates",
+            "betaUpdates": "Beta Updates",
+            "installUpdate": {
+                "label": "Install Update",
+                "button": "Install %version%",
+                "buttonNA": "No update available"
+            },
+            "show": "Show Presence",
+            "hideOnPause": "Hide Presence on Pause",
+            "artworkPrioLocal": "Prioritize Local Artwork",
+            "showTimestamps": "Show Timestamps",
+            "showAlbumArtwork": "Show Album Artwork",
+            "performanceMode": "Performance Mode",
+            "hardwareAcceleration": "Hardware Acceleration",
+            "checkIfMusicInstalled": "Check if Music is installed",
+            "colorTheme": {
+                "label": "Preferred Color Theme",
+                "light": "Light",
+                "dark": "Dark",
+                "auto": "Dark from Sunset to Sunrise",
+                "os": "System Default"
+            },
+            "language": "Preferred Language",
+            "artwork": {
+                "label": "Default Artwork",
+                "applemusic-logo": "Default",
+                "applemusic-logo-rainbow": "Rainbow"
+            },
+            "rpcLargeImageText": "Presence Large Image Text",
+            "rpcDetails": "Presence Details",
+            "rpcState": "Presence State",
+            "enableLastFM": "Enable Last.fm",
+            "lastFMUser": {
+                "label": "Last.fm User",
+                "connect": "Connect",
+                "reconnect": "Reconnect",
+                "connecting": "Connecting...",
+                "cancel": "Cancel"
+            },
+            "enableCache": "Enable Cache",
+            "resetCache": "Reset Cache"
+        },
+        "common": {
+            "reset": "Reset"
+        },
+        "category": {
+            "general": "General",
+            "softwareUpdate": "Software Update",
+            "cache": "Cache Management",
+            "advanced": "Advanced"
+        },
+        "warn": {
+            "music": {
+                "title": "Attention",
+                "description": "The Music app could not be found. Please make sure that the Music app is installed."
+            },
+            "discord": {
+                "title": "Attention",
+                "description": "Discord could not be found. Please make sure that Discord is installed."
+            }
+        },
+        "note": {
+            "language": "If your language is missing, <a href='https://discord.gg/qqAgCHS'>contact us</a>.",
+            "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
+            "cache": {
+                "size": "Current cache size: %size%, %count% items",
+                "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
+                "info": "The cache stores all album artwork and other data to reduce the amount of requests to Apple. This will improve the loading time of the album artwork and link."
+            },
+            "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
+        },
+        "extra": {
+            "github": "View on GitHub",
+            "ko-fi": "Donate",
+            "reloadPage": "Reload",
+            "restartApp": "Restart required"
+        },
+        "modal": {
+            "911": {
+                "title": "In memory of the victims of September 11",
+                "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
+                "buttons": {
+                    "okcover": "Okay, change the covers!"
+                }
+            },
+            "appleEvent": {
+                "title": "Do not forget!",
+                "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
+                "buttons": {
+                    "okcool": "Okay, cool!"
+                }
+            },
+            "newUpdate": {
+                "title": "Software Update",
+                "description": "Version %version% is available for your PC.",
+                "installed": {
+                    "description": "Version %version% is available for your PC and is ready to install.",
+                    "buttons": {
+                        "install": "Install now",
+                        "later": "Later"
+                    }
+                },
+                "buttons": {
+                    "downandinst": "Download & install",
+                    "download": "Download & install later"
+                }
+            },
+            "ko-fi": {
+                "title": "Requires Premium",
+                "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+            },
+            "microsoftStore": {
+                "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+                "buttons": {
+                    "download": "Download now"
+                }
+            },
+            "buttons": {
+                "no": "No",
+                "later": "Not now",
+                "yes": "Yes",
+                "okay": "Okay",
+                "learnMore": "Learn more",
+                "close": "Close"
+            }
         }
-      },
-      "ko-fi": {
-        "title": "Requires Premium",
-        "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
-      },
-      "microsoftStore": {
-        "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
-        "buttons": {
-          "download": "Download now"
-        }
-      },
-      "buttons": {
-        "no": "No",
-        "later": "Not now",
-        "yes": "Yes",
-        "okay": "Okay",
-        "learnMore": "Learn more",
-        "close": "Close"
-      }
     }
-  }
 }

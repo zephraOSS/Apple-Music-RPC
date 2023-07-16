@@ -1,72 +1,99 @@
-import { app } from "electron";
 import { autoUpdater } from "electron-updater";
-import { bounce } from "../utils/functions";
+
 import { Browser } from "./browser";
-import { getAppData } from "./store";
+import { appData, config } from "./store";
 
 import * as log from "electron-log";
 
-export function init() {
-    if (!app.isPackaged || process.windowsStore) return;
+export class Updater {
+    private userNotified: boolean | string = false;
 
-    autoUpdater.on("update-available", (info) => {
-        log.info(`[UPDATER] Update available (${info.version})`);
+    constructor() {
+        log.info("[UPDATER]", "Updater initialized");
 
-        if (process.platform === "darwin") bounce("critical");
-        else Browser.windowAction("show");
+        autoUpdater.allowPrerelease = config.get("betaUpdates");
+        autoUpdater.autoDownload = false;
 
-        Browser.send("new-update-available", true, {
-            version: info.version
-        });
-    });
-
-    autoUpdater.on("update-not-available", () => {
-        log.info("[UPDATER] No updates available");
-    });
-
-    autoUpdater.on("error", (err) => {
-        log.info(`[UPDATER] Error in auto-updater. ${err}`);
-    });
-
-    autoUpdater.on("download-progress", (progressObj) => {
-        if (
-            progressObj.percent === 25 ||
-            progressObj.percent === 50 ||
-            progressObj.percent === 75 ||
-            progressObj.percent === 100
-        )
+        autoUpdater.on("update-available", (info) => {
             log.info(
-                `[UPDATER] Downloading update... (${progressObj.percent}%)`
+                "[UPDATER]",
+                `Update available (${info.version})`,
+                `Auto Update: ${config.get("autoUpdate")}`,
+                `Beta Updates: ${config.get("betaUpdates")}`
             );
 
-        Browser.send("update-download-progress-update", true, {
-            percent: progressObj.percent,
-            transferred: progressObj.transferred,
-            total: progressObj.total,
-            speed: progressObj.bytesPerSecond
+            if (config.get("autoUpdate") && process.platform === "win32")
+                this.downloadUpdate();
+            else if (!this.userNotified) {
+                Browser.send("new-update-available", true, {
+                    version: info.version
+                });
+
+                this.userNotified = true;
+            }
         });
-    });
 
-    autoUpdater.on("update-downloaded", (info) => {
-        log.info(`[UPDATER] Update downloaded (${info.version})`);
+        autoUpdater.on("error", (err) => log.error("[UPDATER]", err));
 
-        if (process.platform === "darwin") bounce("critical");
-        else Browser.windowAction("show");
+        autoUpdater.on("download-progress", (progressObj) => {
+            if (
+                progressObj.percent === 25 ||
+                progressObj.percent === 50 ||
+                progressObj.percent === 75 ||
+                progressObj.percent === 100
+            ) {
+                log.info(
+                    "[UPDATER]",
+                    `Downloading update... (${progressObj.percent}%)`
+                );
+            }
 
-        Browser.send("update-downloaded", true, {});
+            Browser.send("update-download-progress-update", true, {
+                percent: progressObj.percent,
+                transferred: progressObj.transferred,
+                total: progressObj.total,
+                speed: progressObj.bytesPerSecond
+            });
+        });
 
-        if (getAppData("installUpdate")) autoUpdater.quitAndInstall();
-    });
+        autoUpdater.on("update-downloaded", (info) => {
+            log.info("[UPDATER]", `Update downloaded (${info.version})`);
 
-    checkForUpdates();
+            if (appData.get("installUpdate")) this.installUpdate();
+            else Browser.send("update-downloaded", true, {});
+        });
 
-    setInterval(checkForUpdates, 1.8e6);
+        setInterval(() => {
+            this.checkForUpdates();
+        }, 1.8e6);
 
-    log.info("[UPDATER] AutoUpdater initialized");
-}
+        this.checkForUpdates();
+    }
 
-export function checkForUpdates() {
-    log.log("[UPDATER]", "Checking for Updates...");
+    public checkForUpdates() {
+        log.info("[UPDATER]", "Checking for Updates...");
 
-    autoUpdater.checkForUpdatesAndNotify();
+        autoUpdater[
+            this.userNotified ? "checkForUpdates" : "checkForUpdatesAndNotify"
+        ]().then(() => log.info("[UPDATER]", "Update check completed"));
+    }
+
+    public downloadUpdate() {
+        log.info("[UPDATER]", "Update download initiated");
+
+        autoUpdater
+            .downloadUpdate()
+            .then((r) => {
+                log.info("[UPDATER]", "Downloading update...", r);
+            })
+            .catch((err) => {
+                log.error("[UPDATER]", "Error downloading update", err);
+            });
+    }
+
+    public installUpdate() {
+        log.info("[UPDATER]", "Installing update... (Quiting)");
+
+        autoUpdater.quitAndInstall();
+    }
 }

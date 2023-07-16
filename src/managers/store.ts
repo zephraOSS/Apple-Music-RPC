@@ -4,6 +4,8 @@ import * as log from "electron-log";
 export const config = new Store({
         defaults: {
             autoLaunch: true,
+            autoUpdates: process.platform === "win32",
+            betaUpdates: false,
             show: true,
             hideOnPause: true,
             artworkPrioLocal: false,

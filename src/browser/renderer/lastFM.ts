@@ -1,3 +1,5 @@
+import { i18n } from "./index.js";
+
 export async function init() {
     const lastFMUser: {
         username: string;
@@ -20,14 +22,14 @@ export async function init() {
     if (!(await window.electron.config.get("enableLastFM")))
         userBtn.classList.add("disabled");
 
-    toggle.addEventListener("change", async () => {
+    toggle.addEventListener("change", () => {
         userBtn.classList[toggle.checked ? "remove" : "add"]("disabled");
     });
 
-    userBtn.addEventListener("click", async () => {
+    userBtn.addEventListener("click", () => {
         if (userBtn.classList.contains("disabled")) return;
 
-        const strings = await window.electron.getLangStrings();
+        const strings = i18n.strings;
 
         switch (userBtn.textContent) {
             case strings.settings.config.lastFMUser.cancel:
