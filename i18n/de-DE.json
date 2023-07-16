@@ -1,139 +1,147 @@
 {
-  "error": {
-    "admin": "Bitte starte AMRPC nicht mit Administrator-Rechten!",
-    "noTrack": "Kein Lied erkannt",
-    "jsFileExtension": "Es liegt ein Fehler bei den JS-Dateizuordnungsdaten vor. Klicke auf den Button unten, um mehr zu erfahren.",
-    "cmd": "Es liegt ein Fehler mit der Eingabeaufforderung vor. Klicke auf den Button unten, um mehr zu erfahren."
-  },
-  "tray": {
-    "restart": "Neustart",
-    "reportProblem": "Problem melden",
-    "quitITunes": {
-      "info": "Vorgang dauert ca. 3 Sekunden",
-      "button": "iTunes beenden"
+    "error": {
+        "admin": "Bitte starte AMRPC nicht mit Administrator-Rechten!",
+        "noTrack": "Kein Lied erkannt",
+        "jsFileExtension": "Es liegt ein Fehler bei den JS-Dateizuordnungsdaten vor. Klicke auf den Button unten, um mehr zu erfahren.",
+        "cmd": "Es liegt ein Fehler mit der Eingabeaufforderung vor. Klicke auf den Button unten, um mehr zu erfahren."
     },
-    "quit": "Beenden"
-  },
-  "settings": {
-    "config": {
-      "autoLaunch": "Autostart",
-      "show": "Presence anzeigen",
-      "hideOnPause": "Presence während Pause ausblenden",
-      "artworkPrioLocal": "Lokales Artwork priorisieren",
-      "showTimestamps": "Timestamps anzeigen",
-      "showAlbumArtwork": "Album Artwork anzeigen",
-      "performanceMode": "Performance Modus",
-      "hardwareAcceleration": "Hardware-Beschleunigung",
-      "checkIfMusicInstalled": "Check if Music is installed",
-      "colorTheme": {
-        "label": "Bevorzugtes Farbschema",
-        "light": "Hell",
-        "dark": "Dunkel",
-        "auto": "Dunkel von Sonnenuntergang bis -aufgang",
-        "os": "System Farbschema"
-      },
-      "language": "Bevorzugte Sprache",
-      "artwork": {
-        "label": "Standard Artwork",
-        "applemusic-logo": "Standard",
-        "applemusic-logo-rainbow": "Regenbogen"
-      },
-      "rpcLargeImageText": "Presence Large Image Text",
-      "rpcDetails": "Presence Details",
-      "rpcState": "Presence State",
-      "enableLastFM": "Last.fm aktivieren",
-      "lastFMUser": {
-        "label": "Last.fm Benutzer",
-        "connect": "Verbinden",
-        "reconnect": "Neu verbinden",
-        "connecting": "Verbinden...",
-        "cancel": "Abbrechen"
-      },
-      "enableCache": "Cache aktivieren",
-      "resetCache": "Cache löschen"
-    },
-    "common": {
-      "reset": "Löschen"
-    },
-    "category": {
-      "general": "Allgemein",
-      "cache": "Cache Management",
-      "advanced": "Advanced"
-    },
-    "warn": {
-      "music": {
-        "title": "Achtung",
-        "description": "Die Musik App konnte nicht gefunden werden. Bitte stelle sicher, dass die Musik App installiert ist."
-      },
-      "discord": {
-        "title": "Achtung",
-        "description": "Discord konnte nicht gefunden werden. Bitte stelle sicher, dass Discord installiert ist."
-      }
-    },
-    "note": {
-      "language": "Wenn deine Sprache fehlt, <a href='https://discord.gg/qqAgCHS'>kontaktiere uns</a>.",
-      "artworkPrioLocal": "Wenn ein lokales Artwork verfügbar ist, wird es anstelle des Artworks der Apple Music API verwendet.",
-      "cache": {
-        "size": "Derzeitige Cache-Größe: %size%, %count% Einträge",
-        "warn": "<b>WARNUNG</b> Wenn der Cache deaktiviert wird, werden alle Daten gelöscht.",
-        "info": "Der Cache speichert alle Album-Cover und andere Daten, um die Anzahl der Anfragen an Apple zu reduzieren. Dadurch wird die Ladezeit des Album-Covers und des Links verbessert."
-      },
-      "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
-    },
-    "extra": {
-      "github": "Auf GitHub ansehen",
-      "ko-fi": "Spenden",
-      "reloadPage": "Neu laden",
-      "restartApp": "Neustart erforderlich"
-    },
-    "modal": {
-      "911": {
-        "title": "Zum Gedenken an die Opfer des 11. September",
-        "description": "Zu Ehren der Opfer des 11. Septembers haben wir für diese Songs individuelle Albumcover erstellt: %s\nUnd wenn du möchtest, kannst du alle deine Covers ändern (nur für heute).",
-        "buttons": {
-          "okcover": "Okay, ändere die Covers!"
-        }
-      },
-      "appleEvent": {
-        "title": "Nicht vergessen!",
-        "description": "Heute um %d Uhr (10.00 Uhr PDT) ist das Apple Event! Schaue es hier live: %s",
-        "buttons": {
-          "okcool": "Okay, cool!"
-        }
-      },
-      "newUpdate": {
-        "title": "Software Update",
-        "description": "Die Version %version% ist für deinen PC verfügbar.",
-        "installed": {
-          "description": "Die Version %version% ist für deinen PC verfügbar und kann installiert werden.",
-          "buttons": {
-            "install": "Jetzt installieren",
-            "later": "Später"
-          }
+    "tray": {
+        "restart": "Neustart",
+        "reportProblem": "Problem melden",
+        "quitITunes": {
+            "info": "Vorgang dauert ca. 3 Sekunden",
+            "button": "iTunes beenden"
         },
-        "buttons": {
-          "downandinst": "Laden & installieren",
-          "download": "Laden & später installieren"
+        "quit": "Beenden"
+    },
+    "settings": {
+        "config": {
+            "autoLaunch": "Autostart",
+            "autoUpdates": "Automatic Updates",
+            "betaUpdates": "Beta Updates",
+            "installUpdate": {
+                "label": "Install Update",
+                "button": "Install %version%",
+                "buttonNA": "No update available"
+            },
+            "show": "Presence anzeigen",
+            "hideOnPause": "Presence während Pause ausblenden",
+            "artworkPrioLocal": "Lokales Artwork priorisieren",
+            "showTimestamps": "Timestamps anzeigen",
+            "showAlbumArtwork": "Album Artwork anzeigen",
+            "performanceMode": "Performance Modus",
+            "hardwareAcceleration": "Hardware-Beschleunigung",
+            "checkIfMusicInstalled": "Check if Music is installed",
+            "colorTheme": {
+                "label": "Bevorzugtes Farbschema",
+                "light": "Hell",
+                "dark": "Dunkel",
+                "auto": "Dunkel von Sonnenuntergang bis -aufgang",
+                "os": "System Farbschema"
+            },
+            "language": "Bevorzugte Sprache",
+            "artwork": {
+                "label": "Standard Artwork",
+                "applemusic-logo": "Standard",
+                "applemusic-logo-rainbow": "Regenbogen"
+            },
+            "rpcLargeImageText": "Presence Large Image Text",
+            "rpcDetails": "Presence Details",
+            "rpcState": "Presence State",
+            "enableLastFM": "Last.fm aktivieren",
+            "lastFMUser": {
+                "label": "Last.fm Benutzer",
+                "connect": "Verbinden",
+                "reconnect": "Neu verbinden",
+                "connecting": "Verbinden...",
+                "cancel": "Abbrechen"
+            },
+            "enableCache": "Cache aktivieren",
+            "resetCache": "Cache löschen"
+        },
+        "common": {
+            "reset": "Löschen"
+        },
+        "category": {
+            "general": "Allgemein",
+            "softwareUpdate": "Software Update",
+            "cache": "Cache Management",
+            "advanced": "Advanced"
+        },
+        "warn": {
+            "music": {
+                "title": "Achtung",
+                "description": "Die Musik App konnte nicht gefunden werden. Bitte stelle sicher, dass die Musik App installiert ist."
+            },
+            "discord": {
+                "title": "Achtung",
+                "description": "Discord konnte nicht gefunden werden. Bitte stelle sicher, dass Discord installiert ist."
+            }
+        },
+        "note": {
+            "language": "Wenn deine Sprache fehlt, <a href='https://discord.gg/qqAgCHS'>kontaktiere uns</a>.",
+            "artworkPrioLocal": "Wenn ein lokales Artwork verfügbar ist, wird es anstelle des Artworks der Apple Music API verwendet.",
+            "cache": {
+                "size": "Derzeitige Cache-Größe: %size%, %count% Einträge",
+                "warn": "<b>WARNUNG</b> Wenn der Cache deaktiviert wird, werden alle Daten gelöscht.",
+                "info": "Der Cache speichert alle Album-Cover und andere Daten, um die Anzahl der Anfragen an Apple zu reduzieren. Dadurch wird die Ladezeit des Album-Covers und des Links verbessert."
+            },
+            "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
+        },
+        "extra": {
+            "github": "Auf GitHub ansehen",
+            "ko-fi": "Spenden",
+            "reloadPage": "Neu laden",
+            "restartApp": "Neustart erforderlich"
+        },
+        "modal": {
+            "911": {
+                "title": "Zum Gedenken an die Opfer des 11. September",
+                "description": "Zu Ehren der Opfer des 11. Septembers haben wir für diese Songs individuelle Albumcover erstellt: %s\nUnd wenn du möchtest, kannst du alle deine Covers ändern (nur für heute).",
+                "buttons": {
+                    "okcover": "Okay, ändere die Covers!"
+                }
+            },
+            "appleEvent": {
+                "title": "Nicht vergessen!",
+                "description": "Heute um %d Uhr (10.00 Uhr PDT) ist das Apple Event! Schaue es hier live: %s",
+                "buttons": {
+                    "okcool": "Okay, cool!"
+                }
+            },
+            "newUpdate": {
+                "title": "Software Update",
+                "description": "Die Version %version% ist für deinen PC verfügbar.",
+                "installed": {
+                    "description": "Die Version %version% ist für deinen PC verfügbar und kann installiert werden.",
+                    "buttons": {
+                        "install": "Jetzt installieren",
+                        "later": "Später"
+                    }
+                },
+                "buttons": {
+                    "downandinst": "Laden & installieren",
+                    "download": "Laden & später installieren"
+                }
+            },
+            "ko-fi": {
+                "title": "Erfordert Premium",
+                "description": "Um dieses Feature nutzen zu können, ist eine one-time Spende oder Mitgliedschaft erforderlich. Du kannst <a href='https://ko-fi.com/zephra'>hier</a> spenden. Solltest du bereits gespendet haben, starte einmal AMRPC neu. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Mehr erfahren</a>"
+            },
+            "microsoftStore": {
+                "description": "Wusstest du, dass du AMRPC auch im Microsoft Store herunterladen kannst? Aber stelle sicher, dass du <b>Auto Launch</b> in den Einstellungen deaktivierst, bevor du AMRPC im Microsoft Store installierst.",
+                "buttons": {
+                    "download": "Jetzt herunterladen"
+                }
+            },
+            "buttons": {
+                "no": "Nein",
+                "later": "Nicht jetzt",
+                "yes": "Ja",
+                "okay": "Okay",
+                "learnMore": "Mehr erfahren",
+                "close": "Schließen"
+            }
         }
-      },
-      "ko-fi": {
-        "title": "Erfordert Premium",
-        "description": "Um dieses Feature nutzen zu können, ist eine one-time Spende oder Mitgliedschaft erforderlich. Du kannst <a href='https://ko-fi.com/zephra'>hier</a> spenden. Solltest du bereits gespendet haben, starte einmal AMRPC neu. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Mehr erfahren</a>"
-      },
-      "microsoftStore": {
-        "description": "Wusstest du, dass du AMRPC auch im Microsoft Store herunterladen kannst? Aber stelle sicher, dass du <b>Auto Launch</b> in den Einstellungen deaktivierst, bevor du AMRPC im Microsoft Store installierst.",
-        "buttons": {
-          "download": "Jetzt herunterladen"
-        }
-      },
-      "buttons": {
-        "no": "Nein",
-        "later": "Nicht jetzt",
-        "yes": "Ja",
-        "okay": "Okay",
-        "learnMore": "Mehr erfahren",
-        "close": "Schließen"
-      }
     }
-  }
 }
