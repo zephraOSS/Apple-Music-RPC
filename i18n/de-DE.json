@@ -17,12 +17,12 @@
     "settings": {
         "config": {
             "autoLaunch": "Autostart",
-            "autoUpdates": "Automatic Updates",
+            "autoUpdates": "Automatische Updates",
             "betaUpdates": "Beta Updates",
             "installUpdate": {
-                "label": "Install Update",
-                "button": "Install %version%",
-                "buttonNA": "No update available"
+                "label": "Update installieren",
+                "button": "%version% installieren",
+                "buttonNA": "Kein Update verfügbar"
             },
             "show": "Presence anzeigen",
             "hideOnPause": "Presence während Pause ausblenden",
@@ -66,7 +66,7 @@
             "general": "Allgemein",
             "softwareUpdate": "Software Update",
             "cache": "Cache Management",
-            "advanced": "Advanced"
+            "advanced": "Erweitert"
         },
         "warn": {
             "music": {
@@ -86,7 +86,7 @@
                 "warn": "<b>WARNUNG</b> Wenn der Cache deaktiviert wird, werden alle Daten gelöscht.",
                 "info": "Der Cache speichert alle Album-Cover und andere Daten, um die Anzahl der Anfragen an Apple zu reduzieren. Dadurch wird die Ladezeit des Album-Covers und des Links verbessert."
             },
-            "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
+            "checkIfMusicInstalled": "Nur deaktivieren, falls Probleme mit den Music Checks auftreten und du sicher bist, dass Music installiert ist."
         },
         "extra": {
             "github": "Auf GitHub ansehen",
