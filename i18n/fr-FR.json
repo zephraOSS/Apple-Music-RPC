@@ -6,7 +6,7 @@
         "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus."
     },
     "tray": {
-        "restart": "Relancer",
+        "restart": "Redémarrer",
         "reportProblem": "Signaler un problème",
         "quitITunes": {
             "info": "Cela prend 3 secondes",
@@ -86,7 +86,7 @@
                 "warn": "<b>ATTENTION</b> Désactiver le cache va supprimer toutes les données en cache.",
                 "info": "Le cache sauvegarde toutes les couvertures d'album et autres données pour réduire le nombre de requêtes vers Apple. Cela améliore le temps de chargement des couvertures et des liens."
             },
-            "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
+            "checkIfMusicInstalled": "Désactivez ceci seulement si vous rencontrez des problèmes avec ce que vous avez coché, et que vous êtes sûrs que l'application Music est bien installé."
         },
         "extra": {
             "github": "Voir sur GitHub",
