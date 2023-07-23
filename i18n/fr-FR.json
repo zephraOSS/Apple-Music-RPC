@@ -7,31 +7,31 @@
     },
     "tray": {
         "restart": "Relancer",
-        "reportProblem": "Report a Problem",
+        "reportProblem": "Signaler un problème",
         "quitITunes": {
-            "info": "This takes about 3 seconds",
-            "button": "Quit iTunes"
+            "info": "Cela prend 3 secondes",
+            "button": "Quitter iTunes"
         },
         "quit": "Quitter"
     },
     "settings": {
         "config": {
             "autoLaunch": "Lancement Automatique",
-            "autoUpdates": "Automatic Updates",
-            "betaUpdates": "Beta Updates",
+            "autoUpdates": "Mises à jour automatiques",
+            "betaUpdates": "Rejoindre le programme mises à jour bêta",
             "installUpdate": {
-                "label": "Install Update",
+                "label": "Installer la mise à jour",
                 "button": "Install %version%",
-                "buttonNA": "No update available"
+                "buttonNA": "Vous êtes à jour"
             },
             "show": "Afficher la Présence",
             "hideOnPause": "Cacher la Présence en Pause",
-            "artworkPrioLocal": "Prioritize Local Artwork",
+            "artworkPrioLocal": "Pochettes d’album en local",
             "showTimestamps": "Afficher le Timestamp",
             "showAlbumArtwork": "Afficher la Pochette de l'Album",
             "performanceMode": "Mode Performance",
             "hardwareAcceleration": "Accélération Hardware",
-            "checkIfMusicInstalled": "Check if Music is installed",
+            "checkIfMusicInstalled": "Vérifier si Music est installé",
             "colorTheme": {
                 "label": "Thème de Couleur préféré",
                 "light": "Clair",
@@ -45,7 +45,7 @@
                 "applemusic-logo": "Par défaut",
                 "applemusic-logo-rainbow": "Arc-en-ciel"
             },
-            "rpcLargeImageText": "Presence Large Image Text",
+            "rpcLargeImageText": "Texte au survol de la pochette",
             "rpcDetails": "Détails de la Présence",
             "rpcState": "État de la Présence",
             "enableLastFM": "Activer Last.fm",
