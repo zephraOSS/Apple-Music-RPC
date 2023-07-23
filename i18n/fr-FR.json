@@ -21,7 +21,7 @@
             "betaUpdates": "Rejoindre le programme mises à jour bêta",
             "installUpdate": {
                 "label": "Installer la mise à jour",
-                "button": "Install %version%",
+                "button": "Installer %version%",
                 "buttonNA": "Vous êtes à jour"
             },
             "show": "Afficher la Présence",
@@ -64,9 +64,9 @@
         },
         "category": {
             "general": "Général",
-            "softwareUpdate": "Software Update",
-            "cache": "Cache Management",
-            "advanced": "Advanced"
+            "softwareUpdate": "Mise à jour logicielle",
+            "cache": "Gestion du cache",
+            "advanced": "Paramètres avancés"
         },
         "warn": {
             "music": {
@@ -80,7 +80,7 @@
         },
         "note": {
             "language": "Si votre langue manque, <a href='https://discord.gg/qqAgCHS'>contactez nous</a>.",
-            "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
+            "artworkPrioLocal": "Si une pochette d'album en local est disponible, elle sera utilisée à la place de celle renvoyée par l'API d'Apple Music.",
             "cache": {
                 "size": "Taille du cache actuelle : %size%, %count% éléments",
                 "warn": "<b>ATTENTION</b> Désactiver le cache va supprimer toutes les données en cache.",
