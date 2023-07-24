@@ -18,7 +18,7 @@
         "config": {
             "autoLaunch": "Lancement Automatique",
             "autoUpdates": "Mises à jour automatiques",
-            "betaUpdates": "Rejoindre le programme mises à jour bêta",
+            "betaUpdates": "Mises à jour bêta",
             "installUpdate": {
                 "label": "Installer la mise à jour",
                 "button": "Installer %version%",
@@ -45,7 +45,7 @@
                 "applemusic-logo": "Par défaut",
                 "applemusic-logo-rainbow": "Arc-en-ciel"
             },
-            "rpcLargeImageText": "Texte au survol de la pochette",
+            "rpcLargeImageText": "Texte sur l’image de l’activité",
             "rpcDetails": "Détails de la Présence",
             "rpcState": "État de la Présence",
             "enableLastFM": "Activer Last.fm",
