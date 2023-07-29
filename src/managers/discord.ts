@@ -39,26 +39,76 @@ export class Discord {
 
         Discord.instance = this;
 
-        ["rpcDetails", "rpcState", "rpcLargeImageText"].forEach((key) => {
+        [
+            "rpcDetails",
+            "rpcState",
+            "rpcLargeImageText",
+            "showAlbumArtwork",
+            "showTimestamps"
+        ].forEach((key) => {
             // @ts-ignore
             config.onDidChange(key, () => configChange(key));
         });
 
-        function configChange(type: string) {
+        async function configChange(type: string) {
             if (
                 Discord.instance.currentTrack &&
                 Object.keys(Discord.instance.currentTrack).length > 0 &&
                 !Discord.instance.isLive
             ) {
-                const discordType = type.replace("rpc", "");
+                if (type.startsWith("rpc")) {
+                    const discordType = type.replace("rpc", ""),
+                        varResult = new replaceVariables(
+                            Discord.instance.currentTrack
+                        ).getResult(discordType);
 
-                Discord.instance.activity[
-                    discordType.charAt(0).toLowerCase() + discordType.slice(1)
-                ] = new replaceVariables(
-                    Discord.instance.currentTrack
-                ).getResult(discordType);
+                    Discord.instance.activity[
+                        discordType.charAt(0).toLowerCase() +
+                            discordType.slice(1)
+                    ] = varResult;
 
-                Discord.setActivity(Discord.instance.activity);
+                    log.info(
+                        "[DISCORD][configChange]",
+                        `${discordType}: ${varResult}`
+                    );
+
+                    Discord.setActivity(Discord.instance.activity);
+                } else if (type === "showAlbumArtwork") {
+                    Discord.instance.activity.largeImageKey =
+                        config.get("showAlbumArtwork") &&
+                        Discord.instance.currentTrack?.artwork
+                            ? Discord.instance.currentTrack.artwork
+                            : config.get("artwork");
+
+                    log.info(
+                        "[DISCORD][configChange]",
+                        `showAlbumArtwork: ${config.get("showAlbumArtwork")}`
+                    );
+
+                    Discord.setActivity(Discord.instance.activity);
+                } else if (type === "showTimestamps") {
+                    if (config.get("showTimestamps")) {
+                        const currentTrack = await Bridge.fetchMusic();
+
+                        if (
+                            !currentTrack ||
+                            Object.keys(currentTrack).length === 0
+                        )
+                            return;
+
+                        Discord.instance.activity.endTimestamp =
+                            Math.floor(Date.now() / 1000) -
+                            currentTrack.elapsedTime +
+                            currentTrack.duration;
+                    } else delete Discord.instance.activity.endTimestamp;
+
+                    log.info(
+                        "[DISCORD][configChange]",
+                        `showTimestamps: ${config.get("showTimestamps")}`
+                    );
+
+                    Discord.setActivity(Discord.instance.activity);
+                }
             }
         }
     }
