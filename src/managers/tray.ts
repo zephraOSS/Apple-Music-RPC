@@ -10,12 +10,14 @@ export class TrayManager {
     private tray: Tray;
     private i18n = i18n.getLangStrings();
 
+    private isDiscordConnected = false;
+
     constructor() {
         this.tray = new Tray(
             path.join(
                 app.getAppPath(),
                 process.platform === "darwin"
-                    ? "assets/statusBarLogo.png"
+                    ? "assets/statusBarIcon.png"
                     : "assets/trayLogo@32.png"
             )
         );
@@ -29,7 +31,7 @@ export class TrayManager {
 
         i18n.onLanguageUpdate(() => {
             this.i18n = i18n.getLangStrings();
-            this.tray.setContextMenu(this.createContextMenu());
+            this.update();
         });
     }
 
@@ -51,6 +53,12 @@ export class TrayManager {
                         : "Apple Music",
                 enabled: false
             },
+            {
+                label: `Discord${
+                    this.isDiscordConnected ? " " : " not "
+                }connected`,
+                enabled: false
+            },
             { type: "separator" },
             {
                 label: this.i18n?.tray?.reportProblem ?? "Report a Problem",
@@ -62,7 +70,7 @@ export class TrayManager {
             {
                 label: "Settings",
                 click() {
-                    new Browser()
+                    new Browser();
                 }
             },
             { type: "separator" },
@@ -102,5 +110,20 @@ export class TrayManager {
 
     update() {
         this.tray.setContextMenu(this.createContextMenu());
+    }
+
+    public discordConnectionUpdate(isConnected: boolean) {
+        this.isDiscordConnected = isConnected;
+
+        if (process.platform === "darwin") {
+            this.tray.setImage(
+                path.join(
+                    app.getAppPath(),
+                    `assets/statusBarIcon${isConnected ? "" : "Error"}.png`
+                )
+            );
+        }
+
+        this.update();
     }
 }

@@ -1,7 +1,7 @@
 import { Client, Presence, register, User } from "discord-rpc";
 import { app } from "electron";
 
-import { appDependencies } from "../index";
+import { appDependencies, trayManager } from "../index";
 
 import { config, getConfig, setConfig } from "./store";
 import { Browser } from "./browser";
@@ -26,6 +26,7 @@ export class Discord {
 
     public activity: Presence = {};
     public isLive: boolean = false;
+    public isConnected: boolean = false;
     public currentTrack: currentTrack;
     public isSupporter: boolean = null;
     public songData: SongData = new SongData();
@@ -147,7 +148,10 @@ export class Discord {
                 }
 
                 this.isReady = true;
+                this.isConnected = true;
                 this.startUp = false;
+
+                trayManager.discordConnectionUpdate(true);
 
                 this.triggerAfterReady.forEach((func) => func());
                 this.triggerAfterReady = [];
@@ -167,6 +171,9 @@ export class Discord {
             log.info("[DISCORD]", "Client disconnected");
 
             this.isReady = false;
+            this.isConnected = false;
+
+            trayManager.discordConnectionUpdate(false);
 
             this.connect();
         });
