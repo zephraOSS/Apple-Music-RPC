@@ -43,6 +43,7 @@ export class Discord {
             "rpcDetails",
             "rpcState",
             "rpcLargeImageText",
+            "show",
             "showAlbumArtwork",
             "showTimestamps"
         ].forEach((key) => {
@@ -73,6 +74,14 @@ export class Discord {
                     );
 
                     Discord.setActivity(Discord.instance.activity);
+                } else if (type === "show") {
+                    if (
+                        config.get("show") &&
+                        Discord.instance.currentTrack &&
+                        Discord.instance.activity
+                    ) {
+                        Discord.setActivity(Discord.instance.activity);
+                    } else Discord.clearActivity();
                 } else if (type === "showAlbumArtwork") {
                     Discord.instance.activity.largeImageKey =
                         config.get("showAlbumArtwork") &&
