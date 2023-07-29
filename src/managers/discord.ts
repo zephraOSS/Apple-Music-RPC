@@ -95,13 +95,21 @@ export class Discord {
             })
             .catch((err) => {
                 log.error("[DISCORD]", `Client login error: ${err}`);
-                this.connect();
+                log.info("[DISCORD]", "Retrying in 5 seconds...");
+
+                // Could not connect: Discord (most likely) not running
+                // RPC_CONNECTION_TIMEOUT: Discord (most likely) running and needs restart (most of the time)
+                // -> retry in 5 seconds
+
+                setTimeout(() => this.connect(), 5000);
             });
 
         this.client.on("disconnected", () => {
             log.info("[DISCORD]", "Client disconnected");
 
             this.isReady = false;
+
+            this.connect();
         });
 
         register("842112189618978897");
