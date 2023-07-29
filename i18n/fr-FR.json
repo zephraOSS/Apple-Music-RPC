@@ -6,32 +6,32 @@
         "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus."
     },
     "tray": {
-        "restart": "Relancer",
-        "reportProblem": "Report a Problem",
+        "restart": "Redémarrer",
+        "reportProblem": "Signaler un problème",
         "quitITunes": {
-            "info": "This takes about 3 seconds",
-            "button": "Quit iTunes"
+            "info": "Cela prend 3 secondes",
+            "button": "Quitter iTunes"
         },
         "quit": "Quitter"
     },
     "settings": {
         "config": {
             "autoLaunch": "Lancement Automatique",
-            "autoUpdates": "Automatic Updates",
-            "betaUpdates": "Beta Updates",
+            "autoUpdates": "Mises à jour automatiques",
+            "betaUpdates": "Mises à jour bêta",
             "installUpdate": {
-                "label": "Install Update",
-                "button": "Install %version%",
-                "buttonNA": "No update available"
+                "label": "Installer la mise à jour",
+                "button": "Installer %version%",
+                "buttonNA": "Vous êtes à jour"
             },
             "show": "Afficher la Présence",
             "hideOnPause": "Cacher la Présence en Pause",
-            "artworkPrioLocal": "Prioritize Local Artwork",
+            "artworkPrioLocal": "Pochettes d’album en local",
             "showTimestamps": "Afficher le Timestamp",
             "showAlbumArtwork": "Afficher la Pochette de l'Album",
             "performanceMode": "Mode Performance",
             "hardwareAcceleration": "Accélération Hardware",
-            "checkIfMusicInstalled": "Check if Music is installed",
+            "checkIfMusicInstalled": "Vérifier si Music est installé",
             "colorTheme": {
                 "label": "Thème de Couleur préféré",
                 "light": "Clair",
@@ -39,13 +39,13 @@
                 "auto": "Sombre du coucher au lever du soleil",
                 "os": "Valeur par défaut du système"
             },
-            "language": "Langue Préféré",
+            "language": "Langue préférée",
             "artwork": {
                 "label": "Icône par Défaut",
                 "applemusic-logo": "Par défaut",
                 "applemusic-logo-rainbow": "Arc-en-ciel"
             },
-            "rpcLargeImageText": "Presence Large Image Text",
+            "rpcLargeImageText": "Texte sur l’image de l’activité",
             "rpcDetails": "Détails de la Présence",
             "rpcState": "État de la Présence",
             "enableLastFM": "Activer Last.fm",
@@ -64,9 +64,9 @@
         },
         "category": {
             "general": "Général",
-            "softwareUpdate": "Software Update",
-            "cache": "Cache Management",
-            "advanced": "Advanced"
+            "softwareUpdate": "Mise à jour logicielle",
+            "cache": "Gestion du cache",
+            "advanced": "Paramètres avancés"
         },
         "warn": {
             "music": {
@@ -80,13 +80,13 @@
         },
         "note": {
             "language": "Si votre langue manque, <a href='https://discord.gg/qqAgCHS'>contactez nous</a>.",
-            "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
+            "artworkPrioLocal": "Si une pochette d'album en local est disponible, elle sera utilisée à la place de celle renvoyée par l'API d'Apple Music.",
             "cache": {
                 "size": "Taille du cache actuelle : %size%, %count% éléments",
                 "warn": "<b>ATTENTION</b> Désactiver le cache va supprimer toutes les données en cache.",
                 "info": "Le cache sauvegarde toutes les couvertures d'album et autres données pour réduire le nombre de requêtes vers Apple. Cela améliore le temps de chargement des couvertures et des liens."
             },
-            "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
+            "checkIfMusicInstalled": "Désactivez ceci seulement si vous rencontrez des problèmes avec ce que vous avez coché, et que vous êtes sûrs que l'application Music est bien installé."
         },
         "extra": {
             "github": "Voir sur GitHub",
