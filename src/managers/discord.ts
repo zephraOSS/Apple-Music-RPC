@@ -217,12 +217,12 @@ export class Discord {
         } else {
             if (!config.get("artworkPrioLocal")) {
                 this.getSongData(currentTrack).catch(async () => {
-                    this.setLocalArtwork(await Bridge.getCurrentTrackArtwork()).catch(
-                        () => {
-                            this.activity.largeImageKey = getConfig("artwork");
-                            this.setActivity(this.activity);
-                        }
-                    );
+                    this.setLocalArtwork(
+                        await Bridge.getCurrentTrackArtwork()
+                    ).catch(() => {
+                        this.activity.largeImageKey = getConfig("artwork");
+                        this.setActivity(this.activity);
+                    });
                 });
             } else {
                 this.setLocalArtwork(await Bridge.getCurrentTrackArtwork())
