@@ -31,7 +31,7 @@
             "showAlbumArtwork": "Album Artwork anzeigen",
             "performanceMode": "Performance Modus",
             "hardwareAcceleration": "Hardware-Beschleunigung",
-            "checkIfMusicInstalled": "Check if Music is installed",
+            "checkIfMusicInstalled": "Music-Installation überprüfen",
             "colorTheme": {
                 "label": "Bevorzugtes Farbschema",
                 "light": "Hell",
