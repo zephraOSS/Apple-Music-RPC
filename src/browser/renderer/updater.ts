@@ -21,7 +21,7 @@ export function init() {
             [
                 {
                     label: i18n.strings.settings.modal["newUpdate"].buttons
-                        .downandinst,
+                        .downloadAndInstall,
                     style: "btn-grey",
                     events: [
                         {

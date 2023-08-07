@@ -40,11 +40,6 @@
                 "os": "Системная"
             },
             "language": "Язык",
-            "artwork": {
-                "label": "Default Artwork",
-                "applemusic-logo": "Default",
-                "applemusic-logo-rainbow": "Rainbow"
-            },
             "rpcLargeImageText": "Presence Large Image Text",
             "rpcDetails": "Вторая строка в активности",
             "rpcState": "Третья строка в активности",
@@ -90,25 +85,11 @@
         },
         "extra": {
             "github": "Репозиторий на GitHub",
-            "ko-fi": "Пожертвовать",
+            "koFi": "Пожертвовать",
             "reloadPage": "Перезагрузить",
             "restartApp": "Требуется перезагрузка"
         },
         "modal": {
-            "911": {
-                "title": "В память о жертвах 11 сентября",
-                "description": "В память о тех, кто погиб 11 сентября, мы добавили обложки для этих песен: %s\nЕсли хотите, Вы можете поменять их на все обложки (только сегодня).",
-                "buttons": {
-                    "okcover": "Окей, поменять обложки!"
-                }
-            },
-            "appleEvent": {
-                "title": "Не забудь!",
-                "description": "Сегодня в %d (10 утра PDT) будет презентация Apple! Смотреть в прямом эфире можно здесь: %s",
-                "buttons": {
-                    "okcool": "Окей, круто!"
-                }
-            },
             "newUpdate": {
                 "title": "Обновление приложения",
                 "description": "Версия %version% доступна для Вашего ПК.",
@@ -124,7 +105,7 @@
                     "download": "Скачать и установить позже"
                 }
             },
-            "ko-fi": {
+            "koFi": {
                 "title": "Требуется Премиум",
                 "description": "Чтобы использовать эту функцию Вам нужно совершить одно пожертвование или быть платным подписчиком. Вы можете пожертвовать <a href='https://ko-fi.com/zephra'>здесь</a>. Если Вы уже совершили пожертвование, перезапустите AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Читать больше</a>"
             },

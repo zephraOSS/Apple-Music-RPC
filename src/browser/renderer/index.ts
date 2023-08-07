@@ -105,8 +105,8 @@ i18n.updateLanguage();
             .forEach((ele) => {
                 ele.addEventListener("click", () => {
                     new Modal(
-                        i18n.strings.settings.modal["ko-fi"].title,
-                        i18n.strings.settings.modal["ko-fi"].description,
+                        i18n.strings.settings.modal.koFi.title,
+                        i18n.strings.settings.modal.koFi.description,
                         [
                             {
                                 label: i18n.strings.settings.modal.buttons

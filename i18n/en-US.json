@@ -40,11 +40,6 @@
                 "os": "System Default"
             },
             "language": "Preferred Language",
-            "artwork": {
-                "label": "Default Artwork",
-                "applemusic-logo": "Default",
-                "applemusic-logo-rainbow": "Rainbow"
-            },
             "rpcLargeImageText": "Presence Large Image Text",
             "rpcDetails": "Presence Details",
             "rpcState": "Presence State",
@@ -90,25 +85,11 @@
         },
         "extra": {
             "github": "View on GitHub",
-            "ko-fi": "Donate",
+            "koFi": "Donate",
             "reloadPage": "Reload",
             "restartApp": "Restart required"
         },
         "modal": {
-            "911": {
-                "title": "In memory of the victims of September 11",
-                "description": "To honor those who died on September 11 we added some custom album covers for these songs: %s\nAnd when you want, you can change all of the covers (only for today).",
-                "buttons": {
-                    "okcover": "Okay, change the covers!"
-                }
-            },
-            "appleEvent": {
-                "title": "Do not forget!",
-                "description": "Today at %d o'clock (10a.m. PDT) is the Apple Event! Watch it live here: %s",
-                "buttons": {
-                    "okcool": "Okay, cool!"
-                }
-            },
             "newUpdate": {
                 "title": "Software Update",
                 "description": "Version %version% is available for your PC.",
@@ -120,11 +101,11 @@
                     }
                 },
                 "buttons": {
-                    "downandinst": "Download & install",
+                    "downloadAndInstall": "Download & install",
                     "download": "Download & install later"
                 }
             },
-            "ko-fi": {
+            "koFi": {
                 "title": "Requires Premium",
                 "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
             },

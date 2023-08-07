@@ -40,11 +40,6 @@
                 "os": "Valeur par défaut du système"
             },
             "language": "Langue préférée",
-            "artwork": {
-                "label": "Icône par Défaut",
-                "applemusic-logo": "Par défaut",
-                "applemusic-logo-rainbow": "Arc-en-ciel"
-            },
             "rpcLargeImageText": "Texte sur l’image de l’activité",
             "rpcDetails": "Détails de la Présence",
             "rpcState": "État de la Présence",
@@ -90,25 +85,11 @@
         },
         "extra": {
             "github": "Voir sur GitHub",
-            "ko-fi": "Faire un Don",
+            "koFi": "Faire un Don",
             "reloadPage": "Recharger",
             "restartApp": "Rechargement requis"
         },
         "modal": {
-            "911": {
-                "title": "En mémoire aux victimes du 11 Septembre",
-                "description": "Pour honorer ceux qui sont morts le 11 Septembre, on a ajouté quelques couvertures d'album personnalisées pour ces musiques : %s\nEt si quand vous voulez, vous pouvez changer toutes les couvertures (seulement pour aujourd'hui).",
-                "buttons": {
-                    "okcover": "Ok, changer les couvertures !"
-                }
-            },
-            "appleEvent": {
-                "title": "Ne pas oublier !",
-                "description": "Aujourd'hui à %dh (10h du matin PDT) il y a l'Apple Event ! Regardez-le en direct ici : %s",
-                "buttons": {
-                    "okcool": "Ok, cool !"
-                }
-            },
             "newUpdate": {
                 "title": "Mise à jour du Logiciel",
                 "description": "La version %version% est disponible pour votre ordinateur.",
@@ -124,7 +105,7 @@
                     "download": "Télécharger & installer plus tard"
                 }
             },
-            "ko-fi": {
+            "koFi": {
                 "title": "Nécessite Premium",
                 "description": "Pour utiliser cette fonctionnalité, une donation-en-une-fois ou un abonnement membre est nécessaire. Vous pouvez faire un don <a href='https://ko-fi.com/zephra'>ici</a>. Si vous avez déjà fait un don, essayer de redémarrer AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>En apprendre plus</a>"
             },

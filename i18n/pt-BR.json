@@ -40,11 +40,6 @@
                 "os": "Padrão do sistema"
             },
             "language": "Idioma",
-            "artwork": {
-                "label": "Arte do álbum padrão",
-                "applemusic-logo": "Padrão",
-                "applemusic-logo-rainbow": "Arco-íris"
-            },
             "rpcLargeImageText": "Texto da presença na imagem",
             "rpcDetails": "Detalhes da presença",
             "rpcState": "Estado da presença",
@@ -90,25 +85,11 @@
         },
         "extra": {
             "github": "Ver no GitHub",
-            "ko-fi": "Doar",
+            "koFi": "Doar",
             "reloadPage": "Recarregar",
             "restartApp": "Reinício necessário"
         },
         "modal": {
-            "911": {
-                "title": "Em memória das vítimas do 11 de setembro",
-                "description": "Para honrar aqueles que morreram no 11 de setembro adicionamos algumas artes de álbum personalizadas para as músicas: %s\nE quando quiser, você pode mudar todas as capas (apenas hoje).",
-                "buttons": {
-                    "okcover": "Ok, mude as capas!"
-                }
-            },
-            "appleEvent": {
-                "title": "Não esqueça!",
-                "description": "Hoje às %d (10 da manhã PDT) ocorrerá o evento da Apple! Assista ao vivo aqui: %s",
-                "buttons": {
-                    "okcool": "Ok, legal!"
-                }
-            },
             "newUpdate": {
                 "title": "Atualização do programa",
                 "description": "A Versão %version% está disponível para seu PC.",
@@ -124,7 +105,7 @@
                     "download": "Baixar e instalar mais tarde"
                 }
             },
-            "ko-fi": {
+            "koFi": {
                 "title": "Requer Premium",
                 "description": "Para usar essa funcionalidade é necessário fazer uma doação única ou possuir uma inscrição. Você pode doar <a href='https://ko-fi.com/zephra'>aqui</a>. Se você já fez uma doação tente reiniciar o AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Saiba mais</a>"
             },

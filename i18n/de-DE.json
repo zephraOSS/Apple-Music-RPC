@@ -40,11 +40,6 @@
                 "os": "System Farbschema"
             },
             "language": "Bevorzugte Sprache",
-            "artwork": {
-                "label": "Standard Artwork",
-                "applemusic-logo": "Standard",
-                "applemusic-logo-rainbow": "Regenbogen"
-            },
             "rpcLargeImageText": "Presence Large Image Text",
             "rpcDetails": "Presence Details",
             "rpcState": "Presence State",
@@ -90,25 +85,11 @@
         },
         "extra": {
             "github": "Auf GitHub ansehen",
-            "ko-fi": "Spenden",
+            "koFi": "Spenden",
             "reloadPage": "Neu laden",
             "restartApp": "Neustart erforderlich"
         },
         "modal": {
-            "911": {
-                "title": "Zum Gedenken an die Opfer des 11. September",
-                "description": "Zu Ehren der Opfer des 11. Septembers haben wir für diese Songs individuelle Albumcover erstellt: %s\nUnd wenn du möchtest, kannst du alle deine Covers ändern (nur für heute).",
-                "buttons": {
-                    "okcover": "Okay, ändere die Covers!"
-                }
-            },
-            "appleEvent": {
-                "title": "Nicht vergessen!",
-                "description": "Heute um %d Uhr (10.00 Uhr PDT) ist das Apple Event! Schaue es hier live: %s",
-                "buttons": {
-                    "okcool": "Okay, cool!"
-                }
-            },
             "newUpdate": {
                 "title": "Software Update",
                 "description": "Die Version %version% ist für deinen PC verfügbar.",
@@ -120,11 +101,11 @@
                     }
                 },
                 "buttons": {
-                    "downandinst": "Laden & installieren",
+                    "downloadAndInstall": "Laden & installieren",
                     "download": "Laden & später installieren"
                 }
             },
-            "ko-fi": {
+            "koFi": {
                 "title": "Erfordert Premium",
                 "description": "Um dieses Feature nutzen zu können, ist eine one-time Spende oder Mitgliedschaft erforderlich. Du kannst <a href='https://ko-fi.com/zephra'>hier</a> spenden. Solltest du bereits gespendet haben, starte einmal AMRPC neu. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Mehr erfahren</a>"
             },
