@@ -1,9 +1,8 @@
-import { Bridge } from "./bridge";
 import { JSONParse } from "../utils/json";
 
 import * as log from "electron-log";
 
-import type { AppleBridge } from "apple-bridge";
+import EventEmitter from "events";
 
 interface WatchDogData {
     type: "res" | "event";
@@ -17,7 +16,7 @@ interface WatchDogData {
 
 export class WatchDog {
     private socket: WebSocket;
-    private bridge: AppleBridge = Bridge.instance.bridge;
+    private emitter = new EventEmitter();
 
     constructor() {
         this.connect();
@@ -34,13 +33,20 @@ export class WatchDog {
         );
 
         this.socket.onmessage = (e) => {
+            log.debug(
+                "[WatchDog]",
+                "--REMOVE IN PROD.--",
+                "Received message from WatchDog",
+                e.data
+            );
+
             const data: WatchDogData = JSONParse(e.data);
 
             if (!data || Object.keys(data).length === 0) return;
             if (data.type === "res") return;
 
             if (data.playerState === "playing") {
-                this.bridge.emit("playing", "music", {
+                this.emitter.emit("playing", {
                     title: data.title,
                     artist: data.artist,
                     album: data.album,
@@ -48,11 +54,10 @@ export class WatchDog {
                     endTime: data.endTime
                 });
             } else {
-                this.bridge.emit(
+                this.emitter.emit(
                     data.playerState === "not_started"
                         ? "stopped"
-                        : data.playerState,
-                    "music"
+                        : data.playerState
                 );
             }
         };
@@ -80,8 +85,7 @@ export class WatchDog {
             let failCount = 0;
 
             this.socket.send("getCurrentTrack");
-
-            this.socket.onmessage = (e) => {
+            this.socket.addEventListener("message", (e) => {
                 const data: WatchDogData = JSONParse(e.data);
 
                 if (!data || Object.keys(data).length === 0) reject();
@@ -94,7 +98,14 @@ export class WatchDog {
                 }
 
                 resolve(data);
-            };
+            });
         });
+    }
+
+    public on(
+        event: currentTrack["playerState"],
+        listener: (currentTrack: currentTrack) => void
+    ) {
+        this.emitter.on(event, listener);
     }
 }

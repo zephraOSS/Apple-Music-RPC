@@ -5,6 +5,7 @@ import { appData, config } from "./managers/store";
 import { TrayManager } from "./managers/tray";
 import { ModalWatcher } from "./managers/modal";
 import { Bridge } from "./managers/bridge";
+import { WatchDog } from "./managers/watchdog";
 import { Browser } from "./managers/browser";
 import { LastFM } from "./managers/lastFM";
 import { Updater } from "./managers/updater";
@@ -28,6 +29,7 @@ export let modalWatcher: ModalWatcher;
 export let appDependencies: AppDependencies;
 export let lastFM: LastFM;
 export let bridge: Bridge;
+export let watchDog: WatchDog;
 export let updater: Updater;
 
 Object.assign(console, log.functions);
@@ -78,8 +80,14 @@ app.on("ready", async () => {
     initAutoLaunch();
     initMsStoreModal();
 
-    if (appDependencies.music && appDependencies.discord) bridge = new Bridge();
-    else Browser.windowAction("show");
+    if (appDependencies.music && appDependencies.discord) {
+        const useBridge = config.get("service") === "itunes";
+
+        if (useBridge) bridge = new Bridge();
+        else watchDog = new WatchDog();
+
+        log.info("[READY]", `Using ${useBridge ? "Bridge" : "WatchDog"}`);
+    } else Browser.windowAction("show");
 
     nativeTheme.on("updated", () => {
         log.info(
