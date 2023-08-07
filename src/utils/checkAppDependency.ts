@@ -8,16 +8,25 @@ import * as log from "electron-log";
 
 export async function checkAppDependency(): Promise<AppDependencies> {
     const music =
-        process.platform !== "win32"
-            ? true
-            : await checkIfAppIsInstalled("iTunes");
+            process.platform === "win32"
+                ? await checkIfAppIsInstalled("iTunes")
+                : true,
+        appleMusic =
+            process.platform === "win32"
+                ? await checkIfAppIsInstalled("Apple Music")
+                : null;
+
+    // TODO: check if WatchDog is installed
 
     log[!music ? "warn" : "info"](
         `[checkAppDependency][Music] ${music ? "Found" : "Not found"}`
     );
 
     return {
-        music,
+        music: config.get("service") === "itunes" ? music : appleMusic,
+        iTunes: music,
+        appleMusic,
+        watchDog: true,
         discord: true
     };
 }

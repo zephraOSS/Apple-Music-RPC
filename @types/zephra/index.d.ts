@@ -88,6 +88,9 @@ interface APIUserRoles {
 
 interface AppDependencies {
     music: boolean;
+    iTunes: boolean;
+    appleMusic: boolean;
+    watchDog: boolean;
     discord: boolean;
 }
 
