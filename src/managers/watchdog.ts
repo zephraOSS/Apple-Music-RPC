@@ -24,10 +24,14 @@ export class WatchDog {
     }
 
     public connect(): void {
-        this.socket = new WebSocket("ws://localhost:9876");
+        this.socket = new WebSocket("ws://localhost:9632/watchdog");
 
-        this.socket.onopen = () => log.info("Connected to WatchDog");
-        this.socket.onclose = () => log.warn("Disconnected from WatchDog");
+        this.socket.addEventListener("open", () =>
+            log.info("[WatchDog]", "Connected to WatchDog")
+        );
+        this.socket.addEventListener("close", () =>
+            log.info("[WatchDog]", "Disconnected from WatchDog")
+        );
 
         this.socket.onmessage = (e) => {
             const data: WatchDogData = JSONParse(e.data);
