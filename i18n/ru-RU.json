@@ -101,7 +101,7 @@
                     }
                 },
                 "buttons": {
-                    "downandinst": "Скачать и установить",
+                    "downloadAndInstall": "Download & install",
                     "download": "Скачать и установить позже"
                 }
             },
