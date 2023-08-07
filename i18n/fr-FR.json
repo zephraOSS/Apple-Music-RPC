@@ -101,7 +101,7 @@
                     }
                 },
                 "buttons": {
-                    "downloadAndInstall": "Download & install",
+                    "downloadAndInstall": "Télécharger & installer",
                     "download": "Télécharger & installer plus tard"
                 }
             },
