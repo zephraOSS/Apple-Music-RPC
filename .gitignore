@@ -3,6 +3,7 @@
 /dist
 /node_modules
 /src/language
+/@types/zephra/I18n.d.ts
 
 /builder/cert.pfx
 

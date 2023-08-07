@@ -6,6 +6,8 @@ import * as log from "electron-log";
 
 import getAppDataPath from "../utils/getAppDataPath";
 
+import type { I18n } from "../../@types/zephra/I18n";
+
 export class i18n {
     public static appDataPath = path.join(getAppDataPath(), "i18n");
 
@@ -13,7 +15,7 @@ export class i18n {
         config.onDidChange("language", func);
     }
 
-    public static getLangStrings() {
+    public static getLangStrings(): I18n | Record<string, never> {
         const filePath = path.join(
             this.appDataPath,
             `${config.get("language")}.json`
