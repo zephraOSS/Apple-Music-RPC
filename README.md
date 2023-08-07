@@ -4,7 +4,7 @@
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads-pre/zephraOSS/Apple-Music-RPC/total) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads/zephraOSS/Apple-Music-RPC/latest/total) 
 
 ## Apple Music Preview
-We currently don't support [Apple Music Preview](https://apps.microsoft.com/store/detail/apple-music-preview/9PFHDD62MXS1), but we're doing our best to find a way to support it.
+[Apple Music Preview](https://apps.microsoft.com/store/detail/apple-music-preview/9PFHDD62MXS1) integration will be available soon!
 
 ## Installation
 * [Microsoft Store](https://docs.amrpc.zephra.org/installation/windows/microsoft-store)

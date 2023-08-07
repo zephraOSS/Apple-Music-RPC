@@ -129,7 +129,7 @@ export class Browser {
     async copyBrowserFiles() {
         if (app.isPackaged) return;
 
-        return new Promise(function (resolve) {
+        return new Promise(function(resolve) {
             const execute = exec(
                 "npm run copy && cd src/browser/renderer/ && tsc",
                 (error, _stdout, stderr) => {

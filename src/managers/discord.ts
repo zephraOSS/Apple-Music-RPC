@@ -1,7 +1,7 @@
 import { Client, Presence, register, User } from "discord-rpc";
 import { app } from "electron";
 
-import { appDependencies } from "../index";
+import { appDependencies, trayManager } from "../index";
 
 import { config, getConfig, setConfig } from "./store";
 import { Browser } from "./browser";
@@ -19,11 +19,14 @@ export class Discord {
     private client: Client;
     private isReady: boolean = false;
     private startUp: boolean = true;
-    private defaultLIT: string = `AMRPC - ${app.getVersion()}`;
+    private defaultLIT: string = `AMRPC - ${
+        app.isPackaged ? app.getVersion() : "Development"
+    }`;
     private triggerAfterReady: (() => void)[] = [];
 
     public activity: Presence = {};
     public isLive: boolean = false;
+    public isConnected: boolean = false;
     public currentTrack: currentTrack;
     public isSupporter: boolean = null;
     public songData: SongData = new SongData();
@@ -37,26 +40,85 @@ export class Discord {
 
         Discord.instance = this;
 
-        ["rpcDetails", "rpcState", "rpcLargeImageText"].forEach((key) => {
+        [
+            "rpcDetails",
+            "rpcState",
+            "rpcLargeImageText",
+            "show",
+            "showAlbumArtwork",
+            "showTimestamps"
+        ].forEach((key) => {
             // @ts-ignore
             config.onDidChange(key, () => configChange(key));
         });
 
-        function configChange(type: string) {
+        async function configChange(type: string) {
             if (
                 Discord.instance.currentTrack &&
                 Object.keys(Discord.instance.currentTrack).length > 0 &&
                 !Discord.instance.isLive
             ) {
-                const discordType = type.replace("rpc", "");
+                if (type.startsWith("rpc")) {
+                    const discordType = type.replace("rpc", ""),
+                        varResult = new replaceVariables(
+                            Discord.instance.currentTrack
+                        ).getResult(discordType);
 
-                Discord.instance.activity[
-                    discordType.charAt(0).toLowerCase() + discordType.slice(1)
-                ] = new replaceVariables(
-                    Discord.instance.currentTrack
-                ).getResult(discordType);
+                    Discord.instance.activity[
+                        discordType.charAt(0).toLowerCase() +
+                            discordType.slice(1)
+                    ] = varResult;
 
-                Discord.setActivity(Discord.instance.activity);
+                    log.info(
+                        "[DISCORD][configChange]",
+                        `${discordType}: ${varResult}`
+                    );
+
+                    Discord.setActivity(Discord.instance.activity);
+                } else if (type === "show") {
+                    if (
+                        config.get("show") &&
+                        Discord.instance.currentTrack &&
+                        Discord.instance.activity
+                    ) {
+                        Discord.setActivity(Discord.instance.activity);
+                    } else Discord.clearActivity();
+                } else if (type === "showAlbumArtwork") {
+                    Discord.instance.activity.largeImageKey =
+                        config.get("showAlbumArtwork") &&
+                        Discord.instance.currentTrack?.artwork
+                            ? Discord.instance.currentTrack.artwork
+                            : config.get("artwork");
+
+                    log.info(
+                        "[DISCORD][configChange]",
+                        `showAlbumArtwork: ${config.get("showAlbumArtwork")}`
+                    );
+
+                    Discord.setActivity(Discord.instance.activity);
+                } else if (type === "showTimestamps") {
+                    if (config.get("showTimestamps")) {
+                        const currentTrack = await Bridge.fetchMusic();
+
+                        if (
+                            !currentTrack ||
+                            Object.keys(currentTrack).length === 0
+                        )
+                            return;
+
+                        Discord.instance.activity.endTimestamp =
+                            Math.floor(Date.now() / 1000) -
+                            currentTrack.elapsedTime +
+                            currentTrack.duration;
+                    } else delete Discord.instance.activity.endTimestamp;
+
+                    log.info(
+                        "[DISCORD][configChange]",
+                        `showTimestamps: ${config.get("showTimestamps")}`
+                    );
+
+                    Discord.setActivity(Discord.instance.activity);
+                }
             }
         }
     }
@@ -86,20 +148,34 @@ export class Discord {
                 }
 
                 this.isReady = true;
+                this.isConnected = true;
                 this.startUp = false;
+
+                trayManager.discordConnectionUpdate(true);
 
                 this.triggerAfterReady.forEach((func) => func());
                 this.triggerAfterReady = [];
             })
             .catch((err) => {
                 log.error("[DISCORD]", `Client login error: ${err}`);
-                this.connect();
+                log.info("[DISCORD]", "Retrying in 5 seconds...");
+
+                // Could not connect: Discord (most likely) not running
+                // RPC_CONNECTION_TIMEOUT: Discord (most likely) running and needs restart (most of the time)
+                // -> retry in 5 seconds
+
+                setTimeout(() => this.connect(), 5000);
             });
 
         this.client.on("disconnected", () => {
             log.info("[DISCORD]", "Client disconnected");
 
             this.isReady = false;
+            this.isConnected = false;
+
+            trayManager.discordConnectionUpdate(false);
+
+            this.connect();
         });
 
         register("842112189618978897");
@@ -207,12 +283,12 @@ export class Discord {
         } else {
             if (!config.get("artworkPrioLocal")) {
                 this.getSongData(currentTrack).catch(async () => {
-                    this.setLocalArtwork(await Bridge.getCurrentTrackArtwork()).catch(
-                        () => {
-                            this.activity.largeImageKey = getConfig("artwork");
-                            this.setActivity(this.activity);
-                        }
-                    );
+                    this.setLocalArtwork(
+                        await Bridge.getCurrentTrackArtwork()
+                    ).catch(() => {
+                        this.activity.largeImageKey = getConfig("artwork");
+                        this.setActivity(this.activity);
+                    });
                 });
             } else {
                 this.setLocalArtwork(await Bridge.getCurrentTrackArtwork())

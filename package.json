@@ -3,12 +3,13 @@
     "version": "4.2.1-beta.4",
     "description": "Discord RPC for Apple Music",
     "scripts": {
-        "start": "npm run copy && npm run build && electron ./dist/",
+        "start": "npm run copy && npm run generate:i18n-types && npm run build && electron ./dist/",
         "copy": "copyfiles -u 1 -a src/assets/** src/language/** src/browser/*.css src/browser/*.html src/browser/css/*.css dist/ && copyfiles package.json node_modules/** dist/",
         "build": "tsc && cd src/browser/renderer/ && tsc",
         "build:win": "npm run build && npm run copy && electron-builder --config builder/stable.json",
         "build:win-store": "npm run build && npm run copy && electron-builder --config builder/stable-win-store.json",
-        "build:macos": "npm run build && npm run copy && electron-builder --config builder/stable-macos.json"
+        "build:macos": "npm run build && npm run copy && electron-builder --config builder/stable-macos.json",
+        "generate:i18n-types": "make_types -i @types/zephra/I18n.d.ts i18n/en-US.json I18n"
     },
     "repository": {
         "type": "git",
@@ -55,6 +56,7 @@
         "copyfiles": "^2.4.1",
         "electron": "^22.3.5",
         "electron-builder": "^23.6.0",
+        "maketypes": "^1.1.2",
         "typescript": "^4.6.3"
     },
     "overrides": {

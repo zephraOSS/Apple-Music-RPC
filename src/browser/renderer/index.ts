@@ -1,16 +1,11 @@
 import { Modal } from "./modal.js";
 import { i18n as i18nClass } from "./i18n.js";
 
-import {
-    updateTheme,
-    updateLanguage,
-    langString,
-    openURL,
-    newNote
-} from "./utils.js";
+import { updateTheme, openURL, newNote } from "./utils.js";
 
 import { init as initAPI } from "./api.js";
 import { init as initLastFM } from "./lastFM.js";
+import { init as initUpdater } from "./updater.js";
 import { init as initListeners } from "./listeners.js";
 import { init as initEventSettings } from "./eventSettings.js";
 
@@ -40,9 +35,10 @@ console.log("[BROWSER][RENDERER] Loading...");
 initLastFM();
 initEventSettings();
 initListeners();
+initUpdater();
 
 updateTheme();
-updateLanguage();
+i18n.updateLanguage();
 
 (async () => {
     const seenChangelogs = await window.electron.appData.get("changelog");
@@ -80,16 +76,16 @@ updateLanguage();
     if (!appDependencies.music) {
         newNote(
             "warn",
-            langString.settings.warn.music.title,
-            langString.settings.warn.music.description
+            i18n.strings.settings.warn.music.title,
+            i18n.strings.settings.warn.music.description
         );
     }
 
     if (!appDependencies.discord) {
         newNote(
             "warn",
-            langString.settings.warn.discord.title,
-            langString.settings.warn.discord.description
+            i18n.strings.settings.warn.discord.title,
+            i18n.strings.settings.warn.discord.description
         );
     }
 
@@ -109,11 +105,12 @@ updateLanguage();
             .forEach((ele) => {
                 ele.addEventListener("click", () => {
                     new Modal(
-                        langString.settings.modal["ko-fi"].title,
-                        langString.settings.modal["ko-fi"].description,
+                        i18n.strings.settings.modal.koFi.title,
+                        i18n.strings.settings.modal.koFi.description,
                         [
                             {
-                                label: langString.settings.modal.buttons.later,
+                                label: i18n.strings.settings.modal.buttons
+                                    .later,
                                 style: "btn-grey",
                                 events: [
                                     {
@@ -160,7 +157,7 @@ updateLanguage();
                 marked.parse(changelog.body.replace("# Changelog:\r\n", "")),
                 [
                     {
-                        label: langString.settings.modal.buttons.okay,
+                        label: i18n.strings.settings.modal.buttons.okay,
                         style: "btn-grey",
                         events: [
                             {
@@ -179,7 +176,7 @@ updateLanguage();
 export function fetchCacheSize() {
     window.electron.fetchCacheSize().then((stats) => {
         const ele = document.querySelector("#cacheNoteSize"),
-            string: string = langString.settings.note.cache.size;
+            string: string = i18n.strings.settings.note.cache.size;
 
         ele.textContent = string
             .replace("%size%", `${stats.fileSize.toFixed(2)} MB`)

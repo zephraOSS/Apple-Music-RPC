@@ -1,16 +1,16 @@
 import { app, nativeTheme } from "electron";
 
-import { config, getConfig } from "./managers/store";
+import { appData, config } from "./managers/store";
 
 import { TrayManager } from "./managers/tray";
 import { ModalWatcher } from "./managers/modal";
 import { Bridge } from "./managers/bridge";
 import { Browser } from "./managers/browser";
 import { LastFM } from "./managers/lastFM";
+import { Updater } from "./managers/updater";
 
 import { init as initSentry } from "./managers/sentry";
 import { init as initAutoLaunch } from "./managers/launch";
-import { init as initAutoUpdater } from "./managers/updater";
 import { init as initTheme } from "./utils/theme";
 import { init as initMsStoreModal } from "./utils/msStoreModal";
 import { init as initCrowdin } from "./utils/crowdin";
@@ -28,6 +28,7 @@ export let modalWatcher: ModalWatcher;
 export let appDependencies: AppDependencies;
 export let lastFM: LastFM;
 export let bridge: Bridge;
+export let updater: Updater;
 
 Object.assign(console, log.functions);
 
@@ -40,18 +41,30 @@ log.info(
     "------------------------------------"
 );
 
-if (isBeta) log.info("[READY]", "Detected beta build");
-if (isRC) log.info("[READY]", "Detected release candidate build");
-if (process.windowsStore) log.info("[READY]", "Detected Windows Store build");
+if (isBeta) {
+    log.info("[STARTUP]", "Detected beta build. Enabling beta updates");
+    config.set("betaUpdates", true);
+}
+
+if (isRC) log.info("[STARTUP]", "Detected release candidate build");
+if (process.windowsStore) log.info("[STARTUP]", "Detected Windows Store build");
 
 initSentry();
 initProtocol();
+
+appData.set("installUpdate", false);
+
+if (process.platform !== "win32") {
+    config.set("autoUpdates", false);
+    config.set("betaUpdates", false);
+}
 
 app.on("ready", async () => {
     await initCrowdin().catch((err) => log.error("[READY][initCrowdin]", err));
 
     trayManager = new TrayManager();
     modalWatcher = new ModalWatcher();
+    updater = new Updater();
     appDependencies = await checkAppDependency();
 
     if (
@@ -63,7 +76,6 @@ app.on("ready", async () => {
 
     initTheme();
     initAutoLaunch();
-    initAutoUpdater();
     initMsStoreModal();
 
     if (appDependencies.music && appDependencies.discord) bridge = new Bridge();
@@ -76,7 +88,7 @@ app.on("ready", async () => {
             }`
         );
 
-        if (getConfig("colorTheme") === "os") {
+        if (config.get("colorTheme") === "os") {
             Browser.send("update-system-theme", false, {
                 theme: nativeTheme.shouldUseDarkColors ? "dark" : "light"
             });
