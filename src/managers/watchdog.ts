@@ -1,8 +1,9 @@
 import { JSONParse } from "../utils/json";
 
 import * as log from "electron-log";
-
+const WebSocket = require('ws');
 import EventEmitter from "events";
+
 
 interface WatchDogData {
     type: "res" | "event";
