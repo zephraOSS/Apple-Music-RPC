@@ -81,7 +81,7 @@ app.on("ready", async () => {
     initMsStoreModal();
 
     if (appDependencies.music && appDependencies.discord) {
-        const useBridge = config.get("service") === "itunes";
+        const useBridge = appDependencies.iTunes
 
         if (useBridge) bridge = new Bridge();
         else watchDog = new WatchDog();
