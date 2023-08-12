@@ -1,3 +1,3 @@
-interface I18n {
+export interface I18n {
     [key: any]: any;
 }
