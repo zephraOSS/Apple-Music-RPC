@@ -27,9 +27,7 @@ export class Bridge {
         remainingTime: 0
     };
 
-    public bridge: AppleBridge = new AppleBridge({
-        music: false
-    });
+    public bridge: AppleBridge = new AppleBridge();
     public lastTrack: any = {};
     public pausedTrack: any = {};
     public scrobbleTimeout: NodeJS.Timeout;
