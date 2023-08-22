@@ -9,7 +9,8 @@
         "build:win": "npm run build && npm run copy && electron-builder --config builder/stable.json",
         "build:win-store": "npm run build && npm run copy && electron-builder --config builder/stable-win-store.json",
         "build:macos": "npm run build && npm run copy && electron-builder --config builder/stable-macos.json",
-        "generate:i18n-types": "make_types -i @types/zephra/I18n.d.ts i18n/en-US.json I18n"
+        "generate:i18n-types": "make_types -i @types/zephra/I18n.d.ts i18n/en-US.json I18n",
+        "generate:i18n-types-ci": "copyfiles -u 1 -a builder/I18n.d.ts @types/zephra/"
     },
     "repository": {
         "type": "git",
