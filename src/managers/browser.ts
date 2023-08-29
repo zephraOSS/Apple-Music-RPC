@@ -55,9 +55,16 @@ export class Browser {
 
         if (process.platform === "darwin") {
             this.window.on("hide", () => {
-                const isVisible = process.platform === "darwin" ? this.window.isVisibleOnAllWorkspaces() : this.window.isVisible();
+                const isVisible =
+                    process.platform === "darwin"
+                        ? this.window.isVisibleOnAllWorkspaces()
+                        : this.window.isVisible();
 
-                if (!this.window.isMinimized() || (!isVisible && !this.window.isFocusable())) app.dock.hide();
+                if (
+                    !this.window.isMinimized() ||
+                    (!isVisible && !this.window.isFocusable())
+                )
+                    app.dock.hide();
             });
             this.window.on("show", app.dock.show);
         }
@@ -80,38 +87,41 @@ export class Browser {
 
                 break;
             case "hide":
-                this.window.hide();
+                this.window?.hide();
 
                 break;
             case "close":
-                this.window.close();
+                this.window?.close();
 
                 break;
             case "minimize":
-                this.window.minimize();
+                this.window?.minimize();
 
                 break;
             case "maximize":
-                this.window.maximize();
+                this.window?.maximize();
 
                 break;
             case "restore":
-                this.window.restore();
+                this.window?.restore();
 
                 break;
             case "reload":
                 if (!app.isPackaged) await this.copyBrowserFiles();
-                this.window.reload();
+                this.window?.reload();
 
                 break;
         }
     }
 
     saveWindowState() {
+        if (!this.window) return;
         setConfig("windowState", this.window.getBounds());
     }
 
     send(channel: string, ...args: any[]) {
+        if (!this.window) return;
+
         setTimeout(
             () => this.window.webContents.send(channel, ...args),
             this.isReady ? 200 : 2500
@@ -119,7 +129,7 @@ export class Browser {
     }
 
     checkAwaits() {
-        if (Browser.awaitsSend.length > 0 && this.window.isVisible()) {
+        if (Browser.awaitsSend.length > 0 && this.window?.isVisible()) {
             Browser.awaitsSend.forEach((data) => {
                 this.send(data.channel, ...data.args);
             });
@@ -129,7 +139,7 @@ export class Browser {
     async copyBrowserFiles() {
         if (app.isPackaged) return;
 
-        return new Promise(function(resolve) {
+        return new Promise(function (resolve) {
             const execute = exec(
                 "npm run copy && cd src/browser/renderer/ && tsc",
                 (error, _stdout, stderr) => {
