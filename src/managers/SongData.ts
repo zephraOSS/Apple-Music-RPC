@@ -10,7 +10,8 @@ export class SongData {
         artist: string
     ): Promise<SongDataT> {
         return new Promise((resolve, reject) => {
-            if (title.includes("Connecting…")) return resolve(null);
+            if (!title || !album || !artist || title.includes("Connecting…"))
+                return resolve(null);
 
             const reqParam = encodeURIComponent(`${title} ${album} ${artist}`)
                     .replace(/"/g, "%27")

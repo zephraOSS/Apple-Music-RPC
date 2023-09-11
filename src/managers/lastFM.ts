@@ -83,7 +83,13 @@ export class LastFM {
             !this.lastfm.sessionCredentials?.username ||
             !this.lastfm.sessionCredentials?.key
         )
-            return log.warn("[LastFM]", "No session credentials found");
+            return log.warn(
+                "[LastFM][nowPlaying]",
+                "No session credentials found"
+            );
+
+        if (!data.artist || !data.track || !data.album)
+            return log.warn("[LastFM][nowPlaying]", "Missing data");
 
         this.lastfm.track.updateNowPlaying(data, (err: any) => {
             if (err) {
@@ -111,7 +117,13 @@ export class LastFM {
             !this.lastfm.sessionCredentials?.username ||
             !this.lastfm.sessionCredentials?.key
         )
-            return log.warn("[LastFM]", "No session credentials found");
+            return log.warn(
+                "[LastFM][scrobble]",
+                "No session credentials found"
+            );
+
+        if (!data.artist || !data.track || !data.album)
+            return log.warn("[LastFM][scrobble]", "Missing data");
 
         this.lastfm.track.scrobble(data, (err: any) => {
             if (err) {

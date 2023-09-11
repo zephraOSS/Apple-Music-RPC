@@ -204,11 +204,11 @@ export class Bridge {
             return log.warn("[Bridge]", "Discord not found, skipping onPlay");
 
         if (
-            (currentTrack.name === this.lastTrack.name &&
-                currentTrack.artist === this.lastTrack.artist &&
-                currentTrack.duration === this.lastTrack.duration &&
+            (currentTrack.name === this.lastTrack?.name &&
+                currentTrack.artist === this.lastTrack?.artist &&
+                currentTrack.duration === this.lastTrack?.duration &&
                 !this.checkCurrentlyPlaying(currentTrack)) ||
-            (this.discord.isLive && currentTrack.name === this.lastTrack.name)
+            (this.discord.isLive && currentTrack.name === this.lastTrack?.name)
         )
             return;
 
@@ -229,12 +229,12 @@ export class Bridge {
             }
 
             if (
-                this.lastTrack.snowflake === currentTrack.snowflake ||
-                this.pausedTrack.snowflake === currentTrack.snowflake ||
-                (this.pausedTrack.name === currentTrack.name &&
-                    this.pausedTrack.remainingTime &&
+                this.lastTrack?.snowflake === currentTrack.snowflake ||
+                this.pausedTrack?.snowflake === currentTrack.snowflake ||
+                (this.pausedTrack?.name === currentTrack.name &&
+                    this.pausedTrack?.remainingTime &&
                     currentTrack.remainingTime &&
-                    this.pausedTrack.remainingTime -
+                    this.pausedTrack?.remainingTime -
                         currentTrack.remainingTime <=
                         25)
             ) {
