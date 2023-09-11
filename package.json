@@ -1,6 +1,6 @@
 {
     "name": "amrpc",
-    "version": "4.2.1-beta.4",
+    "version": "4.3.0-beta.2",
     "description": "Discord RPC for Apple Music",
     "scripts": {
         "start": "npm run copy && npm run generate:i18n-types && npm run build && electron ./dist/",
@@ -32,7 +32,7 @@
     "dependencies": {
         "@crowdin/ota-client": "^0.7.0",
         "@sentry/electron": "^4.2.0",
-        "apple-bridge": "^1.3.2",
+        "apple-bridge": "^1.4.1",
         "auto-launch": "^5.0.5",
         "cheerio": "^1.0.0-rc.12",
         "child-process-promise": "^2.2.1",
