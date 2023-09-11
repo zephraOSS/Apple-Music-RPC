@@ -247,7 +247,8 @@ export class Discord {
         activity.details = replacedVars.getResult("details");
         activity.state = replacedVars.getResult("state");
 
-        if (currentTrack.duration > 0) {
+        if (currentTrack.endTime) activity.endTimestamp = currentTrack.endTime;
+        else if (currentTrack.duration > 0) {
             activity.endTimestamp =
                 Math.floor(Date.now() / 1000) -
                 currentTrack.elapsedTime +

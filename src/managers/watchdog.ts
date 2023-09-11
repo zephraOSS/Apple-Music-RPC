@@ -1,18 +1,19 @@
 import { JSONParse } from "../utils/json";
 
 import * as log from "electron-log";
-const WebSocket = require('ws');
-import EventEmitter from "events";
 
+import WebSocket from "ws";
+import EventEmitter from "events";
 
 interface WatchDogData {
     type: "res" | "event";
     title: string;
     artist: string;
     album: string;
+    duration: number;
+    endTime: number; // Timestamp
     thumbnailPath: string;
     playerState: "playing" | "paused" | "not_started";
-    endTime: number; // Timestamp
 }
 
 export class WatchDog {
@@ -26,14 +27,18 @@ export class WatchDog {
     public connect(): void {
         this.socket = new WebSocket("ws://localhost:9632/watchdog");
 
-        this.socket.addEventListener("open", () =>
-            log.info("[WatchDog]", "Connected to WatchDog")
-        );
+        this.socket.addEventListener("open", () => {
+            log.info("[WatchDog]", "Connected to WatchDog");
+
+            // TEMP
+            this.socket.send("getCurrentTrack");
+        });
+
         this.socket.addEventListener("close", () =>
             log.info("[WatchDog]", "Disconnected from WatchDog")
         );
 
-        this.socket.onmessage = (e) => {
+        this.socket.addEventListener("message", (e) => {
             log.debug(
                 "[WatchDog]",
                 "--REMOVE IN PROD.--",
@@ -41,18 +46,28 @@ export class WatchDog {
                 e.data
             );
 
-            const data: WatchDogData = JSONParse(e.data);
+            const data: WatchDogData = JSONParse(e.data as string);
 
-            if (!data || Object.keys(data).length === 0) return;
-            if (data.type === "res") return;
+            if (!data || Object.keys(data).length === 0 || !data.playerState)
+                return;
+            //if (data.type === "res") return;
 
             if (data.playerState === "playing") {
+                const durationMS = data.duration * 1000,
+                    startTime = data.endTime - durationMS,
+                    currentTime = Date.now(),
+                    elapsedTime = (currentTime - startTime) / 1000,
+                    remainingTime = (durationMS - elapsedTime * 1000) / 1000;
+
                 this.emitter.emit("playing", {
-                    title: data.title,
-                    artist: data.artist,
-                    album: data.album,
-                    playerState: data.playerState,
-                    endTime: data.endTime
+                    name: data.title || "",
+                    artist: data.artist || "",
+                    album: data.album || "",
+                    duration: data.duration || 0,
+                    elapsedTime,
+                    remainingTime,
+                    endTime: data.endTime,
+                    playerState: data.playerState
                 });
             } else {
                 this.emitter.emit(
@@ -61,7 +76,7 @@ export class WatchDog {
                         : data.playerState
                 );
             }
-        };
+        });
     }
 
     public close(): void {
@@ -82,24 +97,27 @@ export class WatchDog {
     }
 
     public getCurrentTrack(): Promise<WatchDogData> {
-        return new Promise((resolve, reject) => {
-            let failCount = 0;
+        return new Promise((resolve) => {
+            if (!this.isConnected()) return resolve({} as WatchDogData);
 
-            this.socket.send("getCurrentTrack");
-            this.socket.addEventListener("message", (e) => {
-                const data: WatchDogData = JSONParse(e.data);
-
-                if (!data || Object.keys(data).length === 0) reject();
-                if (data.type === "event") {
-                    failCount++;
-
-                    if (failCount > 2) reject();
-
-                    return;
-                }
-
-                resolve(data);
-            });
+            // TODO: WatchDog request support
+            // let failCount = 0;
+            //
+            // this.socket.send("getCurrentTrack");
+            // this.socket.addEventListener("message", (e) => {
+            //     const data: WatchDogData = JSONParse(e.data);
+            //
+            //     if (!data || Object.keys(data).length === 0) reject();
+            //     if (data.type === "event") {
+            //         failCount++;
+            //
+            //         if (failCount > 2) reject();
+            //
+            //         return;
+            //     }
+            //
+            //     resolve(data);
+            // });
         });
     }
 
@@ -108,5 +126,12 @@ export class WatchDog {
         listener: (currentTrack: currentTrack) => void
     ) {
         this.emitter.on(event, listener);
+    }
+
+    public emit(
+        event: currentTrack["playerState"],
+        currentTrack: currentTrack
+    ) {
+        this.emitter.emit(event, currentTrack);
     }
 }

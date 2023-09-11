@@ -49,6 +49,12 @@ export class Bridge {
 
         log.info("[Bridge]", "Initializing Bridge");
 
+        if (config.get("service") === "music") {
+            log.info("[Bridge]", "Using WatchDog");
+
+            this.watchdog = watchDog;
+        }
+
         this.setCurrentTrack()
             .then(() => {
                 setTimeout(() => {
@@ -57,21 +63,22 @@ export class Bridge {
                         typeof this.currentTrack === "object" &&
                         Object.keys(this.currentTrack).length > 0
                     ) {
-                        this.bridge.emit(
-                            this.currentTrack.playerState,
-                            "music",
-                            this.currentTrack
-                        );
+                        if (config.get("service") === "music") {
+                            this.watchdog.emit(
+                                this.currentTrack.playerState,
+                                this.currentTrack
+                            );
+                        } else {
+                            this.bridge.emit(
+                                this.currentTrack.playerState,
+                                "music",
+                                this.currentTrack
+                            );
+                        }
                     }
                 }, 500);
 
                 this.initListeners();
-
-                if (config.get("service") === "music") {
-                    log.info("[Bridge]", "Using WatchDog");
-
-                    this.watchdog = watchDog;
-                }
             })
             .catch((err) => {
                 log.error("[Bridge][constructor][setCurrentTrack]", err);
@@ -88,13 +95,13 @@ export class Bridge {
 
     private initListeners() {
         if (config.get("service") === "music") {
-            this.watchdog.on("playing", this.onPlay);
-            this.watchdog.on("paused", this.onPause);
-            this.watchdog.on("stopped", this.onStop);
+            this.watchdog.on("playing", Bridge.onPlay);
+            this.watchdog.on("paused", Bridge.onPause);
+            this.watchdog.on("stopped", Bridge.onStop);
         } else {
-            this.bridge.on("playing", "music", this.onPlay);
-            this.bridge.on("paused", "music", this.onPause);
-            this.bridge.on("stopped", "music", this.onStop);
+            this.bridge.on("playing", "music", Bridge.onPlay);
+            this.bridge.on("paused", "music", Bridge.onPause);
+            this.bridge.on("stopped", "music", Bridge.onStop);
 
             this.bridge.on(
                 "timeChange",
@@ -160,7 +167,42 @@ export class Bridge {
         }
     }
 
+    static onPlay(currentTrack) {
+        if (!Bridge.instance) return;
+
+        Bridge.instance.onPlay(currentTrack);
+    }
+
+    static onPause() {
+        if (!Bridge.instance) return;
+
+        Bridge.instance.onPause();
+    }
+
+    static onStop() {
+        if (!Bridge.instance) return;
+
+        Bridge.instance.onStop();
+    }
+
     private onPlay(currentTrack) {
+        if (Object.keys(currentTrack).length === 0)
+            return log.warn("[Bridge]", "No Track detected");
+
+        log.debug(
+            "[BetaDebugLog][Bridge][onPlay]",
+            "typeof this.discord",
+            typeof this.discord
+        );
+        log.debug(
+            "[BetaDebugLog][Bridge][onPlay]",
+            "currentTrack",
+            currentTrack
+        );
+
+        if (!this.discord)
+            return log.warn("[Bridge]", "Discord not found, skipping onPlay");
+
         if (
             (currentTrack.name === this.lastTrack.name &&
                 currentTrack.artist === this.lastTrack.artist &&
@@ -174,9 +216,6 @@ export class Bridge {
             "[Bridge]",
             `Playing "${currentTrack.name}" by ${currentTrack.artist}`
         );
-
-        if (Object.keys(currentTrack).length === 0)
-            return log.warn("[Bridge] No Track detected");
 
         if (currentTrack.remainingTime > 0)
             currentTrack.snowflake = generateSnowflake();
@@ -262,7 +301,9 @@ export class Bridge {
     }
 
     private onPause() {
-        if (Object.keys(this.lastTrack).length === 0) return;
+        if (!this.lastTrack || Object.keys(this.lastTrack).length === 0) return;
+        if (!this.discord)
+            return log.warn("[Bridge]", "Discord not found, skipping onPause");
 
         log.info("[Bridge]", "Paused");
 
@@ -283,7 +324,9 @@ export class Bridge {
     }
 
     private onStop() {
-        if (Object.keys(this.lastTrack).length === 0) return;
+        if (!this.lastTrack || Object.keys(this.lastTrack).length === 0) return;
+        if (!this.discord)
+            return log.warn("[Bridge]", "Discord not found, skipping onStop");
 
         log.info("[Bridge]", "Stopped");
 
@@ -332,7 +375,8 @@ export class Bridge {
     }
 
     public static async getCurrentTrackArtwork(logWarn: boolean = true) {
-        if (process.platform !== "win32") return;
+        if (process.platform !== "win32" || config.get("service") === "music")
+            return;
 
         // TODO: AMP support
 
@@ -353,7 +397,7 @@ export class Bridge {
             process.platform === "win32" &&
             config.get("service") === "music"
         )
-            return Bridge.instance.watchdog.getCurrentTrack();
+            return watchDog.getCurrentTrack();
         else return await fetchApp.appleMusic();
     }
 }

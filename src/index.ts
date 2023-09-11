@@ -80,14 +80,10 @@ app.on("ready", async () => {
     initAutoLaunch();
     initMsStoreModal();
 
-    if (appDependencies.music && appDependencies.discord) {
-        const useBridge = appDependencies.iTunes
+    if (config.get("service") === "music") watchDog = new WatchDog();
 
-        if (useBridge) bridge = new Bridge();
-        else watchDog = new WatchDog();
-
-        log.info("[READY]", `Using ${useBridge ? "Bridge" : "WatchDog"}`);
-    } else Browser.windowAction("show");
+    if (appDependencies.music && appDependencies.discord) bridge = new Bridge();
+    else Browser.windowAction("show");
 
     nativeTheme.on("updated", () => {
         log.info(
