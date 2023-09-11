@@ -4,6 +4,7 @@ interface currentTrack {
     album: string;
     mediaKind: string;
     duration: number;
+    endTime?: number;
     elapsedTime: number;
     remainingTime: number;
     url: string;
