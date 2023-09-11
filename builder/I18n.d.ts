@@ -1,3 +1,3 @@
 export interface I18n {
-    [key: any]: any;
+    [key: string | number | symbol]: any;
 }

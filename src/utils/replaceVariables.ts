@@ -20,7 +20,7 @@ export class replaceVariables {
         // e.g. "%title% - %album%" => "-"
         const separator =
             config
-                .split(/%title%|%album%|%artist%|%version%/g)
+                .split(/%title%|%album%|%artist%|%year%|%version%/g)
                 .find((e) => e.length > 0)
                 ?.trim()
                 ?.replace(/[a-zA-Z0-9 ]/g, "") ?? "-";
@@ -42,6 +42,10 @@ export class replaceVariables {
             .replace(
                 /%artist%/g,
                 this.currentTrack.artist ? "_ARTIST_IS_AV_" : "_ARTIST_NOT_AV_"
+            )
+            .replace(
+                /%year%/g,
+                this.currentTrack.releaseYear ? "_YEAR_IS_AV_" : "_YEAR_NOT_AV_"
             )
             .replace(
                 /%version%/g,
@@ -90,6 +94,8 @@ export class replaceVariables {
                 return this.currentTrack.album;
             case "artist":
                 return this.currentTrack.artist;
+            case "year":
+                return this.currentTrack.releaseYear?.toString();
             case "version":
                 return app.isPackaged ? app.getVersion() : "Development";
             default:
