@@ -3,7 +3,11 @@
         "admin": "Merci de ne pas exécuter AMRPC avec les droits d'administrateur !",
         "noTrack": "Aucune piste détéctée",
         "jsFileExtension": "Il y a une erreur dans les données d'association du fichier JS. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus.",
-        "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus."
+        "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus.",
+        "watchDog": {
+            "title": "AMRPC WatchDog not installed",
+            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+        }
     },
     "tray": {
         "restart": "Redémarrer",
