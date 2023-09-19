@@ -3,7 +3,11 @@
         "admin": "Não execute o AMRPC como administrador!",
         "noTrack": "Nenhuma música detectada",
         "jsFileExtension": "Há um erro com o arquivo JS de associação dos dados. Clique no botão abaixo para saber mais.",
-        "cmd": "Há um erro com o prompt de comando. Clique no botão abaixo para saber mais."
+        "cmd": "Há um erro com o prompt de comando. Clique no botão abaixo para saber mais.",
+        "watchDog": {
+            "title": "AMRPC WatchDog not installed",
+            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+        }
     },
     "tray": {
         "restart": "Reiniciar",
