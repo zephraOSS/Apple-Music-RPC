@@ -3,7 +3,11 @@
         "admin": "Molimo vas da ne pokrećete AMRPC kao administrator!",
         "noTrack": "Nije otkrivena nijedna pesma",
         "jsFileExtension": "Došlo je do greške sa podacima o asocijaciji JS datoteka. Kliknite na dugme ispod da biste saznali više.",
-        "cmd": "Došlo je do greške sa Command Prompt-om. Kliknite na dugme ispod da biste saznali više."
+        "cmd": "Došlo je do greške sa Command Prompt-om. Kliknite na dugme ispod da biste saznali više.",
+        "watchDog": {
+            "title": "AMRPC WatchDog not installed",
+            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+        }
     },
     "tray": {
         "restart": "Restart",
