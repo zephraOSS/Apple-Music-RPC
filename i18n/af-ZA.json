@@ -3,7 +3,11 @@
         "admin": "Moet asseblief nie AMRPC met administrateur regte laat loop nie!",
         "noTrack": "Geen snit bespeur nie",
         "jsFileExtension": "Daar is 'n fout met die JS-lêerassosiasiedata. Klik asseblief op die knoppie hieronder om meer te wete te kom.",
-        "cmd": "Daar is 'n fout met opdragprompt. Klik asseblief op die knoppie hieronder om meer te wete te kom."
+        "cmd": "Daar is 'n fout met opdragprompt. Klik asseblief op die knoppie hieronder om meer te wete te kom.",
+        "watchDog": {
+            "title": "AMRPC WatchDog not installed",
+            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+        }
     },
     "tray": {
         "restart": "Herbegin",
