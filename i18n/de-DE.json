@@ -5,8 +5,8 @@
         "jsFileExtension": "Es liegt ein Fehler bei den JS-Dateizuordnungsdaten vor. Klicke auf den Button unten, um mehr zu erfahren.",
         "cmd": "Es liegt ein Fehler mit der Eingabeaufforderung vor. Klicke auf den Button unten, um mehr zu erfahren.",
         "watchDog": {
-            "title": "AMRPC WatchDog not installed",
-            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+            "title": "AMRPC WatchDog nicht installiert",
+            "description": "WatchDog wird für Apple Music (Vorschau) benötigt. Möchtest Du es installieren?"
         }
     },
     "tray": {
