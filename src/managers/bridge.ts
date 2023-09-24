@@ -187,6 +187,7 @@ export class Bridge {
         if (Object.keys(currentTrack).length === 0)
             return log.warn("[Bridge]", "No Track detected");
 
+        // TODO: remove in stable release, keep for beta
         log.debug(
             "[BetaDebugLog][Bridge][onPlay]",
             "typeof this.discord",
