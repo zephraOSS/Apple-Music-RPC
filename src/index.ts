@@ -18,6 +18,7 @@ import { init as initCrowdin } from "./utils/crowdin";
 import { init as initProtocol } from "./utils/protocol";
 
 import { checkAppDependency } from "./utils/checkAppDependency";
+import { WatchDogState } from "./utils/watchdog";
 
 import * as log from "electron-log";
 
@@ -80,7 +81,11 @@ app.on("ready", async () => {
     initAutoLaunch();
     initMsStoreModal();
 
-    if (config.get("service") === "music") watchDog = new WatchDog();
+    if (config.get("service") === "music") {
+        watchDog = new WatchDog();
+
+        app.on("before-quit", () => WatchDogState(false));
+    }
 
     if (appDependencies.music && appDependencies.discord) bridge = new Bridge();
     else Browser.windowAction("show");
