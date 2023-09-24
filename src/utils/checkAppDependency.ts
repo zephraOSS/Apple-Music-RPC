@@ -8,19 +8,23 @@ import * as log from "electron-log";
 import execPromise from "./execPromise";
 
 export async function checkAppDependency(): Promise<AppDependencies> {
-    const iTunes = process.platform === "win32"
-                ? await checkIfAppIsInstalled("iTunes")
-                : true
-    const appleMusic = process.platform === "win32"
-                ? await checkIfAppIsInstalled("Apple Music")
-                : null;
+    const iTunes =
+        process.platform === "win32"
+            ? await checkIfAppIsInstalled("iTunes")
+            : true;
+    const appleMusic =
+        process.platform === "win32"
+            ? await checkIfAppIsInstalled("Apple Music")
+            : null;
 
     // TODO: check if WatchDog is installed
 
     if (iTunes || appleMusic) {
         log["info"](
-            `[checkAppDependency][Music] ${iTunes ? "iTunes Found" : "AppleMusicPreview found"}`
-        )
+            `[checkAppDependency][Music] ${
+                iTunes ? "iTunes Found" : "AppleMusicPreview found"
+            }`
+        );
     } else {
         log["warn"]("[checkAppDependency][Music] Not found");
     }
@@ -45,21 +49,21 @@ export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
     }
 
     if (appName === "Apple Music") {
-        let stdout = await execPromise(`Get-AppxPackage -Name "AppleInc.AppleMusicWin"`, {'shell': 'powershell.exe'});
+        let stdout = await execPromise(
+            `Get-AppxPackage -Name "AppleInc.AppleMusicWin"`,
+            { shell: "powershell.exe" }
+        );
         return stdout.includes("AppleMusicWin");
     }
 
     try {
         exec(`where ${appName}`, (err, stdout) => {
             if (err) {
-                log.error(
-                    "[checkAppDependency][checkIfAppIsInstalled]",
-                    err
-                );
+                log.error("[checkAppDependency][checkIfAppIsInstalled]", err);
                 return false;
             } else {
                 return stdout.includes(appName);
-            };
+            }
         });
     } catch (e) {
         log.info(
