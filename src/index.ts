@@ -36,6 +36,12 @@ export let updater: Updater;
 Object.assign(console, log.functions);
 
 if (!app.isPackaged) log.transports.file.fileName = "development.log";
+else if (isBeta) {
+    log.transports.file.fileName = `beta-${process.version.replace(
+        /\./g,
+        "_"
+    )}.log`;
+}
 if (!app.requestSingleInstanceLock()) app.quit();
 
 log.info(
