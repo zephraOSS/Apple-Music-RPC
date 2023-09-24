@@ -1,9 +1,17 @@
-import { JSONParse } from "../utils/json";
+import { dialog, shell } from "electron";
 
-import * as log from "electron-log";
+import { i18n } from "./i18n";
+import { JSONParse } from "../utils/json";
+import {
+    WatchDogDetails,
+    WatchDogInstaller,
+    WatchDogState
+} from "../utils/watchdog";
 
 import WebSocket from "ws";
 import EventEmitter from "events";
+
+import * as log from "electron-log";
 
 interface WatchDogData {
     type: "res" | "event";
@@ -21,36 +29,82 @@ export class WatchDog {
     private emitter = new EventEmitter();
 
     constructor() {
-        this.connect();
+        this.init();
+    }
+
+    async init() {
+        if (WatchDogDetails("status")) {
+            log.info("[WatchDog]", "WatchDog is installed");
+
+            if (await WatchDogDetails("running")) this.connect();
+            else {
+                WatchDogState(true);
+
+                setTimeout(async () => {
+                    if (await WatchDogDetails("running")) this.connect();
+                    else this.init();
+                }, 2500);
+            }
+        } else {
+            log.info("[WatchDog]", "WatchDog is not installed");
+
+            const strings = i18n.getLangStrings(),
+                msgBox = dialog.showMessageBoxSync({
+                    type: "error",
+                    // @ts-ignore
+                    title: strings.error.watchDog.title,
+                    // @ts-ignore
+                    message: strings.error.watchDog.description,
+                    buttons: [
+                        strings.settings.modal.buttons.yes,
+                        strings.settings.modal.buttons.learnMore
+                    ]
+                });
+
+            switch (msgBox) {
+                case 0:
+                    WatchDogInstaller(true);
+                    break;
+
+                case 1:
+                    shell.openExternal(
+                        "https://docs.amrpc.zephra.cloud/articles/watchdog"
+                    );
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     public connect(): void {
         this.socket = new WebSocket("ws://localhost:9632/watchdog");
 
         this.socket.addEventListener("open", () => {
-            log.info("[WatchDog]", "Connected to WatchDog");
+            log.info("[WatchDog]", "Connected to WebSocket");
 
             // TEMP
             this.socket.send("getCurrentTrack");
         });
 
         this.socket.addEventListener("close", () =>
-            log.info("[WatchDog]", "Disconnected from WatchDog")
+            log.info("[WatchDog]", "Disconnected from WebSocket")
         );
 
-        this.socket.addEventListener("message", (e) => {
-            log.debug(
-                "[WatchDog]",
-                "--REMOVE IN PROD.--",
-                "Received message from WatchDog",
-                e.data
-            );
+        this.socket.addEventListener("error", (e) => {
+            log.error("[WatchDog]", "Error connecting to WebSocket", e);
+            log.info("[WatchDog]", "Retrying in 5 seconds...");
 
+            setTimeout(() => this.connect(), 5000);
+        });
+
+        this.socket.addEventListener("message", (e) => {
             const data: WatchDogData = JSONParse(e.data as string);
 
             if (!data || Object.keys(data).length === 0 || !data.playerState)
                 return;
-            //if (data.type === "res") return;
+            if (data.type === "res") return;
 
             if (data.playerState === "playing") {
                 const durationMS = data.duration * 1000,
@@ -85,11 +139,11 @@ export class WatchDog {
 
     public reconnect(): void {
         this.close();
-        this.connect();
+        this.init();
     }
 
     public isConnected(): boolean {
-        return this.socket.readyState === WebSocket.OPEN;
+        return this.socket && this.socket.readyState === WebSocket.OPEN;
     }
 
     public send(message: string): void {
@@ -97,27 +151,31 @@ export class WatchDog {
     }
 
     public getCurrentTrack(): Promise<WatchDogData> {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             if (!this.isConnected()) return resolve({} as WatchDogData);
 
-            // TODO: WatchDog request support
-            // let failCount = 0;
-            //
-            // this.socket.send("getCurrentTrack");
-            // this.socket.addEventListener("message", (e) => {
-            //     const data: WatchDogData = JSONParse(e.data);
-            //
-            //     if (!data || Object.keys(data).length === 0) reject();
-            //     if (data.type === "event") {
-            //         failCount++;
-            //
-            //         if (failCount > 2) reject();
-            //
-            //         return;
-            //     }
-            //
-            //     resolve(data);
-            // });
+            const gThis = this;
+
+            let failCount = 0;
+
+            this.socket.addEventListener("message", onMessage);
+            this.socket.send("getCurrentTrack");
+
+            function onMessage(e: WebSocket.MessageEvent) {
+                const data: WatchDogData = JSONParse(e.data as string);
+
+                if (!data || Object.keys(data).length === 0) reject();
+                if (data.type === "event") {
+                    failCount++;
+
+                    if (failCount > 4) reject();
+
+                    return;
+                }
+
+                resolve(data);
+                gThis.socket.removeEventListener("message", onMessage);
+            }
         });
     }
 
