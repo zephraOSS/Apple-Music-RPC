@@ -5,8 +5,8 @@
         "jsFileExtension": "Há um erro com o arquivo JS de associação dos dados. Clique no botão abaixo para saber mais.",
         "cmd": "Há um erro com o prompt de comando. Clique no botão abaixo para saber mais.",
         "watchDog": {
-            "title": "AMRPC WatchDog not installed",
-            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+            "title": "AMRPC WatchDog não instalado",
+            "description": "O WatchDog é necessário para suportar o Apple Music (Preview). Deseja instalá-lo?"
         }
     },
     "tray": {
@@ -21,21 +21,21 @@
     "settings": {
         "config": {
             "autoLaunch": "Iniciar automaticamente",
-            "autoUpdates": "Automatic Updates",
-            "betaUpdates": "Beta Updates",
+            "autoUpdates": "Atualizações automáticas",
+            "betaUpdates": "Atualizações beta",
             "installUpdate": {
-                "label": "Install Update",
-                "button": "Install %version%",
-                "buttonNA": "No update available"
+                "label": "Instalar atualização",
+                "button": "Instalar %version%",
+                "buttonNA": "Nenhuma atualização disponível"
             },
             "show": "Mostrar Presença",
             "hideOnPause": "Esconder Presença quando pausar",
-            "artworkPrioLocal": "Prioritize Local Artwork",
+            "artworkPrioLocal": "Priorizar artes de álbum locais",
             "showTimestamps": "Mostrar marcadores de tempo",
             "showAlbumArtwork": "Mostrar arte do álbum",
             "performanceMode": "Modo Desempenho",
             "hardwareAcceleration": "Aceleração de hardware",
-            "checkIfMusicInstalled": "Check if Music is installed",
+            "checkIfMusicInstalled": "Checar se o Apple Music está instalado",
             "colorTheme": {
                 "label": "Esquema de cores",
                 "light": "Claro",
@@ -63,9 +63,9 @@
         },
         "category": {
             "general": "Geral",
-            "softwareUpdate": "Software Update",
+            "softwareUpdate": "Atualizações de Software",
             "cache": "Gerência de cache",
-            "advanced": "Advanced"
+            "advanced": "Avançado"
         },
         "warn": {
             "music": {
@@ -85,7 +85,7 @@
                 "warn": "<b>AVISO</b> Desabilitar o cache causará a remoção de todos os dados do cache.",
                 "info": "O cache guarda todas as artes de álbum e outros dados para reduzir o número de requisições feitos para Apple. Isso pode melhorar o tempo de carregamento da arte do álbum e do link."
             },
-            "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
+            "checkIfMusicInstalled": "Desabilite essa opção se estiver encontrando problemas com a checagem, e tenha certeza de que o aplicativo Apple Music está instalado."
         },
         "extra": {
             "github": "Ver no GitHub",
