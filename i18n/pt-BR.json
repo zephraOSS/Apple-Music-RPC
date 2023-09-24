@@ -79,7 +79,7 @@
         },
         "note": {
             "language": "Se seu idioma não está disponível, <a href='https://discord.gg/qqAgCHS'>entre em contato conosco</a>.",
-            "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
+            "artworkPrioLocal": "Se a arte de álbum estiver disponível localmente ela será usada, em vez de buscar na API do Apple Music.",
             "cache": {
                 "size": "Tamanho atual do cache: %size%, %count% itens",
                 "warn": "<b>AVISO</b> Desabilitar o cache causará a remoção de todos os dados do cache.",
