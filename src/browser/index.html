@@ -219,6 +219,60 @@
                         </div>
                     </div>
 
+                    <div
+                        class="settings_category"
+                        id="watchdog"
+                        data-restriction-os="win32"
+                    >
+                        <div class="category__header">
+                            <h3>WatchDog</h3>
+                        </div>
+
+                        <div class="category__content">
+                            <div
+                                class="settings_setting"
+                                data-restriction-setting="service"
+                                data-restriction-setting-value="music"
+                            >
+                                <div class="setting_main">
+                                    <label
+                                        data-for="config_watchdog.autoUpdates"
+                                    >
+                                        Automatically Download & Install Updates
+                                    </label>
+                                    <label class="cfgSwitch cfg_loading">
+                                        <input
+                                            type="checkbox"
+                                            id="config_watchdog.autoUpdates"
+                                        />
+                                        <i></i>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div
+                                class="settings_setting"
+                                data-restriction-setting="service"
+                                data-restriction-setting-value="music"
+                            >
+                                <div class="setting_main">
+                                    <label
+                                        data-for="config_watchdog.mirrorAppState"
+                                    >
+                                        Start & Stop WatchDog with AMRPC
+                                    </label>
+                                    <label class="cfgSwitch cfg_loading">
+                                        <input
+                                            type="checkbox"
+                                            id="config_watchdog.mirrorAppState"
+                                        />
+                                        <i></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="settings_category" id="rpc">
                         <div class="category__header">
                             <h3>Rich Presence</h3>
