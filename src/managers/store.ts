@@ -25,6 +25,10 @@ export const config = new Store({
             lastFM: {
                 username: "",
                 key: ""
+            },
+            watchdog: {
+                autoUpdates: true,
+                mirrorAppState: true
             }
         }
     }),

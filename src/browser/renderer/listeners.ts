@@ -210,6 +210,12 @@ export function init() {
         .forEach(async (ele: HTMLDivElement) => {
             if (await window.electron.isWindowsStore()) ele.remove();
         });
+
+    document
+        .querySelectorAll(
+            ".settings_category, .settings_setting input, .settings_setting select"
+        )
+        .forEach(checkRestrictionSetting);
 }
 
 async function checkRestartRequired(
@@ -247,4 +253,45 @@ function valueChangeEvents(ele): void {
                 ?.remove();
         }
     }
+
+    checkRestrictionSetting(ele);
+}
+
+function checkRestrictionSetting(ele: HTMLElement) {
+    console.log(ele);
+
+    document
+        .querySelectorAll(".settings_setting[data-restriction-setting]")
+        .forEach(async (eleQS: HTMLDivElement) => {
+            const restrictSetting = eleQS.dataset.restrictionSetting,
+                restrictValue = eleQS.dataset.restrictionSettingValue ?? "true";
+
+            if (!restrictSetting) return;
+
+            if (ele.id === `config_${restrictSetting}`) {
+                const configValue = await window.electron.config.get(
+                    restrictSetting
+                );
+
+                eleQS.classList[
+                    configValue !== restrictValue ? "add" : "remove"
+                ]("cfg_loading");
+            }
+        });
+
+    document
+        .querySelectorAll(".settings_category[data-restriction-setting]")
+        .forEach(async (eleQS: HTMLDivElement) => {
+            const restrictSetting = eleQS.dataset.restrictionSetting;
+
+            if (!restrictSetting) return;
+
+            if (ele.id === `config_${restrictSetting}`) {
+                const configValue = await window.electron.config.get(
+                    restrictSetting
+                );
+
+                eleQS.style.display = configValue ? "block" : "none";
+            }
+        });
 }

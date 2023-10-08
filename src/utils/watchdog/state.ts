@@ -23,6 +23,8 @@ export function WatchDogState(start: boolean = false) {
             }
         );
     } else {
+        log.info("[WatchDog][State]", "Stopping WatchDog");
+
         exec(`tasklist /FI "IMAGENAME eq ${appName}"`, (error, stdout) => {
             if (error) {
                 log.error(

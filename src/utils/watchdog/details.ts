@@ -8,21 +8,27 @@ export function WatchDogDetails(
     type: "version" | "status" | "running"
 ): string | boolean | Promise<boolean> | null {
     const appData = getAppDataPath(),
-        appDataWatchdog = path.join(appData, "/watchdog/");
+        appDataWatchDog = path.join(appData, "/watchdog/");
 
     if (type === "version") {
-        if (!appData || !fs.existsSync(path.join(appData, "version.txt")))
+        if (
+            !appData ||
+            !fs.existsSync(path.join(appDataWatchDog, "version.txt"))
+        )
             return null;
 
-        return fs.readFileSync(path.join(appData, "version.txt"), "utf-8");
+        return fs.readFileSync(
+            path.join(appDataWatchDog, "version.txt"),
+            "utf-8"
+        );
     } else if (type === "status") {
         if (!appData) return null;
 
         return (
-            fs.existsSync(appDataWatchdog) &&
-            fs.existsSync(path.join(appDataWatchdog, "watchdog.exe")) &&
-            fs.existsSync(path.join(appDataWatchdog, "watchdog.pdb")) &&
-            fs.existsSync(path.join(appDataWatchdog, "watchdog.exe.config"))
+            fs.existsSync(appDataWatchDog) &&
+            fs.existsSync(path.join(appDataWatchDog, "watchdog.exe")) &&
+            fs.existsSync(path.join(appDataWatchDog, "Newtonsoft.Json.dll")) &&
+            fs.existsSync(path.join(appDataWatchDog, "websocket-sharp.dll"))
         );
     } else if (type === "running") {
         if (!appData) return null;

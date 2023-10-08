@@ -1,4 +1,4 @@
-import { WatchDogDetails } from "./details";
+import { WatchDogDetails, WatchDogState } from "./";
 import { watchDog } from "../../index";
 
 import fetch from "node-fetch";
@@ -17,6 +17,8 @@ import * as log from "electron-log";
 // - version.txt
 
 export async function WatchDogInstaller(initWatchDog: Boolean = false) {
+    if (watchDog?.watchdogUpdating) return;
+
     const start = Date.now();
 
     log.info("[WatchDogInstaller]", "Checking for WatchDog update");
@@ -33,6 +35,10 @@ export async function WatchDogInstaller(initWatchDog: Boolean = false) {
 
     if (!latestRelease || latestRelease.tag_name === currentVersion) return;
     if (!fs.existsSync(watchdogPath)) fs.mkdirSync(watchdogPath);
+
+    watchDog.watchdogUpdating = true;
+
+    WatchDogState(false);
 
     // Download latest release
     const downloadURL = latestRelease.assets?.find(
@@ -91,6 +97,8 @@ export async function WatchDogInstaller(initWatchDog: Boolean = false) {
             "[WatchDogInstaller]",
             `Finished in ${(Date.now() - start) / 1000}s`
         );
+
+        watchDog.watchdogUpdating = false;
 
         if (initWatchDog) watchDog.init();
     }, 1000);

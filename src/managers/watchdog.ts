@@ -1,5 +1,6 @@
 import { dialog, shell } from "electron";
 
+import { config } from "./store";
 import { i18n } from "./i18n";
 import { JSONParse } from "../utils/json";
 import {
@@ -28,52 +29,66 @@ export class WatchDog {
     private socket: WebSocket;
     private emitter = new EventEmitter();
 
+    public watchdogUpdating = false;
+
     constructor() {
         this.init();
     }
 
     async init() {
-        if (WatchDogDetails("status")) {
-            log.info("[WatchDog]", "WatchDog is installed");
+        if (this.watchdogUpdating) {
+            log.info("[WatchDog]", "WatchDog is updating");
 
-            if (await WatchDogDetails("running")) this.connect();
-            else {
-                WatchDogState(true);
-
-                setTimeout(async () => {
-                    if (await WatchDogDetails("running")) this.connect();
-                    else this.init();
-                }, 2500);
-            }
+            setTimeout(this.init, 2500);
         } else {
-            log.info("[WatchDog]", "WatchDog is not installed");
+            if (WatchDogDetails("status")) {
+                log.info("[WatchDog]", "WatchDog is installed");
 
-            const strings = i18n.getLangStrings(),
-                msgBox = dialog.showMessageBoxSync({
-                    type: "error",
-                    // @ts-ignore
-                    title: strings.error.watchDog.title,
-                    // @ts-ignore
-                    message: strings.error.watchDog.description,
-                    buttons: [
-                        strings.settings.modal.buttons.yes,
-                        strings.settings.modal.buttons.learnMore
-                    ]
-                });
+                if (await WatchDogDetails("running")) this.connect();
+                else {
+                    WatchDogState(true);
 
-            switch (msgBox) {
-                case 0:
-                    WatchDogInstaller(true);
-                    break;
+                    setTimeout(async () => {
+                        if (await WatchDogDetails("running")) this.connect();
+                        else this.init();
+                    }, 2500);
+                }
+            } else {
+                log.info("[WatchDog]", "WatchDog is not installed");
 
-                case 1:
-                    shell.openExternal(
-                        "https://docs.amrpc.zephra.cloud/articles/watchdog"
-                    );
-                    break;
+                if (config.get("watchdog.autoUpdates")) {
+                    setTimeout(() => this.init(), 3000);
 
-                default:
-                    break;
+                    return;
+                }
+
+                const strings = i18n.getLangStrings(),
+                    msgBox = dialog.showMessageBoxSync({
+                        type: "error",
+                        // @ts-ignore
+                        title: strings.error.watchDog.title,
+                        // @ts-ignore
+                        message: strings.error.watchDog.description,
+                        buttons: [
+                            strings.settings.modal.buttons.yes,
+                            strings.settings.modal.buttons.learnMore
+                        ]
+                    });
+
+                switch (msgBox) {
+                    case 0:
+                        WatchDogInstaller(true);
+                        break;
+
+                    case 1:
+                        shell.openExternal(
+                            "https://docs.amrpc.zephra.cloud/articles/watchdog"
+                        );
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -96,7 +111,7 @@ export class WatchDog {
             log.error("[WatchDog]", "Error connecting to WebSocket", e);
             log.info("[WatchDog]", "Retrying in 5 seconds...");
 
-            setTimeout(() => this.connect(), 5000);
+            setTimeout(this.init, 5000);
         });
 
         this.socket.addEventListener("message", (e) => {
