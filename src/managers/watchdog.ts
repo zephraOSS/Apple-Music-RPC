@@ -179,7 +179,8 @@ export class WatchDog {
             function onMessage(e: WebSocket.MessageEvent) {
                 const data: WatchDogData = JSONParse(e.data as string);
 
-                if (!data || Object.keys(data).length === 0) reject();
+                if (!data || Object.keys(data).length === 0) return reject();
+
                 if (data.type === "event") {
                     failCount++;
 

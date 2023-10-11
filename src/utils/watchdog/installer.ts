@@ -16,7 +16,7 @@ import * as log from "electron-log";
 // - [...]
 // - version.txt
 
-export async function WatchDogInstaller(initWatchDog: Boolean = false) {
+export async function WatchDogInstaller(initWatchDog: boolean = false) {
     if (watchDog?.watchdogUpdating) return;
 
     const start = Date.now();

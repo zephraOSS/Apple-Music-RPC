@@ -49,10 +49,11 @@ export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
     }
 
     if (appName === "Apple Music") {
-        let stdout = await execPromise(
+        const stdout = await execPromise(
             `Get-AppxPackage -Name "AppleInc.AppleMusicWin"`,
             { shell: "powershell.exe" }
         );
+
         return stdout.includes("AppleMusicWin");
     }
 
