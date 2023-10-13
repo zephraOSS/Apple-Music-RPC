@@ -3,6 +3,7 @@ import { Tray, Menu, app, shell } from "electron";
 import { quitITunes } from "../utils/quitITunes";
 import { Browser } from "./browser";
 import { i18n } from "./i18n";
+import { config } from "./store";
 
 import * as path from "path";
 
@@ -29,6 +30,10 @@ export class TrayManager {
             else this.tray.popUpContextMenu();
         });
 
+        config.onDidChange("service", () => {
+            this.tray.setContextMenu(this.createContextMenu());
+        });
+
         i18n.onLanguageUpdate(() => {
             this.i18n = i18n.getLangStrings();
             this.update();
@@ -49,7 +54,9 @@ export class TrayManager {
                     (process.platform === "darwin" &&
                         parseFloat(process.release.toString()) <= 10.15) ||
                     process.platform === "win32"
-                        ? "iTunes"
+                        ? config.get("service") === "itunes"
+                            ? "iTunes"
+                            : "Apple Music (Preview)"
                         : "Apple Music",
                 enabled: false
             },

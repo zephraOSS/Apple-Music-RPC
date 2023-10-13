@@ -169,6 +169,14 @@ export function init() {
             const restrictOS = ele.dataset.restrictionOs.split(","),
                 os = platform ?? (await window.electron.getPlatform());
 
+            console.log(
+                `OS Restriction for category "${
+                    ele.querySelector("label[for]")?.getAttribute("for") ??
+                    ele.id ??
+                    "Unknown"
+                }": ${restrictOS.join(", ")} | Current OS: ${os}™`
+            );
+
             if (!restrictOS.includes(os)) ele.remove();
         });
 
@@ -176,14 +184,24 @@ export function init() {
         .querySelectorAll(".settings_setting[data-restriction-os]")
         .forEach(async (ele: HTMLDivElement) => {
             const restrictOS = ele.dataset.restrictionOs.split(","),
-                os = platform ?? (await window.electron.getPlatform());
+                os = platform ?? (await window.electron.getPlatform()),
+                removeEle = ele.hasAttribute("data-restriction-os-remove");
 
-            console.log(restrictOS, os);
+            console.log(
+                `OS Restriction for setting "${
+                    ele.querySelector("label[for]")?.getAttribute("for") ??
+                    ele.id ??
+                    "Unknown"
+                }": ${restrictOS.join(", ")} | Current OS: ${os}™`
+            );
 
-            if (!restrictOS.includes(platform)) {
-                ele.querySelector(
-                    "label.cfgSwitch, select, input"
-                ).classList.add("cfg_loading");
+            if (!restrictOS.includes(os)) {
+                if (removeEle) ele.remove();
+                else {
+                    ele.querySelector(
+                        "label.cfgSwitch, select, input"
+                    ).classList.add("cfg_loading");
+                }
             }
         });
 
@@ -192,6 +210,12 @@ export function init() {
         .forEach(async (ele: HTMLDivElement) => {
             if (await window.electron.isWindowsStore()) ele.remove();
         });
+
+    document
+        .querySelectorAll(
+            ".settings_category, .settings_setting input, .settings_setting select"
+        )
+        .forEach(checkRestrictionSetting);
 }
 
 async function checkRestartRequired(
@@ -229,4 +253,45 @@ function valueChangeEvents(ele): void {
                 ?.remove();
         }
     }
+
+    checkRestrictionSetting(ele);
+}
+
+function checkRestrictionSetting(ele: HTMLElement) {
+    console.log(ele);
+
+    document
+        .querySelectorAll(".settings_setting[data-restriction-setting]")
+        .forEach(async (eleQS: HTMLDivElement) => {
+            const restrictSetting = eleQS.dataset.restrictionSetting,
+                restrictValue = eleQS.dataset.restrictionSettingValue ?? "true";
+
+            if (!restrictSetting) return;
+
+            if (ele.id === `config_${restrictSetting}`) {
+                const configValue = await window.electron.config.get(
+                    restrictSetting
+                );
+
+                eleQS.classList[
+                    configValue !== restrictValue ? "add" : "remove"
+                ]("cfg_loading");
+            }
+        });
+
+    document
+        .querySelectorAll(".settings_category[data-restriction-setting]")
+        .forEach(async (eleQS: HTMLDivElement) => {
+            const restrictSetting = eleQS.dataset.restrictionSetting;
+
+            if (!restrictSetting) return;
+
+            if (ele.id === `config_${restrictSetting}`) {
+                const configValue = await window.electron.config.get(
+                    restrictSetting
+                );
+
+                eleQS.style.display = configValue ? "block" : "none";
+            }
+        });
 }

@@ -5,72 +5,94 @@ import { i18n } from "../managers/i18n";
 import { config } from "../managers/store";
 
 import * as log from "electron-log";
+import execPromise from "./execPromise";
 
 export async function checkAppDependency(): Promise<AppDependencies> {
-    const music =
-        process.platform !== "win32"
-            ? true
-            : await checkIfAppIsInstalled("iTunes");
+    const iTunes =
+        process.platform === "win32"
+            ? await checkIfAppIsInstalled("iTunes")
+            : true;
+    const appleMusic =
+        process.platform === "win32"
+            ? await checkIfAppIsInstalled("Apple Music")
+            : null;
 
-    log[!music ? "warn" : "info"](
-        `[checkAppDependency][Music] ${music ? "Found" : "Not found"}`
-    );
+    // TODO: check if WatchDog is installed
+
+    if (iTunes || appleMusic) {
+        log["info"](
+            `[checkAppDependency][Music] ${
+                iTunes ? "iTunes Found" : "AppleMusicPreview found"
+            }`
+        );
+    } else {
+        log["warn"]("[checkAppDependency][Music] Not found");
+    }
 
     return {
-        music,
+        music: iTunes || appleMusic,
+        iTunes: iTunes,
+        appleMusic,
+        watchDog: true,
         discord: true
     };
 }
 
 export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-        if (appName === "iTunes" && !config.get("checkIfMusicInstalled")) {
-            log.info(
-                "[checkAppDependency][checkIfAppIsInstalled]",
-                "Skipping iTunes"
-            );
+    if (appName === "iTunes" && !config.get("checkIfMusicInstalled")) {
+        log.info(
+            "[checkAppDependency][checkIfAppIsInstalled]",
+            "Skipping iTunes"
+        );
 
-            return resolve(true);
-        }
+        return true;
+    }
 
-        try {
-            exec(`where ${appName}`, (err, stdout) => {
-                if (err) {
-                    log.error(
-                        "[checkAppDependency][checkIfAppIsInstalled]",
-                        err
-                    );
-                    reject(false);
-                } else resolve(stdout.includes(appName));
-            });
-        } catch (e) {
-            log.info(
-                "[checkAppDependency][checkIfAppIsInstalled]",
-                "Check the documentation for more information:",
+    if (appName === "Apple Music") {
+        const stdout = await execPromise(
+            `Get-AppxPackage -Name "AppleInc.AppleMusicWin"`,
+            { shell: "powershell.exe" }
+        );
+
+        return stdout.includes("AppleMusicWin");
+    }
+
+    try {
+        exec(`where ${appName}`, (err, stdout) => {
+            if (err) {
+                log.error("[checkAppDependency][checkIfAppIsInstalled]", err);
+                return false;
+            } else {
+                return stdout.includes(appName);
+            }
+        });
+    } catch (e) {
+        log.info(
+            "[checkAppDependency][checkIfAppIsInstalled]",
+            "Check the documentation for more information:",
+            "https://docs.amrpc.zephra.cloud/articles/command-prompt-error"
+        );
+        log.error(
+            "[checkAppDependency][checkIfAppIsInstalled]",
+            "Check if AMRPC has permission to access Command Prompt"
+        );
+        log.error("[checkAppDependency][checkIfAppIsInstalled]", e);
+
+        const strings = i18n.getLangStrings();
+
+        if (
+            dialog.showMessageBoxSync({
+                type: "error",
+                title: "AMRPC - Apple Bridge Error",
+                message: strings.error.cmd,
+                buttons: [strings.settings.modal.buttons.learnMore]
+            }) === 0
+        ) {
+            shell.openExternal(
                 "https://docs.amrpc.zephra.cloud/articles/command-prompt-error"
             );
-            log.error(
-                "[checkAppDependency][checkIfAppIsInstalled]",
-                "Check if AMRPC has permission to access Command Prompt"
-            );
-            log.error("[checkAppDependency][checkIfAppIsInstalled]", e);
-
-            const strings = i18n.getLangStrings();
-
-            if (
-                dialog.showMessageBoxSync({
-                    type: "error",
-                    title: "AMRPC - Apple Bridge Error",
-                    message: strings.error.cmd,
-                    buttons: [strings.settings.modal.buttons.learnMore]
-                }) === 0
-            ) {
-                shell.openExternal(
-                    "https://docs.amrpc.zephra.cloud/articles/command-prompt-error"
-                );
-            }
-
-            reject(false);
         }
-    });
+
+        return false;
+    }
 }

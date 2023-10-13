@@ -5,6 +5,7 @@ import { appData, config } from "./managers/store";
 import { TrayManager } from "./managers/tray";
 import { ModalWatcher } from "./managers/modal";
 import { Bridge } from "./managers/bridge";
+import { WatchDog } from "./managers/watchdog";
 import { Browser } from "./managers/browser";
 import { LastFM } from "./managers/lastFM";
 import { Updater } from "./managers/updater";
@@ -17,6 +18,7 @@ import { init as initCrowdin } from "./utils/crowdin";
 import { init as initProtocol } from "./utils/protocol";
 
 import { checkAppDependency } from "./utils/checkAppDependency";
+import { WatchDogInstaller, WatchDogState } from "./utils/watchdog";
 
 import * as log from "electron-log";
 
@@ -28,11 +30,18 @@ export let modalWatcher: ModalWatcher;
 export let appDependencies: AppDependencies;
 export let lastFM: LastFM;
 export let bridge: Bridge;
+export let watchDog: WatchDog;
 export let updater: Updater;
 
 Object.assign(console, log.functions);
 
 if (!app.isPackaged) log.transports.file.fileName = "development.log";
+else if (isBeta) {
+    log.transports.file.fileName = `beta-${process.version.replace(
+        /\./g,
+        "_"
+    )}.log`;
+}
 if (!app.requestSingleInstanceLock()) app.quit();
 
 log.info(
@@ -77,6 +86,19 @@ app.on("ready", async () => {
     initTheme();
     initAutoLaunch();
     initMsStoreModal();
+
+    if (config.get("service") === "music") {
+        watchDog = new WatchDog();
+
+        app.on("before-quit", () => WatchDogState(false));
+
+        if (config.get("watchdog.autoUpdates")) WatchDogInstaller(true);
+
+        // Every hour
+        setInterval(() => {
+            if (config.get("watchdog.autoUpdates")) WatchDogInstaller(true);
+        }, 1000 * 60 * 60);
+    }
 
     if (appDependencies.music && appDependencies.discord) bridge = new Bridge();
     else Browser.windowAction("show");

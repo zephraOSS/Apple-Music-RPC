@@ -4,6 +4,7 @@ interface currentTrack {
     album: string;
     mediaKind: string;
     duration: number;
+    endTime?: number;
     elapsedTime: number;
     remainingTime: number;
     url: string;
@@ -88,6 +89,9 @@ interface APIUserRoles {
 
 interface AppDependencies {
     music: boolean;
+    iTunes: boolean;
+    appleMusic: boolean;
+    watchDog: boolean;
     discord: boolean;
 }
 

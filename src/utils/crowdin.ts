@@ -1,3 +1,4 @@
+import { app } from "electron";
 import { i18n } from "../managers/i18n";
 
 import otaClient, { Translations } from "@crowdin/ota-client";
@@ -15,6 +16,13 @@ import * as log from "electron-log";
  * @description Downloads all translations from Crowdin. Use at app start.
  */
 export async function init() {
+    if (!app.isPackaged) {
+        return log.warn(
+            "[Crowdin]",
+            "Not downloading translations in dev mode"
+        );
+    }
+
     log.info("[Crowdin]", "Initializing Crowdin OTA Client");
 
     const client = new otaClient("4e8945ce96a5a9adcee3308fjap");

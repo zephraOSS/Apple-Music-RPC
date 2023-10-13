@@ -1,8 +1,9 @@
 import { Discord } from "./discord";
 import { Browser } from "./browser";
 import { i18n } from "./i18n";
+import { WatchDog } from "./watchdog";
 import { config } from "./store";
-import { appDependencies, lastFM } from "../index";
+import { appDependencies, lastFM, watchDog } from "../index";
 
 import { dialog, shell } from "electron";
 import { AppleBridge, fetchITunes } from "apple-bridge";
@@ -15,6 +16,7 @@ import * as path from "path";
 
 export class Bridge {
     private discord: Discord = new Discord();
+    private watchdog: WatchDog;
     private currentTrack;
     private currentlyPlaying = {
         name: "",
@@ -43,224 +45,293 @@ export class Bridge {
             return;
         }
 
-        this.setCurrentTrack();
+        log.info("[Bridge]", "Initializing Bridge");
 
-        setTimeout(() => {
-            if (
-                this.currentTrack &&
-                typeof this.currentTrack === "object" &&
-                Object.keys(this.currentTrack).length > 0
-            ) {
-                this.bridge.emit(
-                    this.currentTrack.playerState,
-                    "music",
-                    this.currentTrack
-                );
-            }
-        }, 500);
+        if (config.get("service") === "music") {
+            log.info("[Bridge]", "Using WatchDog");
 
-        this.initListeners();
+            this.watchdog = watchDog;
+        }
+
+        this.setCurrentTrack()
+            .then(() => {
+                setTimeout(() => {
+                    if (
+                        this.currentTrack &&
+                        typeof this.currentTrack === "object" &&
+                        Object.keys(this.currentTrack).length > 0
+                    ) {
+                        if (config.get("service") === "music") {
+                            this.watchdog.emit(
+                                this.currentTrack.playerState,
+                                this.currentTrack
+                            );
+                        } else {
+                            this.bridge.emit(
+                                this.currentTrack.playerState,
+                                "music",
+                                this.currentTrack
+                            );
+                        }
+                    }
+                }, 500);
+
+                this.initListeners();
+            })
+            .catch((err) => {
+                log.error("[Bridge][constructor][setCurrentTrack]", err);
+            });
 
         Bridge.instance = this;
     }
 
     private async setCurrentTrack() {
-        this.currentTrack = await Bridge.fetchMusic();
+        if (config.get("service") === "music")
+            this.currentTrack = await this.watchdog.getCurrentTrack();
+        else this.currentTrack = await Bridge.fetchMusic();
     }
 
     private initListeners() {
-        this.bridge.on("playing", "music", (currentTrack) => {
-            if (
-                (currentTrack.name === this.lastTrack.name &&
-                    currentTrack.artist === this.lastTrack.artist &&
-                    currentTrack.duration === this.lastTrack.duration &&
-                    !this.checkCurrentlyPlaying(currentTrack)) ||
-                (this.discord.isLive &&
-                    currentTrack.name === this.lastTrack.name)
-            )
-                return;
+        if (config.get("service") === "music") {
+            this.watchdog.on("playing", Bridge.onPlay);
+            this.watchdog.on("paused", Bridge.onPause);
+            this.watchdog.on("stopped", Bridge.onStop);
+        } else {
+            this.bridge.on("playing", "music", Bridge.onPlay);
+            this.bridge.on("paused", "music", Bridge.onPause);
+            this.bridge.on("stopped", "music", Bridge.onStop);
 
-            log.info(
-                "[Bridge]",
-                `Playing "${currentTrack.name}" by ${currentTrack.artist}`
+            this.bridge.on(
+                "timeChange",
+                "music",
+                async (currentTrack: currentTrack) => {
+                    if (Object.keys(currentTrack).length === 0) return;
+
+                    const { duration, elapsedTime } = currentTrack,
+                        activity = this.discord.activity,
+                        endTimestamp =
+                            Math.floor(Date.now() / 1000) -
+                            elapsedTime +
+                            duration;
+
+                    if (activity.endTimestamp) {
+                        if (duration === 0) {
+                            activity.state = "LIVE";
+                            delete activity.endTimestamp;
+
+                            if (activity.state !== "LIVE")
+                                this.discord.setActivity(activity);
+                        } else if (elapsedTime === 0) {
+                            delete activity.endTimestamp;
+
+                            this.discord.setActivity(activity);
+                        } else if (activity.endTimestamp !== endTimestamp) {
+                            activity.endTimestamp = endTimestamp;
+
+                            this.discord.setActivity(activity);
+                        } else if (elapsedTime >= duration)
+                            this.discord.clearActivity();
+                        else {
+                            const dif =
+                                +new Date(activity.endTimestamp.toString()) -
+                                +new Date() / 1000;
+
+                            if (dif <= 0) return this.discord.clearActivity();
+                        }
+                    } else if (this.discord.isLive && duration > 0) {
+                        await this.discord.setCurrentTrack(currentTrack);
+                    }
+                }
             );
 
-            if (Object.keys(currentTrack).length === 0)
-                return log.warn("[Bridge] No Track detected");
+            this.bridge.on("jsFileExtensionError", "music", () => {
+                log.error("[Bridge]", "JS File Extension Error.");
 
-            if (currentTrack.remainingTime > 0)
-                currentTrack.snowflake = generateSnowflake();
-
-            this.discord.setCurrentTrack(currentTrack);
-
-            if (lastFM && config.get("enableLastFM")) {
-                if (currentTrack.remainingTime <= 0) {
-                    this.lastTrack = currentTrack;
-                    return;
-                }
+                const strings = i18n.getLangStrings();
 
                 if (
-                    this.lastTrack.snowflake === currentTrack.snowflake ||
-                    this.pausedTrack.snowflake === currentTrack.snowflake ||
-                    (this.pausedTrack.name === currentTrack.name &&
-                        this.pausedTrack.remainingTime &&
-                        currentTrack.remainingTime &&
-                        this.pausedTrack.remainingTime -
-                            currentTrack.remainingTime <=
-                            25)
+                    dialog.showMessageBoxSync({
+                        type: "error",
+                        title: "AMRPC - Apple Bridge Error",
+                        message: strings.error.jsFileExtension,
+                        buttons: [strings.settings.modal.buttons.learnMore]
+                    }) === 0
                 ) {
-                    log.info("[LastFM] Skipping scrobble due to same track");
-
-                    this.lastTrack = currentTrack;
-
-                    return;
+                    shell.openExternal(
+                        "https://docs.amrpc.zephra.cloud/articles/js-file-extension-error"
+                    );
                 }
-
-                log.info("[Bridge][lastFM]", "Updating now playing");
-
-                lastFM.nowPlaying({
-                    artist: currentTrack.artist,
-                    track: currentTrack.name,
-                    album: currentTrack.album,
-                    duration: currentTrack.duration
-                });
-
-                const timestamp = Math.floor(Date.now() / 1000);
-
-                if (this.scrobbleTimeout) clearTimeout(this.scrobbleTimeout);
-
-                this.scrobbleTimeout = setTimeout(
-                    async () => {
-                        const newTrack = await Bridge.fetchMusic(),
-                            oldTrack = currentTrack;
-
-                        delete oldTrack.snowflake;
-                        delete oldTrack.remainingTime;
-                        delete oldTrack.elapsedTime;
-                        delete oldTrack.url;
-                        delete oldTrack.artwork;
-
-                        delete newTrack.remainingTime;
-                        delete newTrack.elapsedTime;
-
-                        if (
-                            newTrack.playerState === "playing" &&
-                            Object.keys(newTrack).length > 0 &&
-                            objectEqual(oldTrack, newTrack)
-                        ) {
-                            log.info(
-                                "[Bridge][lastFM]",
-                                `Scrobbling "${currentTrack.name}" by ${currentTrack.artist}`
-                            );
-
-                            lastFM.scrobble({
-                                artist: currentTrack.artist,
-                                track: currentTrack.name,
-                                album: currentTrack.album,
-                                duration: currentTrack.duration,
-                                timestamp
-                            });
-                        }
-                    },
-                    currentTrack.remainingTime > 5
-                        ? (currentTrack.remainingTime - 5) * 1000
-                        : 0
-                );
-            }
-
-            this.lastTrack = currentTrack;
-        });
-
-        this.bridge.on("paused", "music", () => {
-            if (Object.keys(this.lastTrack).length === 0) return;
-
-            log.info("[Bridge]", "Paused");
-
-            this.pausedTrack = this.lastTrack;
-            this.lastTrack = {};
-
-            if (config.get("hideOnPause")) this.discord.clearActivity();
-            else {
-                this.discord.activity.startTimestamp = null;
-                this.discord.activity.endTimestamp = null;
-
-                Discord.setActivity(this.discord.activity);
-            }
-
-            Browser.send("get-current-track", false, {
-                playerState: "paused"
             });
-        });
+        }
+    }
 
-        this.bridge.on(
-            "timeChange",
-            "music",
-            async (currentTrack: currentTrack) => {
-                if (Object.keys(currentTrack).length === 0) return;
+    static onPlay(currentTrack) {
+        if (!Bridge.instance) return;
 
-                const { duration, elapsedTime } = currentTrack,
-                    activity = this.discord.activity,
-                    endTimestamp =
-                        Math.floor(Date.now() / 1000) - elapsedTime + duration;
+        Bridge.instance.onPlay(currentTrack);
+    }
 
-                if (activity.endTimestamp) {
-                    if (duration === 0) {
-                        activity.state = "LIVE";
-                        delete activity.endTimestamp;
+    static onPause() {
+        if (!Bridge.instance) return;
 
-                        if (activity.state !== "LIVE")
-                            this.discord.setActivity(activity);
-                    } else if (elapsedTime === 0) {
-                        delete activity.endTimestamp;
+        Bridge.instance.onPause();
+    }
 
-                        this.discord.setActivity(activity);
-                    } else if (activity.endTimestamp !== endTimestamp) {
-                        activity.endTimestamp = endTimestamp;
+    static onStop() {
+        if (!Bridge.instance) return;
 
-                        this.discord.setActivity(activity);
-                    } else if (elapsedTime >= duration)
-                        this.discord.clearActivity();
-                    else {
-                        const dif =
-                            +new Date(activity.endTimestamp.toString()) -
-                            +new Date() / 1000;
+        Bridge.instance.onStop();
+    }
 
-                        if (dif <= 0) return this.discord.clearActivity();
-                    }
-                } else if (this.discord.isLive && duration > 0) {
-                    await this.discord.setCurrentTrack(currentTrack);
-                }
-            }
+    private onPlay(currentTrack) {
+        if (Object.keys(currentTrack).length === 0)
+            return log.warn("[Bridge]", "No Track detected");
+
+        // TODO: remove in stable release, keep for beta
+        log.debug(
+            "[BetaDebugLog][Bridge][onPlay]",
+            "typeof this.discord",
+            typeof this.discord
+        );
+        log.debug(
+            "[BetaDebugLog][Bridge][onPlay]",
+            "currentTrack",
+            currentTrack
         );
 
-        this.bridge.on("stopped", "music", () => {
-            if (Object.keys(this.lastTrack).length === 0) return;
+        if (!this.discord)
+            return log.warn("[Bridge]", "Discord not found, skipping onPlay");
 
-            log.info("[Bridge]", "Stopped");
+        if (
+            (currentTrack.name === this.lastTrack?.name &&
+                currentTrack.artist === this.lastTrack?.artist &&
+                currentTrack.duration === this.lastTrack?.duration &&
+                !this.checkCurrentlyPlaying(currentTrack)) ||
+            (this.discord.isLive && currentTrack.name === this.lastTrack?.name)
+        )
+            return;
 
-            this.lastTrack = {};
+        log.info(
+            "[Bridge]",
+            `Playing "${currentTrack.name}" by ${currentTrack.artist}`
+        );
 
-            this.discord.clearActivity();
-        });
+        if (currentTrack.remainingTime > 0)
+            currentTrack.snowflake = generateSnowflake();
 
-        this.bridge.on("jsFileExtensionError", "music", () => {
-            log.error("[Bridge]", "JS File Extension Error.");
+        this.discord.setCurrentTrack(currentTrack);
 
-            const strings = i18n.getLangStrings();
+        if (lastFM && config.get("enableLastFM")) {
+            if (currentTrack.remainingTime <= 0) {
+                this.lastTrack = currentTrack;
+                return;
+            }
 
             if (
-                dialog.showMessageBoxSync({
-                    type: "error",
-                    title: "AMRPC - Apple Bridge Error",
-                    message: strings.error.jsFileExtension,
-                    buttons: [strings.settings.modal.buttons.learnMore]
-                }) === 0
+                this.lastTrack?.snowflake === currentTrack.snowflake ||
+                this.pausedTrack?.snowflake === currentTrack.snowflake ||
+                (this.pausedTrack?.name === currentTrack.name &&
+                    this.pausedTrack?.remainingTime &&
+                    currentTrack.remainingTime &&
+                    this.pausedTrack?.remainingTime -
+                        currentTrack.remainingTime <=
+                        25)
             ) {
-                shell.openExternal(
-                    "https://docs.amrpc.zephra.cloud/articles/js-file-extension-error"
-                );
+                log.info("[LastFM] Skipping scrobble due to same track");
+
+                this.lastTrack = currentTrack;
+
+                return;
             }
+
+            log.info("[Bridge][lastFM]", "Updating now playing");
+
+            lastFM.nowPlaying({
+                artist: currentTrack.artist,
+                track: currentTrack.name,
+                album: currentTrack.album,
+                duration: currentTrack.duration
+            });
+
+            const timestamp = Math.floor(Date.now() / 1000);
+
+            if (this.scrobbleTimeout) clearTimeout(this.scrobbleTimeout);
+
+            this.scrobbleTimeout = setTimeout(
+                async () => {
+                    const newTrack = await Bridge.fetchMusic(),
+                        oldTrack = currentTrack;
+
+                    delete oldTrack.snowflake;
+                    delete oldTrack.remainingTime;
+                    delete oldTrack.elapsedTime;
+                    delete oldTrack.url;
+                    delete oldTrack.artwork;
+
+                    delete newTrack.remainingTime;
+                    delete newTrack.elapsedTime;
+
+                    if (
+                        newTrack.playerState === "playing" &&
+                        Object.keys(newTrack).length > 0 &&
+                        objectEqual(oldTrack, newTrack)
+                    ) {
+                        log.info(
+                            "[Bridge][lastFM]",
+                            `Scrobbling "${currentTrack.name}" by ${currentTrack.artist}`
+                        );
+
+                        lastFM.scrobble({
+                            artist: currentTrack.artist,
+                            track: currentTrack.name,
+                            album: currentTrack.album,
+                            duration: currentTrack.duration,
+                            timestamp
+                        });
+                    }
+                },
+                currentTrack.remainingTime > 5
+                    ? (currentTrack.remainingTime - 5) * 1000
+                    : 0
+            );
+        }
+
+        this.lastTrack = currentTrack;
+    }
+
+    private onPause() {
+        if (!this.lastTrack || Object.keys(this.lastTrack).length === 0) return;
+        if (!this.discord)
+            return log.warn("[Bridge]", "Discord not found, skipping onPause");
+
+        log.info("[Bridge]", "Paused");
+
+        this.pausedTrack = this.lastTrack;
+        this.lastTrack = {};
+
+        if (config.get("hideOnPause")) this.discord.clearActivity();
+        else {
+            this.discord.activity.startTimestamp = null;
+            this.discord.activity.endTimestamp = null;
+
+            Discord.setActivity(this.discord.activity);
+        }
+
+        Browser.send("get-current-track", false, {
+            playerState: "paused"
         });
+    }
+
+    private onStop() {
+        if (!this.lastTrack || Object.keys(this.lastTrack).length === 0) return;
+        if (!this.discord)
+            return log.warn("[Bridge]", "Discord not found, skipping onStop");
+
+        log.info("[Bridge]", "Stopped");
+
+        this.lastTrack = {};
+
+        this.discord.clearActivity();
     }
 
     /**
@@ -303,7 +374,10 @@ export class Bridge {
     }
 
     public static async getCurrentTrackArtwork(logWarn: boolean = true) {
-        if (process.platform !== "win32") return;
+        if (process.platform !== "win32" || config.get("service") === "music")
+            return;
+
+        // TODO: AMP support
 
         const artwork: string | undefined = fetchITunes(
             `currentTrackArtwork "${path.join(getAppDataPath(), "artwork")}"`
@@ -316,7 +390,13 @@ export class Bridge {
     }
 
     public static async fetchMusic() {
-        if (process.platform === "win32") return fetchITunes();
+        if (process.platform === "win32" && config.get("service") === "itunes")
+            return fetchITunes();
+        else if (
+            process.platform === "win32" &&
+            config.get("service") === "music"
+        )
+            return watchDog.getCurrentTrack();
         else return await fetchApp.appleMusic();
     }
 }

@@ -15,7 +15,7 @@ export const config = new Store({
             enableCache: true,
             enableLastFM: false,
             checkIfMusicInstalled: true,
-            service: "itunes",
+            service: "amp",
             colorTheme: "light",
             language: "en-US",
             artwork: "applemusic-logo",
@@ -25,6 +25,10 @@ export const config = new Store({
             lastFM: {
                 username: "",
                 key: ""
+            },
+            watchdog: {
+                autoUpdates: true,
+                mirrorAppState: true
             }
         }
     }),
