@@ -1,9 +1,15 @@
 {
+    "general": {
+        "buttons": {
+            "openSettings": "Open Settings"
+        }
+    },
     "error": {
         "admin": "Molimo vas da ne pokrećete AMRPC kao administrator!",
         "noTrack": "Nije otkrivena nijedna pesma",
         "jsFileExtension": "Došlo je do greške sa podacima o asocijaciji JS datoteka. Kliknite na dugme ispod da biste saznali više.",
         "cmd": "Došlo je do greške sa Command Prompt-om. Kliknite na dugme ispod da biste saznali više.",
+        "iTunesInstalledCheck": "AMRPC couldn't check if iTunes is installed. If you're sure that iTunes is installed, go to Settings > Advanced and disable \"Check if Music is installed\".",
         "watchDog": {
             "title": "AMRPC WatchDog not installed",
             "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
@@ -13,7 +19,7 @@
         "restart": "Restart",
         "reportProblem": "Prijavite Problem",
         "quitITunes": {
-            "info": "Ovo traje oko 3 sekunde",
+            "info": "Takes about 3 seconds",
             "button": "Zatvori iTunes"
         },
         "quit": "Zatvori"
