@@ -6,6 +6,7 @@ import { config } from "../managers/store";
 
 import * as log from "electron-log";
 import execPromise from "./execPromise";
+import { Browser } from "../managers/browser";
 
 export async function checkAppDependency(): Promise<AppDependencies> {
     const iTunes =
@@ -61,6 +62,21 @@ export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
         exec(`where ${appName}`, (err, stdout) => {
             if (err) {
                 log.error("[checkAppDependency][checkIfAppIsInstalled]", err);
+
+                if (err.toString().includes("Command failed: where iTunes")) {
+                    const strings = i18n.getLangStrings();
+
+                    if (
+                        dialog.showMessageBoxSync({
+                            type: "info",
+                            title: "AMRPC",
+                            message: strings.error.iTunesInstalledCheck,
+                            buttons: [strings.general.buttons.openSettings]
+                        }) === 0
+                    )
+                        Browser.windowAction("show");
+                }
+
                 return false;
             } else {
                 return stdout.includes(appName);
