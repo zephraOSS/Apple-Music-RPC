@@ -18,12 +18,12 @@ export class replaceVariables {
         if (!config) return undefined;
 
         // e.g. "%title% - %album%" => "-"
-        const separator =
-            config
-                .split(/%title%|%album%|%artist%|%year%|%version%/g)
-                .find((e) => e.length > 0)
-                ?.trim()
-                ?.replace(/[a-zA-Z0-9 ]/g, "") ?? "-";
+        const separator = config
+            .replace(/\([^)]*\)/g, "") // Remove all brackets w/ content
+            ?.split(/%title%|%album%|%artist%|%year%|%version%/g)
+            ?.find((e) => e.length > 0)
+            ?.trim()
+            ?.replace(/[a-zA-Z0-9 ]/g, "");
 
         let returnStr = "";
 
@@ -53,12 +53,33 @@ export class replaceVariables {
             );
 
         testStr
+            .replace(/\([^)]*_NOT_AV_[^)]*\)/g, "") // Remove all brackets w/ content if variable is not available
             .split(/_[a-zA-Z]*_NOT_AV_|-/g)
             .filter((e) => {
                 return e.trim() !== undefined && e.trim() !== "";
             })
             .forEach((e) => {
                 e = e.trim();
+
+                const regexBracketsMatch = e.match(/\([^)]+\)/g);
+
+                regexBracketsMatch?.forEach((bracketE) => {
+                    const regexMatch =
+                            bracketE.match(/_[a-zA-Z]*_IS_AV_|-/g)?.[0] ?? "",
+                        cfgElement = regexMatch
+                            .replace("_IS_AV_", "")
+                            .slice(1)
+                            .toLowerCase(),
+                        cfgValue = this.getValue(cfgElement);
+
+                    let tempE = e;
+
+                    if (bracketE.includes("_IS_AV_"))
+                        tempE = tempE.replace(regexMatch, cfgValue);
+                    else tempE = tempE.replace(bracketE, "");
+
+                    e = tempE;
+                });
 
                 // e.g. "_TITLE_IS_AV" => "title"
                 const regexMatch = e.match(/_[a-zA-Z]*_IS_AV_|-/g)?.[0] ?? "",
@@ -75,6 +96,7 @@ export class replaceVariables {
                         (!cfgValue && e !== config.replace(regex, "").trim()))
                 )
                     return;
+
                 if (returnStr) returnStr += ` ${separator} `;
 
                 returnStr +=
