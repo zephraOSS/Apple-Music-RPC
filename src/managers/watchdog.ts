@@ -133,11 +133,10 @@ export class WatchDog {
             if (data.type === "res") return;
 
             if (data.playerState === "playing") {
-                const durationMS = data.duration * 1000,
-                    startTime = data.endTime - durationMS,
-                    currentTime = Date.now(),
-                    elapsedTime = (currentTime - startTime) / 1000,
-                    remainingTime = (durationMS - elapsedTime * 1000) / 1000;
+                const { elapsedTime, remainingTime } = this.getTimeData(
+                    data.duration,
+                    data.endTime
+                );
 
                 this.emitter.emit("playing", {
                     name: data.title || "",
@@ -176,9 +175,9 @@ export class WatchDog {
         this.socket.send(message);
     }
 
-    public getCurrentTrack(): Promise<WatchDogData> {
+    public getCurrentTrack(): Promise<currentTrack> {
         return new Promise((resolve, reject) => {
-            if (!this.isConnected()) return resolve({} as WatchDogData);
+            if (!this.isConnected()) return resolve({} as currentTrack);
 
             const gThis = this;
 
@@ -200,10 +199,35 @@ export class WatchDog {
                     return;
                 }
 
-                resolve(data);
+                const { elapsedTime, remainingTime } = gThis.getTimeData(
+                    data.duration,
+                    data.endTime
+                );
+
+                resolve({
+                    name: data.title || "",
+                    artist: data.artist || "",
+                    album: data.album || "",
+                    duration: data.duration || 0,
+                    elapsedTime,
+                    remainingTime,
+                    endTime: data.endTime,
+                    playerState: data.playerState
+                } as currentTrack);
                 gThis.socket.removeEventListener("message", onMessage);
             }
         });
+    }
+
+    private getTimeData(duration: number, endTime: number) {
+        const durationMS = duration * 1000,
+            elapsedTime = (Date.now() - (endTime - durationMS)) / 1000,
+            remainingTime = (durationMS - elapsedTime * 1000) / 1000;
+
+        return {
+            elapsedTime,
+            remainingTime
+        };
     }
 
     public on(
