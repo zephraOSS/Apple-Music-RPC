@@ -116,11 +116,12 @@ export class Browser {
 
     saveWindowState() {
         if (!this.window) return;
+
         setConfig("windowState", this.window.getBounds());
     }
 
     send(channel: string, ...args: any[]) {
-        if (!this.window) return;
+        if (!this.window || !this.window.webContents) return;
 
         setTimeout(
             () => this.window.webContents.send(channel, ...args),
