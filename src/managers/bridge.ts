@@ -265,20 +265,39 @@ export class Bridge {
                     const newTrack = await Bridge.fetchMusic(),
                         oldTrack = currentTrack;
 
+                    const oldEndTime = oldTrack.endTime,
+                        newEndTime = newTrack.endTime;
+
                     delete oldTrack.snowflake;
                     delete oldTrack.remainingTime;
                     delete oldTrack.elapsedTime;
                     delete oldTrack.url;
                     delete oldTrack.artwork;
+                    delete oldTrack.endTime;
 
                     delete newTrack.remainingTime;
                     delete newTrack.elapsedTime;
+                    delete newTrack.endTime;
 
                     if (
                         newTrack.playerState === "playing" &&
                         Object.keys(newTrack).length > 0 &&
                         objectEqual(oldTrack, newTrack)
                     ) {
+                        if (
+                            oldEndTime &&
+                            newEndTime &&
+                            config.get("service") === "music" &&
+                            Math.abs(oldEndTime - newEndTime) > 3000
+                        ) {
+                            log.info(
+                                "[Bridge][lastFM][scrobbleTimeout]",
+                                "Skipping scrobble due to same track"
+                            );
+
+                            return;
+                        }
+
                         log.info(
                             "[Bridge][lastFM]",
                             `Scrobbling "${currentTrack.name}" by ${currentTrack.artist}`
