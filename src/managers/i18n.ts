@@ -4,6 +4,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as log from "electron-log";
 
+import { JSONParse } from "../utils/json";
 import getAppDataPath from "../utils/getAppDataPath";
 
 import type { I18n } from "../../@types/zephra/I18n";
@@ -23,7 +24,7 @@ export class i18n {
 
         if (!fs.existsSync(filePath)) return {};
 
-        return JSON.parse(fs.readFileSync(filePath, "utf8"));
+        return JSONParse(fs.readFileSync(filePath, "utf8"));
     }
 
     public static writeLangStrings(lang: string, strings: any) {
