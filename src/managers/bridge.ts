@@ -28,6 +28,7 @@ export class Bridge {
         elapsedTime: 0,
         remainingTime: 0
     };
+    private playerLog: log.ElectronLog = log.create("player");
 
     public bridge: AppleBridge = new AppleBridge();
     public lastTrack: any = {};
@@ -46,6 +47,8 @@ export class Bridge {
         }
 
         log.info("[Bridge]", "Initializing Bridge");
+
+        this.playerLog.transports.file.fileName = `bridge-player.log`;
 
         if (config.get("service") === "music") {
             log.info("[Bridge]", "Using WatchDog");
@@ -188,12 +191,12 @@ export class Bridge {
             return log.warn("[Bridge]", "No Track detected");
 
         // TODO: remove in stable release, keep for beta
-        log.debug(
+        this.playerLog.debug(
             "[BetaDebugLog][Bridge][onPlay]",
             "typeof this.discord",
             typeof this.discord
         );
-        log.debug(
+        this.playerLog.debug(
             "[BetaDebugLog][Bridge][onPlay]",
             "currentTrack",
             currentTrack
