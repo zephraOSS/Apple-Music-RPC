@@ -21,7 +21,23 @@ export function init() {
         updater.downloadUpdate();
     });
 
-    ipcMain.on("update-install", updater.installUpdate);
+    ipcMain.on("update-install", () => {
+        let intervalAttempts = 0;
+
+        const updateInterval = setInterval(() => {
+            if (updater) {
+                updater.installUpdate();
+                clearInterval(updateInterval);
+            } else if (intervalAttempts >= 10) {
+                log.error(
+                    "[IPC][updateInstall]",
+                    "Failed to install update (10 attempts)"
+                );
+
+                clearInterval(updateInterval);
+            } else intervalAttempts++;
+        }, 1000);
+    });
 
     ipcMain.handle("autolaunch-change", () => {
         initAutoLaunch();
