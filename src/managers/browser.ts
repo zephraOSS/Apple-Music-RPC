@@ -50,7 +50,7 @@ export class Browser {
         this.window.on("closed", () => {
             this.window = null;
 
-            app.dock.hide();
+            if (process.platform === "darwin") app.dock.hide();
         });
 
         if (process.platform === "darwin") {
@@ -66,6 +66,7 @@ export class Browser {
                 )
                     app.dock.hide();
             });
+
             this.window.on("show", app.dock.show);
         }
 
