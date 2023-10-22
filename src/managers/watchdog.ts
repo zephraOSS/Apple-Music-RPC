@@ -96,6 +96,8 @@ export class WatchDog {
     }
 
     public connect(): void {
+        let closeByError = false;
+
         this.socket = new WebSocket("ws://localhost:9632/watchdog");
 
         this.socket.addEventListener("open", () => {
@@ -105,11 +107,18 @@ export class WatchDog {
             this.socket.send("getCurrentTrack");
         });
 
-        this.socket.addEventListener("close", () =>
-            log.info("[WatchDog]", "Disconnected from WebSocket")
-        );
+        this.socket.addEventListener("close", () => {
+            log.info("[WatchDog]", "Disconnected from WebSocket");
+
+            if (!closeByError) {
+                log.info("[WatchDog]", "Retrying in 5 seconds...");
+                setTimeout(this.init, 5000);
+            } else closeByError = false;
+        });
 
         this.socket.addEventListener("error", (e) => {
+            closeByError = true;
+
             log.error("[WatchDog]", "Error connecting to WebSocket", e);
             log.info("[WatchDog]", "Retrying in 5 seconds...");
 
