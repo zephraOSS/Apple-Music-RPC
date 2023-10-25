@@ -32,8 +32,8 @@ export class TrayManager {
             else this.tray.popUpContextMenu();
         });
 
-        config.onDidChange("service", () => {
-            this.tray.setContextMenu(this.createContextMenu());
+        ["service", "watchdog.mirrorAppState"].forEach((key: any) => {
+            config.onDidChange(key, this.update.bind(this));
         });
 
         i18n.onLanguageUpdate(() => {
@@ -43,7 +43,7 @@ export class TrayManager {
     }
 
     private createContextMenu(): Electron.Menu {
-        return Menu.buildFromTemplate([
+        const items = [
             {
                 label: `${
                     app.isPackaged ? "AMRPC" : "AMRPC - DEV"
@@ -88,18 +88,24 @@ export class TrayManager {
                     this.i18n?.tray?.quitITunes?.info ??
                     "This takes about 3 seconds",
                 enabled: false,
-                visible: process.platform === "win32"
+                visible:
+                    process.platform === "win32" &&
+                    config.get("service") === "itunes"
             },
             {
                 label: this.i18n?.tray?.quitITunes?.button ?? "Quit iTunes",
-                visible: process.platform === "win32",
+                visible:
+                    process.platform === "win32" &&
+                    config.get("service") === "itunes",
                 click() {
                     quitITunes();
                 }
             },
             {
                 type: "separator",
-                visible: process.platform === "win32"
+                visible:
+                    process.platform === "win32" &&
+                    config.get("service") === "itunes"
             },
             {
                 label: this.i18n?.tray?.restart ?? "Restart",
@@ -128,10 +134,17 @@ export class TrayManager {
                     } else app.quit();
                 }
             }
-        ]);
+        ];
+
+        return Menu.buildFromTemplate(
+            // @ts-ignore
+            items.filter((item) => item.visible !== false)
+        );
     }
 
     update() {
+        log.info("[TrayManager]", "Updating tray");
+
         this.tray.setContextMenu(this.createContextMenu());
     }
 
