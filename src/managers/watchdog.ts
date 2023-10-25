@@ -1,5 +1,6 @@
 import { dialog, shell } from "electron";
 
+import { watchDog } from "../index";
 import { config } from "./store";
 import { i18n } from "./i18n";
 import { JSONParse } from "../utils/json";
@@ -36,8 +37,6 @@ export class WatchDog {
     }
 
     async init() {
-        const that = this;
-
         if (this.watchdogUpdating) {
             log.info("[WatchDog]", "WatchDog is updating");
 
@@ -46,20 +45,21 @@ export class WatchDog {
             if (WatchDogDetails("status")) {
                 log.info("[WatchDog]", "WatchDog is installed");
 
-                if (await WatchDogDetails("running")) that.connect();
+                if (await WatchDogDetails("running")) this.connect();
                 else {
                     WatchDogState(true);
 
                     setTimeout(async () => {
-                        if (await WatchDogDetails("running")) that.connect();
-                        else that.init();
+                        if (await WatchDogDetails("running"))
+                            watchDog.connect();
+                        else watchDog.init();
                     }, 2500);
                 }
             } else {
                 log.info("[WatchDog]", "WatchDog is not installed");
 
                 if (config.get("watchdog.autoUpdates")) {
-                    setTimeout(that.init, 3000);
+                    setTimeout(watchDog.init, 3000);
 
                     return;
                 }
