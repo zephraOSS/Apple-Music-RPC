@@ -18,7 +18,7 @@ import { init as initCrowdin } from "./utils/crowdin";
 import { init as initProtocol } from "./utils/protocol";
 
 import { checkAppDependency } from "./utils/checkAppDependency";
-import { WatchDogInstaller, WatchDogState } from "./utils/watchdog";
+import { WatchDogInstaller } from "./utils/watchdog";
 
 import * as log from "electron-log";
 
@@ -88,8 +88,6 @@ app.on("ready", async () => {
 
     if (config.get("service") === "music") {
         watchDog = new WatchDog();
-
-        app.on("before-quit", () => WatchDogState(false));
 
         if (config.get("watchdog.autoUpdates")) WatchDogInstaller(true);
 

@@ -1,11 +1,13 @@
 import { Tray, Menu, app, shell } from "electron";
 
+import { WatchDogState } from "../utils/watchdog";
 import { quitITunes } from "../utils/quitITunes";
 import { Browser } from "./browser";
 import { i18n } from "./i18n";
 import { config } from "./store";
 
 import * as path from "path";
+import * as log from "electron-log";
 
 export class TrayManager {
     private tray: Tray;
@@ -109,7 +111,21 @@ export class TrayManager {
             {
                 label: this.i18n?.tray?.quit ?? "Quit",
                 click() {
-                    app.exit();
+                    if (
+                        process.platform === "win32" &&
+                        config.get("service") === "music" &&
+                        config.get("watchdog.mirrorAppState")
+                    ) {
+                        WatchDogState(false)
+                            .then(app.quit)
+                            .catch(() => {
+                                log.error(
+                                    "[READY][Quit]",
+                                    "Failed to stop WatchDog. Quitting app."
+                                );
+                                app.quit();
+                            });
+                    } else app.quit();
                 }
             }
         ]);
