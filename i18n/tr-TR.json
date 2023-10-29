@@ -1,0 +1,138 @@
+{
+    "general": {
+        "buttons": {
+            "openSettings": "Ayarları Aç"
+        }
+    },
+    "error": {
+        "admin": "Lütfen AMRPC'yi yönetici yetkileriyle çalıştırmayın!",
+        "noTrack": "Hiçbir parça bulunamadı",
+        "jsFileExtension": "JS dosya ilişkilendirme verilerinde bir hata var. Daha fazla bilgi için aşağıdaki düğmeye tıklayın.",
+        "cmd": "Komut İstemi ile ilgili bir hata oluştu. Daha fazla bilgi için aşağıdaki düğmeye tıklayın.",
+        "iTunesInstalledCheck": "AMRPC, iTunes'un yüklü olup olmadığını kontrol edemedi. Eğer iTunes'un yüklü olduğundan eminseniz, Ayarlar > Gelişmiş'e gidin ve \"Müzik yüklü mü kontrol et\" seçeneğini devre dışı bırakın.",
+        "watchDog": {
+            "title": "AMRPC WatchDog yüklü değil",
+            "description": "Apple Music (Önizleme) için WatchDog gereklidir. Kurmak istiyor musunuz?"
+        }
+    },
+    "tray": {
+        "restart": "Yeniden Başlat",
+        "reportProblem": "Sorun Bildir",
+        "quitITunes": {
+            "info": "Yaklaşık 3 saniye sürecek",
+            "button": "iTunes'u Kapat"
+        },
+        "quit": "Çıkış"
+    },
+    "settings": {
+        "config": {
+            "autoLaunch": "Otomatik Başlat",
+            "autoUpdates": "Otomatik Güncellemeler",
+            "betaUpdates": "Beta Güncellemeleri",
+            "installUpdate": {
+                "label": "Güncellemeyi Kur",
+                "button": "%version% Sürümünü Kur",
+                "buttonNA": "Uygun güncelleme yok"
+            },
+            "show": "Durumu Göster",
+            "hideOnPause": "Durdurulduğunda Durumu Gizle",
+            "artworkPrioLocal": "Yerel Sanat Çalışmasını Öncelikli Kıl",
+            "showTimestamps": "Zaman Damgalarını Göster",
+            "showAlbumArtwork": "Albüm Sanatını Göster",
+            "performanceMode": "Performans Modu",
+            "hardwareAcceleration": "Donanım Hızlandırma",
+            "checkIfMusicInstalled": "Müzik Yüklü mü Kontrol Et",
+            "colorTheme": {
+                "label": "Tercih Edilen Renk Teması",
+                "light": "Açık",
+                "dark": "Koyu",
+                "auto": "Akşamdan Sabaha Koyu Mod",
+                "os": "Sistem Varsayılanı"
+            },
+            "language": "Tercih Edilen Dil",
+            "rpcLargeImageText": "Durum Büyük Resim Metni",
+            "rpcDetails": "Durum Detayları",
+            "rpcState": "Durum Durumu",
+            "enableLastFM": "Last.fm'yi Etkinleştir",
+            "lastFMUser": {
+                "label": "Last.fm Kullanıcısı",
+                "connect": "Bağlan",
+                "reconnect": "Yeniden Bağlan",
+                "connecting": "Bağlanıyor...",
+                "cancel": "İptal"
+            },
+            "enableCache": "Önbelleği Etkinleştir",
+            "resetCache": "Önbelleği Sıfırla"
+        },
+        "common": {
+            "reset": "Sıfırla"
+        },
+        "category": {
+            "general": "Genel",
+            "softwareUpdate": "Yazılım Güncellemesi",
+            "cache": "Önbellek Yönetimi",
+            "advanced": "Gelişmiş"
+        },
+        "warn": {
+            "music": {
+                "title": "Dikkat",
+                "description": "Müzik uygulaması bulunamadı. Lütfen Müzik uygulamasının yüklü olduğundan emin olun."
+            },
+            "discord": {
+                "title": "Dikkat",
+                "description": "Discord bulunamadı. Lütfen Discord'un yüklü olduğundan emin olun."
+            }
+        },
+        "note": {
+            "language": "Eğer diliniz listede yoksa, <a href='https://discord.gg/qqAgCHS'>bizimle iletişime geçin</a>.",
+            "artworkPrioLocal": "Eğer yerel sanat çalışması varsa, Apple Music API'dan alınan sanat çalışması yerine kullanılır.",
+            "cache": {
+                "size": "Geçerli önbellek boyutu: %size%, %count% öğe",
+                "warn": "<b>UYARI</b> Önbelleği devre dışı bırakmak, tüm önbelleğe alınmış verileri silecektir.",
+                "info": "Önbellek, tüm albüm sanat çalışmalarını ve diğer verileri azaltmak için Apple'a yapılan isteklerin sayısını azaltmak için kullanılır. Bu, albüm sanat çalışmasının ve bağlantının yükleme süresini artıracaktır."
+            },
+            "checkIfMusicInstalled": "Bu seçeneği sadece kontrollerle ilgili sorunlar yaşıyorsanız ve Müzik'in yüklü olduğundan eminseniz devre dışı bırakın."
+        },
+        "extra": {
+            "github": "GitHub'da Görüntüle",
+            "koFi": "Bağış Yap",
+            "reloadPage": "Sayfayı Yeniden Yükle",
+            "restartApp": "Yeniden Başlatma Gereklidir"
+        },
+        "modal": {
+            "newUpdate": {
+                "title": "Yazılım Güncellemesi",
+                "description": "Sürüm %version% PC'niz için kullanılabilir.",
+                "installed": {
+                    "description": "Sürüm %version% PC'niz için kullanılabilir ve kurulmaya hazır.",
+                    "buttons": {
+                        "install": "Şimdi Kur",
+                        "later": "Daha Sonra"
+                    }
+                },
+                "buttons": {
+                    "downloadAndInstall": "İndir ve Kur",
+                    "download": "İndir ve Sonra Kur"
+                }
+            },
+            "koFi": {
+                "title": "Premium Üyelik Gerektirir",
+                "description": "Bu özelliği kullanmak için tek seferlik bir bağış veya üyelik gereklidir. Bağış yapmak için <a href='https://ko-fi.com/zephra'>buraya</a> tıklayabilirsiniz. Eğer zaten bağış yaptıysanız, AMRPC'yi yeniden başlatmayı deneyin. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Daha Fazla Bilgi</a>"
+            },
+            "microsoftStore": {
+                "description": "AMRPC'yi Microsoft Mağazası'ndan indirebileceğinizi biliyor muydunuz? Ancak Microsoft Mağazası'ndan indirmeden önce Ayarlar'dan <b>Otomatik Başlat</b>'ı devre dışı bıraktığınızdan emin olun.",
+                "buttons": {
+                    "download": "Şimdi İndir"
+                }
+            },
+            "buttons": {
+                "no": "Hayır",
+                "later": "Şimdi Değil",
+                "yes": "Evet",
+                "okay": "Tamam",
+                "learnMore": "Daha Fazla Bilgi",
+                "close": "Kapat"
+            }
+        }
+    }
+}
