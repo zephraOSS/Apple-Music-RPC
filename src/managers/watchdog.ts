@@ -45,7 +45,7 @@ export class WatchDog {
             if (WatchDogDetails("status")) {
                 log.info("[WatchDog]", "WatchDog is installed");
 
-                if (await WatchDogDetails("running")) this.connect();
+                if (await WatchDogDetails("running")) watchDog.connect();
                 else {
                     WatchDogState(true);
 
