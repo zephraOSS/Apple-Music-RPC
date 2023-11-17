@@ -22,7 +22,16 @@ export class i18n {
             `${config.get("language")}.json`
         );
 
-        if (!fs.existsSync(filePath)) return {};
+        if (!fs.existsSync(filePath)) {
+            log.warn(
+                "[i18n][getLangStrings]",
+                `Translations file (${config.get(
+                    "language"
+                )}) not found at ${filePath}`
+            );
+
+            return {};
+        }
 
         return JSONParse(fs.readFileSync(filePath, "utf8"));
     }

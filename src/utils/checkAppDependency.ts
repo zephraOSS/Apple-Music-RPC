@@ -66,6 +66,15 @@ export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
                 if (err.toString().includes("Command failed: where iTunes")) {
                     const strings = i18n.getLangStrings();
 
+                    if (!strings || Object.keys(strings).length === 0) {
+                        log.error(
+                            "[checkAppDependency][checkIfAppIsInstalled]",
+                            "i18n strings not found"
+                        );
+
+                        return false;
+                    }
+
                     if (
                         dialog.showMessageBoxSync({
                             type: "info",
@@ -95,6 +104,15 @@ export async function checkIfAppIsInstalled(appName: string): Promise<boolean> {
         log.error("[checkAppDependency][checkIfAppIsInstalled]", e);
 
         const strings = i18n.getLangStrings();
+
+        if (!strings || Object.keys(strings).length === 0) {
+            log.error(
+                "[checkAppDependency][checkIfAppIsInstalled]",
+                "i18n strings not found"
+            );
+
+            return false;
+        }
 
         if (
             dialog.showMessageBoxSync({

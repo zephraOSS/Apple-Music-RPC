@@ -152,6 +152,15 @@ export class Bridge {
 
                 const strings = i18n.getLangStrings();
 
+                if (!strings || Object.keys(strings).length === 0) {
+                    log.error(
+                        "[Bridge][jsFileExtensionError]",
+                        "i18n strings not found"
+                    );
+
+                    return;
+                }
+
                 if (
                     dialog.showMessageBoxSync({
                         type: "error",

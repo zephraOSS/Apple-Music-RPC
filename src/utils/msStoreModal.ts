@@ -16,7 +16,7 @@ export function init() {
 
     const string = i18n.getLangStrings();
 
-    if (!string) {
+    if (!string || Object.keys(string).length === 0) {
         log.warn("[msStoreModal]", "Canceled due to missing language file");
         return;
     }
