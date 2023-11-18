@@ -1,11 +1,11 @@
 {
     "general": {
         "buttons": {
-            "openSettings": "Open Settings"
+            "openSettings": "Abrir configuración"
         }
     },
     "error": {
-        "admin": "Please do not run AMRPC with administrator privileges!",
+        "admin": "Por favor, no ejecutes AMRPC con privilegios de administrador!",
         "noTrack": "No track detected",
         "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more.",
         "cmd": "There is an error with Command Prompt. Please click on the button below to learn more.",
