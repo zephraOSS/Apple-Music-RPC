@@ -6,132 +6,132 @@
     },
     "error": {
         "admin": "Por favor, no ejecutes AMRPC con privilegios de administrador!",
-        "noTrack": "No track detected",
-        "jsFileExtension": "There is an error with the JS file association data. Please click on the button below to learn more.",
+        "noTrack": "Ninguna canción detectada",
+        "jsFileExtension": "Hay un error con los datos de la asociación de archivos JS. Por favor, haz clic en el botón de abajo para obtener más información.",
         "cmd": "There is an error with Command Prompt. Please click on the button below to learn more.",
-        "iTunesInstalledCheck": "AMRPC couldn't check if iTunes is installed. If you're sure that iTunes is installed, go to Settings > Advanced and disable \"Check if Music is installed\".",
+        "iTunesInstalledCheck": "AMRPC no pudo comprobar si iTunes está instalado. Si estás seguro de que iTunes está instalado, ve a Ajustes > Avanzado y desactiva \"Comprobar si la música está instalada\".",
         "watchDog": {
-            "title": "AMRPC WatchDog not installed",
-            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+            "title": "AMRPC WatchDog no instalado",
+            "description": "WatchDog es necesario para Apple Music (Vista previa). ¿Quieres instalarlo?"
         }
     },
     "tray": {
-        "restart": "Restart",
-        "reportProblem": "Report a Problem",
+        "restart": "Reiniciar",
+        "reportProblem": "Reportar un problema",
         "quitITunes": {
-            "info": "Takes about 3 seconds",
-            "button": "Quit iTunes"
+            "info": "Tarda unos 3 segundos",
+            "button": "Salir de iTunes"
         },
-        "quit": "Quit"
+        "quit": "Salir"
     },
     "settings": {
         "config": {
-            "autoLaunch": "Auto Launch",
-            "autoUpdates": "Automatic Updates",
-            "betaUpdates": "Beta Updates",
+            "autoLaunch": "Lanzamiento automático",
+            "autoUpdates": "Actualizaciones automáticas",
+            "betaUpdates": "Actualizaciones beta",
             "installUpdate": {
-                "label": "Install Update",
-                "button": "Install %version%",
-                "buttonNA": "No update available"
+                "label": "Instalar actualización",
+                "button": "Instalar %version%",
+                "buttonNA": "No hay actualizaciones disponibles"
             },
-            "show": "Show Presence",
-            "hideOnPause": "Hide Presence on Pause",
-            "artworkPrioLocal": "Prioritize Local Artwork",
-            "showTimestamps": "Show Timestamps",
-            "showAlbumArtwork": "Show Album Artwork",
-            "performanceMode": "Performance Mode",
-            "hardwareAcceleration": "Hardware Acceleration",
-            "checkIfMusicInstalled": "Check if Music is installed",
+            "show": "Mostrar presencia",
+            "hideOnPause": "Ocultar presencia en pausa",
+            "artworkPrioLocal": "Priorizar ilustración local",
+            "showTimestamps": "Mostrar marcas de tiempo",
+            "showAlbumArtwork": "Mostrar ilustraciones de álbum",
+            "performanceMode": "Modo Rendimiento",
+            "hardwareAcceleration": "Aceleración de hardware",
+            "checkIfMusicInstalled": "Comprobar si Música está instalado",
             "colorTheme": {
-                "label": "Preferred Color Theme",
-                "light": "Light",
-                "dark": "Dark",
-                "auto": "Dark from Sunset to Sunrise",
-                "os": "System Default"
+                "label": "Tema de color preferido",
+                "light": "Claro",
+                "dark": "Oscuro",
+                "auto": "Oscuro del atardecer al amanecer",
+                "os": "Predeterminado del sistema"
             },
-            "language": "Preferred Language",
-            "rpcLargeImageText": "Presence Large Image Text",
-            "rpcDetails": "Presence Details",
-            "rpcState": "Presence State",
-            "enableLastFM": "Enable Last.fm",
+            "language": "Idioma preferido",
+            "rpcLargeImageText": "Texto de imagen grande en la presencia",
+            "rpcDetails": "Detalles de presencia",
+            "rpcState": "Estado de presencia",
+            "enableLastFM": "Habilitar Last.fm",
             "lastFMUser": {
-                "label": "Last.fm User",
-                "connect": "Connect",
-                "reconnect": "Reconnect",
-                "connecting": "Connecting...",
-                "cancel": "Cancel"
+                "label": "Usuario de Last.fm",
+                "connect": "Conectar",
+                "reconnect": "Reconectar",
+                "connecting": "Conectando...",
+                "cancel": "Cancelar"
             },
-            "enableCache": "Enable Cache",
-            "resetCache": "Reset Cache"
+            "enableCache": "Habilitar caché",
+            "resetCache": "Restablecer caché"
         },
         "common": {
-            "reset": "Reset"
+            "reset": "Restablecer"
         },
         "category": {
             "general": "General",
-            "softwareUpdate": "Software Update",
-            "cache": "Cache Management",
-            "advanced": "Advanced"
+            "softwareUpdate": "Actualización de software",
+            "cache": "Gestión de caché",
+            "advanced": "Avanzado"
         },
         "warn": {
             "music": {
-                "title": "Attention",
-                "description": "The Music app could not be found. Please make sure that the Music app is installed."
+                "title": "Atención",
+                "description": "No se pudo encontrar la aplicación de música. Por favor, asegúrate de que la aplicación Música está instalada."
             },
             "discord": {
-                "title": "Attention",
-                "description": "Discord could not be found. Please make sure that Discord is installed."
+                "title": "Atención",
+                "description": "Discord no pudo ser encontrado. Por favor, asegúrate de que Discord está instalado."
             }
         },
         "note": {
-            "language": "If your language is missing, <a href='https://discord.gg/qqAgCHS'>contact us</a>.",
-            "artworkPrioLocal": "If local artwork is available, it will be used instead of the one from Apple Music API.",
+            "language": "Si falta tu idioma, <a href='https://discord.gg/qqAgCHS'>contáctanos</a>.",
+            "artworkPrioLocal": "Si la ilustración local está disponible, se usará en lugar de la API de Apple Music.",
             "cache": {
-                "size": "Current cache size: %size%, %count% items",
-                "warn": "<b>WARNING</b> Disabling the cache will delete all cached data.",
-                "info": "The cache stores all album artwork and other data to reduce the amount of requests to Apple. This will improve the loading time of the album artwork and link."
+                "size": "Tamaño actual del caché: %size%, %count% elementos",
+                "warn": "<b>ADVERTENCIA</b> Al desactivar el caché se eliminarán todos los datos almacenados.",
+                "info": "El caché almacena todos los archivos de álbum y otros datos para reducir la cantidad de peticiones a Apple. Esto mejorará el tiempo de carga del álbum de arte y enlace."
             },
-            "checkIfMusicInstalled": "Disable this only if you're encountering issues with the checks, and you're sure that Music is installed."
+            "checkIfMusicInstalled": "Deshabilita esto sólo si encuentras problemas con las comprobaciones, y estás seguro de que Música está instalada."
         },
         "extra": {
-            "github": "View on GitHub",
-            "koFi": "Donate",
-            "reloadPage": "Reload",
-            "restartApp": "Restart required"
+            "github": "Ver en GitHub",
+            "koFi": "Donar",
+            "reloadPage": "Recargar",
+            "restartApp": "Reinicio necesario"
         },
         "modal": {
             "newUpdate": {
-                "title": "Software Update",
-                "description": "Version %version% is available for your PC.",
+                "title": "Actualización de software",
+                "description": "La versión %version% está disponible para tu PC.",
                 "installed": {
-                    "description": "Version %version% is available for your PC and is ready to install.",
+                    "description": "La versión %version% está disponible para tu PC y está lista para instalarse.",
                     "buttons": {
-                        "install": "Install now",
-                        "later": "Later"
+                        "install": "Instalar ahora",
+                        "later": "Más tarde"
                     }
                 },
                 "buttons": {
-                    "downloadAndInstall": "Download & install",
-                    "download": "Download & install later"
+                    "downloadAndInstall": "Descargar e instalar",
+                    "download": "Descargar e instalar más tarde"
                 }
             },
             "koFi": {
-                "title": "Requires Premium",
-                "description": "To use this feature, a one-time donation or a membership is required. You can donate <a href='https://ko-fi.com/zephra'>here</a>. If you have already donated, try to restart AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Learn More</a>"
+                "title": "Requiere Premium",
+                "description": "Para utilizar esta característica, se requiere una donación única o una membresía. Puedes donar <a href='https://ko-fi.com/zephra'>aquí</a>. Si ya has donado, intenta reiniciar AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Más información</a>"
             },
             "microsoftStore": {
-                "description": "Did you know that you can install AMRPC from the Microsoft Store? But make sure to disable <b>Auto Launch</b> in the settings before installing it from the Microsoft Store.",
+                "description": "¿Sabía que puedes instalar AMRPC desde la tienda de Microsoft? Pero asegúrate de desactivar <b>Auto iniciar</b> en los ajustes antes de instalarlo desde la tienda de Microsoft.",
                 "buttons": {
-                    "download": "Download now"
+                    "download": "Descargar ahora"
                 }
             },
             "buttons": {
                 "no": "No",
-                "later": "Not now",
-                "yes": "Yes",
-                "okay": "Okay",
-                "learnMore": "Learn more",
-                "close": "Close"
+                "later": "Ahora no",
+                "yes": "Sí",
+                "okay": "Okey",
+                "learnMore": "Más información",
+                "close": "Cerrar"
             }
         }
     }
