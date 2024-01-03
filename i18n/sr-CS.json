@@ -1,0 +1,138 @@
+{
+    "general": {
+        "buttons": {
+            "openSettings": "Open Settings"
+        }
+    },
+    "error": {
+        "admin": "Molimo vas da ne pokrećete AMRPC kao administrator!",
+        "noTrack": "Nije otkrivena nijedna pesma",
+        "jsFileExtension": "Došlo je do greške sa podacima o asocijaciji JS datoteka. Kliknite na dugme ispod da biste saznali više.",
+        "cmd": "Došlo je do greške sa Command Prompt-om. Kliknite na dugme ispod da biste saznali više.",
+        "iTunesInstalledCheck": "AMRPC couldn't check if iTunes is installed. If you're sure that iTunes is installed, go to Settings > Advanced and disable \"Check if Music is installed\".",
+        "watchDog": {
+            "title": "AMRPC WatchDog not installed",
+            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+        }
+    },
+    "tray": {
+        "restart": "Restart",
+        "reportProblem": "Prijavite Problem",
+        "quitITunes": {
+            "info": "Takes about 3 seconds",
+            "button": "Zatvori iTunes"
+        },
+        "quit": "Zatvori"
+    },
+    "settings": {
+        "config": {
+            "autoLaunch": "Automatsko Pokretanje",
+            "autoUpdates": "Automatsko ažuriranje",
+            "betaUpdates": "Beta Ažuriranja",
+            "installUpdate": {
+                "label": "Instaliraj Ažuriranje",
+                "button": "Instaliraj %version%",
+                "buttonNA": "Nema dostupnih ažuriranja"
+            },
+            "show": "Prikaži \"Presence\"",
+            "hideOnPause": "Sakrij \"Presence\" kada je Pauzirano",
+            "artworkPrioLocal": "Prioritizuj Lokalnu Sliku Albuma",
+            "showTimestamps": "Prikaži Proteklo Vreme",
+            "showAlbumArtwork": "Prikaži Sliku Albuma",
+            "performanceMode": "Performanski Režim",
+            "hardwareAcceleration": "Hardverska Akceleracija",
+            "checkIfMusicInstalled": "Proveri da li je Music instaliran",
+            "colorTheme": {
+                "label": "Željena tema",
+                "light": "Svetla",
+                "dark": "Tamna",
+                "auto": "Tamna od Zalaska Sunca do Izlaska Sunca",
+                "os": "Sistemska Podrazumevna"
+            },
+            "language": "Jezik",
+            "rpcLargeImageText": "Velika Slika i Tekst na \"Presence-u\"",
+            "rpcDetails": "Detalji o \"Presence-u\"",
+            "rpcState": "Stanje \"Presence-a\"",
+            "enableLastFM": "Omogući Last.fm",
+            "lastFMUser": {
+                "label": "Last.fm Korisnik",
+                "connect": "Povežite se",
+                "reconnect": "Ponovno Povezivanje",
+                "connecting": "Povezivanje...",
+                "cancel": "Otkaži"
+            },
+            "enableCache": "Dozvoli Keš Memoriju",
+            "resetCache": "Restartujte Keš Memoriju"
+        },
+        "common": {
+            "reset": "Restart"
+        },
+        "category": {
+            "general": "Generalno",
+            "softwareUpdate": "Ažuriranje Softvera",
+            "cache": "Upravljanje Keš Memorijom",
+            "advanced": "Napredno"
+        },
+        "warn": {
+            "music": {
+                "title": "Pažnja",
+                "description": "Aplikacija \"Music\" nije pronađena. Uverite se da je aplikacija \"Music\" instalirana."
+            },
+            "discord": {
+                "title": "Pažnja",
+                "description": "\"Discord\" nije pronađen. Molimo, proverite da li je \"Discord\" instaliran."
+            }
+        },
+        "note": {
+            "language": "Ako Vaš jezik nedostaje, <a href='https://discord.gg/qqAgCHS'>kontaktirajte nas</a>.",
+            "artworkPrioLocal": "Ako je lokalna slika albuma dostupna, koristiće se umesto one iz Apple Music API-ja.",
+            "cache": {
+                "size": "Trenutna veličina keš memorije: %size%, %count% stvari",
+                "warn": "<b>UPOZORENJE</b> Onemogućavanje keš memorije će izbrisati sve keširane podatke.",
+                "info": "Keš memorija čuva sve slike albuma i druge podatke kako bi se smanjio broj zahteva upućenih Apple-u. Ovo će poboljšati vreme učitavanja slike albuma i linkova."
+            },
+            "checkIfMusicInstalled": "Onemogućite ovo samo ako naiđete na probleme sa proverama i sigurni ste da je muzika instalirana."
+        },
+        "extra": {
+            "github": "Vidi na GitHub-u",
+            "koFi": "Donirajte",
+            "reloadPage": "Osveži",
+            "restartApp": "Potrebno je ponovno pokretanje"
+        },
+        "modal": {
+            "newUpdate": {
+                "title": "Ažuriranje Softvera",
+                "description": "Verzija %version% je dostupna za vaš računar.",
+                "installed": {
+                    "description": "Verzija %version% je dostupna za vaš računar i spremna je za instalaciju.",
+                    "buttons": {
+                        "install": "Instalirajte sada",
+                        "later": "Kasnije"
+                    }
+                },
+                "buttons": {
+                    "downloadAndInstall": "Preuzmite i instalirajte",
+                    "download": "Preuzmite i instalirajte kasnije"
+                }
+            },
+            "koFi": {
+                "title": "Zahteva Premium",
+                "description": "Da biste koristili ovu funkciju, potrebna je jednokratna donacija ili članstvo. Možete donirati <a href='https://ko-fi.com/zephra'>ovde</a>. Ako ste već donirali, pokušajte da ponovo pokrenete AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Saznajte više</a>"
+            },
+            "microsoftStore": {
+                "description": "Da li ste znali da AMRPC možete da instalirate iz Microsoft prodavnice? Ali obavezno onemogućite <b>Automatsko pokretanje</b> u podešavanjima pre nego što ga instalirate iz Microsoft prodavnice.",
+                "buttons": {
+                    "download": "Preuzmite sada"
+                }
+            },
+            "buttons": {
+                "no": "Ne",
+                "later": "Ne sada",
+                "yes": "Da",
+                "okay": "Okej",
+                "learnMore": "Saznajte više",
+                "close": "Zatvori"
+            }
+        }
+    }
+}
