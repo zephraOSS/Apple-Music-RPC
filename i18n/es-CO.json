@@ -8,7 +8,7 @@
         "admin": "Por favor, no ejecutes AMRPC con privilegios de administrador!",
         "noTrack": "Ninguna canción detectada",
         "jsFileExtension": "Hay un error con los datos de la asociación de archivos JS. Por favor, haz clic en el botón de abajo para obtener más información.",
-        "cmd": "There is an error with Command Prompt. Please click on the button below to learn more.",
+        "cmd": "Hay un error con Command Prompt. Por favor haga clic en el botón de abajo para obtener más información.",
         "iTunesInstalledCheck": "AMRPC no pudo comprobar si iTunes está instalado. Si estás seguro de que iTunes está instalado, ve a Ajustes > Avanzado y desactiva \"Comprobar si la música está instalada\".",
         "watchDog": {
             "title": "AMRPC WatchDog no instalado",
