@@ -7,12 +7,12 @@
 [Apple Music Preview](https://apps.microsoft.com/store/detail/apple-music-preview/9PFHDD62MXS1) integration is currently in beta testing. [View Releases](https://github.com/zephraOSS/Apple-Music-RPC/releases)
 
 ## Installation
-* [Microsoft Store](https://docs.amrpc.zephra.org/installation/windows/microsoft-store)
-* [Windows](https://docs.amrpc.zephra.org/installation/windows)
-* [macOS](https://docs.amrpc.zephra.org/installation/macos)
+* [Microsoft Store](https://docs.amrpc.zephra.cloud/installation/windows/microsoft-store)
+* [Windows](https://docs.amrpc.zephra.cloud/installation/windows)
+* [macOS](https://docs.amrpc.zephra.cloud/installation/macos)
 
 ## You need help?
-* Take a look at [the documentation](https://docs.amrpc.zephra.org)
+* Take a look at [the documentation](https://docs.amrpc.zephra.cloud)
 * Join [our Discord](https://discord.gg/APDghNfJhQ)
 
 ## Information
