@@ -1,0 +1,138 @@
+{
+    "general": {
+        "buttons": {
+            "openSettings": "Abrir configuración"
+        }
+    },
+    "error": {
+        "admin": "Por favor, no ejecutes AMRPC con privilegios de administrador!",
+        "noTrack": "Ninguna canción detectada",
+        "jsFileExtension": "Hay un error con los datos de la asociación de archivos JS. Por favor, haz clic en el botón de abajo para obtener más información.",
+        "cmd": "Hay un error con Command Prompt. Por favor haga clic en el botón de abajo para obtener más información.",
+        "iTunesInstalledCheck": "AMRPC no pudo comprobar si iTunes está instalado. Si estás seguro de que iTunes está instalado, ve a Ajustes > Avanzado y desactiva \"Comprobar si la música está instalada\".",
+        "watchDog": {
+            "title": "AMRPC WatchDog no instalado",
+            "description": "WatchDog es necesario para Apple Music (Vista previa). ¿Quieres instalarlo?"
+        }
+    },
+    "tray": {
+        "restart": "Reiniciar",
+        "reportProblem": "Reportar un problema",
+        "quitITunes": {
+            "info": "Tarda unos 3 segundos",
+            "button": "Salir de iTunes"
+        },
+        "quit": "Salir"
+    },
+    "settings": {
+        "config": {
+            "autoLaunch": "Lanzamiento automático",
+            "autoUpdates": "Actualizaciones automáticas",
+            "betaUpdates": "Actualizaciones beta",
+            "installUpdate": {
+                "label": "Instalar actualización",
+                "button": "Instalar %version%",
+                "buttonNA": "No hay actualizaciones disponibles"
+            },
+            "show": "Mostrar presencia",
+            "hideOnPause": "Ocultar presencia en pausa",
+            "artworkPrioLocal": "Priorizar ilustración local",
+            "showTimestamps": "Mostrar marcas de tiempo",
+            "showAlbumArtwork": "Mostrar ilustraciones de álbum",
+            "performanceMode": "Modo Rendimiento",
+            "hardwareAcceleration": "Aceleración de hardware",
+            "checkIfMusicInstalled": "Comprobar si Música está instalado",
+            "colorTheme": {
+                "label": "Tema de color preferido",
+                "light": "Claro",
+                "dark": "Oscuro",
+                "auto": "Oscuro del atardecer al amanecer",
+                "os": "Predeterminado del sistema"
+            },
+            "language": "Idioma preferido",
+            "rpcLargeImageText": "Texto de imagen grande en la presencia",
+            "rpcDetails": "Detalles de presencia",
+            "rpcState": "Estado de presencia",
+            "enableLastFM": "Habilitar Last.fm",
+            "lastFMUser": {
+                "label": "Usuario de Last.fm",
+                "connect": "Conectar",
+                "reconnect": "Reconectar",
+                "connecting": "Conectando...",
+                "cancel": "Cancelar"
+            },
+            "enableCache": "Habilitar caché",
+            "resetCache": "Restablecer caché"
+        },
+        "common": {
+            "reset": "Restablecer"
+        },
+        "category": {
+            "general": "General",
+            "softwareUpdate": "Actualización de software",
+            "cache": "Gestión de caché",
+            "advanced": "Avanzado"
+        },
+        "warn": {
+            "music": {
+                "title": "Atención",
+                "description": "No se pudo encontrar la aplicación de música. Por favor, asegúrate de que la aplicación Música está instalada."
+            },
+            "discord": {
+                "title": "Atención",
+                "description": "Discord no pudo ser encontrado. Por favor, asegúrate de que Discord está instalado."
+            }
+        },
+        "note": {
+            "language": "Si falta tu idioma, <a href='https://discord.gg/qqAgCHS'>contáctanos</a>.",
+            "artworkPrioLocal": "Si la ilustración local está disponible, se usará en lugar de la API de Apple Music.",
+            "cache": {
+                "size": "Tamaño actual del caché: %size%, %count% elementos",
+                "warn": "<b>ADVERTENCIA</b> Al desactivar el caché se eliminarán todos los datos almacenados.",
+                "info": "El caché almacena todos los archivos de álbum y otros datos para reducir la cantidad de peticiones a Apple. Esto mejorará el tiempo de carga del álbum de arte y enlace."
+            },
+            "checkIfMusicInstalled": "Deshabilita esto sólo si encuentras problemas con las comprobaciones, y estás seguro de que Música está instalada."
+        },
+        "extra": {
+            "github": "Ver en GitHub",
+            "koFi": "Donar",
+            "reloadPage": "Recargar",
+            "restartApp": "Reinicio necesario"
+        },
+        "modal": {
+            "newUpdate": {
+                "title": "Actualización de software",
+                "description": "La versión %version% está disponible para tu PC.",
+                "installed": {
+                    "description": "La versión %version% está disponible para tu PC y está lista para instalarse.",
+                    "buttons": {
+                        "install": "Instalar ahora",
+                        "later": "Más tarde"
+                    }
+                },
+                "buttons": {
+                    "downloadAndInstall": "Descargar e instalar",
+                    "download": "Descargar e instalar más tarde"
+                }
+            },
+            "koFi": {
+                "title": "Requiere Premium",
+                "description": "Para utilizar esta característica, se requiere una donación única o una membresía. Puedes donar <a href='https://ko-fi.com/zephra'>aquí</a>. Si ya has donado, intenta reiniciar AMRPC. <a href='https://docs.amrpc.zephra.cloud/articles/ko-fi-features'>Más información</a>"
+            },
+            "microsoftStore": {
+                "description": "¿Sabía que puedes instalar AMRPC desde la tienda de Microsoft? Pero asegúrate de desactivar <b>Auto iniciar</b> en los ajustes antes de instalarlo desde la tienda de Microsoft.",
+                "buttons": {
+                    "download": "Descargar ahora"
+                }
+            },
+            "buttons": {
+                "no": "No",
+                "later": "Ahora no",
+                "yes": "Sí",
+                "okay": "Okey",
+                "learnMore": "Más información",
+                "close": "Cerrar"
+            }
+        }
+    }
+}
