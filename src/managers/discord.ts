@@ -184,7 +184,8 @@ export class Discord {
     setActivity(activity: Presence) {
         if (!this.isSupporter) activity.largeImageText = this.defaultLIT;
         if (!config.get("showTimestamps")) delete activity.endTimestamp;
-
+        let type = 2;
+        activity.type = type;
         this.activity = activity;
 
         if (this.isReady) {
