@@ -19,8 +19,8 @@ export const config = new Store({
             colorTheme: "light",
             language: "en-US",
             artwork: "applemusic-logo",
-            rpcLargeImageText: "AMRPC - %version%",
-            rpcDetails: "%title% - %album%",
+            rpcLargeImageText: "%album% (AMRPC - %version%)",
+            rpcDetails: "%title%",
             rpcState: "%artist%",
             lastFM: {
                 username: "",
