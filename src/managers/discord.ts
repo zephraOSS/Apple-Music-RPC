@@ -184,8 +184,7 @@ export class Discord {
     setActivity(activity: Presence) {
         if (!this.isSupporter) activity.largeImageText = this.defaultLIT;
         if (!config.get("showTimestamps")) delete activity.endTimestamp;
-        let type = 2;
-        activity.type = type;
+        activity.type = 2; // Display "Listening to Apple Music", instead of "Playing Apple Music"
         this.activity = activity;
 
         if (this.isReady) {
