@@ -1,15 +1,25 @@
 {
+    "general": {
+        "buttons": {
+            "openSettings": "Einstellungen öffnen"
+        }
+    },
     "error": {
         "admin": "Bitte starte AMRPC nicht mit Administrator-Rechten!",
         "noTrack": "Kein Lied erkannt",
         "jsFileExtension": "Es liegt ein Fehler bei den JS-Dateizuordnungsdaten vor. Klicke auf den Button unten, um mehr zu erfahren.",
-        "cmd": "Es liegt ein Fehler mit der Eingabeaufforderung vor. Klicke auf den Button unten, um mehr zu erfahren."
+        "cmd": "Es liegt ein Fehler mit der Eingabeaufforderung vor. Klicke auf den Button unten, um mehr zu erfahren.",
+        "iTunesInstalledCheck": "AMRPC konnte nicht überprüfen ob iTunes installiert ist. Wenn Sie sich sicher sind, dass iTunes installiert ist, gehen Sie auf Einstellungen > Erweitert und deaktivieren Sie \"Überprüfen Sie, ob Musik installiert ist\".",
+        "watchDog": {
+            "title": "AMRPC WatchDog nicht installiert",
+            "description": "WatchDog wird für Apple Music (Vorschau) benötigt. Möchtest Du es installieren?"
+        }
     },
     "tray": {
         "restart": "Neustart",
         "reportProblem": "Problem melden",
         "quitITunes": {
-            "info": "Vorgang dauert ca. 3 Sekunden",
+            "info": "Gedauert ca. 3 Sekunden",
             "button": "iTunes beenden"
         },
         "quit": "Beenden"

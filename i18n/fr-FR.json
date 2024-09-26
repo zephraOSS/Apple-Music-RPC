@@ -1,15 +1,25 @@
 {
+    "general": {
+        "buttons": {
+            "openSettings": "Open Settings"
+        }
+    },
     "error": {
         "admin": "Merci de ne pas exécuter AMRPC avec les droits d'administrateur !",
         "noTrack": "Aucune piste détéctée",
         "jsFileExtension": "Il y a une erreur dans les données d'association du fichier JS. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus.",
-        "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus."
+        "cmd": "Il y a une erreur avec le terminal de commande. Veuillez cliquer sur le bouton ci-dessous pour en savoir plus.",
+        "iTunesInstalledCheck": "AMRPC couldn't check if iTunes is installed. If you're sure that iTunes is installed, go to Settings > Advanced and disable \"Check if Music is installed\".",
+        "watchDog": {
+            "title": "AMRPC WatchDog not installed",
+            "description": "WatchDog is required for Apple Music (Preview). Do you want to install it?"
+        }
     },
     "tray": {
         "restart": "Redémarrer",
         "reportProblem": "Signaler un problème",
         "quitITunes": {
-            "info": "Cela prend 3 secondes",
+            "info": "Takes about 3 seconds",
             "button": "Quitter iTunes"
         },
         "quit": "Quitter"
